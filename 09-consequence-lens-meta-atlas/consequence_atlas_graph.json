@@ -1,0 +1,213 @@
+{
+  "schema": "common-ground-v34-verified-and-extended-atlas/v1",
+  "verifiedAtUtc": "2026-10-23T20:45:00Z",
+  "sourceAtlasUrl": "http://127.0.0.1:4200/preview/v34/",
+  "reproductionUrl": "http://127.0.0.1:4200/preview/v34/reproduction.html",
+  "v34BaselineMetrics": {
+    "selectedRecords": 16,
+    "nativeCheckedRecords": 14,
+    "sourceInspectedRecords": 2,
+    "exactStatements": 43,
+    "relationshipEdges": 17,
+    "supportPorts": 6,
+    "consequenceLensChoices": 5,
+    "sorryAxCount": 0,
+    "allowedTransitiveAxioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "toolchainEnvironments": [
+    {
+      "leanVersion": "v4.35.0",
+      "libraries": {
+        "cslib": "0b1e3680b43ad9cd482a66f183764f33fc8a4e8f",
+        "mathlib": "56a005855ea17e0b0958f73ec801ae140b0a1679"
+      },
+      "records": [
+        "all_prior_recovery",
+        "decision_preservation",
+        "ending01_memory"
+      ]
+    },
+    {
+      "leanVersion": "v4.34.0-rc2",
+      "libraries": {
+        "euler": "pinned-imported-environment"
+      },
+      "records": [
+        "l2_averaging"
+      ]
+    },
+    {
+      "leanVersion": "v4.33.1",
+      "libraries": {
+        "mathlib": "db584cd6"
+      },
+      "records": [
+        "determinant_rate"
+      ]
+    },
+    {
+      "leanVersion": "v4.32.0",
+      "libraries": {
+        "mathlib": "81a5d257c8e410db227a6665ed08f64fea08e997"
+      },
+      "records": [
+        "finite_convex_representation",
+        "moment_matching",
+        "observable_span",
+        "indicator_observation",
+        "query_identification",
+        "canonical_reconstruction",
+        "information_recovery",
+        "sampler_representation"
+      ]
+    },
+    {
+      "leanVersion": "v4.29.0",
+      "libraries": {
+        "econlib": "003655ccf010cdf44c4f67d6675167b54ce0e9df",
+        "mathlib": "8a178386ffc0f5fef0b77738bb5449d50efeea95"
+      },
+      "records": [
+        "bellman_residual"
+      ]
+    }
+  ],
+  "novelBreakthroughExtensions": [
+    {
+      "id": "ext-01-quantitative-critical-slack",
+      "folder": "01-blackwell-critical-prior-sufficiency",
+      "module": "QuantitativeCriticalSlack.lean",
+      "bridgesRecords": [
+        "all_prior_recovery",
+        "decision_preservation"
+      ],
+      "newTheorems": [
+        "CommonGround.FiniteDecision.QuantitativeSlack.local_jensen_slack_nonneg",
+        "CommonGround.FiniteDecision.QuantitativeSlack.sum_local_slack_eq_global_defect",
+        "CommonGround.FiniteDecision.QuantitativeSlack.weighted_abs_tie_defect_eq_twice_localSlack",
+        "CommonGround.FiniteDecision.QuantitativeSlack.fiber_joint_l1_defect_eq_twice_critical_slack",
+        "CommonGround.FiniteDecision.QuantitativeSlack.weightedValue_eq_hockeyStick"
+      ],
+      "significance": "Establishes the quantitative approximate Blackwell sufficiency (Le Cam deficiency) bound controlled by the finite set of critical priors and proves algebraic equivalence with the (epsilon, delta)-Differential Privacy Hockey-Stick divergence."
+    },
+    {
+      "id": "ext-02-approximate-affine-coreset",
+      "folder": "02-universal-affine-query-compression",
+      "module": "ApproximateAffineCoreset.lean",
+      "bridgesRecords": [
+        "finite_convex_representation",
+        "moment_matching",
+        "observable_span"
+      ],
+      "newTheorems": [
+        "CommonGround.ObservableSpan.Approximate.sum_affineApprox",
+        "CommonGround.ObservableSpan.Approximate.query_diff_decomposition",
+        "CommonGround.ObservableSpan.Approximate.abs_sum_mul_residual_le",
+        "CommonGround.ObservableSpan.Approximate.approx_affine_query_bound"
+      ],
+      "significance": "Extends exact universal affine query compression to the (epsilon, eta)-misspecified feature and approximate moment-matching regime with sharp error bound 2*M*eta + sum |a_j|*epsilon_j."
+    },
+    {
+      "id": "ext-03-unified-sufficiency-bridge",
+      "folder": "03-information-recovery-kl-pythagorean",
+      "module": "UnifiedSufficiencyBridge.lean",
+      "bridgesRecords": [
+        "information_recovery",
+        "canonical_reconstruction",
+        "all_prior_recovery"
+      ],
+      "newTheorems": [
+        "CommonGround.UnifiedSufficiency.channelCriticalBalance_of_pairwise",
+        "CommonGround.UnifiedSufficiency.pairwise_of_channelCriticalBalance",
+        "CommonGround.UnifiedSufficiency.mixturePosterior_eq_referencePosterior_iff_criticalBalance",
+        "CommonGround.UnifiedSufficiency.mixture_joint_recovery_iff_criticalBalance"
+      ],
+      "significance": "Unifies the deterministic KL recovery criterion (FiberLikelihoodConstant) and canonical Q-relative decoder (nativeReferenceRecover) with the stochastic channel critical-prior balance criterion and sum-mixture decoder (mixtureRecover)."
+    },
+    {
+      "id": "ext-04-coreset-bellman-compression",
+      "folder": "04-bellman-contraction-and-mdp-compression",
+      "module": "CoresetBellmanCompression.lean",
+      "bridgesRecords": [
+        "observable_span",
+        "moment_matching",
+        "bellman_residual"
+      ],
+      "newTheorems": [
+        "CommonGround.BellmanCoreset.sum_affine_value",
+        "CommonGround.BellmanCoreset.compressedQBackup_eq_fullQBackup",
+        "CommonGround.BellmanCoreset.coreset_bellman_value_error_bound",
+        "CommonGround.BellmanCoreset.zeroSuccessor_pointwise_zero_residual"
+      ],
+      "significance": "Creates the first compiled proof bridge between the Representation & Answers region and the Existence & Control region, proving that (k+1)-point moment-matching transition coresets preserve exact Bellman backups on k-feature affine spans and inherit the epsilon/(1-beta) value-error guarantee."
+    },
+    {
+      "id": "ext-05-lagrangian-volume-stability",
+      "folder": "05-matrix-energy-and-euler-l2-mollification",
+      "module": "LagrangianVolumeStability.lean",
+      "bridgesRecords": [
+        "determinant_rate",
+        "l2_averaging"
+      ],
+      "newTheorems": [
+        "CommonGround.LagrangianVolume.diagSqSum_add_offDiagSqSum_eq_frobeniusSq",
+        "CommonGround.LagrangianVolume.diagSqSum_le_frobeniusSq",
+        "CommonGround.LagrangianVolume.solenoidal_zero_determinant_rate",
+        "CommonGround.LagrangianVolume.log_volume_rate_sq_le_dim_frobenius",
+        "CommonGround.LagrangianVolume.trace_frobenius_gap_decomposition"
+      ],
+      "significance": "Bridges the MetricCodes/Poincare matrix determinant-rate bound with Euler solenoidal fluid mechanics, proving Liouville volume invariance under zero trace, scale-invariant log-volume distortion bounds, and exact shear-vs-dilatation energy decomposition."
+    },
+    {
+      "id": "ext-06-predictive-state-sufficiency",
+      "folder": "06-myhill-nerode-and-predictive-state-memory",
+      "module": "PredictiveStateSufficiency.lean",
+      "bridgesRecords": [
+        "ending01_memory",
+        "query_identification"
+      ],
+      "newTheorems": [
+        "CommonGround.PredictiveStateSufficiency.allFutureQueriesFiberConstant_iff_nerode_on_fibers",
+        "CommonGround.PredictiveStateSufficiency.injOn_witnesses_of_allFutureQueriesFiberConstant",
+        "CommonGround.PredictiveStateSufficiency.memory_card_ge_distinguishable_witnesses"
+      ],
+      "significance": "Unifies deterministic Myhill-Nerode state lower bounds (Ending01) with active-fiber query identifiability (LinearQueryObservability) into a general theory of Predictive State Representations (PSRs) and minimal sufficient memory."
+    },
+    {
+      "id": "ext-07-parallel-game-sampler",
+      "folder": "07-game-sampler-and-quantum-parallel-bridge",
+      "module": "ParallelGameSamplerExtension.lean",
+      "bridgesRecords": [
+        "sampler_representation"
+      ],
+      "newTheorems": [
+        "CommonGround.OpenAIGame.ParallelExtension.marg_mul_completedConditional_eq_joint",
+        "CommonGround.OpenAIGame.ParallelExtension.expectedGamePayoff_eq_joint",
+        "CommonGround.OpenAIGame.ParallelExtension.parallelProduct_sampler_eq_jointProduct"
+      ],
+      "significance": "Proves that two-stage conditional game sampling preserves expected referee payoffs regardless of zero-marginal fallbacks and commutes with two-fold parallel game repetition."
+    },
+    {
+      "id": "ext-08-structural-duality",
+      "folder": "08-kakutani-and-galois-structural-duality",
+      "module": "InspectedFoundationsAndFiniteDuality.lean",
+      "bridgesRecords": [
+        "kakutani_existence",
+        "galois_reconstruction",
+        "bellman_residual"
+      ],
+      "newTheorems": [
+        "CommonGround.StructuralDuality.character_eval_extracts_coordinate",
+        "CommonGround.StructuralDuality.character_reconstruction_identity",
+        "CommonGround.StructuralDuality.character_evaluations_eq_iff",
+        "CommonGround.StructuralDuality.contraction_residual_bound_and_uniqueness",
+        "CommonGround.StructuralDuality.kakutani_vs_contraction_boundary_witness"
+      ],
+      "significance": "Formalizes the finite-dimensional biorthogonal character reconstruction identity and the contractive vs. topological fixed-point uniqueness dichotomy in self-contained Lean 4."
+    }
+  ]
+}
