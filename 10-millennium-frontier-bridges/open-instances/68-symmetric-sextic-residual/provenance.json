@@ -1,0 +1,21 @@
+{
+  "instanceId": "symmetric-sextic-residual",
+  "variables": [
+    "X0",
+    "X1",
+    "X2",
+    "Y0",
+    "Y1",
+    "Y2"
+  ],
+  "statementSource": "instance.rec",
+  "contextSource": "why.md",
+  "sameVarietyInstances": [],
+  "mathematicalChecks": "checks.json",
+  "checkCommand": "sage -python scripts/audit-frontier.py",
+  "existenceStatus": "Not established by the cited methods for this target; no claim of unrestricted nonexistence.",
+  "references": [
+    "docs/03-geometric-support.md \u00a7\u00a73.3\u20133.4"
+  ],
+  "discussionUrl": "https://github.com/hodge-computer/sextics/discussions/117"
+}

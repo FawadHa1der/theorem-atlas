@@ -1,0 +1,8 @@
+# Exact mathematical target; acceptance is derived from a checked, merged proposal.
+id: klein-coupled-character
+title: Coupled Klein · nontrivial character
+q: 1
+F: X0**5*X1 + 10*X0**3*X2*Y1*Y2/7 + 5*X0*X1**3*Y0*Y1/7 + X0*X2**5 + X1**5*X2 + 15*X1*X2**3*Y0*Y2/7 + Y0**6 + Y1**6 + Y2**6
+A: X0**3*Y0**3
+rationale: why.md
+provenanceFile: provenance.json

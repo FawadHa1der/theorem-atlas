@@ -1,0 +1,10 @@
+# Exact mathematical target; acceptance is derived from a checked, merged proposal.
+id: quadric-contact-residual
+title: Quadric contact · residual sector
+q: 1
+F: X0**6 + 5*X0**4*Y0**2 + 5*X0**2*X1**2*Y1**2 + 5*X0**2*X1*X2*Y1*Y2 + 5*X0**2*X2**2*Y2**2
+  + 5*X0**2*Y0**4 + 5*X0*X1*X2**2*Y0*Y1/7 + 10*X0*X1*Y0*Y1*Y2**2/7 + X1**6 + 5*X1**2*Y0**2*Y1**2
+  + 5*X1*X2*Y0**2*Y1*Y2 + X2**6 + 5*X2**2*Y0**2*Y2**2 + Y0**6 + Y1**6 + Y2**6
+A: X0**3*Y0**3
+rationale: why.md
+provenanceFile: provenance.json

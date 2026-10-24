@@ -1,0 +1,14 @@
+# Exact mathematical target; acceptance is derived from a checked, merged proposal.
+id: polarized-k3-remainder
+title: Polarized split · K3 remainder
+q: 1
+F: X0**6 + 5*X0**5*X1/7 + 15*X0**4*Y0**2 + 25*X0**4*Y0*Y1/7 + 50*X0**3*X1*Y0**2/7 + 5*X0**2*X1**3*X2/7 + 15*X0**2*X1**2*Y1*Y2/7
+  + 15*X0**2*X1*X2*Y1**2/7 + 15*X0**2*Y0**4 + 50*X0**2*Y0**3*Y1/7 + 5*X0**2*Y1**3*Y2/7 + 10*X0*X1**3*Y0*Y2/7 + 30*X0*X1**2*X2*Y0*Y1/7
+  + 25*X0*X1*Y0**4/7 + 30*X0*X1*Y0*Y1**2*Y2/7 + 15*X0*X2**5/7 + 150*X0*X2**3*Y2**2/7 + 10*X0*X2*Y0*Y1**3/7 + 75*X0*X2*Y2**4/7
+  + X1**6 + 10*X1**5*X2/7 + 15*X1**4*Y1**2 + 50*X1**4*Y1*Y2/7 + 5*X1**3*X2*Y0**2/7 + 100*X1**3*X2*Y1**2/7 + 15*X1**2*Y0**2*Y1*Y2/7
+  + 15*X1**2*Y1**4 + 100*X1**2*Y1**3*Y2/7 + 15*X1*X2*Y0**2*Y1**2/7 + 50*X1*X2*Y1**4/7 + X2**6 + 75*X2**4*Y0*Y2/7 + 15*X2**4*Y2**2
+  + 150*X2**2*Y0*Y2**3/7 + 15*X2**2*Y2**4 + Y0**6 + 5*Y0**5*Y1/7 + 5*Y0**2*Y1**3*Y2/7 + 15*Y0*Y2**5/7 + Y1**6 + 10*Y1**5*Y2/7
+  + Y2**6
+A: X0*X1*X2*Y0*Y1*Y2
+rationale: why.md
+provenanceFile: provenance.json

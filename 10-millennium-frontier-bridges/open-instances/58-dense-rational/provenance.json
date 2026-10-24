@@ -1,0 +1,15 @@
+{
+  "instanceId": "dense-rational",
+  "variables": [
+    "X0",
+    "X1",
+    "X2",
+    "Y0",
+    "Y1",
+    "Y2"
+  ],
+  "statementSource": "instance.rec",
+  "contextSource": "why.md",
+  "discussionUrl": "https://github.com/hodge-computer/sextics/discussions/59",
+  "sameVarietyInstances": []
+}

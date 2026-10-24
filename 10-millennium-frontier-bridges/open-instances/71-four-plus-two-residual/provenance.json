@@ -1,0 +1,22 @@
+{
+  "instanceId": "four-plus-two-residual",
+  "variables": [
+    "X0",
+    "X1",
+    "X2",
+    "Y0",
+    "Y1",
+    "Y2"
+  ],
+  "statementSource": "instance.rec",
+  "contextSource": "why.md",
+  "sameVarietyInstances": [],
+  "mathematicalChecks": "checks.json",
+  "checkCommand": "sage -python scripts/audit-frontier.py",
+  "existenceStatus": "Not established by the cited methods for this target; no claim of unrestricted nonexistence.",
+  "references": [
+    "docs/03a-split-and-k3.md \u00a7\u00a73A.1\u20133A.3",
+    "docs/02a-binary-blocks.md"
+  ],
+  "discussionUrl": "https://github.com/hodge-computer/sextics/discussions/120"
+}
