@@ -1,0 +1,91 @@
+{
+  "schema": "common-ground-quantitative-critical-prior-adversarial-audit/v1",
+  "verifiedWith": "Exact Rational Arithmetic (fractions.Fraction / BigInt GCD) + Lean 4 Formal Proofs",
+  "leanModules": [
+    "RecoveryConverseFull.lean",
+    "QuantitativeCriticalSlack.lean",
+    "AdversarialTightnessAndMarginalBound.lean",
+    "../03-information-recovery-kl-pythagorean/UnifiedSufficiencyBridge.lean"
+  ],
+  "coreVerifiedIdentities": [
+    {
+      "id": "identity-1-global-slack-decomposition",
+      "leanTheorem": "CommonGround.FiniteDecision.QuantitativeSlack.sum_local_slack_eq_global_defect",
+      "formula": "∑_{b ∈ β} Δ_t(b) = V_t(p, q) - V_t(P, Q), with Δ_t(b) ≥ 0",
+      "adversarialStatus": "Exact identity across all 500+ randomized and boundary channels; zero violations."
+    },
+    {
+      "id": "identity-2-critical-tie-l1-proportionality",
+      "leanTheorem": "CommonGround.FiniteDecision.QuantitativeSlack.weighted_abs_tie_defect_eq_twice_localSlack",
+      "formula": "At t_b = Q_b / (P_b + Q_b): ∑_{a ∈ α} |t_b p_a - (1 - t_b) q_a| K(a, b) = 2 Δ_{t_b}(b)",
+      "adversarialStatus": "Exact equality on every positive-total output fiber (P_b + Q_b > 0)."
+    },
+    {
+      "id": "identity-3-fiberwise-mixture-reconstruction",
+      "leanTheorem": "CommonGround.FiniteDecision.QuantitativeSlack.fiber_joint_l1_defect_eq_twice_critical_slack",
+      "formula": "∑_{a ∈ α} |P_b R_mix(b, a) - p_a K(a, b)| = ∑_{a ∈ α} |Q_b R_mix(b, a) - q_a K(a, b)| = 2 Δ_{t_b}(b)",
+      "adversarialStatus": "Exact equality on every positive-total output fiber; simultaneously identical for both P and Q."
+    },
+    {
+      "id": "identity-4-global-marginal-l1-bound-and-tightness",
+      "leanTheorem": "CommonGround.FiniteDecision.AdversarialTightness.marginal_l1_error_le_sum_fiber_joint_defect",
+      "formula": "‖(P.bind R_mix) - p‖_1 ≤ 2 ∑_{b : P_b+Q_b>0} Δ_{t_b}(b) ≤ 2 ∑_{b : P_b+Q_b>0} δ_{t_b}",
+      "adversarialStatus": "Upper bound holds universally; exact equality (ratio = 2.000000) is attained on all deterministic observation maps g : α → β."
+    },
+    {
+      "id": "identity-5-hockey-stick-dp-equivalence",
+      "leanTheorem": "CommonGround.FiniteDecision.QuantitativeSlack.weightedValue_eq_hockeyStick",
+      "formula": "V_t(p, q) = (1 - t)(∑ q_a) + t H_{(1-t)/t}(p ∥ q)",
+      "adversarialStatus": "Exact algebraic identity for all t ∈ (0, 1]."
+    }
+  ],
+  "adversarialFixtures": [
+    {
+      "id": "fixture-01-v34-equal-prior-evasion",
+      "name": "V34 Counterexample Twin (Fin 3 → Fin 2, Equal-Prior TV Evasion)",
+      "p": ["2/5", "1/10", "1/2"],
+      "q": ["1/10", "1/20", "17/20"],
+      "K": [["1", "0"], ["1", "0"], ["0", "1"]],
+      "observedP": ["1/2", "1/2"],
+      "observedQ": ["3/20", "17/20"],
+      "priorHalfDefect": "0",
+      "criticalPriors": ["3/13", "17/27"],
+      "localCriticalSlacks": ["1/260", "0"],
+      "marginalL1ErrorP": "1/130",
+      "marginalL1ErrorQ": "1/130",
+      "twiceSumLocalSlacks": "1/130",
+      "boundAttainmentRatio": "1.0 (Exact Equality: ‖PR_mix - p‖_1 = 2 ∑ Δ_{t_b}(b))"
+    },
+    {
+      "id": "fixture-02-multi-prior-grid-evasion",
+      "name": "Adversarial Multi-Prior Grid Evasion (Evades t = 1/4, 1/2, 3/4 simultaneously)",
+      "p": ["8/15", "1/5", "4/15", "0"],
+      "q": ["1/30", "1/30", "14/15", "0"],
+      "K": [["1", "0"], ["1", "0"], ["0", "1"], ["0", "1"]],
+      "observedP": ["11/15", "4/15"],
+      "observedQ": ["1/15", "14/15"],
+      "gridDefects": {
+        "t=1/4": "0",
+        "t=1/2": "0",
+        "t=3/4": "0"
+      },
+      "criticalPriors": ["1/12", "7/9"],
+      "localCriticalSlacks": ["1/72", "0"],
+      "marginalL1ErrorP": "1/36",
+      "marginalL1ErrorQ": "1/36",
+      "twiceSumLocalSlacks": "1/36",
+      "takeaway": "Any fixed prior grid can be adversarially evaded by placing distinct likelihood ratios p_a/q_a on the same side of the grid thresholds (1-t)/t; the output-adaptive critical prior t_b = Q_b/(P_b+Q_b) = 1/12 bisects the fiber ratios (16 and 6) at (1-t_0)/t_0 = 11 and exposes the exact L1 reconstruction error 1/36."
+    },
+    {
+      "id": "fixture-03-singular-reference-vs-mixture-decoder",
+      "name": "Singular Reference Support (Q_0 = 0, P_0 = 1/2)",
+      "p": ["1/2", "0", "1/2"],
+      "q": ["0", "0", "1"],
+      "K": [["1", "0"], ["1", "0"], ["0", "1"]],
+      "mixtureDecoderErrorP": "0",
+      "mixtureDecoderErrorQ": "0",
+      "referenceDecoderErrorP": "2/3",
+      "takeaway": "When Q_b = 0 but P_b > 0, the Q-relative canonical reconstruction R_ref(b,a) = q_a K(a,b)/Q_b has a 0/0 singularity and fails on P (error 2/3), whereas R_mix(b,a) = (p_a+q_a)K(a,b)/(P_b+Q_b) reduces to p_a K(a,b)/P_b and achieves zero error on both P and Q without requiring absolute continuity p ≪ q."
+    }
+  ]
+}

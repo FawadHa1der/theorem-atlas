@@ -1,0 +1,132 @@
+{
+  "schema": "common-ground-hodge-sextics-16-open-instances-audit/v1",
+  "targetProject": "https://hodge.computer (https://github.com/hodge-computer/sextics)",
+  "referencePaper": "Benjamin E. Diamond (2026), Hodge Structures in Sextic Fourfolds Equipped with an Involution, arXiv:2603.29157v2",
+  "governingPDE": "F^(q+1) | (A - q * dF(v) + F * div(v)) in Q[Z_0..Z_5]_(F) for v = W / D, D not in (F)",
+  "exactVerifiedMechanisms": {
+    "lemma_3_4_combinatorial_coverage": {
+      "q1_degree6_reduced_monomials": 456,
+      "q1_verified_with_subset_sum_6": 456,
+      "q2_degree12_reduced_monomials": 3639,
+      "q2_verified_with_subset_sum_6": 3639,
+      "total_monomials_verified": 4095,
+      "success_rate": "100.0% (4095 / 4095)"
+    },
+    "lemma_3_6_partial_euler_quotient_rule": "Verified in Lean 4 (DiamondGriffithsLewisPDE.lean) and Python symbolic algebra (hodge_sextics_solver.py): whenever F = F_I + F_{I^c} is uncoupled across a subset I with deg_I(A) + |I| = 6, the rational vector field v = (A * nu_I) / (q * dF(nu_I)) satisfies A - q*dF(v) + F*div(v) = 0 identically.",
+    "second_order_jacobian_coupling_correction": "Verified in Lean 4 (coupled_sextic_second_order_jacobian_correction): when cross-block coupling creates a nonzero defect E = D*(nu_I(A) + |I|*A) - nu_I(D)*A, adding the F-proportional correction (F/q)*mu reduces the PDE modulo F^2 to E = (q-1)*D*dF(mu) mod F."
+  },
+  "open16InstancesAnalysis": [
+    {
+      "instanceId": 56,
+      "title": "Broken paired signs",
+      "PartialResultsOnLeaderboard": 0,
+      "structuralObstruction": "Sign asymmetry breaks the direct GL_3 block transport from Fermat.",
+      "attackStrategyFromOurBridges": "Use weighted diagonal derivation nu_w = sum w_i Z_i d/dZ_i matched to the paired sign blocks, plus second-order Jacobian correction mu."
+    },
+    {
+      "instanceId": 58,
+      "title": "Dense rational · full coefficient support",
+      "PartialResultsOnLeaderboard": 1,
+      "structuralObstruction": "All 462 degree-6 monomials are active; naive Macaulay linear system for (W, D) exceeds memory.",
+      "attackStrategyFromOurBridges": "Apply waring_coreset_cohomology_pairing_invariance (Discovery 02): project modulo J(F)_6 first and prune candidate vector-field basis blocks to a (k+1)-element apolar coreset."
+    },
+    {
+      "instanceId": 60,
+      "title": "Cyclic coupling · pole order two",
+      "PartialResultsOnLeaderboard": 2,
+      "structuralObstruction": "Order-2 pole (q=1) with cyclic Z/3Z cross-block coupling terms.",
+      "attackStrategyFromOurBridges": "Decompose into Z/3Z character sectors via equivariant_certificate_symmetrization (3x Macaulay reduction) and choose D = dF(nu_cyclic) invariant under the cyclic generator."
+    },
+    {
+      "instanceId": 66,
+      "title": "Polarized split · K3 remainder",
+      "PartialResultsOnLeaderboard": 2,
+      "structuralObstruction": "Split sextic component is solved, leaving a K3-type middle-cohomology remainder at q=2.",
+      "attackStrategyFromOurBridges": "Use the 3+3 block partial Euler derivation nu_{0,1,2} (verified in test_03 of hodge_sextics_solver.py) to annihilate the split sector, then apply coupled_sextic_second_order_jacobian_correction at q=2 on the K3 remainder."
+    },
+    {
+      "instanceId": 67,
+      "title": "Coupled Klein · nontrivial character",
+      "PartialResultsOnLeaderboard": 0,
+      "structuralObstruction": "Klein 4-group V_4 = Z/2Z x Z/2Z symmetry with target A in a nontrivial character sector.",
+      "attackStrategyFromOurBridges": "Apply equivariant_certificate_symmetrization with the V_4 character projector Pi_chi (8x total dimension reduction when combined with sigma), reducing the degree-7 numerator space from 6*792 = 4,752 unknowns to ~594 unknowns."
+    },
+    {
+      "instanceId": 68,
+      "title": "Permutation symmetry · residual sector",
+      "PartialResultsOnLeaderboard": 0,
+      "structuralObstruction": "S_3 permutation symmetry on (U_0,U_1,U_2) and (V_0,V_1,V_2); residual non-trivial representation.",
+      "attackStrategyFromOurBridges": "Project onto the 2D standard / 1D sign S_3 character sectors (6x Macaulay matrix reduction) and use symmetric partial Euler sums."
+    },
+    {
+      "instanceId": 69,
+      "title": "Rank-one coupling · biquartic pencil",
+      "PartialResultsOnLeaderboard": 1,
+      "structuralObstruction": "Rank-one coupling term L(U)^2 * Q(V)^4 or biquartic interaction breaks block separation.",
+      "attackStrategyFromOurBridges": "Choose nu in ker(dL) (a 5-dimensional subspace of partial Euler fields annihilating the rank-1 linear form L), which forces the rank-1 coupling to behave as a pure block term under nu!"
+    },
+    {
+      "instanceId": 71,
+      "title": "Four plus two · suspension remainder",
+      "PartialResultsOnLeaderboard": 0,
+      "structuralObstruction": "4+2 variable split (quaternary sextic + binary sextic suspension).",
+      "attackStrategyFromOurBridges": "Use I = {4, 5} (the 2-variable binary suspension block, where binary_sextic_factorization_identity factors the binary sextic completely into 6 linear forms) and apply Lemma 3.6 on the 2-variable block."
+    },
+    {
+      "instanceId": 72,
+      "title": "Quadric contact · residual sector",
+      "PartialResultsOnLeaderboard": 0,
+      "structuralObstruction": "F has contact along a quadric Q = 0 (F = Q^3 + R or Q*G + H).",
+      "attackStrategyFromOurBridges": "Use Hamiltonian / Lie-Of-Quadric vector fields nu in so(Q) satisfying dQ(nu) = 0, so nu differentiates only the residual contact cofactor."
+    },
+    {
+      "instanceId": 74,
+      "title": "One reflection · skew coupling",
+      "PartialResultsOnLeaderboard": 8,
+      "structuralObstruction": "Z/2Z reflection with skew-symmetric cross-coupling (8 partial results already found on leaderboard).",
+      "attackStrategyFromOurBridges": "Split into +/-1 reflection eigenspaces via projPlus/projMinus (HodgeSexticCertificateAndWaringBridge.lean) and apply the q=2 Jacobian defect cancellation formula."
+    },
+    {
+      "instanceId": 77,
+      "title": "Reflection · complementary character",
+      "PartialResultsOnLeaderboard": 2,
+      "structuralObstruction": "Complementary odd character sector under a single coordinate reflection.",
+      "attackStrategyFromOurBridges": "Project W onto the odd reflection sector Pi_- while keeping the denominator D = dF(nu_+) in the even sector Pi_+ so W/D has the exact required parity."
+    },
+    {
+      "instanceId": 78,
+      "title": "Cyclic triple cover · complementary character",
+      "PartialResultsOnLeaderboard": 1,
+      "structuralObstruction": "Z/3Z cyclic cover in the non-trivial character eigenspace.",
+      "attackStrategyFromOurBridges": "Use Z/3Z character idempotent projection (3x Macaulay reduction) and cyclic partial Euler combinations."
+    },
+    {
+      "instanceId": 79,
+      "title": "Eight powers · linear-section remainder",
+      "PartialResultsOnLeaderboard": 0,
+      "structuralObstruction": "Waring rank 8 (sum of 8 sixth powers L_1^6 + ... + L_8^6 on P^5, exceeding the 6-coordinate Fermat basis by 2 dependent linear forms).",
+      "attackStrategyFromOurBridges": "Change coordinates so L_1..L_6 are Z_0..Z_5 and L_7, L_8 are linear combinations. To eliminate the 2 extra powers L_7^6 and L_8^6 from dF(nu), choose the 4-dimensional subspace of linear derivations nu in gl_6(Q) satisfying dL_7(nu) = 0 and dL_8(nu) = 0! On that subspace, dF(nu) reduces to a pure 6-power Fermat form!"
+    },
+    {
+      "instanceId": 80,
+      "title": "Quadratic pullback · residual density",
+      "PartialResultsOnLeaderboard": 0,
+      "structuralObstruction": "Pullback of a cubic F_3(Q_0, ..., Q_5) under quadratic forms Q_i (even exponents only).",
+      "attackStrategyFromOurBridges": "All exponents in F and A are even, reducing the monomial support to the even-exponent lattice (8x smaller Macaulay system). Apply partial Euler fields aligned with the quadratic blocks."
+    },
+    {
+      "instanceId": 81,
+      "title": "Eight planes · contact arrangement",
+      "PartialResultsOnLeaderboard": 0,
+      "structuralObstruction": "Arrangement of 8 planes with contact relations.",
+      "attackStrategyFromOurBridges": "Use logarithmic vector fields tangent to subsets of 4 coplanar/concurrent planes so dL_r(nu) = lambda_r L_r."
+    },
+    {
+      "instanceId": 82,
+      "title": "Simultaneous permutations · standard sector",
+      "PartialResultsOnLeaderboard": 0,
+      "structuralObstruction": "Diagonal S_3 action permuting (U_0,U_1,U_2) and (V_0,V_1,V_2) simultaneously, projected to the 2D standard representation.",
+      "attackStrategyFromOurBridges": "Combine S_3 standard-representation projection with block-swap sigma anti-invariance (reducing the search dimension by 6x) and solve the resulting exact rational linear system in python-flint."
+    }
+  ]
+}

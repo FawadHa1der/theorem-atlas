@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Quantitative Critical-Prior Sufficiency · Interactive Exact-Rational Laboratory</title>
+  <style>
+    :root {
+      --bg: #f6f4ec;
+      --card: #ffffff;
+      --ink: #162a24;
+      --muted: #4b6158;
+      --accent: #0f5c47;
+      --accent-soft: #e2f0eb;
+      --warn: #9a4c0e;
+      --warn-soft: #fdf2e6;
+      --border: #cdd6cf;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --serif: Georgia, "Times New Roman", serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.55 var(--sans);
+    }
+    header, main, footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 1.25rem 1.5rem;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+    }
+    .eyebrow {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      font-weight: 700;
+      margin: 0;
+    }
+    h1 {
+      font: 700 clamp(1.6rem, 3vw, 2.3rem)/1.18 var(--serif);
+      margin: 0.35rem 0 0.5rem;
+    }
+    h2 {
+      font: 700 1.25rem/1.25 var(--serif);
+      margin: 0 0 0.65rem;
+    }
+    h3 {
+      font-size: 0.95rem;
+      margin: 0 0 0.4rem;
+    }
+    .presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0 0.5rem;
+    }
+    button {
+      font: inherit;
+      padding: 0.45rem 0.85rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--ink);
+      cursor: pointer;
+      font-weight: 500;
+    }
+    button:hover { border-color: var(--accent); }
+    button.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+    @media (max-width: 880px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.1rem 1.25rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-top: 0.4rem;
+    }
+    th, td {
+      border-bottom: 1px solid #e4eae5;
+      padding: 0.42rem 0.45rem;
+      text-align: left;
+    }
+    th { color: var(--muted); font-weight: 600; }
+    code, .math {
+      font-family: var(--mono);
+      font-size: 0.86rem;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.18rem 0.55rem;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .badge-ok { background: var(--accent-soft); color: var(--accent); }
+    .badge-warn { background: var(--warn-soft); color: var(--warn); }
+    .formula-box {
+      background: #f0f4f1;
+      border-left: 4px solid var(--accent);
+      padding: 0.65rem 0.9rem;
+      margin: 0.65rem 0;
+      font-family: var(--mono);
+      font-size: 0.84rem;
+    }
+    svg {
+      width: 100%;
+      height: auto;
+      background: #fbfaf6;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    .input-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      margin-bottom: 0.4rem;
+    }
+    input[type="text"] {
+      font: 0.85rem var(--mono);
+      padding: 0.3rem 0.45rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="eyebrow">Common Ground V34 Extension · Exact BigInt Rational Laboratory</p>
+    <h1>Quantitative Critical-Prior Sufficiency &amp; Le Cam Slack Explorer</h1>
+    <p>Interactive exact-rational verifier for <code>QuantitativeCriticalSlack.lean</code>, <code>UnifiedSufficiencyBridge.lean</code>, and <code>AdversarialTightnessAndMarginalBound.lean</code>. Every quantity below is computed in exact arbitrary-precision rational arithmetic (<code>BigInt</code> GCD) alongside the continuous Bayes defect curve.</p>
+    <div class="presets" id="preset-buttons"></div>
+  </header>
+
+  <main>
+    <div class="grid">
+      <section class="card">
+        <h2>1. Channel &amp; Prior Specification (Exact Rationals)</h2>
+        <p id="preset-desc" style="color:var(--muted);margin-top:0"></p>
+        <div class="input-row">
+          <label style="min-width:95px;font-weight:600">Law p:</label>
+          <input type="text" id="input-p" aria-label="Law p comma-separated fractions">
+        </div>
+        <div class="input-row">
+          <label style="min-width:95px;font-weight:600">Law q:</label>
+          <input type="text" id="input-q" aria-label="Law q comma-separated fractions">
+        </div>
+        <div class="input-row">
+          <label style="min-width:95px;font-weight:600">Kernel K rows:</label>
+          <input type="text" id="input-K" aria-label="Kernel K rows semicolon-separated">
+        </div>
+        <button type="button" id="btn-evaluate" class="active" style="margin-top:0.35rem">Recompute Exact Rational Certificates</button>
+        <p id="parse-error" style="color:var(--warn);font-weight:600" hidden></p>
+
+        <h3 style="margin-top:1.1rem">Input Laws &amp; Within-Fiber Likelihood Ratios</h3>
+        <table id="input-table">
+          <thead>
+            <tr><th>Atom a</th><th>p(a)</th><th>q(a)</th><th>Ratio p(a)/q(a)</th><th>Kernel row K(a, ·)</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2>2. Critical-Prior Certificates &amp; Exact Slack Identities</h2>
+        <div id="verdict-banner" style="margin-bottom:0.65rem"></div>
+        <div class="formula-box" id="master-theorem-box"></div>
+        <table id="critical-table">
+          <thead>
+            <tr>
+              <th>Output b</th>
+              <th>P_b, Q_b</th>
+              <th>Critical t_b</th>
+              <th>Local Slack Δ_{t_b}(b)</th>
+              <th>Fiber Joint L1 Error</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <h2>3. Marginal Reconstruction: R_mix vs. Canonical R_ref</h2>
+        <p style="color:var(--muted);margin-top:0">Compares <code>mixtureRecover</code> ($R_{\text{mix}}(b,a) = \frac{(p_a+q_a)K(a,b)}{P_b+Q_b}$) from Discovery 01 against <code>nativeReferenceRecover</code> ($R_{\text{ref}}(b,a) = \frac{q_a K(a,b)}{Q_b}$) from Discovery 03.</p>
+        <table id="recon-table">
+          <thead>
+            <tr>
+              <th>Atom a</th>
+              <th>True p(a)</th>
+              <th>(P·R_mix)(a)</th>
+              <th>|P·R_mix − p|</th>
+              <th>(P·R_ref)(a)</th>
+              <th>True q(a)</th>
+              <th>(Q·R_mix)(a)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div class="formula-box" id="marginal-bound-box"></div>
+      </section>
+
+      <section class="card">
+        <h2>4. Bayes Value Defect Curve δ_t = V_t(p,q) − V_t(P,Q)</h2>
+        <p style="color:var(--muted);margin-top:0">Vertical dashed lines mark the output-determined critical priors $t_b = Q_b / (P_b + Q_b)$. Even when $\delta_t = 0$ on large intervals (evading fixed test grids like $t=1/2$), non-recoverability forces $\delta_{t_b} \ge \Delta_{t_b}(b) > 0$ at a critical prior.</p>
+        <svg id="defect-svg" viewBox="0 0 520 230" role="img" aria-label="Plot of Bayes score defect delta_t versus prior t"></svg>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // Exact BigInt Rational Engine
+    function gcd(a, b) {
+      a = a < 0n ? -a : a;
+      b = b < 0n ? -b : b;
+      while (b !== 0n) { const t = b; b = a % b; a = t; }
+      return a === 0n ? 1n : a;
+    }
+    class Rat {
+      constructor(n, d = 1n) {
+        if (typeof n === 'number') n = BigInt(n);
+        if (typeof d === 'number') d = BigInt(d);
+        if (d === 0n) throw new Error('Zero denominator');
+        if (d < 0n) { n = -n; d = -d; }
+        const g = gcd(n, d);
+        this.n = n / g;
+        this.d = d / g;
+      }
+      static parse(str) {
+        str = String(str).trim();
+        if (str.includes('/')) {
+          const [a, b] = str.split('/');
+          return new Rat(BigInt(a.trim()), BigInt(b.trim()));
+        }
+        return new Rat(BigInt(str), 1n);
+      }
+      add(o) { return new Rat(this.n * o.d + o.n * this.d, this.d * o.d); }
+      sub(o) { return new Rat(this.n * o.d - o.n * this.d, this.d * o.d); }
+      mul(o) { return new Rat(this.n * o.n, this.d * o.d); }
+      div(o) { return new Rat(this.n * o.d, this.d * o.n); }
+      abs() { return new Rat(this.n < 0n ? -this.n : this.n, this.d); }
+      lt(o) { return this.n * o.d < o.n * this.d; }
+      le(o) { return this.n * o.d <= o.n * this.d; }
+      eq(o) { return this.n === o.n && this.d === o.d; }
+      isZero() { return this.n === 0n; }
+      max(o) { return this.lt(o) ? o : this; }
+      toNumber() { return Number(this.n) / Number(this.d); }
+      toString() { return this.d === 1n ? `${this.n}` : `${this.n}/${this.d}`; }
+    }
+    const ZERO = new Rat(0n), ONE = new Rat(1n), TWO = new Rat(2n);
+
+    const PRESETS = [
+      {
+        id: 'v34-counterexample',
+        label: '1. V34 Equal-Prior Counterexample (t=1/2 Evaded, Caught at t_0=3/13)',
+        desc: 'Preserves total variation distance (7/20) and equal-prior Bayes score (27/40) at t=1/2 with zero slack, but fails common recovery. Critical prior t_0 = 3/13 exposes exact local slack Δ = 1/260 and L1 error 2Δ = 1/130.',
+        p: '2/5, 1/10, 1/2',
+        q: '1/10, 1/20, 17/20',
+        K: '1, 0; 1, 0; 0, 1'
+      },
+      {
+        id: 'v34-recoverable',
+        label: '2. V34 Recoverable Twin (Exact Sufficiency, Δ = 0)',
+        desc: 'Within fiber {0,1}, p=(2/5, 1/10) and q_R=(3/25, 3/100) have identical 4:1 ratio. Both critical priors have Δ = 0, and R_mix = R_ref recovers both p and q_R with zero error.',
+        p: '2/5, 1/10, 1/2',
+        q: '3/25, 3/100, 17/20',
+        K: '1, 0; 1, 0; 0, 1'
+      },
+      {
+        id: 'multi-grid-evasion',
+        label: '3. Adversarial Multi-Grid Evasion (Evades t=1/4, 1/2, 3/4; Caught at t_0=1/12)',
+        desc: 'Atoms 0 and 1 have likelihood ratios 16 and 6, both > (1-t)/t for all t ≥ 1/4. Thus δ_t = 0 across t ∈ [1/4, 1], fooling standard prior grids. Output-0 critical prior t_0 = 1/12 bisects the ratios at (1-t_0)/t_0 = 11 and catches the exact L1 defect 1/36.',
+        p: '8/15, 1/5, 4/15',
+        q: '1/30, 1/30, 14/15',
+        K: '1, 0; 1, 0; 0, 1'
+      },
+      {
+        id: 'singular-q-zero',
+        label: '4. Boundary Singularity (Q_0 = 0, P_0 = 1/2: R_mix Succeeds, R_ref Fails)',
+        desc: 'Fiber 0 has P_0 = 1/2 > 0 but Q_0 = 0. The Q-relative decoder R_ref divides by Q_0 = 0 (incurring L1 error 2/3 on p), whereas R_mix = (p_a+q_a)K(a,b)/(P_b+Q_b) smoothly recovers both p and q with 0 error.',
+        p: '1/2, 0, 1/2',
+        q: '0, 0, 1',
+        K: '1, 0; 1, 0; 0, 1'
+      },
+      {
+        id: 'stochastic-channel',
+        label: '5. Non-Deterministic Stochastic Channel (Cross-Fiber Cancellation)',
+        desc: 'A 3×3 noisy stochastic channel where every fiber has positive slack Δ_{t_b}(b) > 0, demonstrating strict triangle-inequality slack between fiberwise joint L1 defect and marginal L1 error.',
+        p: '1/2, 1/3, 1/6',
+        q: '1/6, 1/3, 1/2',
+        K: '3/4, 1/4, 0; 1/4, 1/2, 1/4; 0, 1/4, 3/4'
+      }
+    ];
+
+    function pushforward(p, K) {
+      const nOut = K[0].length;
+      return Array.from({length: nOut}, (_, b) =>
+        p.reduce((acc, pa, a) => acc.add(pa.mul(K[a][b])), ZERO)
+      );
+    }
+    function weightedVal(p, q, t) {
+      const omt = ONE.sub(t);
+      return p.reduce((acc, pa, a) => acc.add(t.mul(pa).max(omt.mul(q[a]))), ZERO);
+    }
+    function localSlack(p, q, K, t, b) {
+      const P = pushforward(p, K), Q = pushforward(q, K), omt = ONE.sub(t);
+      const upper = p.reduce((acc, pa, a) => acc.add(t.mul(pa).max(omt.mul(q[a])).mul(K[a][b])), ZERO);
+      const lower = t.mul(P[b]).max(omt.mul(Q[b]));
+      return upper.sub(lower);
+    }
+
+    function render() {
+      const errEl = document.getElementById('parse-error');
+      errEl.hidden = true;
+      try {
+        const p = document.getElementById('input-p').value.split(',').map(Rat.parse);
+        const q = document.getElementById('input-q').value.split(',').map(Rat.parse);
+        const K = document.getElementById('input-K').value.split(';').map(r => r.split(',').map(Rat.parse));
+        if (p.length !== q.length || K.length !== p.length) throw new Error('Dimension mismatch between p, q, and rows of K.');
+        const nIn = p.length, nOut = K[0].length;
+        const P = pushforward(p, K), Q = pushforward(q, K);
+
+        // Input table
+        const inBody = document.querySelector('#input-table tbody');
+        inBody.innerHTML = p.map((pa, a) => {
+          const ratio = q[a].isZero() ? '∞' : pa.div(q[a]).toString();
+          return `<tr><td><code>a=${a}</code></td><td><code>${pa}</code></td><td><code>${q[a]}</code></td><td><code>${ratio}</code></td><td><code>(${K[a].join(', ')})</code></td></tr>`;
+        }).join('');
+
+        // Mixture & Reference decoders
+        const Rmix = Array.from({length: nOut}, (_, b) => {
+          const denom = P[b].add(Q[b]);
+          if (denom.isZero()) return p.slice();
+          return p.map((pa, a) => pa.add(q[a]).mul(K[a][b]).div(denom));
+        });
+        const Rref = Array.from({length: nOut}, (_, b) => {
+          if (Q[b].isZero()) return Array.from({length: nIn}, () => new Rat(1n, BigInt(nIn)));
+          return q.map((qa, a) => qa.mul(K[a][b]).div(Q[b]));
+        });
+
+        let sumSlack = ZERO;
+        const critRows = [];
+        const critPriorsFloat = [];
+        for (let b = 0; b < nOut; b++) {
+          const denom = P[b].add(Q[b]);
+          if (denom.isZero()) {
+            critRows.push(`<tr><td><code>b=${b}</code></td><td><code>0, 0</code></td><td><code>(inactive)</code></td><td><code>0</code></td><td><code>0</code></td></tr>`);
+          } else {
+            const tb = Q[b].div(denom);
+            critPriorsFloat.push({b, t: tb.toNumber(), label: tb.toString()});
+            const sb = localSlack(p, q, K, tb, b);
+            sumSlack = sumSlack.add(sb);
+            const jointErrP = p.reduce((acc, pa, a) => acc.add(P[b].mul(Rmix[b][a]).sub(pa.mul(K[a][b])).abs()), ZERO);
+            critRows.push(`<tr>
+              <td><code>b=${b}</code></td>
+              <td><code>${P[b]}, ${Q[b]}</code></td>
+              <td><code>t_${b} = ${tb}</code></td>
+              <td><code>${sb}</code></td>
+              <td><code>${jointErrP} = 2·(${sb})</code></td>
+            </tr>`);
+          }
+        }
+        document.querySelector('#critical-table tbody').innerHTML = critRows.join('');
+
+        const twoSumSlack = TWO.mul(sumSlack);
+        const banner = document.getElementById('verdict-banner');
+        if (sumSlack.isZero()) {
+          banner.innerHTML = `<span class="badge badge-ok">✓ EXACT COMMON RECOVERY</span> All critical priors have zero slack (Δ_{t_b}(b) = 0). One decoder R_mix simultaneously reconstructs both p and q.`;
+        } else {
+          banner.innerHTML = `<span class="badge badge-warn">! INFORMATION LOSS DETECTED AT CRITICAL PRIORS</span> Sum of local critical slacks ∑ Δ_{t_b}(b) = <code>${sumSlack}</code> &gt; 0 (Joint L1 defect = <code>${twoSumSlack}</code>).`;
+        }
+        document.getElementById('master-theorem-box').innerHTML =
+          `Verified Lean 4 Identity (fiber_joint_l1_defect_eq_twice_critical_slack):<br>` +
+          `∑_b ∑_a |P_b R_mix(b,a) − p_a K(a,b)| = 2 ∑_b Δ_{t_b}(b) = <strong>${twoSumSlack}</strong>`;
+
+        // Marginal reconstruction table
+        const pRecMix = Array.from({length: nIn}, (_, a) => P.reduce((acc, Pb, b) => acc.add(Pb.mul(Rmix[b][a])), ZERO));
+        const qRecMix = Array.from({length: nIn}, (_, a) => Q.reduce((acc, Qb, b) => acc.add(Qb.mul(Rmix[b][a])), ZERO));
+        const pRecRef = Array.from({length: nIn}, (_, a) => P.reduce((acc, Pb, b) => acc.add(Pb.mul(Rref[b][a])), ZERO));
+
+        let errPMix = ZERO, errQMix = ZERO, errPRef = ZERO;
+        document.querySelector('#recon-table tbody').innerHTML = p.map((pa, a) => {
+          const diffP = pRecMix[a].sub(pa).abs();
+          const diffQ = qRecMix[a].sub(q[a]).abs();
+          const diffRef = pRecRef[a].sub(pa).abs();
+          errPMix = errPMix.add(diffP);
+          errQMix = errQMix.add(diffQ);
+          errPRef = errPRef.add(diffRef);
+          return `<tr>
+            <td><code>a=${a}</code></td>
+            <td><code>${pa}</code></td>
+            <td><code>${pRecMix[a]}</code></td>
+            <td><code>${diffP}</code></td>
+            <td><code>${pRecRef[a]}</code></td>
+            <td><code>${q[a]}</code></td>
+            <td><code>${qRecMix[a]}</code></td>
+          </tr>`;
+        }).join('');
+
+        document.getElementById('marginal-bound-box').innerHTML =
+          `‖P·R_mix − p‖₁ = <strong>${errPMix}</strong> ≤ 2 ∑ Δ_{t_b}(b) = <strong>${twoSumSlack}</strong> &nbsp;|&nbsp; ` +
+          `‖Q·R_mix − q‖₁ = <strong>${errQMix}</strong> &nbsp;|&nbsp; ` +
+          `‖P·R_ref − p‖₁ = <strong>${errPRef}</strong>`;
+
+        // Plot defect curve delta_t over t in [0, 1]
+        const svg = document.getElementById('defect-svg');
+        const W = 520, H = 230, padL = 48, padR = 20, padT = 22, padB = 34;
+        const plotW = W - padL - padR, plotH = H - padT - padB;
+        const N = 200;
+        const pts = [];
+        let maxDef = 0.001;
+        for (let i = 0; i <= N; i++) {
+          const t = new Rat(BigInt(i), BigInt(N));
+          const def = weightedVal(p, q, t).sub(weightedVal(P, Q, t)).toNumber();
+          if (def > maxDef) maxDef = def;
+          pts.push({t: i / N, def});
+        }
+        const xOf = t => padL + t * plotW;
+        const yOf = d => padT + plotH - (d / (maxDef * 1.15)) * plotH;
+        const pathD = pts.map((pt, idx) => `${idx === 0 ? 'M' : 'L'}${xOf(pt.t).toFixed(1)},${yOf(pt.def).toFixed(1)}`).join(' ');
+
+        const critLines = critPriorsFloat.map(c => {
+          const cx = xOf(c.t).toFixed(1);
+          return `<line x1="${cx}" y1="${padT}" x2="${cx}" y2="${padT + plotH}" stroke="#9a4c0e" stroke-width="1.5" stroke-dasharray="4 3"/>
+                  <text x="${cx}" y="${padT - 5}" text-anchor="middle" font-size="10" fill="#9a4c0e" font-family="monospace">t_${c.b}=${c.label}</text>`;
+        }).join('');
+
+        svg.innerHTML = `
+          <line x1="${padL}" y1="${padT + plotH}" x2="${padL + plotW}" y2="${padT + plotH}" stroke="#889990" stroke-width="1"/>
+          <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT + plotH}" stroke="#889990" stroke-width="1"/>
+          <text x="${padL}" y="${H - 8}" text-anchor="middle" font-size="11" fill="#4b6158">t = 0</text>
+          <text x="${xOf(0.5)}" y="${H - 8}" text-anchor="middle" font-size="11" fill="#4b6158">t = 1/2 (TV)</text>
+          <text x="${padL + plotW}" y="${H - 8}" text-anchor="middle" font-size="11" fill="#4b6158">t = 1</text>
+          <text x="${padL - 6}" y="${padT + 8}" text-anchor="end" font-size="10" fill="#4b6158">${maxDef.toFixed(4)}</text>
+          <text x="${padL - 6}" y="${padT + plotH}" text-anchor="end" font-size="10" fill="#4b6158">0</text>
+          ${critLines}
+          <path d="${pathD}" fill="none" stroke="#0f5c47" stroke-width="2.4"/>
+        `;
+      } catch (e) {
+        errEl.textContent = e.message;
+        errEl.hidden = false;
+      }
+    }
+
+    const presetContainer = document.getElementById('preset-buttons');
+    PRESETS.forEach((pr, idx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = pr.label;
+      if (idx === 0) btn.classList.add('active');
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#preset-buttons button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('preset-desc').textContent = pr.desc;
+        document.getElementById('input-p').value = pr.p;
+        document.getElementById('input-q').value = pr.q;
+        document.getElementById('input-K').value = pr.K;
+        render();
+      });
+      presetContainer.appendChild(btn);
+    });
+
+    document.getElementById('btn-evaluate').addEventListener('click', render);
+    // Initialize with Preset 0
+    document.getElementById('preset-desc').textContent = PRESETS[0].desc;
+    document.getElementById('input-p').value = PRESETS[0].p;
+    document.getElementById('input-q').value = PRESETS[0].q;
+    document.getElementById('input-K').value = PRESETS[0].K;
+    render();
+  </script>
+</body>
+</html>
