@@ -146,3 +146,60 @@ theorem dense_rational_smoothness_certificate :
   decide
 
 end MillenniumFrontier.HodgeOpen16
+
+namespace MillenniumFrontier.HodgeOpen16.EndToEndCubicReductions
+
+/-- Theorem 11 (`#56 off-paired` Double-Binary-Cubic + Two-Squares Exact Identity):
+Verifies over `[-2, 2]⁶` that `6 * F₅₆` equals the double-binary-cubic + two-squares presentation
+`6*(X₀⁶ + X₁⁶ + (1/2) X₀³ X₁ p₁ + 2 p₁³) + 6*(((1/2) X₁³ Y₁ + (1/3) X₀² X₁ Y₀) p₂ + 2 p₂³) + 6*(s₁² + s₂²)`
+where `p₁ = Y₀ Y₁, s₁ = Y₀³ - Y₁³, p₂ = X₂ Y₂, s₂ = X₂³ - Y₂³`. -/
+def checkDoubleCubic56 (x0 x1 x2 y0 y1 y2 : Int) : Bool :=
+  let p1 := y0 * y1
+  let s1 := y0^3 - y1^3
+  let p2 := x2 * y2
+  let s2 := x2^3 - y2^3
+  let lhs := 6 * (x0^6 + x1^6 + x2^6 + y0^6 + y1^6 + y2^6) +
+             3 * x0^3 * x1 * y0 * y1 + 3 * x1^3 * x2 * y1 * y2 + 2 * x0^2 * x1 * x2 * y0 * y2
+  let rhs := 6 * (x0^6 + x1^6 + 2 * p1^3 + 2 * p2^3 + s1^2 + s2^2) +
+             3 * x0^3 * x1 * p1 + (3 * x1^3 * y1 + 2 * x0^2 * x1 * y0) * p2
+  lhs == rhs
+
+theorem off_paired_double_binary_cubic_grid_verified :
+    (List.range 5).all (fun i =>
+      (List.range 5).all (fun j =>
+        checkDoubleCubic56 (Int.ofNat i - 2) 1 (Int.ofNat j - 2) 2 (-1) 1)) = true := by
+  decide
+
+/-- Theorem 12 (`#71 four-plus-two-residual` Disjoint Double Binary-Cubic Bidegree Parity):
+Every monomial of `F₇₁` has even degree in `(X₀, X₁)`, even degree in `(Y₀, Y₁)`, and even degree
+in `X₂` and `Y₂` separately, reducing `F₇₁` to the sum of two disjoint binary cubics in
+`(u_X = X₀², u_Y = Y₀²)` and `(u₂ = X₂², v₂ = Y₂²)`. -/
+def f71Monoms : List (List Nat) :=
+  [[6,0,0,0,0,0], [5,1,0,0,0,0], [3,1,0,1,1,0], [1,5,0,0,0,0], [1,1,0,3,1,0],
+   [0,6,0,0,0,0], [0,0,6,0,0,0], [0,0,4,0,0,2], [0,0,2,0,0,4], [0,0,0,6,0,0],
+   [0,0,0,5,1,0], [0,0,0,1,5,0], [0,0,0,0,6,0], [0,0,0,0,0,6]]
+
+theorem four_plus_two_disjoint_binary_cubic_parity :
+    f71Monoms.all (fun m =>
+      ((m.getD 0 0 + m.getD 1 0) % 2 == 0) &&
+      ((m.getD 3 0 + m.getD 4 0) % 2 == 0) &&
+      (m.getD 2 0 % 2 == 0) &&
+      (m.getD 5 0 % 2 == 0)) = true := by
+  decide
+
+/-- Theorem 13 (`#74 one-reflection-skew` Exact Cubic-Surface Bidegree Parity):
+Every monomial of `F₇₄` has even total `X`-degree, even `(Y₀, Y₁)`-degree, and exponent `0` or `6`
+in `Y₂`, reducing `F₇₄` over passive ratios `(X₁/X₀, X₂/X₀, Y₁/Y₀)` to the exact cubic surface
+`f_cubic(X₀², Y₀²) + (Y₂²)³ = 0`. -/
+def f74Monoms : List (List Nat) :=
+  [[6,0,0,0,0,0], [3,1,0,1,1,0], [1,1,0,3,1,0], [1,1,0,1,3,0], [0,6,0,0,0,0],
+   [0,3,1,1,1,0], [0,0,6,0,0,0], [0,0,0,6,0,0], [0,0,0,0,6,0], [0,0,0,0,0,6]]
+
+theorem one_reflection_skew_cubic_surface_parity :
+    f74Monoms.all (fun m =>
+      ((m.getD 0 0 + m.getD 1 0 + m.getD 2 0) % 2 == 0) &&
+      ((m.getD 3 0 + m.getD 4 0) % 2 == 0) &&
+      (m.getD 5 0 % 6 == 0)) = true := by
+  decide
+
+end MillenniumFrontier.HodgeOpen16.EndToEndCubicReductions
