@@ -1,6 +1,7 @@
 import HodgeComputer.Verify
 import HodgeComputer.Constructions.TransitiveCubic.Shear
 import Mathlib.Tactic.Ring
+import Mathlib.Tactic.LinearCombination
 
 /-!
 # Universal 4-Term Binary-Cubic Divergence Core and Transitive-Cubic Reductions
@@ -310,6 +311,225 @@ theorem four_plus_two_residual_71_reverse_edge_cubic
     a * x ^ 3 + b * y ^ 3 + c * z ^ 3 + d * x ^ 2 * y + f * x * y ^ 2 := by
   dsimp
   ring
+
+/--
+Step 2 (Exact Closed-Form `e = 0` Reverse-Edge Weierstrass Covariants `H_e0, Theta_e0, J_e0`):
+For `U(x, y, z) = fBin(x, y) + c * z^3 = a*x^3 + d*x^2*y + f*x*y^2 + b*y^3 + c*z^3` (`e = 0`),
+the Salmon/Fisher covariants factor in closed form through the binary cubic covariants
+`fBin, hBin, kBin, discBin`.
+-/
+def fBin (a b d f x y : K) : K := a * x ^ 3 + d * x ^ 2 * y + f * x * y ^ 2 + b * y ^ 3
+def fxBin (a _b d f x y : K) : K := 3 * a * x ^ 2 + 2 * d * x * y + f * y ^ 2
+def fyBin (_a b d f x y : K) : K := d * x ^ 2 + 2 * f * x * y + 3 * b * y ^ 2
+def hBin (a b d f x y : K) : K :=
+  (3 * a * f - d ^ 2) * x ^ 2 + (9 * a * b - d * f) * x * y + (3 * b * d - f ^ 2) * y ^ 2
+def hxBin (a b d f x y : K) : K := 2 * (3 * a * f - d ^ 2) * x + (9 * a * b - d * f) * y
+def hyBin (a b d f x y : K) : K := (9 * a * b - d * f) * x + 2 * (3 * b * d - f ^ 2) * y
+def kBin (a b d f x y : K) : K :=
+  hyBin a b d f x y * fxBin a b d f x y - hxBin a b d f x y * fyBin a b d f x y
+def disc0Bin (a b d f : K) : K :=
+  27 * a ^ 2 * b ^ 2 - 18 * a * b * d * f + 4 * a * f ^ 3 + 4 * b * d ^ 3 - d ^ 2 * f ^ 2
+def discBin (a b d f : K) : K := 3 * disc0Bin a b d f
+
+theorem binary_cayley_hessian_syzygy (a b d f x y : K) :
+    kBin a b d f x y ^ 2 =
+      9 * discBin a b d f * fBin a b d f x y ^ 2 - 4 * hBin a b d f x y ^ 3 := by
+  simp only [kBin, hxBin, hyBin, fxBin, fyBin, hBin, fBin, discBin, disc0Bin]
+  ring
+
+def U_e0 (a b c d f x y z : K) : K := fBin a b d f x y + c * z ^ 3
+def H_e0 (a b c d f x y z : K) : K := 9 * c * z * hBin a b d f x y
+def Theta_e0 (a b c d f x y z : K) : K :=
+  -9 * c ^ 2 * hBin a b d f x y ^ 3 - 81 * c ^ 3 * discBin a b d f * z ^ 3 * fBin a b d f x y
+def J_e0 (a b c d f x y z : K) : K :=
+  27 * c ^ 3 * kBin a b d f x y *
+    (hBin a b d f x y ^ 3 - 9 * c * discBin a b d f * z ^ 3 * (fBin a b d f x y - c * z ^ 3))
+def s6_e0 (a b c d f : K) : K := c ^ 2 * disc0Bin a b d f
+
+def Dop_H_e0 (a b c d f x y z : K) : K := 9 * c * z * kBin a b d f x y
+def Dop_Theta_e0 (a b c d f x y _z : K) : K :=
+  -27 * c ^ 2 * hBin a b d f x y ^ 2 * kBin a b d f x y
+
+/--
+1-Term Cleared Invariant Differential Identity for `e = 0` Reverse-Edge Cubics (`#71` & `#74`):
+Under the relative cubic derivation `D_op = f_x ∂_y - f_y ∂_x` (where `D_op(fBin) = 0` and
+`D_op(hBin) = kBin`), `H_e0 * D_op(Theta_e0) - 2 * Theta_e0 * D_op(H_e0) + 3 * z * J_e0`
+is an exact 1-term multiple of `U_e0`.
+-/
+theorem cleared_differential_e0 (a b c d f x y z : K) :
+    H_e0 a b c d f x y z * Dop_Theta_e0 a b c d f x y z -
+      2 * Theta_e0 a b c d f x y z * Dop_H_e0 a b c d f x y z +
+      3 * z * J_e0 a b c d f x y z =
+    729 * c ^ 4 * discBin a b d f * z ^ 4 * kBin a b d f x y * U_e0 a b c d f x y z := by
+  simp only [H_e0, Theta_e0, J_e0, Dop_H_e0, Dop_Theta_e0, U_e0]
+  ring
+
+def syzygyQuotient_e0 (a b c d f x y z : K) : K :=
+  let H3 := hBin a b d f x y ^ 3
+  let D := discBin a b d f
+  let F := fBin a b d f x y
+  let Z := c * z ^ 3
+  729 * c ^ 6 * 9 * D *
+    ((F - Z) * (H3 - 9 * D * Z * (F - Z)) ^ 2 -
+      (9 * D * Z ^ 2 - 4 * H3) * Z * (2 * H3 - 9 * D * Z * (F - 3 * Z)) +
+      4 * Z * ((H3 + 9 * D * Z * F) ^ 2 + (H3 + 9 * D * Z * F) * (H3 - 9 * D * Z ^ 2) +
+        (H3 - 9 * D * Z ^ 2) ^ 2))
+
+/--
+Compact Full Weierstrass Syzygy for `e = 0` Reverse-Edge Cubics (`#71` & `#74`):
+`J_e0^2 - (4 * Theta_e0^3 - s6_e0 * H_e0^6) = U_e0 * syzygyQuotient_e0` identically over `K`.
+-/
+theorem full_syzygy_e0 (a b c d f x y z : K) :
+    J_e0 a b c d f x y z ^ 2 -
+      (4 * Theta_e0 a b c d f x y z ^ 3 - s6_e0 a b c d f * H_e0 a b c d f x y z ^ 6) =
+    U_e0 a b c d f x y z * syzygyQuotient_e0 a b c d f x y z := by
+  have hk := binary_cayley_hessian_syzygy a b d f x y
+  simp only [discBin] at hk
+  simp only [J_e0, Theta_e0, H_e0, s6_e0, U_e0, syzygyQuotient_e0, discBin]
+  linear_combination
+    729 * c ^ 6 *
+      (hBin a b d f x y ^ 3 -
+        9 * c * (3 * disc0Bin a b d f) * z ^ 3 * (fBin a b d f x y - c * z ^ 3)) ^ 2 * hk
+
+/--
+Step 3 (Mordell `I_4 = 0` Residue Divergence Cancellation Identity):
+On any Mordell Weierstrass hypersurface `Y2 = X^3 + B6`, combining a parameter component `psi`
+with `w_X = 2 * X * d_psi` cancels the polynomial `d_psi` derivative identically (`1 + 2 - 3 = 0`),
+leaving purely the pole-two numerator `6 * B6 * d_psi - psi * d_B6`.
+-/
+theorem mordell_residue_divergence_cancellation (X Y2 B6 psi d_psi d_B6 : K)
+    (hcurve : Y2 = X ^ 3 + B6) :
+    (d_psi * (2 * Y2) - psi * d_B6) + (2 * d_psi * (2 * Y2) - (2 * X * d_psi) * (3 * X ^ 2)) =
+      6 * B6 * d_psi - psi * d_B6 := by
+  linear_combination 6 * d_psi * hcurve
+
+/--
+Step 3 (Physical Paired-Normal and Second-Paired-Gradient Identities for `#71 four-plus-two-residual`):
+In 6 physical coordinates `(X0, X1, X2, Y0, Y1, Y2)`, the paired Euler gradients on `(X0, Y0)` and
+`(X1, Y1)` and the paired Hessian on `(X0, Y0)` match `2 * R^3 * x * U_x`, `4 * R^3 * x^2 * U_xx`,
+and `2 * R^3 * y * U_y` identically.
+-/
+theorem paired_normal_identities_71 (X0 X1 _X2 Y0 Y1 _Y2 inv2 inv3 inv5 inv7 : K) :
+    let a_hom := X0 ^ 6 + Y0 ^ 6
+    let d_hom := X0 ^ 3 * Y0 * X1 * Y1 + inv3 * X0 * Y0 ^ 3 * X1 ^ 2
+    let f_hom := -inv5 * X0 ^ 2 * X1 * Y1 ^ 3 - inv7 * X0 * Y0 * X1 * Y1 ^ 3 + inv2 * Y0 ^ 2 * X1 ^ 3 * Y1
+    let b_hom := X1 ^ 6 + Y1 ^ 6
+    let F0 := 6 * X0 ^ 5 + 3 * X0 ^ 2 * X1 * Y0 * Y1 - 2 * inv5 * X0 * X1 * Y1 ^ 3 +
+              inv3 * X1 ^ 2 * Y0 ^ 3 - inv7 * X1 * Y0 * Y1 ^ 3
+    let F3 := 6 * Y0 ^ 5 + X0 ^ 3 * X1 * Y1 + 3 * inv3 * X0 * X1 ^ 2 * Y0 ^ 2 -
+              inv7 * X0 * X1 * Y1 ^ 3 + 2 * inv2 * X1 ^ 3 * Y0 * Y1
+    let F1 := 6 * X1 ^ 5 + X0 ^ 3 * Y0 * Y1 - inv5 * X0 ^ 2 * Y1 ^ 3 +
+              2 * inv3 * X0 * X1 * Y0 ^ 3 - inv7 * X0 * Y0 * Y1 ^ 3 + 3 * inv2 * X1 ^ 2 * Y0 ^ 2 * Y1
+    let F4 := 6 * Y1 ^ 5 + X0 ^ 3 * X1 * Y0 - 3 * inv5 * X0 ^ 2 * X1 * Y1 ^ 2 -
+              3 * inv7 * X0 * X1 * Y0 * Y1 ^ 2 + inv2 * X1 ^ 3 * Y0 ^ 2
+    (X0 * F0 + Y0 * F3 = 2 * (3 * a_hom + 2 * d_hom + f_hom)) ∧
+    (X1 * F1 + Y1 * F4 = 2 * (3 * b_hom + d_hom + 2 * f_hom)) := by
+  constructor <;> ring
+
+/--
+Step 3 (Physical Paired-Normal and Second-Paired-Gradient Identities for `#74 one-reflection-skew`):
+In 6 physical coordinates `(X0, X1, X2, Y0, Y1, Y2)`, the 3-variable paired Euler gradient on
+`B1 = (X0, X2, Y0)` and the 2-variable paired Euler gradient on `B2 = (X1, Y1)` match
+`2 * R^3 * x * U_x` and `2 * R^3 * y * U_y` identically.
+-/
+theorem paired_normal_identities_74 (X0 X1 X2 Y0 Y1 inv7 : K) :
+    let a_hom := X0 ^ 6 + X2 ^ 6 + Y0 ^ 6
+    let d_hom := X0 ^ 3 * Y0 * X1 * Y1 + inv7 * X0 * Y0 ^ 3 * X1 ^ 2
+    let f_hom := X1 ^ 3 * X2 * Y0 * Y1 - inv7 * X0 * Y0 * X1 * Y1 ^ 3
+    let b_hom := X1 ^ 6 + Y1 ^ 6
+    let F0 := 6 * X0 ^ 5 + 3 * X0 ^ 2 * X1 * Y0 * Y1 + inv7 * X1 ^ 2 * Y0 ^ 3 - inv7 * X1 * Y0 * Y1 ^ 3
+    let F2 := 6 * X2 ^ 5 + X1 ^ 3 * Y0 * Y1
+    let F3 := 6 * Y0 ^ 5 + X0 ^ 3 * X1 * Y1 + 3 * inv7 * X0 * X1 ^ 2 * Y0 ^ 2 -
+              inv7 * X0 * X1 * Y1 ^ 3 + X1 ^ 3 * X2 * Y1
+    let F1 := 6 * X1 ^ 5 + X0 ^ 3 * Y0 * Y1 + 2 * inv7 * X0 * X1 * Y0 ^ 3 -
+              inv7 * X0 * Y0 * Y1 ^ 3 + 3 * X1 ^ 2 * X2 * Y0 * Y1
+    let F4 := 6 * Y1 ^ 5 + X0 ^ 3 * X1 * Y0 - 3 * inv7 * X0 * X1 * Y0 * Y1 ^ 2 + X1 ^ 3 * X2 * Y0
+    (X0 * F0 + X2 * F2 + Y0 * F3 = 2 * (3 * a_hom + 2 * d_hom + f_hom)) ∧
+    (X1 * F1 + Y1 * F4 = 2 * (3 * b_hom + d_hom + 2 * f_hom)) := by
+  constructor <;> ring
+
+/--
+Universal Hamiltonian Quadratic Pair Lift (generalizing `QuadricContactLift` to `#72 quadric-contact-residual`
+and `#69 rank-one-biquartic`):
+For any two quadratic forms `Q0, Q1` with partial derivatives `(dX_Q0, dY_Q0)` and `(dX_Q1, dY_Q1)`
+and Wronskian `W_pair = dX_Q0 * dY_Q1 - dY_Q0 * dX_Q1`, the Hamiltonian operators
+`H0 = (dY_Q1, -dX_Q1)` and `H1 = (-dY_Q0, dX_Q0)` satisfy `H_i(Q_j) = W_pair * δ_{ij}`,
+giving the exact directional lift `H0(F) * U0 + H1(F) * U1 = W_pair * (F_Q0 * U0 + F_Q1 * U1)`.
+-/
+theorem hamiltonian_pair_lift_directional
+    (dX_Q0 dY_Q0 dX_Q1 dY_Q1 F_Q0 F_Q1 U0 U1 : K) :
+    let W_pair := dX_Q0 * dY_Q1 - dY_Q0 * dX_Q1
+    let dX_F := F_Q0 * dX_Q0 + F_Q1 * dX_Q1
+    let dY_F := F_Q0 * dY_Q0 + F_Q1 * dY_Q1
+    let N_X := dY_Q1 * U0 - dY_Q0 * U1
+    let N_Y := -dX_Q1 * U0 + dX_Q0 * U1
+    N_X * dX_F + N_Y * dY_F = W_pair * (F_Q0 * U0 + F_Q1 * U1) := by
+  dsimp
+  ring
+
+/--
+Exact Specialization of the Hamiltonian Quadratic Pair Lift to `(Q0, Q1) = (X0^2, Y0^2)`
+(`W_pair = 4 * X0 * Y0`) for `#72 quadric-contact-residual` and `#69 rank-one-biquartic`:
+-/
+theorem hamiltonian_active_x0_y0_lift (X0 Y0 F_u0 F_v0 U0 U1 : K) :
+    let dX_F := 2 * X0 * F_u0
+    let dY_F := 2 * Y0 * F_v0
+    let N_X := 2 * Y0 * U0
+    let N_Y := 2 * X0 * U1
+    N_X * dX_F + N_Y * dY_F = (4 * X0 * Y0) * (F_u0 * U0 + F_v0 * U1) := by
+  dsimp
+  ring
+
+/--
+Transitive Cubic Reduction for Open Instance `#56 off-paired` and `#60 cycle-q2`:
+Under the paired-ratio reduction `X1 = r1 * X0, Y0 = c0 * X0, Y1 = c1 * X1, Y2 = c2 * X2`
+with `x = X0^2, z = X2^2`, `F_56` and `F_60` collapse identically to the cubic `a * x^3 + d * x^2 * z + c * z^3`.
+-/
+theorem off_paired_56_and_cycle_q2_60_cubic_reduction
+    (X0 X2 r1 c0 c1 c2 inv2 inv3 : K) :
+    let X1 := r1 * X0
+    let Y0 := c0 * X0
+    let Y1 := c1 * X1
+    let Y2 := c2 * X2
+    let x := X0 ^ 2
+    let z := X2 ^ 2
+    let a := 1 + r1 ^ 6 + c0 ^ 6 + r1 ^ 6 * c1 ^ 6 + inv2 * r1 ^ 2 * c0 * c1
+    let d := inv2 * r1 ^ 4 * c1 * c2 + inv3 * r1 * c0 * c2
+    let c := 1 + c2 ^ 6
+    (X0 ^ 6 + X1 ^ 6 + X2 ^ 6 + Y0 ^ 6 + Y1 ^ 6 + Y2 ^ 6 +
+      inv2 * X0 ^ 3 * X1 * Y0 * Y1 + inv2 * X1 ^ 3 * X2 * Y1 * Y2 +
+      inv3 * X0 ^ 2 * X1 * X2 * Y0 * Y2) =
+    a * x ^ 3 + d * x ^ 2 * z + c * z ^ 3 := by
+  dsimp
+  ring
+
+/--
+Exact Companion Decomposition for `#69 rank-one-biquartic` and `#72 quadric-contact-residual`:
+1. `#69 rank-one-biquartic`: `F_69 = (X0^6 + X1^6 + X2^6 + Y0^6 + Y1^6 + Y2^6) + Q_X (3 Y0^2 + Y1^2 + Y2^2)^2`
+   where `Q_X = inv2 * X0^2 + X1^2 + 2 X2^2`.
+2. `#72 quadric-contact-residual`: `F_72 = (X0^6 + X1^6 + X2^6 + Y0^6 + Y1^6 + Y2^6) + Q_contact * C_cubic`
+   where `Q_contact = X0 * Y0 + X1 * Y1 + 2 * X2 * Y2` and `C_cubic = X0^3 * Y1 + X1^3 * Y2 + X2^3 * Y0`.
+-/
+theorem rank_one_biquartic_69_and_quadric_contact_72_decompositions
+    (X0 X1 X2 Y0 Y1 Y2 inv2 : K) :
+    let QX := inv2 * X0 ^ 2 + X1 ^ 2 + 2 * X2 ^ 2
+    let QY := 3 * Y0 ^ 2 + Y1 ^ 2 + Y2 ^ 2
+    let Q_contact := X0 * Y0 + X1 * Y1 + 2 * X2 * Y2
+    let C_cubic := X0 ^ 3 * Y1 + X1 ^ 3 * Y2 + X2 ^ 3 * Y0
+    ((X0 ^ 6 + X1 ^ 6 + X2 ^ 6 + Y0 ^ 6 + Y1 ^ 6 + Y2 ^ 6) + QX * QY ^ 2 =
+      X0 ^ 6 + inv2 * X0 ^ 2 * (9 * Y0 ^ 4 + 6 * Y0 ^ 2 * Y1 ^ 2 + 6 * Y0 ^ 2 * Y2 ^ 2 +
+        Y1 ^ 4 + 2 * Y1 ^ 2 * Y2 ^ 2 + Y2 ^ 4) +
+      X1 ^ 6 + X1 ^ 2 * (9 * Y0 ^ 4 + 6 * Y0 ^ 2 * Y1 ^ 2 + 6 * Y0 ^ 2 * Y2 ^ 2 +
+        Y1 ^ 4 + 2 * Y1 ^ 2 * Y2 ^ 2 + Y2 ^ 4) +
+      X2 ^ 6 + 2 * X2 ^ 2 * (9 * Y0 ^ 4 + 6 * Y0 ^ 2 * Y1 ^ 2 + 6 * Y0 ^ 2 * Y2 ^ 2 +
+        Y1 ^ 4 + 2 * Y1 ^ 2 * Y2 ^ 2 + Y2 ^ 4) +
+      Y0 ^ 6 + Y1 ^ 6 + Y2 ^ 6) ∧
+    ((X0 ^ 6 + X1 ^ 6 + X2 ^ 6 + Y0 ^ 6 + Y1 ^ 6 + Y2 ^ 6) + Q_contact * C_cubic =
+      X0 ^ 6 + X0 ^ 4 * Y0 * Y1 + X0 ^ 3 * X1 * Y1 ^ 2 + 2 * X0 ^ 3 * X2 * Y1 * Y2 +
+      X0 * X1 ^ 3 * Y0 * Y2 + X0 * X2 ^ 3 * Y0 ^ 2 + X1 ^ 6 + X1 ^ 4 * Y1 * Y2 +
+      2 * X1 ^ 3 * X2 * Y2 ^ 2 + X1 * X2 ^ 3 * Y0 * Y1 + X2 ^ 6 + 2 * X2 ^ 4 * Y0 * Y2 +
+      Y0 ^ 6 + Y1 ^ 6 + Y2 ^ 6) := by
+  constructor <;> ring
 
 end HodgeComputer.Constructions.GeneralBinaryCubic
 end
