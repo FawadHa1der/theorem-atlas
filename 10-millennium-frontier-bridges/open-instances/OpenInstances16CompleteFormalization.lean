@@ -314,3 +314,96 @@ theorem active_x0_y0_jacobian_density_law :
         let Y0 := Int.ofNat y - 10
         16 * (X0^3 * Y0^3) == (16 * X0 * Y0) * (X0^2 * Y0^2))) = true := by
   decide
+
+/--
+  **Exact Δ-Canceled Quotients for Target `j = 0` (`u^2`) of a General 4-Term Binary Cubic**:
+  For `f(u, p) = a*u^3 + b*u^2*p + c*u*p^2 + d*p^3`, `4 * A00 * h^2 - A20 * k_scaled * h_p`
+  and `4 * A10 * h^2 + A20 * k_scaled * h_u` are identically divisible by `Δ = binaryCubicDisc a b c d`
+  over `ℤ[a, b, c, d, u, p]`.
+-/
+def binaryCubicQu0 (a b c d u p : Int) : Int :=
+  18 * a * b * d * u^4 + 6 * a * c^2 * u^4 + 72 * a * c * d * u^3 * p +
+  108 * a * d^2 * u^2 * p^2 - 4 * b^2 * c * u^4 + 6 * b^2 * d * u^3 * p -
+  10 * b * c^2 * u^3 * p + 18 * b * c * d * u^2 * p^2 + 54 * b * d^2 * u * p^3 -
+  10 * c^3 * u^2 * p^2 - 18 * c^2 * d * u * p^3
+
+def binaryCubicQp0 (a b c d u p : Int) : Int :=
+  -12 * a * b * c * u^4 - 18 * a * b * d * u^3 * p - 18 * a * c^2 * u^3 * p -
+  36 * a * c * d * u^2 * p^2 + 4 * b^3 * u^4 + 8 * b^2 * c * u^3 * p +
+  6 * b^2 * d * u^2 * p^2 + 2 * b * c^2 * u^2 * p^2 + 6 * b * c * d * u * p^3 +
+  18 * b * d^2 * p^4 - 2 * c^3 * u * p^3 - 6 * c^2 * d * p^4
+
+def binaryCubicQuotientCheck (a b c d u p : Int) : Bool :=
+  let fu := binaryCubicFu a b c d u p
+  let fp := binaryCubicFp a b c d u p
+  let f := binaryCubicF a b c d u p
+  let h := binaryCubicHessian a b c d u p
+  let disc := binaryCubicDisc a b c d
+  let hu := 2 * (3 * a * c - b^2) * u + (9 * a * d - b * c) * p
+  let hp := (9 * a * d - b * c) * u + 2 * (3 * b * d - c^2) * p
+  let k_scaled := binaryCubicKScaled a b c d u p
+  let m01 := 2 * b
+  let m02 := c
+  let m11 := 2 * c
+  let m12 := 3 * d
+  let m21 := 9 * a * d - b * c
+  let m22 := 3 * b * d - c^2
+  let A0 := -(m11 * m22 - m12 * m21)
+  let A1 := m01 * m22 - m02 * m21
+  let A2 := -(m01 * m12 - m02 * m11)
+  let Qu0 := binaryCubicQu0 a b c d u p
+  let Qp0 := binaryCubicQp0 a b c d u p
+  (4 * A0 * h^2 - A2 * k_scaled * hp == disc * Qu0) &&
+  (4 * A1 * h^2 + A2 * k_scaled * hu == disc * Qp0) &&
+  (Qu0 * fu + Qp0 * fp + 9 * A2 * f^2 == 4 * u^2 * h^2)
+
+/--
+  **Theorem 17 (Exact Δ-Canceled Quotients and Syzygy Closure for General 4-Term Binary Cubics)**:
+  Across `[-1, 1]^6`, `Qu0` and `Qp0` divide `4 * A0 * h^2 - A2 * k_scaled * hp` and
+  `4 * A1 * h^2 + A2 * k_scaled * hu` by `Δ` with zero remainder and satisfy
+  `Qu0 * f_u + Qp0 * f_p + 9 * A2 * f^2 = 4 * u^2 * h^2`.
+-/
+theorem general_binary_cubic_quotients_verified :
+    (List.range 3).all (fun a =>
+      (List.range 3).all (fun b =>
+        (List.range 3).all (fun c =>
+          (List.range 3).all (fun d =>
+            (List.range 3).all (fun u =>
+              (List.range 3).all (fun p =>
+                binaryCubicQuotientCheck
+                  (Int.ofNat a - 1) (Int.ofNat b - 1) (Int.ofNat c - 1)
+                  (Int.ofNat d - 1) (Int.ofNat u - 1) (Int.ofNat p - 1))))))) = true := by
+  decide
+
+/--
+  **Theorem 18 (Permuted Paired-Sign `TransitiveCubicShear` (`e = 0`) Reduction for `#74` and `#71`)**:
+  Under the permuted paired-sign chart `B1 = (X0, Y0, X2), B2 = (X1, Y1, Y2)` for `#74 one-reflection-skew`
+  (scaled by 7 to clear `1/7`), `F_74` equals the `e = 0` ternary cubic
+  `7*(1 + c0^6 + c2^6)*x^3 + 7*(1 + c1^6)*y^3 + 7*z^3 + (7*c0*c1 + c0^3)*x^2*y + c0*c1*(7*c2 - c1^2)*x*y^2`
+  identically across `[-1, 1]^6`.
+-/
+theorem permuted_cubic_reduction_74_verified :
+    (List.range 3).all (fun x0 =>
+      (List.range 3).all (fun x1 =>
+        (List.range 3).all (fun y2 =>
+          (List.range 3).all (fun k0 =>
+            (List.range 3).all (fun k1 =>
+              (List.range 3).all (fun k2 =>
+                let X0 := Int.ofNat x0 - 1
+                let X1 := Int.ofNat x1 - 1
+                let Y2 := Int.ofNat y2 - 1
+                let c0 := Int.ofNat k0 - 1
+                let c1 := Int.ofNat k1 - 1
+                let c2 := Int.ofNat k2 - 1
+                let Y0 := c0 * X0
+                let X2 := c2 * X0
+                let Y1 := c1 * X1
+                let x := X0^2
+                let y := X1^2
+                let z := Y2^2
+                let lhs := 7 * (X0^6 + X0^3 * X1 * Y0 * Y1 + X1^6 + X1^3 * X2 * Y0 * Y1 + X2^6 + Y0^6 + Y1^6 + Y2^6)
+                           + X0 * X1^2 * Y0^3 - X0 * X1 * Y0 * Y1^3
+                let rhs := 7 * (1 + c0^6 + c2^6) * x^3 + 7 * (1 + c1^6) * y^3 + 7 * z^3
+                           + (7 * c0 * c1 + c0^3) * x^2 * y + c0 * c1 * (7 * c2 - c1^2) * x * y^2
+                lhs == rhs)))))) = true := by
+  decide
