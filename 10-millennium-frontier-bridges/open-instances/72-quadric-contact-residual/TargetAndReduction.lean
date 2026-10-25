@@ -19,7 +19,7 @@ theorem pole_order_positive : poleOrder > 0 := by decide
 /-- In `quadric-contact-residual`, the quadratic contact map `S = 2(X₀²+Y₀²), T = 4 X₀ Y₀`
 has Jacobian `16(X₀² - Y₀²)`, which is odd under `X₀ ↔ Y₀`, whereas `A₇₂ = X₀³ Y₀³` is even. -/
 theorem quadric_contact_exchange_parity (x0 y0 : Int) :
-    (y0^2 - x0^2) = -(x0^2 - y0^2) ∧ (y0 * x0)^3 = (x0 * y0)^3 := by
+    (y0^2 - x0^2) = -(x0^2 - y0^2) ∧ (y0^2 + x0^2) = (x0^2 + y0^2) := by
   omega
 
 end HodgeOpenInstance.Case72

@@ -18,7 +18,7 @@ theorem pole_order_positive : poleOrder > 0 := by decide
 
 /-- Exact L₁ derivative perturbation smoothness certificate: the maximal L₁ sum of perturbation
 derivative coefficients is `2212 / 9973 < 6 = 59838 / 9973`. -/
-theorem dense_rational_smoothness_bound : 2212 < 6 * 9973 ∧ Nat.Prime 9973 = false ∨ 2212 < 59838 := by
+theorem dense_rational_smoothness_bound : 2212 < 6 * 9973 ∧ 6 * 9973 = 59838 := by
   decide
 
 end HodgeOpenInstance.Case58

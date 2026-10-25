@@ -24,8 +24,8 @@ def clearedDefect (F A D q dF_N div_D_N : Int) : Int :=
 /-- Theorem 1 (Normalized Certificate Identity):
 When `q * dF_N = A * D` and `div_D_N = F^q * Q`, the cleared defect equals `F * (F^q * Q)`. -/
 theorem normalized_defect_identity (F A D q dF_N FQ : Int)
-    (h1 : q * dF_N = A * D) (h2 : D * (q * dF_N) = A * D * D) :
-    clearedDefect F A D q dF_N FQ = A * D * D - D * (q * dF_N) + F * FQ := by
+    (h2 : q * D * dF_N = A * D * D) :
+    clearedDefect F A D q dF_N FQ = F * FQ := by
   unfold clearedDefect
   omega
 

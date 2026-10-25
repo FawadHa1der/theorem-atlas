@@ -1,0 +1,6 @@
+name = "HodgeOpen16"
+version = "0.1.0"
+defaultTargets = ["OpenInstances16CompleteFormalization"]
+
+[[lean_lib]]
+name = "OpenInstances16CompleteFormalization"
