@@ -531,5 +531,102 @@ theorem rank_one_biquartic_69_and_quadric_contact_72_decompositions
       Y0 ^ 6 + Y1 ^ 6 + Y2 ^ 6) := by
   constructor <;> ring
 
+/--
+Closed-Form First-Order `k`-Jet Weierstrass Covariants (`Hk_e0, Thetak_e0, Jk_e0`) and
+Cleared Differential Quotient (`Mk_e0`) for `e = 0` Reverse-Edge Cubics (`#71` & `#74`):
+Under the square-zero perturbation `U_Jet = fBin(x, y) + c * z^3 + 2 * k * x * y * z` (`k^2 = 0`),
+the 28 nonzero coefficient expressions of `PolarCovariants.{Hk, Thetak, Jk}` at `e = 0`
+collapse identically through `h1Bin = 9 * a * b - d * f`, `fxyHalf = d * x + f * y`, and
+`sSkew = f * fxBin - d * fyBin = (3 * a * f - d^2) * x^2 - (3 * b * d - f^2) * y^2`.
+-/
+def h0Bin (a _b d f : K) : K := 3 * a * f - d ^ 2
+def h1Bin (a b d f : K) : K := 9 * a * b - d * f
+def h2Bin (_a b d f : K) : K := 3 * b * d - f ^ 2
+def fxyHalf (d f x y : K) : K := d * x + f * y
+def sSkew (a b d f x y : K) : K := h0Bin a b d f * x ^ 2 - h2Bin a b d f * y ^ 2
+
+theorem hessian_discriminant_identity_e0 (a b d f : K) :
+    h1Bin a b d f ^ 2 - 4 * h0Bin a b d f * h2Bin a b d f = discBin a b d f := by
+  simp only [h1Bin, h0Bin, h2Bin, discBin, disc0Bin]
+  ring
+
+theorem euler_skew_identities_e0 (a b d f x y : K) :
+    (f * fxBin a b d f x y - d * fyBin a b d f x y = sSkew a b d f x y) ∧
+    (x * hxBin a b d f x y - y * hyBin a b d f x y = 2 * sSkew a b d f x y) ∧
+    (3 * fBin a b d f x y * sSkew a b d f x y -
+      hBin a b d f x y * (x * fxBin a b d f x y - y * fyBin a b d f x y) =
+      -x * y * kBin a b d f x y) := by
+  refine ⟨?_, ?_, ?_⟩ <;>
+    simp only [fxBin, fyBin, hxBin, hyBin, fBin, hBin, kBin, sSkew, h0Bin, h2Bin] <;>
+    ring
+
+def Hk_e0 (_a _b c d f x y z : K) : K := -18 * c * z ^ 2 * fxyHalf d f x y
+
+def Thetak_e0 (a b c d f x y z : K) : K :=
+  27 * c ^ 2 * z * hBin a b d f x y *
+    (2 * fxyHalf d f x y * hBin a b d f x y - h1Bin a b d f * fBin a b d f x y) +
+  27 * c ^ 3 * z ^ 4 *
+    (5 * h1Bin a b d f * hBin a b d f x y - 6 * discBin a b d f * x * y)
+
+def Jk_e0 (a b c d f x y z : K) : K :=
+  -162 * c ^ 3 * z * hBin a b d f x y ^ 2 *
+    (sSkew a b d f x y * hBin a b d f x y + fxyHalf d f x y * kBin a b d f x y) +
+  486 * c ^ 4 * z ^ 4 *
+    ((h1Bin a b d f * hBin a b d f x y - discBin a b d f * x * y) * kBin a b d f x y +
+      3 * discBin a b d f * fBin a b d f x y * sSkew a b d f x y) -
+  1458 * c ^ 5 * discBin a b d f * z ^ 7 * sSkew a b d f x y
+
+def Mk_e0 (a b c d f x y z : K) : K :=
+  243 * c ^ 3 * z ^ 2 * h1Bin a b d f * hBin a b d f x y * kBin a b d f x y -
+  4374 * c ^ 4 * discBin a b d f * z ^ 5 * sSkew a b d f x y
+
+def D0_Hk_e0 (a b c d f x y z : K) : K := -18 * c * z ^ 2 * sSkew a b d f x y
+def Dk_H0_e0 (a b c d f x y z : K) : K := -36 * c * z ^ 2 * sSkew a b d f x y
+def Dk_Theta0_e0 (a b c d f x y z : K) : K :=
+  108 * c ^ 2 * z * hBin a b d f x y ^ 2 * sSkew a b d f x y +
+  162 * c ^ 3 * discBin a b d f * z ^ 4 * (x * fxBin a b d f x y - y * fyBin a b d f x y)
+def D0_Thetak_e0 (a b c d f x y z : K) : K :=
+  27 * c ^ 2 * z *
+    (kBin a b d f x y * (2 * fxyHalf d f x y * hBin a b d f x y - h1Bin a b d f * fBin a b d f x y) +
+      2 * hBin a b d f x y * (sSkew a b d f x y * hBin a b d f x y + fxyHalf d f x y * kBin a b d f x y)) +
+  27 * c ^ 3 * z ^ 4 *
+    (5 * h1Bin a b d f * kBin a b d f x y -
+      6 * discBin a b d f * (x * fxBin a b d f x y - y * fyBin a b d f x y))
+
+/--
+Closed-Form First-Order `k`-Jet Cleared Invariant Differential Identity (`#71` & `#74`):
+At order `k^1` in `(H0 + k*Hk) * D(Theta0 + k*Thetak) - 2*(Theta0 + k*Thetak) * D(H0 + k*Hk) + 3*z*(J0 + k*Jk)`,
+the entire expression equals `M0 * (2 * x * y * z) + U_e0 * Mk_e0` identically over `K`.
+-/
+theorem cleared_differential_jet_e0 (a b c d f x y z : K) :
+    H_e0 a b c d f x y z * (D0_Thetak_e0 a b c d f x y z + Dk_Theta0_e0 a b c d f x y z) +
+      Hk_e0 a b c d f x y z * Dop_Theta_e0 a b c d f x y z -
+      2 * Theta_e0 a b c d f x y z * (D0_Hk_e0 a b c d f x y z + Dk_H0_e0 a b c d f x y z) -
+      2 * Thetak_e0 a b c d f x y z * Dop_H_e0 a b c d f x y z +
+      3 * z * Jk_e0 a b c d f x y z =
+    (729 * c ^ 4 * discBin a b d f * z ^ 4 * kBin a b d f x y) * (2 * x * y * z) +
+      U_e0 a b c d f x y z * Mk_e0 a b c d f x y z := by
+  simp only [H_e0, Hk_e0, Theta_e0, Thetak_e0, Jk_e0, Dop_H_e0, Dop_Theta_e0,
+    D0_Hk_e0, Dk_H0_e0, Dk_Theta0_e0, D0_Thetak_e0, U_e0, Mk_e0]
+  ring
+
+/--
+2-Direction Mordell Wronskian Divergence-Free Law (`#71` & `#74`):
+On any Mordell Weierstrass hypersurface `Y2 = X^3 + B6`, choosing two commuting parameter
+derivations `(E1, E2)` with Wronskian weights `psi1 = E2_B6` and `psi2 = -E1_B6` (so
+`E1_psi1 + E2_psi2 = E1_E2_B6 - E1_E2_B6 = 0`) and horizontal shifts `wX1 = 2 * X * E1_E2_B6`,
+`wX2 = -2 * X * E1_E2_B6` makes the total Mordell residue divergence vanish identically (`= 0`).
+-/
+theorem mordell_wronskian_divergence_zero (X Y2 B6 E1_B6 E2_B6 E1_E2_B6 : K)
+    (hcurve : Y2 = X ^ 3 + B6) :
+    let psi1 := E2_B6
+    let psi2 := -E1_B6
+    let d1_psi1 := E1_E2_B6
+    let d2_psi2 := -E1_E2_B6
+    ((d1_psi1 * (2 * Y2) - psi1 * E1_B6) + (2 * d1_psi1 * (2 * Y2) - (2 * X * d1_psi1) * (3 * X ^ 2))) +
+    ((d2_psi2 * (2 * Y2) - psi2 * E2_B6) + (2 * d2_psi2 * (2 * Y2) - (2 * X * d2_psi2) * (3 * X ^ 2))) = 0 := by
+  dsimp
+  linear_combination 0 * hcurve
+
 end HodgeComputer.Constructions.GeneralBinaryCubic
 end

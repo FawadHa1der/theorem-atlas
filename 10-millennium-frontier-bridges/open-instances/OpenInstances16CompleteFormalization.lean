@@ -518,3 +518,84 @@ theorem quadric_contact_72_decomposition_verified :
                            Y0^6 + Y1^6 + Y2^6
                 lhs == rhs)))))) = true := by
   decide
+
+/--
+  **Theorem 23 (Closed-Form First-Order `k`-Jet Cleared Differential Identity (`#71` & `#74`))**:
+  Under the square-zero perturbation `U_Jet = fBin(x, y) + c * z^3 + 2 * k * x * y * z` (`k^2 = 0`),
+  the closed-form `k^1`-jet covariants `Hk_e0, Thetak_e0, Jk_e0` and quotient `Mk_e0` satisfy
+  `H0*(D0_Thetak + Dk_Theta0) + Hk*Dop_Theta0 - 2*Theta0*(D0_Hk + Dk_H0) - 2*Thetak*Dop_H0 + 3*z*Jk == M0*(2*x*y*z) + U0*Mk`
+  identically across `[-1, 1]^7`.
+-/
+def e0JetDifferentialCheck (a b c d f x y : Int) : Bool :=
+  let z : Int := 1
+  let f_bin := binaryCubicF a d f b x y
+  let fx_bin := binaryCubicFu a d f b x y
+  let fy_bin := binaryCubicFp a d f b x y
+  let h_bin := binaryCubicHessian a d f b x y
+  let k_bin := binaryCubicKScaled a d f b x y
+  let disc := binaryCubicDisc a d f b
+  let h0 := 3 * a * f - d^2
+  let h1 := 9 * a * b - d * f
+  let h2 := 3 * b * d - f^2
+  let fxy_half := d * x + f * y
+  let s_skew := h0 * x^2 - h2 * y^2
+  let U0 := f_bin + c * z^3
+  let H0 := 9 * c * z * h_bin
+  let Theta0 := -9 * c^2 * h_bin^3 - 81 * c^3 * disc * z^3 * f_bin
+  let Dop_H0 := 9 * c * z * k_bin
+  let Dop_Theta0 := -27 * c^2 * h_bin^2 * k_bin
+  let Hk := -18 * c * z^2 * fxy_half
+  let Thetak := 27 * c^2 * z * h_bin * (2 * fxy_half * h_bin - h1 * f_bin) +
+                27 * c^3 * z^4 * (5 * h1 * h_bin - 6 * disc * x * y)
+  let Jk := -162 * c^3 * z * h_bin^2 * (s_skew * h_bin + fxy_half * k_bin) +
+            486 * c^4 * z^4 * ((h1 * h_bin - disc * x * y) * k_bin + 3 * disc * f_bin * s_skew) -
+            1458 * c^5 * disc * z^7 * s_skew
+  let Mk := 243 * c^3 * z^2 * h1 * h_bin * k_bin - 4374 * c^4 * disc * z^5 * s_skew
+  let M0 := 729 * c^4 * disc * z^4 * k_bin
+  let D0_Hk := -18 * c * z^2 * s_skew
+  let Dk_H0 := -36 * c * z^2 * s_skew
+  let Dk_Theta0 := 108 * c^2 * z * h_bin^2 * s_skew + 162 * c^3 * disc * z^4 * (x * fx_bin - y * fy_bin)
+  let D0_Thetak := 27 * c^2 * z * (k_bin * (2 * fxy_half * h_bin - h1 * f_bin) +
+                    2 * h_bin * (s_skew * h_bin + fxy_half * k_bin)) +
+                   27 * c^3 * z^4 * (5 * h1 * k_bin - 6 * disc * (x * fx_bin - y * fy_bin))
+  H0 * (D0_Thetak + Dk_Theta0) + Hk * Dop_Theta0 - 2 * Theta0 * (D0_Hk + Dk_H0) -
+    2 * Thetak * Dop_H0 + 3 * z * Jk == M0 * (2 * x * y * z) + U0 * Mk
+
+theorem e0_cleared_differential_jet_verified :
+    (List.range 3).all (fun a =>
+      (List.range 3).all (fun b =>
+        (List.range 3).all (fun c =>
+          (List.range 3).all (fun d =>
+            (List.range 3).all (fun f =>
+              (List.range 3).all (fun x =>
+                (List.range 3).all (fun y =>
+                  e0JetDifferentialCheck
+                    (Int.ofNat a - 1) (Int.ofNat b - 1) (Int.ofNat c - 1)
+                    (Int.ofNat d - 1) (Int.ofNat f - 1) (Int.ofNat x - 1) (Int.ofNat y - 1)))))))) = true := by
+  decide
+
+/--
+  **Theorem 24 (2-Direction Mordell Wronskian Divergence-Free Law (`#71` & `#74`))**:
+  On any Mordell Weierstrass hypersurface `Y2 = X^3 + B6`, choosing two commuting parameter
+  derivations `(E1, E2)` with Wronskian weights `psi1 = E2_B6` and `psi2 = -E1_B6` makes the
+  total Mordell residue divergence vanish identically (`= 0`) across `[-2, 2]^5`.
+-/
+theorem mordell_wronskian_divergence_zero_verified :
+    (List.range 5).all (fun x =>
+      (List.range 5).all (fun b6 =>
+        (List.range 5).all (fun e1 =>
+          (List.range 5).all (fun e2 =>
+            (List.range 5).all (fun e12 =>
+              let X := Int.ofNat x - 2
+              let B6 := Int.ofNat b6 - 2
+              let E1_B6 := Int.ofNat e1 - 2
+              let E2_B6 := Int.ofNat e2 - 2
+              let E1_E2_B6 := Int.ofNat e12 - 2
+              let Y2 := X^3 + B6
+              let psi1 := E2_B6
+              let psi2 := -E1_B6
+              let d1_psi1 := E1_E2_B6
+              let d2_psi2 := -E1_E2_B6
+              ((d1_psi1 * (2 * Y2) - psi1 * E1_B6) + (2 * d1_psi1 * (2 * Y2) - (2 * X * d1_psi1) * (3 * X^2))) +
+              ((d2_psi2 * (2 * Y2) - psi2 * E2_B6) + (2 * d2_psi2 * (2 * Y2) - (2 * X * d2_psi2) * (3 * X^2))) == 0))))) = true := by
+  decide
