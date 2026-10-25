@@ -628,5 +628,185 @@ theorem mordell_wronskian_divergence_zero (X Y2 B6 E1_B6 E2_B6 E1_E2_B6 : K)
   dsimp
   linear_combination 0 * hcurve
 
+/--
+Official `instance.rec` Reverse-Edge `e = 0` Ternary Cubic Reduction for `#74 one-reflection-skew`:
+For the exact benchmark sextic `F_74` in `74-one-reflection-skew/instance.rec`, setting
+`B1 = (X0, X2, Y0)`, `B2 = (X1, Y1)`, `B3 = (Y2)` with `Y0 = c0 * X0, X2 = c2 * X0, Y1 = c1 * X1`
+and `x = X0^2, y = X1^2, z = Y2^2` reduces `F_74` identically to `U_e0(a, b, c, d, f, x, y, z)`
+with `d = c0 * c1 * (1 + inv7 * c0^2)` and `f = c0 * c1 * (c2 - inv7 * c1^2)`.
+-/
+theorem official_one_reflection_skew_74_reverse_edge_cubic
+    (X0 X1 Y2 c0 c1 c2 inv7 : K) :
+    let Y0 := c0 * X0
+    let X2 := c2 * X0
+    let Y1 := c1 * X1
+    let x := X0 ^ 2
+    let y := X1 ^ 2
+    let z := Y2 ^ 2
+    let a := 1 + c0 ^ 6 + c2 ^ 6
+    let b := 1 + c1 ^ 6
+    let c := (1 : K)
+    let d := c0 * c1 * (1 + inv7 * c0 ^ 2)
+    let f := c0 * c1 * (c2 - inv7 * c1 ^ 2)
+    (X0 ^ 6 + X0 ^ 3 * X1 * Y0 * Y1 + inv7 * X0 * X1 * Y0 ^ 3 * Y1 -
+      inv7 * X0 * X1 * Y0 * Y1 ^ 3 + X1 ^ 6 + X1 ^ 3 * X2 * Y0 * Y1 +
+      X2 ^ 6 + Y0 ^ 6 + Y1 ^ 6 + Y2 ^ 6) =
+    U_e0 a b c d f x y z := by
+  simp only [U_e0, fBin]
+  ring
+
+/--
+Official `instance.rec` Reverse-Edge `e = 0` Ternary Cubic Reduction for `#71 four-plus-two-residual`:
+For the exact benchmark sextic `F_71` in `71-four-plus-two-residual/instance.rec`, setting
+`B1 = (X0, X1)`, `B2 = (Y0, Y1)`, `B3 = (X2, Y2)` with `X1 = c0 * X0, Y1 = c1 * Y0, Y2 = c2 * X2`
+and `x = X0^2, y = Y0^2, z = X2^2` reduces `F_71` identically to `U_e0(a, b, c, d, f, x, y, z)`
+with complete passive-ratio separation `a(c0), b(c1), c(c2)` and `f = 2 * d = 10/7 * c0 * c1`.
+-/
+theorem official_four_plus_two_residual_71_reverse_edge_cubic
+    (X0 Y0 X2 c0 c1 c2 inv7 : K) :
+    let X1 := c0 * X0
+    let Y1 := c1 * Y0
+    let Y2 := c2 * X2
+    let x := X0 ^ 2
+    let y := Y0 ^ 2
+    let z := X2 ^ 2
+    let a := 1 + 5 * inv7 * c0 + 10 * inv7 * c0 ^ 5 + c0 ^ 6
+    let b := 1 + 5 * inv7 * c1 + 15 * inv7 * c1 ^ 5 + c1 ^ 6
+    let c := 1 + 15 * inv7 * c2 ^ 2 + 10 * inv7 * c2 ^ 4 + c2 ^ 6
+    let d := 5 * inv7 * c0 * c1
+    let f := 10 * inv7 * c0 * c1
+    (X0 ^ 6 + 5 * inv7 * X0 ^ 5 * X1 + 5 * inv7 * X0 ^ 3 * X1 * Y0 * Y1 +
+      10 * inv7 * X0 * X1 ^ 5 + 10 * inv7 * X0 * X1 * Y0 ^ 3 * Y1 + X1 ^ 6 +
+      X2 ^ 6 + 15 * inv7 * X2 ^ 4 * Y2 ^ 2 + 10 * inv7 * X2 ^ 2 * Y2 ^ 4 +
+      Y0 ^ 6 + 5 * inv7 * Y0 ^ 5 * Y1 + 15 * inv7 * Y0 * Y1 ^ 5 + Y1 ^ 6 + Y2 ^ 6) =
+    U_e0 a b c d f x y z := by
+  simp only [U_e0, fBin]
+  ring
+
+/--
+Official `instance.rec` 48-Term Tensor-Rank-1 Decomposition for `#69 rank-one-biquartic`:
+Verifies that `F_69 = f69(X) + g69(Y) + (5/7) * L69(X)^2 * M69(Y)` where
+`L69(X) = X0^2 + X0*X1 + 2*X1*X2 + 3*X2^2` and `M69(Y) = Y0^2 + Y0*Y1 + 2*Y1*Y2 + 3*Y2^2`.
+-/
+theorem official_rank_one_biquartic_69_decomposition
+    (X0 X1 X2 Y0 Y1 Y2 inv7 : K) :
+    let f69 := X0 ^ 6 + 5 * inv7 * X0 ^ 5 * X1 + 5 * inv7 * X0 ^ 2 * X1 ^ 3 * X2 +
+               15 * inv7 * X0 * X2 ^ 5 + X1 ^ 6 + 10 * inv7 * X1 ^ 5 * X2 + X2 ^ 6
+    let g69 := Y0 ^ 6 + 10 * inv7 * Y0 ^ 5 * Y1 + 10 * inv7 * Y0 ^ 3 * Y1 * Y2 ^ 2 +
+               5 * inv7 * Y0 * Y2 ^ 5 + Y1 ^ 6 + 15 * inv7 * Y1 ^ 5 * Y2 + Y2 ^ 6
+    let L69 := X0 ^ 2 + X0 * X1 + 2 * X1 * X2 + 3 * X2 ^ 2
+    let M69 := Y0 ^ 2 + Y0 * Y1 + 2 * Y1 * Y2 + 3 * Y2 ^ 2
+    f69 + g69 + 5 * inv7 * L69 ^ 2 * M69 =
+      X0 ^ 6 + 5 * inv7 * X0 ^ 5 * X1 + 5 * inv7 * X0 ^ 4 * Y0 ^ 2 + 5 * inv7 * X0 ^ 4 * Y0 * Y1 +
+      10 * inv7 * X0 ^ 4 * Y1 * Y2 + 15 * inv7 * X0 ^ 4 * Y2 ^ 2 + 10 * inv7 * X0 ^ 3 * X1 * Y0 ^ 2 +
+      10 * inv7 * X0 ^ 3 * X1 * Y0 * Y1 + 20 * inv7 * X0 ^ 3 * X1 * Y1 * Y2 + 30 * inv7 * X0 ^ 3 * X1 * Y2 ^ 2 +
+      5 * inv7 * X0 ^ 2 * X1 ^ 3 * X2 + 5 * inv7 * X0 ^ 2 * X1 ^ 2 * Y0 ^ 2 + 5 * inv7 * X0 ^ 2 * X1 ^ 2 * Y0 * Y1 +
+      10 * inv7 * X0 ^ 2 * X1 ^ 2 * Y1 * Y2 + 15 * inv7 * X0 ^ 2 * X1 ^ 2 * Y2 ^ 2 + 20 * inv7 * X0 ^ 2 * X1 * X2 * Y0 ^ 2 +
+      20 * inv7 * X0 ^ 2 * X1 * X2 * Y0 * Y1 + 40 * inv7 * X0 ^ 2 * X1 * X2 * Y1 * Y2 + 60 * inv7 * X0 ^ 2 * X1 * X2 * Y2 ^ 2 +
+      30 * inv7 * X0 ^ 2 * X2 ^ 2 * Y0 ^ 2 + 30 * inv7 * X0 ^ 2 * X2 ^ 2 * Y0 * Y1 + 60 * inv7 * X0 ^ 2 * X2 ^ 2 * Y1 * Y2 +
+      90 * inv7 * X0 ^ 2 * X2 ^ 2 * Y2 ^ 2 + 20 * inv7 * X0 * X1 ^ 2 * X2 * Y0 ^ 2 + 20 * inv7 * X0 * X1 ^ 2 * X2 * Y0 * Y1 +
+      40 * inv7 * X0 * X1 ^ 2 * X2 * Y1 * Y2 + 60 * inv7 * X0 * X1 ^ 2 * X2 * Y2 ^ 2 + 30 * inv7 * X0 * X1 * X2 ^ 2 * Y0 ^ 2 +
+      30 * inv7 * X0 * X1 * X2 ^ 2 * Y0 * Y1 + 60 * inv7 * X0 * X1 * X2 ^ 2 * Y1 * Y2 + 90 * inv7 * X0 * X1 * X2 ^ 2 * Y2 ^ 2 +
+      15 * inv7 * X0 * X2 ^ 5 + X1 ^ 6 + 10 * inv7 * X1 ^ 5 * X2 + 20 * inv7 * X1 ^ 2 * X2 ^ 2 * Y0 ^ 2 +
+      20 * inv7 * X1 ^ 2 * X2 ^ 2 * Y0 * Y1 + 40 * inv7 * X1 ^ 2 * X2 ^ 2 * Y1 * Y2 + 60 * inv7 * X1 ^ 2 * X2 ^ 2 * Y2 ^ 2 +
+      60 * inv7 * X1 * X2 ^ 3 * Y0 ^ 2 + 60 * inv7 * X1 * X2 ^ 3 * Y0 * Y1 + 120 * inv7 * X1 * X2 ^ 3 * Y1 * Y2 +
+      180 * inv7 * X1 * X2 ^ 3 * Y2 ^ 2 + X2 ^ 6 + 45 * inv7 * X2 ^ 4 * Y0 ^ 2 + 45 * inv7 * X2 ^ 4 * Y0 * Y1 +
+      90 * inv7 * X2 ^ 4 * Y1 * Y2 + 135 * inv7 * X2 ^ 4 * Y2 ^ 2 + Y0 ^ 6 + 10 * inv7 * Y0 ^ 5 * Y1 +
+      10 * inv7 * Y0 ^ 3 * Y1 * Y2 ^ 2 + 5 * inv7 * Y0 * Y2 ^ 5 + Y1 ^ 6 + 15 * inv7 * Y1 ^ 5 * Y2 + Y2 ^ 6 := by
+  dsimp
+  ring
+
+/--
+Official `instance.rec` Symmetric Contact-Surface Decomposition for `#72 quadric-contact-residual`:
+Under `S0 = X0^2 + Y0^2` and `P0 = X0 * Y0`, `F_72` reduces with zero remainder to a cubic in `(S0, P0)`
+over `(X1, X2, Y1, Y2)`:
+`F_72 = S0^3 + 2 * S0 * P0^2 + 5 * S0 * (X1^2*Y1^2 + X1*X2*Y1*Y2 + X2^2*Y2^2) + (5/7) * P0 * X1*Y1*(X2^2 + 2*Y2^2) + X1^6 + X2^6 + Y1^6 + Y2^6`.
+-/
+theorem official_quadric_contact_residual_72_cubic_reduction
+    (X0 X1 X2 Y0 Y1 Y2 inv7 : K) :
+    let S0 := X0 ^ 2 + Y0 ^ 2
+    let P0 := X0 * Y0
+    S0 ^ 3 + 2 * S0 * P0 ^ 2 + 5 * S0 * (X1 ^ 2 * Y1 ^ 2 + X1 * X2 * Y1 * Y2 + X2 ^ 2 * Y2 ^ 2) +
+      5 * inv7 * P0 * X1 * Y1 * (X2 ^ 2 + 2 * Y2 ^ 2) + X1 ^ 6 + X2 ^ 6 + Y1 ^ 6 + Y2 ^ 6 =
+    X0 ^ 6 + 5 * X0 ^ 4 * Y0 ^ 2 + 5 * X0 ^ 2 * X1 ^ 2 * Y1 ^ 2 + 5 * X0 ^ 2 * X1 * X2 * Y1 * Y2 +
+      5 * X0 ^ 2 * X2 ^ 2 * Y2 ^ 2 + 5 * X0 ^ 2 * Y0 ^ 4 + 5 * inv7 * X0 * X1 * X2 ^ 2 * Y0 * Y1 +
+      10 * inv7 * X0 * X1 * Y0 * Y1 * Y2 ^ 2 + X1 ^ 6 + 5 * X1 ^ 2 * Y0 ^ 2 * Y1 ^ 2 +
+      5 * X1 * X2 * Y0 ^ 2 * Y1 * Y2 + X2 ^ 6 + 5 * X2 ^ 2 * Y0 ^ 2 * Y2 ^ 2 + Y0 ^ 6 + Y1 ^ 6 + Y2 ^ 6 := by
+  dsimp
+  ring
+
+/--
+Cleared 3-Coordinate Paired-Normal Transport Identity for `#74 one-reflection-skew` on `B1 = (X0, X2, Y0) = (p, r, q)`:
+Clearing the denominators `f^2 * G1^2` (where `G1 = p*f + r*h + q*g` is the 3-coordinate paired Euler gradient
+and `H11 = p^2*fpp + r^2*frr + q^2*fqq + 2*p*r*fpr + 2*p*q*fpq + 2*r*q*frq` is the 3-coordinate paired Hessian),
+the normal-chart source `3 * p^2 * q^3 / f - p^3 * q^3 * fpp / f^2` equals `p^3 * q^3 * (8 * G1 - H11) / G1^2`
+plus the exact 2-component tangent divergence of `(Wr, Wq) = (-p^3 * q^3 * r / G1, -p^3 * q^4 / G1)`.
+-/
+theorem paired_normal_change_3coord_cleared
+    (p r q f h g fpp fpr fpq frr frq fqq : K) :
+    let G1 := p * f + r * h + q * g
+    let H11 := p ^ 2 * fpp + r ^ 2 * frr + q ^ 2 * fqq + 2 * p * r * fpr + 2 * p * q * fpq + 2 * r * q * frq
+    let f_df_r := f * fpr - h * fpp
+    let f_dh_r := f * frr - h * fpr
+    let f_dg_r := f * frq - h * fpq
+    let f_dG1_r := -h * f + p * f_df_r + f * h + r * f_dh_r + q * f_dg_r
+    let f_df_q := f * fpq - g * fpp
+    let f_dh_q := f * frq - g * fpr
+    let f_dg_q := f * fqq - g * fpq
+    let f_dG1_q := -g * f + p * f_df_q + r * f_dh_q + f * g + q * f_dg_q
+    let num_div_r := G1 * f * (3 * p ^ 2 * h * q ^ 3 * r - p ^ 3 * q ^ 3 * f) +
+                     p ^ 3 * q ^ 3 * r * (f * f_dG1_r + G1 * f_df_r)
+    let num_div_q := G1 * f * (3 * p ^ 2 * g * q ^ 4 - 4 * p ^ 3 * q ^ 3 * f) +
+                     p ^ 3 * q ^ 4 * (f * f_dG1_q + G1 * f_df_q)
+    G1 ^ 2 * (3 * p ^ 2 * q ^ 3 * f - p ^ 3 * q ^ 3 * fpp) =
+      f ^ 2 * p ^ 3 * q ^ 3 * (8 * G1 - H11) + (num_div_r + num_div_q) := by
+  dsimp
+  ring
+
+/--
+Complete 6-Variable Physical Polynomial Lift of the Universal 4-Term Binary-Cubic Certificate Core
+(`general_binary_cubic_6var_directional`):
+For any 6-variable sextic of the form
+`F = a(X) + b(X) * P + c(X) * P^2 + (d - 2) * P^3 + Y0^6 + Y1^6 + Y2^6 = f(a, b, c, d, P) + s^2 + T^2`
+where `P = Y0 * Y1`, `s = Y0^3 - Y1^3`, `S = Y0^3 + Y1^3`, `T = Y2^3`, `R = T + inv3_tau * s`
+(with `(3 * inv3_tau)^2 = 3`, i.e., `3 * inv3_tau^2 = 1`), and `EX(a) = 6*a, EX(b) = 4*b, EX(c) = 2*c`,
+the 6-component polynomial vector field
+`N_j = (3 * S * MX * X0 * U_j, 3 * S * MX * X1 * U_j, 3 * S * MX * X2 * U_j,
+        MX * (6 * Y1^2 * V_j + Y0 * (s + 6 * inv3_tau * T) * B_j),
+        MX * (6 * Y0^2 * V_j - Y1 * (s + 6 * inv3_tau * T) * B_j),
+        3 * S * MX * Y2 * B_j)`
+satisfies the global 6-variable directional identity
+`∑ N_j_i ∂_i F = 6 * MX * S * P^j * D(a, b, c, d, P, R, T)` for all `j ∈ {0, 1, 2}`.
+-/
+theorem three_R_sq_identity (s T inv3_tau : K) (htau : 3 * inv3_tau ^ 2 = 1) :
+    let R := T + inv3_tau * s
+    3 * R ^ 2 = s ^ 2 + 6 * inv3_tau * s * T + 3 * T ^ 2 := by
+  dsimp
+  linear_combination s ^ 2 * htau
+
+theorem general_binary_cubic_6var_directional
+    (a b c d Y0 Y1 Y2 MX inv3_tau Uj Vj Bj rhs : K)
+    (htau : 3 * inv3_tau ^ 2 = 1)
+    (hscalar : fu a b c d (Y0 * Y1) * Uj + fp a b c d (Y0 * Y1) * Vj +
+      3 * (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) ^ 2 * Bj = rhs) :
+    let P := Y0 * Y1
+    let s := Y0 ^ 3 - Y1 ^ 3
+    let S := Y0 ^ 3 + Y1 ^ 3
+    let T := Y2 ^ 3
+    let EX_F := 6 * a + 4 * b * P + 2 * c * P ^ 2
+    let F_Y0 := (b + 2 * c * P + 3 * (d - 2) * P ^ 2) * Y1 + 6 * Y0 ^ 5
+    let F_Y1 := (b + 2 * c * P + 3 * (d - 2) * P ^ 2) * Y0 + 6 * Y1 ^ 5
+    let F_Y2 := 6 * Y2 ^ 5
+    let N_EX := 3 * S * MX * Uj
+    let N3 := MX * (6 * Y1 ^ 2 * Vj + Y0 * (s + 6 * inv3_tau * T) * Bj)
+    let N4 := MX * (6 * Y0 ^ 2 * Vj - Y1 * (s + 6 * inv3_tau * T) * Bj)
+    let N5 := 3 * S * MX * Y2 * Bj
+    N_EX * EX_F + N3 * F_Y0 + N4 * F_Y1 + N5 * F_Y2 = 6 * MX * S * rhs := by
+  dsimp only
+  simp only [fu, fp] at hscalar
+  linear_combination
+    6 * MX * (Y0 ^ 3 + Y1 ^ 3) * hscalar -
+    6 * MX * (Y0 ^ 3 + Y1 ^ 3) * (Y0 ^ 3 - Y1 ^ 3) ^ 2 * Bj * htau
+
 end HodgeComputer.Constructions.GeneralBinaryCubic
 end

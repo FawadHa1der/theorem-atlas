@@ -599,3 +599,168 @@ theorem mordell_wronskian_divergence_zero_verified :
               ((d1_psi1 * (2 * Y2) - psi1 * E1_B6) + (2 * d1_psi1 * (2 * Y2) - (2 * X * d1_psi1) * (3 * X^2))) +
               ((d2_psi2 * (2 * Y2) - psi2 * E2_B6) + (2 * d2_psi2 * (2 * Y2) - (2 * X * d2_psi2) * (3 * X^2))) == 0))))) = true := by
   decide
+
+/--
+  **Theorem 25 (Official `instance.rec` Reverse-Edge `e = 0` Cubic Reductions for `#71` (`f = 2d`) and `#74`)**:
+  Verifies across `[-1, 1]^6` that the official `71-four-plus-two-residual/instance.rec` polynomial `7 * F_71`
+  reduces to `a(c0)*x^3 + b(c1)*y^3 + c(c2)*z^3 + 5*c0*c1*x^2*y + 10*c0*c1*x*y^2` (`f = 2d`) and
+  the official `74-one-reflection-skew/instance.rec` polynomial `7 * F_74` reduces to
+  `7*(1 + c0^6 + c2^6)*x^3 + 7*(1 + c1^6)*y^3 + 7*z^3 + c0*c1*(7 + c0^2)*x^2*y + c0*c1*(7*c2 - c1^2)*x*y^2`.
+-/
+theorem official_71_and_74_reverse_edge_cubic_verified :
+    (List.range 3).all (fun u0 =>
+      (List.range 3).all (fun u1 =>
+        (List.range 3).all (fun u2 =>
+          (List.range 3).all (fun k0 =>
+            (List.range 3).all (fun k1 =>
+              (List.range 3).all (fun k2 =>
+                let X0 := Int.ofNat u0 - 1
+                let Y0 := Int.ofNat u1 - 1
+                let X2 := Int.ofNat u2 - 1
+                let c0 := Int.ofNat k0 - 1
+                let c1 := Int.ofNat k1 - 1
+                let c2 := Int.ofNat k2 - 1
+                let X1_71 := c0 * X0
+                let Y1_71 := c1 * Y0
+                let Y2_71 := c2 * X2
+                let x71 := X0^2
+                let y71 := Y0^2
+                let z71 := X2^2
+                let lhs71 := 7 * X0^6 + 5 * X0^5 * X1_71 + 5 * X0^3 * X1_71 * Y0 * Y1_71 +
+                             10 * X0 * X1_71^5 + 10 * X0 * X1_71 * Y0^3 * Y1_71 + 7 * X1_71^6 +
+                             7 * X2^6 + 15 * X2^4 * Y2_71^2 + 10 * X2^2 * Y2_71^4 +
+                             7 * Y0^6 + 5 * Y0^5 * Y1_71 + 15 * Y0 * Y1_71^5 + 7 * Y1_71^6 + 7 * Y2_71^6
+                let rhs71 := (7 + 5 * c0 + 10 * c0^5 + 7 * c0^6) * x71^3 +
+                             (7 + 5 * c1 + 15 * c1^5 + 7 * c1^6) * y71^3 +
+                             (7 + 15 * c2^2 + 10 * c2^4 + 7 * c2^6) * z71^3 +
+                             5 * c0 * c1 * x71^2 * y71 + 10 * c0 * c1 * x71 * y71^2
+                let Y0_74 := c0 * X0
+                let X2_74 := c2 * X0
+                let Y1_74 := c1 * Y0
+                let x74 := X0^2
+                let y74 := Y0^2
+                let z74 := X2^2
+                let lhs74 := 7 * (X0^6 + X0^3 * Y0 * Y0_74 * Y1_74 + Y0^6 + Y0^3 * X2_74 * Y0_74 * Y1_74 +
+                                  X2_74^6 + Y0_74^6 + Y1_74^6 + X2^6) +
+                             X0 * Y0 * Y0_74^3 * Y1_74 - X0 * Y0 * Y0_74 * Y1_74^3
+                let rhs74 := 7 * (1 + c0^6 + c2^6) * x74^3 + 7 * (1 + c1^6) * y74^3 + 7 * z74^3 +
+                             c0 * c1 * (7 + c0^2) * x74^2 * y74 + c0 * c1 * (7 * c2 - c1^2) * x74 * y74^2
+                (lhs71 == rhs71) && (lhs74 == rhs74))))))) = true := by
+  decide
+
+/--
+  **Theorem 26 (Official `instance.rec` 48-Term Tensor-Rank-1 Decomposition for `#69 rank-one-biquartic`)**:
+  Verifies across `[-1, 1]^6` that `7 * F_69 = 7 * f69(X) + 7 * g69(Y) + 5 * L69(X)^2 * M69(Y)`
+  where `L69(X) = X0^2 + X0*X1 + 2*X1*X2 + 3*X2^2` and `M69(Y) = Y0^2 + Y0*Y1 + 2*Y1*Y2 + 3*Y2^2`.
+-/
+theorem official_rank_one_biquartic_69_verified :
+    (List.range 3).all (fun x0 =>
+      (List.range 3).all (fun x1 =>
+        (List.range 3).all (fun x2 =>
+          (List.range 3).all (fun y0 =>
+            (List.range 3).all (fun y1 =>
+              (List.range 3).all (fun y2 =>
+                let X0 := Int.ofNat x0 - 1
+                let X1 := Int.ofNat x1 - 1
+                let X2 := Int.ofNat x2 - 1
+                let Y0 := Int.ofNat y0 - 1
+                let Y1 := Int.ofNat y1 - 1
+                let Y2 := Int.ofNat y2 - 1
+                let f69_7 := 7 * X0^6 + 5 * X0^5 * X1 + 5 * X0^2 * X1^3 * X2 + 15 * X0 * X2^5 +
+                             7 * X1^6 + 10 * X1^5 * X2 + 7 * X2^6
+                let g69_7 := 7 * Y0^6 + 10 * Y0^5 * Y1 + 10 * Y0^3 * Y1 * Y2^2 + 5 * Y0 * Y2^5 +
+                             7 * Y1^6 + 15 * Y1^5 * Y2 + 7 * Y2^6
+                let L69 := X0^2 + X0 * X1 + 2 * X1 * X2 + 3 * X2^2
+                let M69 := Y0^2 + Y0 * Y1 + 2 * Y1 * Y2 + 3 * Y2^2
+                let rhs := 7 * X0^6 + 5 * X0^5 * X1 + 5 * X0^4 * Y0^2 + 5 * X0^4 * Y0 * Y1 +
+                           10 * X0^4 * Y1 * Y2 + 15 * X0^4 * Y2^2 + 10 * X0^3 * X1 * Y0^2 +
+                           10 * X0^3 * X1 * Y0 * Y1 + 20 * X0^3 * X1 * Y1 * Y2 + 30 * X0^3 * X1 * Y2^2 +
+                           5 * X0^2 * X1^3 * X2 + 5 * X0^2 * X1^2 * Y0^2 + 5 * X0^2 * X1^2 * Y0 * Y1 +
+                           10 * X0^2 * X1^2 * Y1 * Y2 + 15 * X0^2 * X1^2 * Y2^2 + 20 * X0^2 * X1 * X2 * Y0^2 +
+                           20 * X0^2 * X1 * X2 * Y0 * Y1 + 40 * X0^2 * X1 * X2 * Y1 * Y2 + 60 * X0^2 * X1 * X2 * Y2^2 +
+                           30 * X0^2 * X2^2 * Y0^2 + 30 * X0^2 * X2^2 * Y0 * Y1 + 60 * X0^2 * X2^2 * Y1 * Y2 +
+                           90 * X0^2 * X2^2 * Y2^2 + 20 * X0 * X1^2 * X2 * Y0^2 + 20 * X0 * X1^2 * X2 * Y0 * Y1 +
+                           40 * X0 * X1^2 * X2 * Y1 * Y2 + 60 * X0 * X1^2 * X2 * Y2^2 + 30 * X0 * X1 * X2^2 * Y0^2 +
+                           30 * X0 * X1 * X2^2 * Y0 * Y1 + 60 * X0 * X1 * X2^2 * Y1 * Y2 + 90 * X0 * X1 * X2^2 * Y2^2 +
+                           15 * X0 * X2^5 + 7 * X1^6 + 10 * X1^5 * X2 + 20 * X1^2 * X2^2 * Y0^2 +
+                           20 * X1^2 * X2^2 * Y0 * Y1 + 40 * X1^2 * X2^2 * Y1 * Y2 + 60 * X1^2 * X2^2 * Y2^2 +
+                           60 * X1 * X2^3 * Y0^2 + 60 * X1 * X2^3 * Y0 * Y1 + 120 * X1 * X2^3 * Y1 * Y2 +
+                           180 * X1 * X2^3 * Y2^2 + 7 * X2^6 + 45 * X2^4 * Y0^2 + 45 * X2^4 * Y0 * Y1 +
+                           90 * X2^4 * Y1 * Y2 + 135 * X2^4 * Y2^2 + 7 * Y0^6 + 10 * Y0^5 * Y1 +
+                           10 * Y0^3 * Y1 * Y2^2 + 5 * Y0 * Y2^5 + 7 * Y1^6 + 15 * Y1^5 * Y2 + 7 * Y2^6
+                f69_7 + g69_7 + 5 * L69^2 * M69 == rhs)))))) = true := by
+  decide
+
+/--
+  **Theorem 27 (Cleared 3-Coordinate Paired-Normal Transport Identity for `#74 one-reflection-skew`)**:
+  Verifies across `[-1, 1]^6` that on the 3-coordinate block `B1 = (p, r, q) = (X0, X2, Y0)`,
+  `G1^2 * (3 * p^2 * q^3 * f - p^3 * q^3 * fpp) == f^2 * p^3 * q^3 * (8 * G1 - H11) + (num_div_r + num_div_q)`.
+-/
+theorem paired_normal_change_3coord_verified :
+    (List.range 3).all (fun ip =>
+      (List.range 3).all (fun ir =>
+        (List.range 3).all (fun iq =>
+          (List.range 3).all (fun if0 =>
+            (List.range 3).all (fun ih0 =>
+              (List.range 3).all (fun ig0 =>
+                let p := Int.ofNat ip - 1
+                let r := Int.ofNat ir - 1
+                let q := Int.ofNat iq - 1
+                let f := Int.ofNat if0 - 1
+                let h := Int.ofNat ih0 - 1
+                let g := Int.ofNat ig0 - 1
+                let fpp : Int := 2
+                let fpr : Int := -1
+                let fpq : Int := 3
+                let frr : Int := -2
+                let frq : Int := 1
+                let fqq : Int := 4
+                let G1 := p * f + r * h + q * g
+                let H11 := p^2 * fpp + r^2 * frr + q^2 * fqq + 2 * p * r * fpr + 2 * p * q * fpq + 2 * r * q * frq
+                let f_df_r := f * fpr - h * fpp
+                let f_dh_r := f * frr - h * fpr
+                let f_dg_r := f * frq - h * fpq
+                let f_dG1_r := -h * f + p * f_df_r + f * h + r * f_dh_r + q * f_dg_r
+                let f_df_q := f * fpq - g * fpp
+                let f_dh_q := f * frq - g * fpr
+                let f_dg_q := f * fqq - g * fpq
+                let f_dG1_q := -g * f + p * f_df_q + r * f_dh_q + f * g + q * f_dg_q
+                let num_div_r := G1 * f * (3 * p^2 * h * q^3 * r - p^3 * q^3 * f) +
+                                 p^3 * q^3 * r * (f * f_dG1_r + G1 * f_df_r)
+                let num_div_q := G1 * f * (3 * p^2 * g * q^4 - 4 * p^3 * q^3 * f) +
+                                 p^3 * q^4 * (f * f_dG1_q + G1 * f_df_q)
+                G1^2 * (3 * p^2 * q^3 * f - p^3 * q^3 * fpp) ==
+                  f^2 * p^3 * q^3 * (8 * G1 - H11) + (num_div_r + num_div_q))))))) = true := by
+  decide
+
+/--
+  **Theorem 28 (Official `instance.rec` Symmetric Contact-Surface Reduction for `#72 quadric-contact-residual`)**:
+  Verifies across `[-1, 1]^6` that `7 * F_72` reduces identically in `S0 = X0^2 + Y0^2` and `P0 = X0 * Y0` to
+  `7 * (S0^3 + 2 * S0 * P0^2 + 5 * S0 * (X1^2*Y1^2 + X1*X2*Y1*Y2 + X2^2*Y2^2) + X1^6 + X2^6 + Y1^6 + Y2^6) + 5 * P0 * X1*Y1*(X2^2 + 2*Y2^2)`.
+-/
+theorem official_quadric_contact_72_cubic_reduction_verified :
+    (List.range 3).all (fun x0 =>
+      (List.range 3).all (fun x1 =>
+        (List.range 3).all (fun x2 =>
+          (List.range 3).all (fun y0 =>
+            (List.range 3).all (fun y1 =>
+              (List.range 3).all (fun y2 =>
+                let X0 := Int.ofNat x0 - 1
+                let X1 := Int.ofNat x1 - 1
+                let X2 := Int.ofNat x2 - 1
+                let Y0 := Int.ofNat y0 - 1
+                let Y1 := Int.ofNat y1 - 1
+                let Y2 := Int.ofNat y2 - 1
+                let S0 := X0^2 + Y0^2
+                let P0 := X0 * Y0
+                let lhs := 7 * (S0^3 + 2 * S0 * P0^2 + 5 * S0 * (X1^2 * Y1^2 + X1 * X2 * Y1 * Y2 + X2^2 * Y2^2) +
+                                X1^6 + X2^6 + Y1^6 + Y2^6) +
+                           5 * P0 * X1 * Y1 * (X2^2 + 2 * Y2^2)
+                let rhs := 7 * (X0^6 + 5 * X0^4 * Y0^2 + 5 * X0^2 * X1^2 * Y1^2 + 5 * X0^2 * X1 * X2 * Y1 * Y2 +
+                                5 * X0^2 * X2^2 * Y2^2 + 5 * X0^2 * Y0^4 + X1^6 + 5 * X1^2 * Y0^2 * Y1^2 +
+                                5 * X1 * X2 * Y0^2 * Y1 * Y2 + X2^6 + 5 * X2^2 * Y0^2 * Y2^2 +
+                                Y0^6 + Y1^6 + Y2^6) +
+                           5 * X0 * X1 * X2^2 * Y0 * Y1 + 10 * X0 * X1 * Y0 * Y1 * Y2^2
+                lhs == rhs)))))) = true := by
+  decide
+
