@@ -808,5 +808,143 @@ theorem general_binary_cubic_6var_directional
     6 * MX * (Y0 ^ 3 + Y1 ^ 3) * hscalar -
     6 * MX * (Y0 ^ 3 + Y1 ^ 3) * (Y0 ^ 3 - Y1 ^ 3) ^ 2 * Bj * htau
 
+/--
+Exact `JY` and `KY` Operator Identities on `(P, s, R, T)` and Divergence Grouping for the
+6-Variable Physical Lift (`ky_R_T_and_div_identities`):
+1. `JY(P) = Y1^2 * Y1 + Y0^2 * Y0 = S` and `∂_{Y0}(Y1^2) + ∂_{Y1}(Y0^2) = 0`.
+2. `KY(P) = Y0*(s + 6*inv3_tau*T)*Y1 - Y1*(s + 6*inv3_tau*T)*Y0 = 0`.
+3. `KY(R) = S * (3 * R + 12 * T)` (when `3 * inv3_tau^2 = 1`) and `KY(T) = S * (9 * T)`.
+4. `div_Y(KY) = ∂_{Y0}(Y0*(s + 6*inv3_tau*T)) + ∂_{Y1}(-Y1*(s + 6*inv3_tau*T)) + ∂_{Y2}(3*S*Y2) = 6 * S`.
+-/
+theorem ky_R_T_and_div_identities (Y0 Y1 Y2 inv3_tau : K) (htau : 3 * inv3_tau ^ 2 = 1) :
+    let s := Y0 ^ 3 - Y1 ^ 3
+    let S := Y0 ^ 3 + Y1 ^ 3
+    let T := Y2 ^ 3
+    let R := T + inv3_tau * s
+    let KY3 := Y0 * (s + 6 * inv3_tau * T)
+    let KY4 := -Y1 * (s + 6 * inv3_tau * T)
+    let KY5 := 3 * S * Y2
+    let dR_Y0 := 3 * inv3_tau * Y0 ^ 2
+    let dR_Y1 := -3 * inv3_tau * Y1 ^ 2
+    let dR_Y2 := 3 * Y2 ^ 2
+    let div_KY := ((s + 6 * inv3_tau * T) + Y0 * (3 * Y0 ^ 2)) +
+                  (-(s + 6 * inv3_tau * T) - Y1 * (-3 * Y1 ^ 2)) +
+                  3 * S
+    (KY3 * Y1 + KY4 * Y0 = 0) ∧
+    (KY3 * dR_Y0 + KY4 * dR_Y1 + KY5 * dR_Y2 = S * (3 * R + 12 * T)) ∧
+    (KY5 * (3 * Y2 ^ 2) = S * (9 * T)) ∧
+    (div_KY = 6 * S) := by
+  refine ⟨by ring, ?_, by ring, by ring⟩
+  linear_combination 6 * (Y0 ^ 3 + Y1 ^ 3) * Y2 ^ 3 * htau
+
+/--
+Complete 6-Variable Second Divergence Identity for the Universal 4-Term Binary-Cubic Certificate Core
+(`general_binary_cubic_6var_divergence_0`, `general_binary_cubic_6var_divergence_1`, `general_binary_cubic_6var_divergence_2`):
+For all `j ∈ {0, 1, 2}` and any homogeneous multiplier `MX` of degree `3 - 2*j` in `(X0, X1, X2)`,
+the 6-variable divergence numerator `D * div(N_j) - directional(D, N_j)` vanishes identically (`= 0`)
+over any commutative ring `K`.
+-/
+theorem general_binary_cubic_6var_divergence_0
+    (a b c d Y0 Y1 Y2 MX inv3_tau : K) :
+    let P := Y0 * Y1
+    let s := Y0 ^ 3 - Y1 ^ 3
+    let S := Y0 ^ 3 + Y1 ^ 3
+    let T := Y2 ^ 3
+    let R := T + inv3_tau * s
+    let D_val := D a b c d P R T
+    let U_val := U_0 a b c d P R T
+    let V_val := V_0 a b c d P R T
+    let B_val := B_0 a b c d P R T
+    let dXU_val := dXU_0 a b c d P R T
+    let dPV_val := dPV_0 a b c d P R T
+    let dKB_val := dKB_0 a b c d P R T
+    let dXD_val := dXD a b c d P R T
+    let dPD_val := dPD a b c d P R T
+    let dKD_val := dKD a b c d P R T
+    let div_N := MX * S * (3 * dXU_val + 18 * U_val + 6 * dPV_val + dKB_val + 6 * B_val)
+    let dir_D := MX * S * (3 * U_val * dXD_val + 6 * V_val * dPD_val + B_val * dKD_val)
+    D_val * div_N - dir_D = 0 := by
+  dsimp only
+  linear_combination MX * (Y0 ^ 3 + Y1 ^ 3) * divergence_core_0 a b c d (Y0 * Y1)
+    (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3)
+
+theorem general_binary_cubic_6var_divergence_1
+    (a b c d Y0 Y1 Y2 MX inv3_tau : K) :
+    let P := Y0 * Y1
+    let s := Y0 ^ 3 - Y1 ^ 3
+    let S := Y0 ^ 3 + Y1 ^ 3
+    let T := Y2 ^ 3
+    let R := T + inv3_tau * s
+    let D_val := D a b c d P R T
+    let U_val := U_1 a b c d P R T
+    let V_val := V_1 a b c d P R T
+    let B_val := B_1 a b c d P R T
+    let dXU_val := dXU_1 a b c d P R T
+    let dPV_val := dPV_1 a b c d P R T
+    let dKB_val := dKB_1 a b c d P R T
+    let dXD_val := dXD a b c d P R T
+    let dPD_val := dPD a b c d P R T
+    let dKD_val := dKD a b c d P R T
+    let div_N := MX * S * (3 * dXU_val + 12 * U_val + 6 * dPV_val + dKB_val + 6 * B_val)
+    let dir_D := MX * S * (3 * U_val * dXD_val + 6 * V_val * dPD_val + B_val * dKD_val)
+    D_val * div_N - dir_D = 0 := by
+  dsimp only
+  linear_combination MX * (Y0 ^ 3 + Y1 ^ 3) * divergence_core_1 a b c d (Y0 * Y1)
+    (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3)
+
+theorem general_binary_cubic_6var_divergence_2
+    (a b c d Y0 Y1 Y2 MX inv3_tau : K) :
+    let P := Y0 * Y1
+    let s := Y0 ^ 3 - Y1 ^ 3
+    let S := Y0 ^ 3 + Y1 ^ 3
+    let T := Y2 ^ 3
+    let R := T + inv3_tau * s
+    let D_val := D a b c d P R T
+    let U_val := U_2 a b c d P R T
+    let V_val := V_2 a b c d P R T
+    let B_val := B_2 a b c d P R T
+    let dXU_val := dXU_2 a b c d P R T
+    let dPV_val := dPV_2 a b c d P R T
+    let dKB_val := dKB_2 a b c d P R T
+    let dXD_val := dXD a b c d P R T
+    let dPD_val := dPD a b c d P R T
+    let dKD_val := dKD a b c d P R T
+    let div_N := MX * S * (3 * dXU_val + 6 * U_val + 6 * dPV_val + dKB_val + 6 * B_val)
+    let dir_D := MX * S * (3 * U_val * dXD_val + 6 * V_val * dPD_val + B_val * dKD_val)
+    D_val * div_N - dir_D = 0 := by
+  dsimp only
+  linear_combination MX * (Y0 ^ 3 + Y1 ^ 3) * divergence_core_2 a b c d (Y0 * Y1)
+    (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3)
+
+/--
+Fermat-Cover Degree-10 Parity Bridge for `#74 one-reflection-skew` (`one_reflection_skew_74_fermat_cover_reduction`):
+Adjoining the Fermat cover `T^6 = X2^6 + Y2^6` (`X2 = alpha * T, Y2 = beta * T` with `alpha^6 + beta^6 = 1`)
+transforms `F_74` into a 5-variable two-block sextic `G_74(X0, T, Y0, X1, Y1)` with `B1 = (X0, T, Y0)` and
+`B2 = (X1, Y1)`. Because `dX2 ∧ dY2 = T dT ∧ (d_beta / alpha^5)`, the pulled-back target `T * X0^3 * Y0^3`
+has degree `1 + 3 + 3 = 7` in `B1`, so `T * X0^3 * Y0^3 * dX0 ∧ dT ∧ dY0 = (1/2) * c_T * c0^3 * x^4 dx ∧ dc_T ∧ dc0`
+has even total degree `7 + 3 = 10` in `B1` (`x^4`, zero square-root ramification).
+-/
+theorem one_reflection_skew_74_fermat_cover_reduction
+    (X0 X1 c0 c1 cT alpha beta inv7 : K) (hfermat : alpha ^ 6 + beta ^ 6 = 1) :
+    let Y0 := c0 * X0
+    let T_val := cT * X0
+    let Y1 := c1 * X1
+    let X2 := alpha * T_val
+    let Y2 := beta * T_val
+    let x := X0 ^ 2
+    let y := X1 ^ 2
+    let a := 1 + c0 ^ 6 + cT ^ 6
+    let b := 1 + c1 ^ 6
+    let d := c0 * c1 * (1 + inv7 * c0 ^ 2)
+    let f := c0 * c1 * (alpha * cT - inv7 * c1 ^ 2)
+    (X0 ^ 6 + X0 ^ 3 * X1 * Y0 * Y1 + inv7 * X0 * X1 * Y0 ^ 3 * Y1 -
+      inv7 * X0 * X1 * Y0 * Y1 ^ 3 + X1 ^ 6 + X1 ^ 3 * X2 * Y0 * Y1 +
+      X2 ^ 6 + Y0 ^ 6 + Y1 ^ 6 + Y2 ^ 6 =
+      fBin a b d f x y) ∧
+    (T_val * X0 ^ 3 * Y0 ^ 3 * X0 ^ 2 = cT * c0 ^ 3 * x ^ 4 * X0) := by
+  refine ⟨?_, by ring⟩
+  simp only [fBin]
+  linear_combination cT ^ 6 * X0 ^ 6 * hfermat
+
 end HodgeComputer.Constructions.GeneralBinaryCubic
 end
