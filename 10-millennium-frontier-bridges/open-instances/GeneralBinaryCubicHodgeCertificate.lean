@@ -1215,5 +1215,189 @@ theorem official_eight_plane_81_and_diagonal_permutation_82_decompositions
         1001 * Y0 ^ 6 + 1001 * Y1 ^ 6 + 1001 * Y2 ^ 6) := by
   refine ⟨by ring, by ring⟩
 
+/--
+End-to-End Cleared `HodgeComputer.defect` Vanishing Theorem for the 6-Variable Physical Lift
+of Any 4-Term Binary Cubic (`general_binary_cubic_defect_zero_0..2`):
+Combining `general_binary_cubic_6var_directional` (`directional F N^(j) = A_j * D`) and
+`general_binary_cubic_6var_divergence_0..2` (`divergenceNumerator D N^(j) = 0`) proves that
+the exact `HodgeComputer.defect` expression
+`A_j * D^2 - D * directional F N^(j) + F * divergenceNumerator D N^(j)` vanishes identically (`= 0`,
+strict certificate with `Q = 0`) for all three target sectors `j ∈ {0, 1, 2}` (`A_j = 6 * MX * S * P^j`).
+-/
+theorem general_binary_cubic_defect_zero_0
+    (a b c d Y0 Y1 Y2 MX inv3_tau F_val : K)
+    (htau : 3 * inv3_tau ^ 2 = 1) :
+    let P := Y0 * Y1
+    let s := Y0 ^ 3 - Y1 ^ 3
+    let S := Y0 ^ 3 + Y1 ^ 3
+    let T := Y2 ^ 3
+    let R := T + inv3_tau * s
+    let D_val := D a b c d P R T
+    let U0 := U_0 a b c d P R T
+    let V0 := V_0 a b c d P R T
+    let B0 := B_0 a b c d P R T
+    let dX_U0 := dXU_0 a b c d P R T
+    let dP_V0 := dPV_0 a b c d P R T
+    let dK_B0 := dKB_0 a b c d P R T
+    let dX_D := dXD a b c d P R T
+    let dP_D := dPD a b c d P R T
+    let dK_D := dKD a b c d P R T
+    let EX_F := 6 * a + 4 * b * P + 2 * c * P ^ 2
+    let F_Y0 := (b + 2 * c * P + 3 * (d - 2) * P ^ 2) * Y1 + 6 * Y0 ^ 5
+    let F_Y1 := (b + 2 * c * P + 3 * (d - 2) * P ^ 2) * Y0 + 6 * Y1 ^ 5
+    let F_Y2 := 6 * Y2 ^ 5
+    let N_EX := 3 * S * MX * U0
+    let N3 := MX * (6 * Y1 ^ 2 * V0 + Y0 * (s + 6 * inv3_tau * T) * B0)
+    let N4 := MX * (6 * Y0 ^ 2 * V0 - Y1 * (s + 6 * inv3_tau * T) * B0)
+    let N5 := 3 * S * MX * Y2 * B0
+    let A0 := 6 * MX * S * (1 : K)
+    let dir_F_N := N_EX * EX_F + N3 * F_Y0 + N4 * F_Y1 + N5 * F_Y2
+    let div_N := MX * S * (3 * dX_U0 + 18 * U0 + 6 * dP_V0 + dK_B0 + 6 * B0)
+    let dir_D_N := MX * S * (3 * U0 * dX_D + 6 * V0 * dP_D + B0 * dK_D)
+    A0 * D_val ^ 2 - D_val * dir_F_N + F_val * (D_val * div_N - dir_D_N) = 0 := by
+  have h1 := general_binary_cubic_6var_directional a b c d Y0 Y1 Y2 MX inv3_tau
+    (U_0 a b c d (Y0 * Y1) (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3))
+    (V_0 a b c d (Y0 * Y1) (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3))
+    (B_0 a b c d (Y0 * Y1) (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3))
+    ((1 : K) * D a b c d (Y0 * Y1) (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3))
+    htau
+    (first_scalar_identity_0 a b c d (Y0 * Y1) (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3))
+  have h3 := general_binary_cubic_6var_divergence_0 a b c d Y0 Y1 Y2 MX inv3_tau
+  dsimp only at h1 h3 ⊢
+  linear_combination
+    -D a b c d (Y0 * Y1) (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3) * h1 +
+    F_val * h3
+
+theorem general_binary_cubic_defect_zero_1
+    (a b c d Y0 Y1 Y2 MX inv3_tau F_val : K)
+    (htau : 3 * inv3_tau ^ 2 = 1) :
+    let P := Y0 * Y1
+    let s := Y0 ^ 3 - Y1 ^ 3
+    let S := Y0 ^ 3 + Y1 ^ 3
+    let T := Y2 ^ 3
+    let R := T + inv3_tau * s
+    let D_val := D a b c d P R T
+    let U1 := U_1 a b c d P R T
+    let V1 := V_1 a b c d P R T
+    let B1 := B_1 a b c d P R T
+    let dX_U1 := dXU_1 a b c d P R T
+    let dP_V1 := dPV_1 a b c d P R T
+    let dK_B1 := dKB_1 a b c d P R T
+    let dX_D := dXD a b c d P R T
+    let dP_D := dPD a b c d P R T
+    let dK_D := dKD a b c d P R T
+    let EX_F := 6 * a + 4 * b * P + 2 * c * P ^ 2
+    let F_Y0 := (b + 2 * c * P + 3 * (d - 2) * P ^ 2) * Y1 + 6 * Y0 ^ 5
+    let F_Y1 := (b + 2 * c * P + 3 * (d - 2) * P ^ 2) * Y0 + 6 * Y1 ^ 5
+    let F_Y2 := 6 * Y2 ^ 5
+    let N_EX := 3 * S * MX * U1
+    let N3 := MX * (6 * Y1 ^ 2 * V1 + Y0 * (s + 6 * inv3_tau * T) * B1)
+    let N4 := MX * (6 * Y0 ^ 2 * V1 - Y1 * (s + 6 * inv3_tau * T) * B1)
+    let N5 := 3 * S * MX * Y2 * B1
+    let A1 := 6 * MX * S * P
+    let dir_F_N := N_EX * EX_F + N3 * F_Y0 + N4 * F_Y1 + N5 * F_Y2
+    let div_N := MX * S * (3 * dX_U1 + 12 * U1 + 6 * dP_V1 + dK_B1 + 6 * B1)
+    let dir_D_N := MX * S * (3 * U1 * dX_D + 6 * V1 * dP_D + B1 * dK_D)
+    A1 * D_val ^ 2 - D_val * dir_F_N + F_val * (D_val * div_N - dir_D_N) = 0 := by
+  have h1 := general_binary_cubic_6var_directional a b c d Y0 Y1 Y2 MX inv3_tau
+    (U_1 a b c d (Y0 * Y1) (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3))
+    (V_1 a b c d (Y0 * Y1) (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3))
+    (B_1 a b c d (Y0 * Y1) (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3))
+    ((Y0 * Y1) * D a b c d (Y0 * Y1) (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3))
+    htau
+    (first_scalar_identity_1 a b c d (Y0 * Y1) (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3))
+  have h3 := general_binary_cubic_6var_divergence_1 a b c d Y0 Y1 Y2 MX inv3_tau
+  dsimp only at h1 h3 ⊢
+  linear_combination
+    -D a b c d (Y0 * Y1) (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3) * h1 +
+    F_val * h3
+
+theorem general_binary_cubic_defect_zero_2
+    (a b c d Y0 Y1 Y2 MX inv3_tau F_val : K)
+    (htau : 3 * inv3_tau ^ 2 = 1) :
+    let P := Y0 * Y1
+    let s := Y0 ^ 3 - Y1 ^ 3
+    let S := Y0 ^ 3 + Y1 ^ 3
+    let T := Y2 ^ 3
+    let R := T + inv3_tau * s
+    let D_val := D a b c d P R T
+    let U2 := U_2 a b c d P R T
+    let V2 := V_2 a b c d P R T
+    let B2 := B_2 a b c d P R T
+    let dX_U2 := dXU_2 a b c d P R T
+    let dP_V2 := dPV_2 a b c d P R T
+    let dK_B2 := dKB_2 a b c d P R T
+    let dX_D := dXD a b c d P R T
+    let dP_D := dPD a b c d P R T
+    let dK_D := dKD a b c d P R T
+    let EX_F := 6 * a + 4 * b * P + 2 * c * P ^ 2
+    let F_Y0 := (b + 2 * c * P + 3 * (d - 2) * P ^ 2) * Y1 + 6 * Y0 ^ 5
+    let F_Y1 := (b + 2 * c * P + 3 * (d - 2) * P ^ 2) * Y0 + 6 * Y1 ^ 5
+    let F_Y2 := 6 * Y2 ^ 5
+    let N_EX := 3 * S * MX * U2
+    let N3 := MX * (6 * Y1 ^ 2 * V2 + Y0 * (s + 6 * inv3_tau * T) * B2)
+    let N4 := MX * (6 * Y0 ^ 2 * V2 - Y1 * (s + 6 * inv3_tau * T) * B2)
+    let N5 := 3 * S * MX * Y2 * B2
+    let A2 := 6 * MX * S * P ^ 2
+    let dir_F_N := N_EX * EX_F + N3 * F_Y0 + N4 * F_Y1 + N5 * F_Y2
+    let div_N := MX * S * (3 * dX_U2 + 6 * U2 + 6 * dP_V2 + dK_B2 + 6 * B2)
+    let dir_D_N := MX * S * (3 * U2 * dX_D + 6 * V2 * dP_D + B2 * dK_D)
+    A2 * D_val ^ 2 - D_val * dir_F_N + F_val * (D_val * div_N - dir_D_N) = 0 := by
+  have h1 := general_binary_cubic_6var_directional a b c d Y0 Y1 Y2 MX inv3_tau
+    (U_2 a b c d (Y0 * Y1) (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3))
+    (V_2 a b c d (Y0 * Y1) (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3))
+    (B_2 a b c d (Y0 * Y1) (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3))
+    ((Y0 * Y1) ^ 2 * D a b c d (Y0 * Y1) (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3))
+    htau
+    (first_scalar_identity_2 a b c d (Y0 * Y1) (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3))
+  have h3 := general_binary_cubic_6var_divergence_2 a b c d Y0 Y1 Y2 MX inv3_tau
+  dsimp only at h1 h3 ⊢
+  linear_combination
+    -D a b c d (Y0 * Y1) (Y2 ^ 3 + inv3_tau * (Y0 ^ 3 - Y1 ^ 3)) (Y2 ^ 3) * h1 +
+    F_val * h3
+
+/--
+Binary-Block Contact-Cover Wronskian Strict Certificate Identity (`binary_block_wronskian_certificate_directional`,
+Chapter 2a §2a.1, for `#71 four-plus-two-residual`):
+When two binary sextic blocks admit 3-torsion contact presentations `P0 = C0^3 + r0^2` and
+`P1 = C1^3 + r1^2` with Wronskians `J0 = C0_x * r0_y - C0_y * r0_x` and `J1 = C1_u * r1_v - C1_v * r1_u`,
+the Hamiltonian vector field `N = (N_x, N_y, N_u, N_v) = (J1 * r0 * (-C0_y), J1 * r0 * C0_x, J0 * r1 * (-C1_v), J0 * r1 * C1_u)`
+with denominator `D = r0^2 + r1^2` satisfies `directional (P0 + P1 + P2) N = (2 * J0 * J1) * D`.
+-/
+theorem binary_block_wronskian_certificate_directional
+    (C0 r0 C0_x C0_y r0_x r0_y C1 r1 C1_u C1_v r1_u r1_v : K) :
+    let J0 := C0_x * r0_y - C0_y * r0_x
+    let J1 := C1_u * r1_v - C1_v * r1_u
+    let P0_x := 3 * C0 ^ 2 * C0_x + 2 * r0 * r0_x
+    let P0_y := 3 * C0 ^ 2 * C0_y + 2 * r0 * r0_y
+    let P1_u := 3 * C1 ^ 2 * C1_u + 2 * r1 * r1_u
+    let P1_v := 3 * C1 ^ 2 * C1_v + 2 * r1 * r1_v
+    let N_x := J1 * r0 * (-C0_y)
+    let N_y := J1 * r0 * C0_x
+    let N_u := J0 * r1 * (-C1_v)
+    let N_v := J0 * r1 * C1_u
+    let D_contact := r0 ^ 2 + r1 ^ 2
+    N_x * P0_x + N_y * P0_y + N_u * P1_u + N_v * P1_v =
+      (2 * J0 * J1) * D_contact := by
+  dsimp
+  ring
+
+/--
+Pole-Raising Deformation Certificate Identity (`pole_raising_defect_identity`,
+Chapter 4 §4.5, for `#60 cycle-q2`):
+Given a family of certificates at pole order `q` along a deformation `F_t = F + t * C` (`C` an even sextic),
+the field `w = (q * C * v - F * v_dot) / (q + 1)` satisfies the cleared pole-`q+1` identity for target `A * C`.
+-/
+theorem pole_raising_defect_identity
+    (F A C q dF_v dC_v dF_vdot div_v div_vdot : K) :
+    let K_q := A - q * dF_v + F * div_v
+    let d_dt_K_q := -q * (dC_v + dF_vdot) + C * div_v + F * div_vdot
+    let dF_w := q * C * dF_v - F * dF_vdot
+    let div_w := q * dC_v + q * C * div_v - dF_vdot - F * div_vdot
+    (q + 1) * A * C - (q + 1) * dF_w + F * div_w =
+      (q + 1) * C * K_q - F * d_dt_K_q := by
+  dsimp
+  ring
+
 end HodgeComputer.Constructions.GeneralBinaryCubic
 end
