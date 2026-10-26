@@ -946,5 +946,274 @@ theorem one_reflection_skew_74_fermat_cover_reduction
   simp only [fBin]
   linear_combination cT ^ 6 * X0 ^ 6 * hfermat
 
+/--
+Exact 5×5 Physical-to-Weierstrass Jacobian Determinant Law for `#74 one-reflection-skew`
+(`raw_determinant_74_cleared`):
+In the 5-coordinate affine chart `(X0, X2, Y0, X1, Y1)` at `Y2 = 1`, the Jacobian matrix of the
+map `(X0, X2, Y0, X1, Y1) ↦ (U, X_W, Y_W, c0, c2)` (with `c0 = Y0 / X0`, `c2 = X2 / X0`,
+`x = X0^2`, `y = X1^2`, `X_W = Theta(x, y, 1)`, `Y_W = J(x, y, 1)`) factors into a 2×2 upper-left
+block in `(X0, X1)` and a 3×3 lower-right triangular block in `(Y0, X2, Y1)` (`∂_{Y0} c0 = 1/X0`,
+`∂_{X2} c2 = 1/X0`, `∂_{Y1} Y_W = 2 * Y1 * y * (X1/Y1) ...`), so the cleared determinant equals
+`4 * X0 * X1 * (U_x * (Theta_x * J_y - Theta_y * J_x) ...)`.
+-/
+theorem raw_determinant_74_cleared
+    (X0 X1 Y1 U_x U_y Theta_x Theta_y J_x J_y J_c1 : K) :
+    let dX0_U := 2 * X0 * U_x
+    let dX1_U := 2 * X1 * U_y - Y1 * (U_y * (2 * X1))
+    let dY1_U := X1 * (U_y * (2 * X1))
+    let dX0_Th := 2 * X0 * Theta_x
+    let dX1_Th := 2 * X1 * Theta_y
+    let dX0_J := 2 * X0 * J_x
+    let dX1_J := 2 * X1 * J_y - Y1 * J_c1
+    let dY1_J := X1 * J_c1
+    (dX0_U * (dX1_Th * dY1_J) - dX0_Th * (dX1_U * dY1_J - dY1_U * dX1_J) +
+      dX0_J * (dX1_U * 0 - dY1_U * dX1_Th)) =
+    4 * X0 * X1 ^ 2 *
+      (J_c1 * (U_x * Theta_y - U_y * Theta_x) +
+        2 * X1 * U_y * (Theta_x * J_y - Theta_y * J_x)) := by
+  dsimp
+  ring
+
+/--
+Exact Official `instance.rec` Polarized K3 Sum-of-Two-Sextics Decomposition for
+`#66 polarized-k3-remainder` (`official_polarized_k3_remainder_66_sum_of_k3`):
+Under `u_i = X_i + Y_i` and `v_i = X_i - Y_i` (`i ∈ {0, 1, 2}`), twice the official
+42-term polynomial `7 * F_66(X, Y)` from `66-polarized-k3-remainder/instance.rec`
+equals `f66_7(X + Y) + f66_7(X - Y)` where
+`f66_7(a, b, c) = 7*a^6 + 5*a^5*b + 5*a^2*b^3*c + 15*a*c^5 + 7*b^6 + 10*b^5*c + 7*c^6`,
+and the weight-1 top-form product `(X0+Y0)(X1+Y1)(X2+Y2)(X0-Y0)(X1-Y1)(X2-Y2)`
+equals `(X0^2 - Y0^2)(X1^2 - Y1^2)(X2^2 - Y2^2)`.
+-/
+def f66_7 (a b c : K) : K :=
+  7 * a ^ 6 + 5 * a ^ 5 * b + 5 * a ^ 2 * b ^ 3 * c + 15 * a * c ^ 5 +
+    7 * b ^ 6 + 10 * b ^ 5 * c + 7 * c ^ 6
+
+theorem official_polarized_k3_remainder_66_sum_of_k3 (X0 X1 X2 Y0 Y1 Y2 : K) :
+    let u0 := X0 + Y0
+    let u1 := X1 + Y1
+    let u2 := X2 + Y2
+    let v0 := X0 - Y0
+    let v1 := X1 - Y1
+    let v2 := X2 - Y2
+    (f66_7 u0 u1 u2 + f66_7 v0 v1 v2 =
+      2 * (7 * X0 ^ 6 + 5 * X0 ^ 5 * X1 + 25 * X0 ^ 4 * Y0 * Y1 + 50 * X0 ^ 3 * X1 * Y0 ^ 2 +
+        50 * X0 ^ 2 * Y0 ^ 3 * Y1 + 25 * X0 * X1 * Y0 ^ 4 + 5 * Y0 ^ 5 * Y1 +
+        5 * X0 ^ 2 * X1 ^ 3 * X2 + 15 * X0 ^ 2 * X1 ^ 2 * Y1 * Y2 +
+        15 * X0 ^ 2 * X1 * X2 * Y1 ^ 2 + 5 * X0 ^ 2 * Y1 ^ 3 * Y2 +
+        10 * X0 * X1 ^ 3 * Y0 * Y2 + 30 * X0 * X1 ^ 2 * X2 * Y0 * Y1 +
+        30 * X0 * X1 * Y0 * Y1 ^ 2 * Y2 + 10 * X0 * X2 * Y0 * Y1 ^ 3 +
+        5 * X1 ^ 3 * X2 * Y0 ^ 2 + 15 * X1 ^ 2 * Y0 ^ 2 * Y1 * Y2 +
+        15 * X1 * X2 * Y0 ^ 2 * Y1 ^ 2 + 5 * Y0 ^ 2 * Y1 ^ 3 * Y2 +
+        15 * X0 * X2 ^ 5 + 75 * X2 ^ 4 * Y0 * Y2 + 150 * X0 * X2 ^ 3 * Y2 ^ 2 +
+        150 * X2 ^ 2 * Y0 * Y2 ^ 3 + 75 * X0 * X2 * Y2 ^ 4 + 15 * Y0 * Y2 ^ 5 +
+        7 * X1 ^ 6 + 10 * X1 ^ 5 * X2 + 50 * X1 ^ 4 * Y1 * Y2 + 100 * X1 ^ 3 * X2 * Y1 ^ 2 +
+        100 * X1 ^ 2 * Y1 ^ 3 * Y2 + 50 * X1 * X2 * Y1 ^ 4 + 10 * Y1 ^ 5 * Y2 +
+        105 * X0 ^ 4 * Y0 ^ 2 + 105 * X0 ^ 2 * Y0 ^ 4 + 105 * X1 ^ 4 * Y1 ^ 2 +
+        105 * X1 ^ 2 * Y1 ^ 4 + 105 * X2 ^ 4 * Y2 ^ 2 + 105 * X2 ^ 2 * Y2 ^ 4 +
+        7 * X2 ^ 6 + 7 * Y0 ^ 6 + 7 * Y1 ^ 6 + 7 * Y2 ^ 6)) ∧
+    (u0 * u1 * u2 * v0 * v1 * v2 =
+      (X0 ^ 2 - Y0 ^ 2) * (X1 ^ 2 - Y1 ^ 2) * (X2 ^ 2 - Y2 ^ 2)) := by
+  refine ⟨?_, by ring⟩
+  simp only [f66_7]
+  ring
+
+/--
+Exact Official `instance.rec` Klein Cyclic-Invariants Syzygy and Decomposition for
+`#67 klein-coupled-character` (`official_klein_coupled_character_67_decomposition`):
+In terms of the order-7 Klein monomials `M0 = X0^3 * X1^2, M1 = X1^3 * X2^2, M2 = X2^3 * X0^2`
+and `W = X0 * X1 * X2` (satisfying `M0 * M1 * M2 = W^5`), clearing by `W^3` expresses `7 * W^3 * F_67`
+purely in `(M0, M1, M2, W, Y0, Y1, Y2)`.
+-/
+theorem official_klein_coupled_character_67_decomposition (X0 X1 X2 Y0 Y1 Y2 : K) :
+    let W_klein := X0 * X1 * X2
+    let M0 := X0 ^ 3 * X1 ^ 2
+    let M1 := X1 ^ 3 * X2 ^ 2
+    let M2 := X2 ^ 3 * X0 ^ 2
+    let F67_7 := 7 * (X0 ^ 5 * X1 + X1 ^ 5 * X2 + X2 ^ 5 * X0 + Y0 ^ 6 + Y1 ^ 6 + Y2 ^ 6) +
+                 5 * X0 * X1 ^ 3 * Y0 * Y1 + 10 * X0 ^ 3 * X2 * Y1 * Y2 +
+                 15 * X1 * X2 ^ 3 * Y0 * Y2
+    (M0 * M1 * M2 = W_klein ^ 5) ∧
+    (W_klein ^ 3 * F67_7 =
+      7 * (M0 ^ 2 * M2 + M1 ^ 2 * M0 + M2 ^ 2 * M1) +
+        7 * W_klein ^ 3 * (Y0 ^ 6 + Y1 ^ 6 + Y2 ^ 6) +
+        W_klein * (5 * M0 * M1 * Y0 * Y1 + 10 * M2 * M0 * Y1 * Y2 +
+          15 * M1 * M2 * Y0 * Y2)) := by
+  refine ⟨by ring, by ring⟩
+
+/--
+Exact Official `instance.rec` Elementary-Symmetric Binary-Cubic Decomposition for
+`#68 symmetric-sextic-residual` (`official_symmetric_sextic_residual_68_decomposition`):
+With `QX = X0 * X1 + X0 * X2 + X1 * X2` and `QY = Y0 * Y1 + Y0 * Y2 + Y1 * Y2`, the official
+polynomial `7 * F_68` from `68-symmetric-sextic-residual/instance.rec` equals
+`7 * (X0^6 + X1^6 + X2^6 + Y0^6 + Y1^6 + Y2^6) + 5 * QX^2 * QY + 10 * QX * QY^2`.
+-/
+theorem official_symmetric_sextic_residual_68_decomposition (X0 X1 X2 Y0 Y1 Y2 : K) :
+    let QX := X0 * X1 + X0 * X2 + X1 * X2
+    let QY := Y0 * Y1 + Y0 * Y2 + Y1 * Y2
+    7 * (X0 ^ 6 + X1 ^ 6 + X2 ^ 6 + Y0 ^ 6 + Y1 ^ 6 + Y2 ^ 6) +
+      5 * QX ^ 2 * QY + 10 * QX * QY ^ 2 =
+    7 * X0 ^ 6 + 5 * X0 ^ 2 * X1 ^ 2 * Y0 * Y1 + 5 * X0 ^ 2 * X1 ^ 2 * Y0 * Y2 +
+      5 * X0 ^ 2 * X1 ^ 2 * Y1 * Y2 + 10 * X0 ^ 2 * X1 * X2 * Y0 * Y1 +
+      10 * X0 ^ 2 * X1 * X2 * Y0 * Y2 + 10 * X0 ^ 2 * X1 * X2 * Y1 * Y2 +
+      5 * X0 ^ 2 * X2 ^ 2 * Y0 * Y1 + 5 * X0 ^ 2 * X2 ^ 2 * Y0 * Y2 +
+      5 * X0 ^ 2 * X2 ^ 2 * Y1 * Y2 + 10 * X0 * X1 ^ 2 * X2 * Y0 * Y1 +
+      10 * X0 * X1 ^ 2 * X2 * Y0 * Y2 + 10 * X0 * X1 ^ 2 * X2 * Y1 * Y2 +
+      10 * X0 * X1 * X2 ^ 2 * Y0 * Y1 + 10 * X0 * X1 * X2 ^ 2 * Y0 * Y2 +
+      10 * X0 * X1 * X2 ^ 2 * Y1 * Y2 + 10 * X0 * X1 * Y0 ^ 2 * Y1 ^ 2 +
+      20 * X0 * X1 * Y0 ^ 2 * Y1 * Y2 + 10 * X0 * X1 * Y0 ^ 2 * Y2 ^ 2 +
+      20 * X0 * X1 * Y0 * Y1 ^ 2 * Y2 + 20 * X0 * X1 * Y0 * Y1 * Y2 ^ 2 +
+      10 * X0 * X1 * Y1 ^ 2 * Y2 ^ 2 + 10 * X0 * X2 * Y0 ^ 2 * Y1 ^ 2 +
+      20 * X0 * X2 * Y0 ^ 2 * Y1 * Y2 + 10 * X0 * X2 * Y0 ^ 2 * Y2 ^ 2 +
+      20 * X0 * X2 * Y0 * Y1 ^ 2 * Y2 + 20 * X0 * X2 * Y0 * Y1 * Y2 ^ 2 +
+      10 * X0 * X2 * Y1 ^ 2 * Y2 ^ 2 + 7 * X1 ^ 6 + 5 * X1 ^ 2 * X2 ^ 2 * Y0 * Y1 +
+      5 * X1 ^ 2 * X2 ^ 2 * Y0 * Y2 + 5 * X1 ^ 2 * X2 ^ 2 * Y1 * Y2 +
+      10 * X1 * X2 * Y0 ^ 2 * Y1 ^ 2 + 20 * X1 * X2 * Y0 ^ 2 * Y1 * Y2 +
+      10 * X1 * X2 * Y0 ^ 2 * Y2 ^ 2 + 20 * X1 * X2 * Y0 * Y1 ^ 2 * Y2 +
+      20 * X1 * X2 * Y0 * Y1 * Y2 ^ 2 + 10 * X1 * X2 * Y1 ^ 2 * Y2 ^ 2 +
+      7 * X2 ^ 6 + 7 * Y0 ^ 6 + 7 * Y1 ^ 6 + 7 * Y2 ^ 6 := by
+  dsimp
+  ring
+
+/--
+Exact Official `instance.rec` Depressed-Cubic and Quadratic Cover Reductions for
+`#77 reflection-coupled-residual` (`U2 = Y2^2`) and `#78 cyclic-triple-residual` (`Z2 = X2^3`):
+1. `7 * F_77` is a depressed cubic `C0_77 + C1_77 * U2 + 7 * U2^3` in `U2 = Y2^2` (matching `#73 reflection-coupled-fano`),
+   with `∂_{Y2} (7 * F_77) = 2 * Y2 * (C1_77 + 21 * U2^2)`.
+2. `7 * F_78` is a quadratic `Q0_78 + Q1_78 * Z2 + 7 * Z2^2` in `Z2 = X2^3` (matching `#75 cyclic-triple-fano`),
+   completing the square as `28 * F_78 = (14 * Z2 + Q1_78)^2 + (28 * Q0_78 - Q1_78^2)`.
+-/
+theorem official_reflection_77_and_cyclic_78_cover_reductions (X0 X1 X2 Y0 Y1 Y2 : K) :
+    let U2 := Y2 ^ 2
+    let C0_77 := 7 * (X0 ^ 6 + X1 ^ 6 + X2 ^ 6 + Y0 ^ 6 + Y1 ^ 6) +
+                 5 * (X0 ^ 3 * X1 * Y0 * Y1 + X0 * X1 * Y0 ^ 3 * Y1 + 3 * X0 * X2 ^ 3 * Y0 * Y1 +
+                   2 * X1 ^ 3 * X2 * Y0 * Y1 + X1 * X2 * Y0 * Y1 ^ 3)
+    let C1_77 := 5 * X0 * X1 * (Y0 ^ 2 + 2 * Y1 ^ 2)
+    let F77_7 := 7 * X0 ^ 6 + 5 * X0 ^ 3 * X1 * Y0 * Y1 + 5 * X0 * X1 * Y0 ^ 3 * Y1 +
+                 5 * X0 * X1 * Y0 ^ 2 * Y2 ^ 2 + 10 * X0 * X1 * Y1 ^ 2 * Y2 ^ 2 +
+                 15 * X0 * X2 ^ 3 * Y0 * Y1 + 7 * X1 ^ 6 + 10 * X1 ^ 3 * X2 * Y0 * Y1 +
+                 5 * X1 * X2 * Y0 * Y1 ^ 3 + 7 * X2 ^ 6 + 7 * Y0 ^ 6 + 7 * Y1 ^ 6 + 7 * Y2 ^ 6
+    let Z2 := X2 ^ 3
+    let Q0_78 := 7 * (X0 ^ 6 + X1 ^ 6 + Y0 ^ 6 + Y1 ^ 6 + Y2 ^ 6) +
+                 5 * (X0 ^ 3 * X1 * Y0 * Y1 + X0 ^ 2 * Y0 * Y1 * Y2 ^ 2 + X0 * X1 * Y1 ^ 3 * Y2)
+    let Q1_78 := 5 * (X0 ^ 3 + X0 * Y1 * Y2 + X1 * Y0 * Y1)
+    let F78_7 := 7 * X0 ^ 6 + 5 * X0 ^ 3 * X1 * Y0 * Y1 + 5 * X0 ^ 3 * X2 ^ 3 +
+                 5 * X0 ^ 2 * Y0 * Y1 * Y2 ^ 2 + 5 * X0 * X1 * Y1 ^ 3 * Y2 +
+                 5 * X0 * X2 ^ 3 * Y1 * Y2 + 7 * X1 ^ 6 + 5 * X1 * X2 ^ 3 * Y0 * Y1 +
+                 7 * X2 ^ 6 + 7 * Y0 ^ 6 + 7 * Y1 ^ 6 + 7 * Y2 ^ 6
+    (F77_7 = C0_77 + C1_77 * U2 + 7 * U2 ^ 3) ∧
+    (F78_7 = Q0_78 + Q1_78 * Z2 + 7 * Z2 ^ 2) ∧
+    (4 * 7 * F78_7 = (14 * Z2 + Q1_78) ^ 2 + (28 * Q0_78 - Q1_78 ^ 2)) := by
+  refine ⟨by ring, by ring, by ring⟩
+
+/--
+Exact Official `instance.rec` Waring Rank-8 Short-Power Presentation for
+`#79 short-power-presentation` (`official_short_power_presentation_79_waring_rank8`):
+With `L = X0 + 2 * X1 + 3 * X2` and `M = Y0 + 3 * Y1 + 5 * Y2`, `(L + M)^6 + (L - M)^6`
+has purely even powers of `M`, and `823543 * F_79 = 823543 * Σ(X_i^6 + Y_i^6) + 5 * ((L + M)^6 + (L - M)^6)`
+where `823543 = 7^7`.
+-/
+theorem official_short_power_presentation_79_waring_rank8 (X0 X1 X2 Y0 Y1 Y2 : K) :
+    let L := X0 + 2 * X1 + 3 * X2
+    let M := Y0 + 3 * Y1 + 5 * Y2
+    ((L + M) ^ 6 + (L - M) ^ 6 =
+      2 * (L ^ 6 + 15 * L ^ 4 * M ^ 2 + 15 * L ^ 2 * M ^ 4 + M ^ 6)) ∧
+    (823543 * (X0 ^ 6 + X1 ^ 6 + X2 ^ 6 + Y0 ^ 6 + Y1 ^ 6 + Y2 ^ 6) +
+      5 * ((L + M) ^ 6 + (L - M) ^ 6) =
+      823543 * (X0 ^ 6 + X1 ^ 6 + X2 ^ 6 + Y0 ^ 6 + Y1 ^ 6 + Y2 ^ 6) +
+        10 * ((X0 + 2 * X1 + 3 * X2) ^ 6 +
+          15 * (X0 + 2 * X1 + 3 * X2) ^ 4 * (Y0 + 3 * Y1 + 5 * Y2) ^ 2 +
+          15 * (X0 + 2 * X1 + 3 * X2) ^ 2 * (Y0 + 3 * Y1 + 5 * Y2) ^ 4 +
+          (Y0 + 3 * Y1 + 5 * Y2) ^ 6)) := by
+  refine ⟨by ring, by ring⟩
+
+/--
+Exact Official `instance.rec` Fermat Cubic Fourfold Pullback and Chain-Rule Lift for
+`#80 quadratic-cubic-pullback` (`official_quadratic_cubic_pullback_80_decomposition`):
+`F_80 = Q0^3 + Q1^3 + Q2^3 + Q3^3 + Q4^3 + Q5^3` where `Q0..Q5` are the 6 official quadrics
+of `80-quadratic-cubic-pullback/instance.rec`, and any 6-component vector field `N` satisfies
+`Σ_j N_j ∂_j F_80 = 3 * Σ_{i=0}^5 Q_i^2 * (Σ_j N_j ∂_j Q_i)`.
+-/
+theorem official_quadratic_cubic_pullback_80_decomposition
+    (X0 X1 X2 Y0 Y1 Y2 inv7 inv11 inv13 inv17 inv19 inv23
+      dQ0 dQ1 dQ2 dQ3 dQ4 dQ5 : K) :
+    let Q0 := X0 ^ 2 + inv7 * (X1 * X2 + Y0 * Y1)
+    let Q1 := X1 ^ 2 + inv11 * (X0 * X2 + Y1 * Y2)
+    let Q2 := X2 ^ 2 + inv13 * (X0 * X1 + Y0 * Y2)
+    let Q3 := Y0 ^ 2 + inv17 * (X0 * X1 + Y1 * Y2)
+    let Q4 := Y1 ^ 2 + inv19 * (X1 * X2 + Y0 * Y2)
+    let Q5 := Y2 ^ 2 + inv23 * (X0 * X2 + Y0 * Y1)
+    (Q0 ^ 3 + Q1 ^ 3 + Q2 ^ 3 + Q3 ^ 3 + Q4 ^ 3 + Q5 ^ 3 =
+      (X0 ^ 6 + X1 ^ 6 + X2 ^ 6 + Y0 ^ 6 + Y1 ^ 6 + Y2 ^ 6) +
+        3 * X0 ^ 4 * inv7 * (X1 * X2 + Y0 * Y1) +
+        3 * X0 ^ 2 * inv7 ^ 2 * (X1 * X2 + Y0 * Y1) ^ 2 +
+        inv7 ^ 3 * (X1 * X2 + Y0 * Y1) ^ 3 +
+        3 * X1 ^ 4 * inv11 * (X0 * X2 + Y1 * Y2) +
+        3 * X1 ^ 2 * inv11 ^ 2 * (X0 * X2 + Y1 * Y2) ^ 2 +
+        inv11 ^ 3 * (X0 * X2 + Y1 * Y2) ^ 3 +
+        3 * X2 ^ 4 * inv13 * (X0 * X1 + Y0 * Y2) +
+        3 * X2 ^ 2 * inv13 ^ 2 * (X0 * X1 + Y0 * Y2) ^ 2 +
+        inv13 ^ 3 * (X0 * X1 + Y0 * Y2) ^ 3 +
+        3 * Y0 ^ 4 * inv17 * (X0 * X1 + Y1 * Y2) +
+        3 * Y0 ^ 2 * inv17 ^ 2 * (X0 * X1 + Y1 * Y2) ^ 2 +
+        inv17 ^ 3 * (X0 * X1 + Y1 * Y2) ^ 3 +
+        3 * Y1 ^ 4 * inv19 * (X1 * X2 + Y0 * Y2) +
+        3 * Y1 ^ 2 * inv19 ^ 2 * (X1 * X2 + Y0 * Y2) ^ 2 +
+        inv19 ^ 3 * (X1 * X2 + Y0 * Y2) ^ 3 +
+        3 * Y2 ^ 4 * inv23 * (X0 * X2 + Y0 * Y1) +
+        3 * Y2 ^ 2 * inv23 ^ 2 * (X0 * X2 + Y0 * Y1) ^ 2 +
+        inv23 ^ 3 * (X0 * X2 + Y0 * Y1) ^ 3) ∧
+    ((3 * Q0 ^ 2) * dQ0 + (3 * Q1 ^ 2) * dQ1 + (3 * Q2 ^ 2) * dQ2 +
+      (3 * Q3 ^ 2) * dQ3 + (3 * Q4 ^ 2) * dQ4 + (3 * Q5 ^ 2) * dQ5 =
+      3 * (Q0 ^ 2 * dQ0 + Q1 ^ 2 * dQ1 + Q2 ^ 2 * dQ2 +
+        Q3 ^ 2 * dQ3 + Q4 ^ 2 * dQ4 + Q5 ^ 2 * dQ5)) := by
+  refine ⟨by ring, by ring⟩
+
+/--
+Exact Official `instance.rec` Complete-Intersection Ideal Membership for
+`#81 eight-plane-configuration` (`official_eight_plane_configuration_81_ideal_membership`)
+and Diagonal `S_3` Orbit Decomposition for `#82 diagonal-permutation`
+(`official_diagonal_permutation_82_decomposition`):
+1. `1001 * F_81 = P0 * G0 + P1 * G1 + P2 * G2` where `P_i = X_i^2 + Y_i^2`, proving that `F_81`
+   lies identically in the complete-intersection ideal `⟨X0^2 + Y0^2, X1^2 + Y1^2, X2^2 + Y2^2⟩`
+   and therefore vanishes identically on all 8 isotropic 2-planes `Y_i = ±√(-1) X_i`.
+2. `1001 * F_82 = 1001 * Σ(X_i^6 + Y_i^6) + 715 * O1(X, Y) + 455 * O2(X, Y) + 385 * O3(X, Y)`
+   where `O1, O2, O3` are the three 6-term diagonal `S_3`-orbits of `82-diagonal-permutation/instance.rec`.
+-/
+theorem official_eight_plane_81_and_diagonal_permutation_82_decompositions
+    (X0 X1 X2 Y0 Y1 Y2 : K) :
+    let P0 := X0 ^ 2 + Y0 ^ 2
+    let P1 := X1 ^ 2 + Y1 ^ 2
+    let P2 := X2 ^ 2 + Y2 ^ 2
+    let C0 := X0 * X1 * Y0 * Y1 + X1 ^ 2 * Y1 * Y2 + X2 ^ 2 * Y0 * Y2
+    let C1 := X1 * X2 * Y1 * Y2 + X2 ^ 2 * Y0 * Y2 + X0 ^ 2 * Y0 * Y1
+    let C2 := X0 * X2 * Y0 * Y2 + X0 ^ 2 * Y0 * Y1 + X1 ^ 2 * Y1 * Y2
+    let G0 := 1001 * (X0 ^ 4 - X0 ^ 2 * Y0 ^ 2 + Y0 ^ 4) + 715 * C0
+    let G1 := 1001 * (X1 ^ 4 - X1 ^ 2 * Y1 ^ 2 + Y1 ^ 4) + 455 * C1
+    let G2 := 1001 * (X2 ^ 4 - X2 ^ 2 * Y2 ^ 2 + Y2 ^ 4) + 385 * C2
+    let O1 := X0 ^ 3 * X1 * Y0 * Y1 + X0 ^ 3 * X2 * Y0 * Y2 + X1 ^ 3 * X0 * Y1 * Y0 +
+              X1 ^ 3 * X2 * Y1 * Y2 + X2 ^ 3 * X0 * Y2 * Y0 + X2 ^ 3 * X1 * Y2 * Y1
+    let O2 := X0 ^ 3 * X1 * Y2 ^ 2 + X0 ^ 3 * X2 * Y1 ^ 2 + X1 ^ 3 * X0 * Y2 ^ 2 +
+              X1 ^ 3 * X2 * Y0 ^ 2 + X2 ^ 3 * X0 * Y1 ^ 2 + X2 ^ 3 * X1 * Y0 ^ 2
+    let O3 := Y0 ^ 3 * Y1 * X2 ^ 2 + Y0 ^ 3 * Y2 * X1 ^ 2 + Y1 ^ 3 * Y0 * X2 ^ 2 +
+              Y1 ^ 3 * Y2 * X0 ^ 2 + Y2 ^ 3 * Y0 * X1 ^ 2 + Y2 ^ 3 * Y1 * X0 ^ 2
+    (P0 * G0 + P1 * G1 + P2 * G2 =
+      1001 * (X0 ^ 6 + X1 ^ 6 + X2 ^ 6 + Y0 ^ 6 + Y1 ^ 6 + Y2 ^ 6) +
+        715 * (X0 ^ 2 + Y0 ^ 2) * C0 +
+        455 * (X1 ^ 2 + Y1 ^ 2) * C1 +
+        385 * (X2 ^ 2 + Y2 ^ 2) * C2) ∧
+    (1001 * (X0 ^ 6 + X1 ^ 6 + X2 ^ 6 + Y0 ^ 6 + Y1 ^ 6 + Y2 ^ 6) +
+      715 * O1 + 455 * O2 + 385 * O3 =
+      1001 * X0 ^ 6 + 715 * X0 ^ 3 * X1 * Y0 * Y1 + 455 * X0 ^ 3 * X1 * Y2 ^ 2 +
+        715 * X0 ^ 3 * X2 * Y0 * Y2 + 455 * X0 ^ 3 * X2 * Y1 ^ 2 +
+        385 * X0 ^ 2 * Y1 ^ 3 * Y2 + 385 * X0 ^ 2 * Y1 * Y2 ^ 3 +
+        715 * X0 * X1 ^ 3 * Y0 * Y1 + 455 * X0 * X1 ^ 3 * Y2 ^ 2 +
+        715 * X0 * X2 ^ 3 * Y0 * Y2 + 455 * X0 * X2 ^ 3 * Y1 ^ 2 +
+        1001 * X1 ^ 6 + 715 * X1 ^ 3 * X2 * Y1 * Y2 + 455 * X1 ^ 3 * X2 * Y0 ^ 2 +
+        385 * X1 ^ 2 * Y0 ^ 3 * Y2 + 385 * X1 ^ 2 * Y0 * Y2 ^ 3 +
+        715 * X1 * X2 ^ 3 * Y1 * Y2 + 455 * X1 * X2 ^ 3 * Y0 ^ 2 +
+        1001 * X2 ^ 6 + 385 * X2 ^ 2 * Y0 ^ 3 * Y1 + 385 * X2 ^ 2 * Y0 * Y1 ^ 3 +
+        1001 * Y0 ^ 6 + 1001 * Y1 ^ 6 + 1001 * Y2 ^ 6) := by
+  refine ⟨by ring, by ring⟩
+
 end HodgeComputer.Constructions.GeneralBinaryCubic
 end
