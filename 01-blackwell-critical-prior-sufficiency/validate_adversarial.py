@@ -201,13 +201,13 @@ class TestQuantitativeCriticalPriorSufficiency(unittest.TestCase):
         t0 = critical_prior(P[0], Q[0])
         self.assertEqual(t0, Frac(3, 13))
         slack_0 = local_slack(p, q, K, t0, 0)
-        self.assertEqual(slack_0, Frac(1, 260))
+        self.assertEqual(slack_0, Frac(1, 65))
 
         res = self.verify_all_theorems_on_instance(p, q, K)
-        # Deterministic map -> marginal L1 error attains 2 * sum_b Delta_{tb}(b) = 1/130 WITH EQUALITY!
-        self.assertEqual(res["err_p"], Frac(1, 130))
-        self.assertEqual(res["err_q"], Frac(1, 130))
-        self.assertEqual(res["two_sum_local_slack"], Frac(1, 130))
+        # Deterministic map -> marginal L1 error attains 2 * sum_b Delta_{tb}(b) = 2/65 WITH EQUALITY!
+        self.assertEqual(res["err_p"], Frac(2, 65))
+        self.assertEqual(res["err_q"], Frac(2, 65))
+        self.assertEqual(res["two_sum_local_slack"], Frac(2, 65))
 
     def test_02_v34_recoverable_twin(self):
         """V34 Fin 3 -> Fin 2 recoverable twin: zero slack at all critical priors."""

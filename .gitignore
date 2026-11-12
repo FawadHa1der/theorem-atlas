@@ -1,0 +1,27 @@
+# Lean 4 build & cache artifacts
+.lake/
+build/
+
+# Python / OS / Editor scratch
+__pycache__/
+*.py[cod]
+.DS_Store
+*.swp
+.env
+.env.*
+.wrangler/
+
+# Node tooling (if installed locally)
+node_modules/
+
+# Deterministically generated or superseded bundles (all live data is tracked in the 8 <16 MiB shards in observatory/chunks/)
+observatory/bundle-data.js
+observatory/dist-cloudflare/
+observatory/data/
+observatory/universe/data/
+observatory/universe/sources/data/
+observatory/preview/v20/data/
+
+# Local background daemon logs (keep status JSON, ignore growing run history/nohup logs)
+observatory/logs/*.log
+observatory/logs/r2-uploaded-sha256.json

@@ -1,0 +1,77 @@
+name: Deploy · Cloudflare Pages + R2 Unrestricted Lean 4 Corpus
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+
+concurrency:
+  group: deploy-cloudflare-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-verify-and-deploy:
+    name: Build, Sync Unrestricted .lean Corpus to R2 & Deploy Cloudflare Pages
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      R2_BUCKET_NAME: ${{ vars.R2_BUCKET_NAME || 'common-ground-lean-corpus' }}
+      CF_PAGES_PROJECT: ${{ vars.CF_PAGES_PROJECT || 'common-ground-observatory' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Cache Lean 4 elan toolchain & .lake build
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.elan
+            .lake
+          key: lean4-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lakefile.toml', 'CommonGround/**/*.lean') }}
+          restore-keys: |
+            lean4-${{ runner.os }}-
+
+      - name: Install Lean 4.33.0 & Verify Zero-Sorry Kernel Build
+        run: |
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/elan" toolchain install "$(cat lean-toolchain)"
+          python3 -B observatory/scripts/compile-all-lean4.py
+
+      - name: Reconstruct Data, Build Unified Chrome/Safari Shards (<25 MiB) & Run E2E Tests
+        run: |
+          python3 -B observatory/scripts/reconstruct-bundle-data.py --force
+          python3 -B observatory/scripts/build-cloudflare-dist.py
+          bash observatory/tests/run-tests.sh
+
+      - name: Sync Unrestricted-Size Lean 4 Corpus to Cloudflare R2 & Ensure Pages Project Exists
+        if: ${{ env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != '' }}
+        run: |
+          npx --yes wrangler@4 r2 bucket create "$R2_BUCKET_NAME" || true
+          npx --yes wrangler@4 pages project create "$CF_PAGES_PROJECT" --production-branch=main || true
+          python3 -B observatory/scripts/sync-lean-to-r2.py --bucket "$R2_BUCKET_NAME"
+
+      - name: Deploy Static Shards + R2 Streaming Function (/api/lean/*) to Cloudflare Pages
+        if: ${{ env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != '' }}
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: "4.14.0"
+          command: pages deploy observatory/dist-cloudflare --project-name=${{ env.CF_PAGES_PROJECT }} --branch=main

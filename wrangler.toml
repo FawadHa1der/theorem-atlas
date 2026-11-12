@@ -1,0 +1,8 @@
+name = "common-ground-observatory"
+compatibility_date = "2025-02-01"
+pages_build_output_dir = "observatory/dist-cloudflare"
+
+# Unrestricted-size Lean 4 proof corpus (>25 MiB / >100 MiB files, $0 egress)
+[[r2_buckets]]
+binding = "LEAN_CORPUS_BUCKET"
+bucket_name = "common-ground-lean-corpus"

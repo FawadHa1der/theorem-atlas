@@ -1,0 +1,840 @@
+{"cycle": 1, "at": "2026-11-11T17:42:08.724618+00:00", "exitCode": 0, "leanFiles": 555, "checks": "142/142"}
+{"cycle": 2, "at": "2026-11-11T17:57:19.350730+00:00", "exitCode": 0, "leanFiles": 555, "checks": "142/142"}
+{"cycle": 3, "at": "2026-11-11T18:12:21.035704+00:00", "exitCode": 1, "leanFiles": 558, "checks": "0/142"}
+{"cycle": 1, "at": "2026-11-11T18:21:59.300399+00:00", "exitCode": 0, "leanFiles": 558, "checks": "142/142"}
+{"cycle": 1, "at": "2026-11-11T18:23:17.402242+00:00", "exitCode": 0, "leanFiles": 558, "checks": "142/142"}
+{"cycle": 4, "at": "2026-11-11T18:27:32.857388+00:00", "exitCode": 0, "leanFiles": 558, "checks": "142/142"}
+{"cycle": 2, "at": "2026-11-11T18:37:10.879455+00:00", "exitCode": 0, "leanFiles": 559, "checks": "142/142"}
+{"cycle": 2, "at": "2026-11-11T18:38:30.180438+00:00", "exitCode": 0, "leanFiles": 559, "checks": "142/142"}
+{"cycle": 1, "timestampUtc": "2026-11-11T18:40:54.156782+00:00", "exitCode": 1, "passed": 154, "failed": 1, "leanFiles": 559, "totalZeroSorryLeanFiles": 616, "durationSec": 5.89}
+{"cycle": 1, "timestampUtc": "2026-11-11T18:42:12.564301+00:00", "exitCode": 1, "passed": 154, "failed": 1, "leanFiles": 559, "totalZeroSorryLeanFiles": 616, "durationSec": 5.64}
+{"cycle": 5, "at": "2026-11-11T18:42:38.818349+00:00", "exitCode": 1, "leanFiles": 559, "checks": "0/142"}
+{"cycle": 1, "timestampUtc": "2026-11-11T18:43:52.155017+00:00", "exitCode": 0, "passed": 155, "failed": 0, "leanFiles": 559, "totalZeroSorryLeanFiles": 616, "durationSec": 12.41}
+{"cycle": 1, "timestampUtc": "2026-11-11T18:43:52.166139+00:00", "exitCode": 0, "passed": 155, "failed": 0, "leanFiles": 559, "totalZeroSorryLeanFiles": 616, "durationSec": 12.2}
+{"cycle": 1, "timestampUtc": "2026-11-11T18:44:54.853638+00:00", "exitCode": 0, "passed": 155, "failed": 0, "leanFiles": 559, "totalZeroSorryLeanFiles": 616, "durationSec": 11.34}
+{"cycle": 1, "timestampUtc": "2026-11-11T18:45:06.467239+00:00", "exitCode": 0, "passed": 155, "failed": 0, "leanFiles": 559, "totalZeroSorryLeanFiles": 616, "durationSec": 11.57}
+{"cycle": 1, "timestampUtc": "2026-11-11T18:45:41.353339+00:00", "exitCode": 0, "passed": 155, "failed": 0, "leanFiles": 559, "totalZeroSorryLeanFiles": 616, "durationSec": 11.37}
+{"cycle": 1, "timestampUtc": "2026-11-11T18:45:53.367103+00:00", "exitCode": 0, "passed": 155, "failed": 0, "leanFiles": 559, "totalZeroSorryLeanFiles": 616, "durationSec": 11.52}
+{"cycle": 3, "at": "2026-11-11T18:52:22.559590+00:00", "exitCode": 0, "leanFiles": 559, "checks": "142/142"}
+{"cycle": 3, "at": "2026-11-11T18:53:41.567345+00:00", "exitCode": 0, "leanFiles": 559, "checks": "142/142"}
+{"cycle": 2, "timestampUtc": "2026-11-11T18:56:05.192549+00:00", "exitCode": 0, "passed": 155, "failed": 0, "leanFiles": 559, "totalZeroSorryLeanFiles": 616, "durationSec": 11.03}
+{"cycle": 2, "timestampUtc": "2026-11-11T18:57:24.183501+00:00", "exitCode": 0, "passed": 155, "failed": 0, "leanFiles": 559, "totalZeroSorryLeanFiles": 616, "durationSec": 11.61}
+{"cycle": 6, "at": "2026-11-11T18:57:50.470747+00:00", "exitCode": 0, "leanFiles": 559, "checks": "142/142"}
+{"cycle": 2, "timestampUtc": "2026-11-11T18:59:03.553863+00:00", "exitCode": 0, "passed": 155, "failed": 0, "leanFiles": 559, "totalZeroSorryLeanFiles": 616, "durationSec": 11.39}
+{"cycle": 2, "timestampUtc": "2026-11-11T19:00:17.529816+00:00", "exitCode": 0, "passed": 155, "failed": 0, "leanFiles": 559, "totalZeroSorryLeanFiles": 616, "durationSec": 11.05}
+{"cycle": 2, "timestampUtc": "2026-11-11T19:01:05.105743+00:00", "exitCode": 0, "passed": 155, "failed": 0, "leanFiles": 559, "totalZeroSorryLeanFiles": 616, "durationSec": 11.29}
+{"cycle": 4, "at": "2026-11-11T19:07:34.337957+00:00", "exitCode": 0, "leanFiles": 560, "checks": "142/142"}
+{"cycle": 4, "at": "2026-11-11T19:08:53.125891+00:00", "exitCode": 0, "leanFiles": 560, "checks": "142/142"}
+{"cycle": 1, "timestampUtc": "2026-11-11T19:10:32.693208+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.01}
+{"cycle": 1, "timestampUtc": "2026-11-11T19:10:44.616122+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.44}
+{"cycle": 3, "timestampUtc": "2026-11-11T19:11:16.649012+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.45}
+{"cycle": 3, "timestampUtc": "2026-11-11T19:12:35.490304+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.29}
+{"cycle": 7, "at": "2026-11-11T19:13:02.033435+00:00", "exitCode": 0, "leanFiles": 560, "checks": "142/142"}
+{"cycle": 3, "timestampUtc": "2026-11-11T19:14:14.604702+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.04}
+{"cycle": 3, "timestampUtc": "2026-11-11T19:15:29.164279+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.62}
+{"cycle": 3, "timestampUtc": "2026-11-11T19:16:16.791768+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.22}
+{"cycle": 5, "at": "2026-11-11T19:22:45.667082+00:00", "exitCode": 0, "leanFiles": 560, "checks": "142/142"}
+{"cycle": 5, "at": "2026-11-11T19:24:04.825183+00:00", "exitCode": 0, "leanFiles": 560, "checks": "142/142"}
+{"cycle": 2, "timestampUtc": "2026-11-11T19:25:56.236635+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.19}
+{"cycle": 4, "timestampUtc": "2026-11-11T19:26:27.873665+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.22}
+{"cycle": 4, "timestampUtc": "2026-11-11T19:27:46.703010+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.19}
+{"cycle": 8, "at": "2026-11-11T19:28:13.437256+00:00", "exitCode": 0, "leanFiles": 560, "checks": "142/142"}
+{"cycle": 4, "timestampUtc": "2026-11-11T19:29:25.652670+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.02}
+{"cycle": 4, "timestampUtc": "2026-11-11T19:30:40.209790+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.02}
+{"cycle": 4, "timestampUtc": "2026-11-11T19:31:28.491279+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.24}
+{"cycle": 6, "at": "2026-11-11T19:37:57.395157+00:00", "exitCode": 0, "leanFiles": 560, "checks": "142/142"}
+{"cycle": 6, "at": "2026-11-11T19:39:16.315436+00:00", "exitCode": 0, "leanFiles": 560, "checks": "142/142"}
+{"cycle": 3, "timestampUtc": "2026-11-11T19:41:07.777976+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.06}
+{"cycle": 5, "timestampUtc": "2026-11-11T19:41:39.552372+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.65}
+{"cycle": 5, "timestampUtc": "2026-11-11T19:42:57.699296+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 10.98}
+{"cycle": 9, "at": "2026-11-11T19:43:25.382467+00:00", "exitCode": 0, "leanFiles": 560, "checks": "142/142"}
+{"cycle": 5, "timestampUtc": "2026-11-11T19:44:36.898039+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.23}
+{"cycle": 5, "timestampUtc": "2026-11-11T19:45:51.603948+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.38}
+{"cycle": 5, "timestampUtc": "2026-11-11T19:46:40.145537+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.2}
+{"cycle": 7, "at": "2026-11-11T19:53:08.932104+00:00", "exitCode": 0, "leanFiles": 560, "checks": "142/142"}
+{"cycle": 7, "at": "2026-11-11T19:54:28.290585+00:00", "exitCode": 0, "leanFiles": 560, "checks": "142/142"}
+{"cycle": 4, "timestampUtc": "2026-11-11T19:56:20.099396+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.79}
+{"cycle": 6, "timestampUtc": "2026-11-11T19:56:51.319439+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.74}
+{"cycle": 6, "timestampUtc": "2026-11-11T19:58:09.125136+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.4}
+{"cycle": 10, "at": "2026-11-11T19:58:37.545099+00:00", "exitCode": 0, "leanFiles": 560, "checks": "142/142"}
+{"cycle": 6, "timestampUtc": "2026-11-11T19:59:49.007088+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 12.08}
+{"cycle": 6, "timestampUtc": "2026-11-11T20:01:03.123113+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.49}
+{"cycle": 6, "timestampUtc": "2026-11-11T20:01:52.432122+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 560, "totalZeroSorryLeanFiles": 617, "durationSec": 11.8}
+{"cycle": 8, "at": "2026-11-11T20:08:21.159976+00:00", "exitCode": 0, "leanFiles": 560, "checks": "142/142"}
+{"cycle": 8, "at": "2026-11-11T20:09:40.489108+00:00", "exitCode": 0, "leanFiles": 560, "checks": "142/142"}
+{"cycle": 5, "timestampUtc": "2026-11-11T20:11:32.953875+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 12.33}
+{"cycle": 7, "timestampUtc": "2026-11-11T20:12:03.747870+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 12.41}
+{"cycle": 7, "timestampUtc": "2026-11-11T20:13:20.973552+00:00", "exitCode": 0, "passed": 158, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 11.83}
+{"cycle": 11, "at": "2026-11-11T20:13:49.494238+00:00", "exitCode": 0, "leanFiles": 561, "checks": "142/142"}
+{"cycle": 1, "timestampUtc": "2026-11-11T20:14:44.273339+00:00", "exitCode": 0, "passed": 161, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 11.72}
+{"cycle": 1, "timestampUtc": "2026-11-11T20:14:57.402699+00:00", "exitCode": 0, "passed": 161, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 12.57}
+{"cycle": 7, "timestampUtc": "2026-11-11T20:15:01.679351+00:00", "exitCode": 0, "passed": 161, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 12.66}
+{"cycle": 7, "timestampUtc": "2026-11-11T20:16:14.650097+00:00", "exitCode": 0, "passed": 161, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 11.51}
+{"cycle": 7, "timestampUtc": "2026-11-11T20:17:04.418461+00:00", "exitCode": 0, "passed": 161, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 11.5}
+{"cycle": 9, "at": "2026-11-11T20:23:34.812944+00:00", "exitCode": 0, "leanFiles": 561, "checks": "142/142"}
+{"cycle": 9, "at": "2026-11-11T20:24:53.061155+00:00", "exitCode": 0, "leanFiles": 561, "checks": "142/142"}
+{"cycle": 6, "timestampUtc": "2026-11-11T20:26:45.223101+00:00", "exitCode": 0, "passed": 161, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 11.85}
+{"cycle": 8, "timestampUtc": "2026-11-11T20:27:15.188406+00:00", "exitCode": 0, "passed": 161, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 11.47}
+{"cycle": 8, "timestampUtc": "2026-11-11T20:28:32.905703+00:00", "exitCode": 0, "passed": 161, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 11.96}
+{"cycle": 12, "at": "2026-11-11T20:29:01.539752+00:00", "exitCode": 0, "leanFiles": 561, "checks": "142/142"}
+{"cycle": 2, "timestampUtc": "2026-11-11T20:30:10.680543+00:00", "exitCode": 0, "passed": 161, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 12.77}
+{"cycle": 8, "timestampUtc": "2026-11-11T20:30:14.277772+00:00", "exitCode": 0, "passed": 161, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 12.63}
+{"cycle": 8, "timestampUtc": "2026-11-11T20:31:26.518350+00:00", "exitCode": 0, "passed": 161, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 11.9}
+{"cycle": 8, "timestampUtc": "2026-11-11T20:32:16.901873+00:00", "exitCode": 0, "passed": 161, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 12.05}
+{"cycle": 10, "at": "2026-11-11T20:38:47.482477+00:00", "exitCode": 0, "leanFiles": 561, "checks": "142/142"}
+{"cycle": 10, "at": "2026-11-11T20:40:05.811494+00:00", "exitCode": 0, "leanFiles": 561, "checks": "142/142"}
+{"cycle": 7, "timestampUtc": "2026-11-11T20:41:45.799252+00:00", "exitCode": 1, "passed": 0, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 0.06}
+{"cycle": 9, "timestampUtc": "2026-11-11T20:42:15.244215+00:00", "exitCode": 1, "passed": 0, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 0.05}
+{"cycle": 9, "timestampUtc": "2026-11-11T20:43:32.990584+00:00", "exitCode": 1, "passed": 0, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 0.08}
+{"cycle": 13, "at": "2026-11-11T20:44:01.952887+00:00", "exitCode": 1, "leanFiles": 561, "checks": "0/142"}
+{"cycle": 3, "timestampUtc": "2026-11-11T20:45:11.249248+00:00", "exitCode": 1, "passed": 0, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 0.08}
+{"cycle": 9, "timestampUtc": "2026-11-11T20:45:14.356314+00:00", "exitCode": 1, "passed": 0, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 0.08}
+{"cycle": 1, "version": "V157", "timestampUtc": "2026-11-11T20:46:04.123967+00:00", "exitCode": 1, "passed": 0, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 0.05}
+{"cycle": 9, "timestampUtc": "2026-11-11T20:46:26.571515+00:00", "exitCode": 1, "passed": 0, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 0.05}
+{"cycle": 9, "timestampUtc": "2026-11-11T20:47:17.440025+00:00", "exitCode": 1, "passed": 0, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 0.06}
+{"cycle": 11, "at": "2026-11-11T20:54:18.710752+00:00", "exitCode": 1, "leanFiles": 561, "checks": "0/142"}
+{"cycle": 11, "at": "2026-11-11T20:55:39.398197+00:00", "exitCode": 1, "leanFiles": 561, "checks": "0/142"}
+{"cycle": 8, "timestampUtc": "2026-11-11T20:57:18.747562+00:00", "exitCode": 1, "passed": 165, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 32.42}
+{"cycle": 10, "timestampUtc": "2026-11-11T20:57:49.393977+00:00", "exitCode": 0, "passed": 165, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 34.14}
+{"cycle": 1, "version": "V157", "timestampUtc": "2026-11-11T20:58:19.530297+00:00", "exitCode": 0, "passed": 165, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 32.41}
+{"cycle": 10, "timestampUtc": "2026-11-11T20:59:06.588108+00:00", "exitCode": 0, "passed": 165, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 33.58}
+{"cycle": 1, "version": "V157", "timestampUtc": "2026-11-11T20:59:25.702074+00:00", "exitCode": 0, "passed": 165, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 34.83}
+{"cycle": 14, "at": "2026-11-11T20:59:37.026565+00:00", "exitCode": 0, "leanFiles": 561, "checks": "142/142"}
+{"cycle": 4, "timestampUtc": "2026-11-11T21:00:47.428027+00:00", "exitCode": 0, "passed": 165, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 35.63}
+{"cycle": 10, "timestampUtc": "2026-11-11T21:00:50.296078+00:00", "exitCode": 0, "passed": 165, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 35.93}
+{"cycle": 10, "timestampUtc": "2026-11-11T21:02:00.269985+00:00", "exitCode": 0, "passed": 165, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 33.68}
+{"cycle": 10, "timestampUtc": "2026-11-11T21:02:51.685217+00:00", "exitCode": 0, "passed": 165, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 33.7}
+{"cycle": 12, "at": "2026-11-11T21:09:50.673845+00:00", "exitCode": 0, "leanFiles": 561, "checks": "142/142"}
+{"cycle": 12, "at": "2026-11-11T21:11:11.252387+00:00", "exitCode": 0, "leanFiles": 561, "checks": "142/142"}
+{"cycle": 9, "timestampUtc": "2026-11-11T21:12:51.781243+00:00", "exitCode": 0, "passed": 165, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 32.54}
+{"cycle": 11, "timestampUtc": "2026-11-11T21:13:22.629015+00:00", "exitCode": 0, "passed": 165, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 33.23}
+{"cycle": 11, "timestampUtc": "2026-11-11T21:14:41.046316+00:00", "exitCode": 0, "passed": 165, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 34.45}
+{"cycle": 2, "version": "V157", "timestampUtc": "2026-11-11T21:15:02.891345+00:00", "exitCode": 0, "passed": 165, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 36.65}
+{"cycle": 15, "at": "2026-11-11T21:15:13.725172+00:00", "exitCode": 0, "leanFiles": 561, "checks": "142/142"}
+{"cycle": 5, "timestampUtc": "2026-11-11T21:16:22.931168+00:00", "exitCode": 0, "passed": 165, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 34.96}
+{"cycle": 11, "timestampUtc": "2026-11-11T21:16:24.954191+00:00", "exitCode": 0, "passed": 165, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 34.63}
+{"cycle": 11, "timestampUtc": "2026-11-11T21:17:32.473471+00:00", "exitCode": 0, "passed": 165, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 32.17}
+{"cycle": 11, "timestampUtc": "2026-11-11T21:18:26.007502+00:00", "exitCode": 0, "passed": 165, "failed": 0, "leanFiles": 561, "totalZeroSorryLeanFiles": 618, "durationSec": 33.81}
+{"cycle": 1, "version": "V158", "timestampUtc": "2026-11-11T21:24:19.803803+00:00", "exitCode": 1, "passed": 167, "failed": 1, "leanFiles": 562, "totalZeroSorryLeanFiles": 619, "durationSec": 27.04}
+{"cycle": 13, "at": "2026-11-11T21:25:16.450858+00:00", "exitCode": 1, "leanFiles": 562, "checks": "0/142"}
+{"cycle": 1, "version": "V158", "timestampUtc": "2026-11-11T21:25:50.901975+00:00", "exitCode": 1, "passed": 167, "failed": 1, "leanFiles": 562, "totalZeroSorryLeanFiles": 619, "durationSec": 26.6}
+{"cycle": 13, "at": "2026-11-11T21:26:46.164007+00:00", "exitCode": 0, "leanFiles": 562, "checks": "142/142"}
+{"cycle": 1, "version": "V158", "timestampUtc": "2026-11-11T21:26:48.160085+00:00", "exitCode": 0, "passed": 168, "failed": 0, "leanFiles": 562, "totalZeroSorryLeanFiles": 619, "durationSec": 35.21}
+{"cycle": 10, "timestampUtc": "2026-11-11T21:28:26.075069+00:00", "exitCode": 0, "passed": 168, "failed": 0, "leanFiles": 562, "totalZeroSorryLeanFiles": 619, "durationSec": 33.76}
+{"cycle": 12, "timestampUtc": "2026-11-11T21:28:55.933429+00:00", "exitCode": 0, "passed": 168, "failed": 0, "leanFiles": 562, "totalZeroSorryLeanFiles": 619, "durationSec": 33.26}
+{"cycle": 12, "timestampUtc": "2026-11-11T21:30:13.813039+00:00", "exitCode": 0, "passed": 168, "failed": 0, "leanFiles": 562, "totalZeroSorryLeanFiles": 619, "durationSec": 32.72}
+{"cycle": 3, "version": "V157", "timestampUtc": "2026-11-11T21:30:38.274985+00:00", "exitCode": 0, "passed": 168, "failed": 0, "leanFiles": 562, "totalZeroSorryLeanFiles": 619, "durationSec": 34.84}
+{"cycle": 16, "at": "2026-11-11T21:30:48.845606+00:00", "exitCode": 0, "leanFiles": 562, "checks": "142/142"}
+{"cycle": 6, "timestampUtc": "2026-11-11T21:31:59.778887+00:00", "exitCode": 0, "passed": 168, "failed": 0, "leanFiles": 562, "totalZeroSorryLeanFiles": 619, "durationSec": 36.36}
+{"cycle": 12, "timestampUtc": "2026-11-11T21:32:01.156670+00:00", "exitCode": 0, "passed": 168, "failed": 0, "leanFiles": 562, "totalZeroSorryLeanFiles": 619, "durationSec": 36.19}
+{"cycle": 12, "timestampUtc": "2026-11-11T21:33:04.669043+00:00", "exitCode": 0, "passed": 168, "failed": 0, "leanFiles": 562, "totalZeroSorryLeanFiles": 619, "durationSec": 32.18}
+{"cycle": 12, "timestampUtc": "2026-11-11T21:33:58.679707+00:00", "exitCode": 0, "passed": 168, "failed": 0, "leanFiles": 562, "totalZeroSorryLeanFiles": 619, "durationSec": 32.19}
+{"cycle": 14, "at": "2026-11-11T21:40:50.793009+00:00", "exitCode": 0, "leanFiles": 563, "checks": "142/142"}
+{"cycle": 14, "at": "2026-11-11T21:42:18.894757+00:00", "exitCode": 1, "leanFiles": 563, "checks": "0/142"}
+{"cycle": 1, "version": "V159", "timestampUtc": "2026-11-11T21:42:40.340808+00:00", "exitCode": 1, "passed": 171, "failed": 1, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 26.93}
+{"cycle": 11, "timestampUtc": "2026-11-11T21:44:01.006712+00:00", "exitCode": 0, "passed": 172, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 34.44}
+{"cycle": 1, "version": "V159", "timestampUtc": "2026-11-11T21:44:08.669652+00:00", "exitCode": 0, "passed": 172, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 35.04}
+{"cycle": 13, "timestampUtc": "2026-11-11T21:44:29.787664+00:00", "exitCode": 0, "passed": 172, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 33.87}
+{"cycle": 13, "timestampUtc": "2026-11-11T21:45:48.061743+00:00", "exitCode": 0, "passed": 172, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 34.27}
+{"cycle": 4, "version": "V157", "timestampUtc": "2026-11-11T21:46:14.348166+00:00", "exitCode": 0, "passed": 172, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 35.56}
+{"cycle": 17, "at": "2026-11-11T21:46:24.859527+00:00", "exitCode": 0, "leanFiles": 563, "checks": "142/142"}
+{"cycle": 7, "timestampUtc": "2026-11-11T21:47:35.547834+00:00", "exitCode": 0, "passed": 172, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 35.32}
+{"cycle": 13, "timestampUtc": "2026-11-11T21:47:36.241776+00:00", "exitCode": 0, "passed": 172, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 35.1}
+{"cycle": 13, "timestampUtc": "2026-11-11T21:48:37.268605+00:00", "exitCode": 0, "passed": 172, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 32.62}
+{"cycle": 13, "timestampUtc": "2026-11-11T21:49:32.580362+00:00", "exitCode": 0, "passed": 172, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 33.44}
+{"cycle": 15, "at": "2026-11-11T21:56:24.162302+00:00", "exitCode": 0, "leanFiles": 563, "checks": "142/142"}
+{"cycle": 15, "at": "2026-11-11T21:57:52.105889+00:00", "exitCode": 0, "leanFiles": 563, "checks": "142/142"}
+{"cycle": 12, "timestampUtc": "2026-11-11T21:59:36.249152+00:00", "exitCode": 0, "passed": 172, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 34.72}
+{"cycle": 14, "timestampUtc": "2026-11-11T22:00:03.850690+00:00", "exitCode": 0, "passed": 172, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 34.06}
+{"cycle": 14, "timestampUtc": "2026-11-11T22:01:21.432417+00:00", "exitCode": 0, "passed": 172, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 33.36}
+{"cycle": 5, "version": "V157", "timestampUtc": "2026-11-11T22:01:50.649730+00:00", "exitCode": 0, "passed": 172, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 35.78}
+{"cycle": 18, "at": "2026-11-11T22:02:00.273361+00:00", "exitCode": 0, "leanFiles": 563, "checks": "142/142"}
+{"cycle": 8, "timestampUtc": "2026-11-11T22:03:12.630659+00:00", "exitCode": 0, "passed": 172, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 36.61}
+{"cycle": 14, "timestampUtc": "2026-11-11T22:03:12.835303+00:00", "exitCode": 0, "passed": 172, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 36.58}
+{"cycle": 14, "timestampUtc": "2026-11-11T22:04:12.342015+00:00", "exitCode": 0, "passed": 172, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 35.07}
+{"cycle": 14, "timestampUtc": "2026-11-11T22:05:06.252369+00:00", "exitCode": 0, "passed": 172, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 33.18}
+{"cycle": 16, "at": "2026-11-11T22:11:50.375420+00:00", "exitCode": 1, "leanFiles": 563, "checks": "0/142"}
+{"cycle": 16, "at": "2026-11-11T22:13:20.827612+00:00", "exitCode": 1, "leanFiles": 563, "checks": "0/142"}
+{"cycle": 13, "timestampUtc": "2026-11-11T22:15:03.557018+00:00", "exitCode": 1, "passed": 176, "failed": 6, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 26.8}
+{"cycle": 15, "timestampUtc": "2026-11-11T22:15:30.690846+00:00", "exitCode": 1, "passed": 176, "failed": 6, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 26.83}
+{"cycle": 15, "timestampUtc": "2026-11-11T22:16:49.288666+00:00", "exitCode": 1, "passed": 176, "failed": 6, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 27.85}
+{"cycle": 6, "version": "V157", "timestampUtc": "2026-11-11T22:17:19.618190+00:00", "exitCode": 1, "passed": 176, "failed": 6, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 28.39}
+{"cycle": 19, "at": "2026-11-11T22:17:29.143532+00:00", "exitCode": 1, "leanFiles": 563, "checks": "0/142"}
+{"cycle": 15, "timestampUtc": "2026-11-11T22:18:41.847986+00:00", "exitCode": 1, "passed": 176, "failed": 1, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 29.0}
+{"cycle": 9, "timestampUtc": "2026-11-11T22:18:42.414059+00:00", "exitCode": 1, "passed": 176, "failed": 1, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 29.22}
+{"cycle": 15, "timestampUtc": "2026-11-11T22:19:38.151422+00:00", "exitCode": 1, "passed": 176, "failed": 1, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 25.8}
+{"cycle": 15, "timestampUtc": "2026-11-11T22:20:32.344443+00:00", "exitCode": 1, "passed": 176, "failed": 1, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 25.58}
+{"cycle": 1, "version": "V160", "timestampUtc": "2026-11-11T22:21:30.715772+00:00", "exitCode": 0, "passed": 177, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 32.56}
+{"cycle": 17, "at": "2026-11-11T22:27:22.821626+00:00", "exitCode": 0, "leanFiles": 563, "checks": "142/142"}
+{"cycle": 17, "at": "2026-11-11T22:28:51.682570+00:00", "exitCode": 0, "leanFiles": 563, "checks": "142/142"}
+{"cycle": 14, "timestampUtc": "2026-11-11T22:30:34.794762+00:00", "exitCode": 0, "passed": 177, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 30.72}
+{"cycle": 16, "timestampUtc": "2026-11-11T22:31:01.734367+00:00", "exitCode": 0, "passed": 177, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 31.02}
+{"cycle": 16, "timestampUtc": "2026-11-11T22:32:21.256020+00:00", "exitCode": 0, "passed": 177, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 31.95}
+{"cycle": 7, "version": "V157", "timestampUtc": "2026-11-11T22:32:53.142943+00:00", "exitCode": 0, "passed": 177, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 32.96}
+{"cycle": 20, "at": "2026-11-11T22:33:02.758022+00:00", "exitCode": 0, "leanFiles": 563, "checks": "142/142"}
+{"cycle": 16, "timestampUtc": "2026-11-11T22:34:15.405330+00:00", "exitCode": 0, "passed": 177, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 33.54}
+{"cycle": 10, "timestampUtc": "2026-11-11T22:34:16.480169+00:00", "exitCode": 0, "passed": 177, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 33.54}
+{"cycle": 16, "timestampUtc": "2026-11-11T22:35:09.050741+00:00", "exitCode": 0, "passed": 177, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 30.88}
+{"cycle": 16, "timestampUtc": "2026-11-11T22:36:03.893147+00:00", "exitCode": 0, "passed": 177, "failed": 0, "leanFiles": 563, "totalZeroSorryLeanFiles": 620, "durationSec": 31.04}
+{"cycle": 18, "at": "2026-11-11T22:42:55.682362+00:00", "exitCode": 0, "leanFiles": 563, "checks": "142/142"}
+{"cycle": 18, "at": "2026-11-11T22:44:22.439596+00:00", "exitCode": 0, "leanFiles": 563, "checks": "142/142"}
+{"cycle": 15, "timestampUtc": "2026-11-11T22:46:07.107478+00:00", "exitCode": 0, "passed": 177, "failed": 0, "leanFiles": 564, "totalZeroSorryLeanFiles": 621, "durationSec": 31.79}
+{"cycle": 17, "timestampUtc": "2026-11-11T22:46:33.601465+00:00", "exitCode": 0, "passed": 177, "failed": 0, "leanFiles": 564, "totalZeroSorryLeanFiles": 621, "durationSec": 31.85}
+{"cycle": 17, "timestampUtc": "2026-11-11T22:47:53.105968+00:00", "exitCode": 0, "passed": 177, "failed": 0, "leanFiles": 564, "totalZeroSorryLeanFiles": 621, "durationSec": 31.84}
+{"cycle": 8, "version": "V157", "timestampUtc": "2026-11-11T22:48:25.967314+00:00", "exitCode": 0, "passed": 177, "failed": 0, "leanFiles": 564, "totalZeroSorryLeanFiles": 621, "durationSec": 32.29}
+{"cycle": 21, "at": "2026-11-11T22:48:35.909392+00:00", "exitCode": 0, "leanFiles": 564, "checks": "142/142"}
+{"cycle": 17, "timestampUtc": "2026-11-11T22:49:44.992308+00:00", "exitCode": 1, "passed": 180, "failed": 1, "leanFiles": 564, "totalZeroSorryLeanFiles": 621, "durationSec": 29.55}
+{"cycle": 11, "timestampUtc": "2026-11-11T22:49:46.569335+00:00", "exitCode": 1, "passed": 180, "failed": 1, "leanFiles": 564, "totalZeroSorryLeanFiles": 621, "durationSec": 29.58}
+{"cycle": 17, "timestampUtc": "2026-11-11T22:50:34.258681+00:00", "exitCode": 1, "passed": 180, "failed": 1, "leanFiles": 564, "totalZeroSorryLeanFiles": 621, "durationSec": 25.17}
+{"cycle": 17, "timestampUtc": "2026-11-11T22:51:29.853606+00:00", "exitCode": 1, "passed": 180, "failed": 1, "leanFiles": 564, "totalZeroSorryLeanFiles": 621, "durationSec": 25.45}
+{"cycle": 1, "version": "V161", "timestampUtc": "2026-11-11T22:52:16.311709+00:00", "exitCode": 0, "passed": 181, "failed": 0, "leanFiles": 564, "totalZeroSorryLeanFiles": 621, "durationSec": 31.0}
+{"cycle": 19, "at": "2026-11-11T22:58:26.731865+00:00", "exitCode": 0, "leanFiles": 564, "checks": "142/142"}
+{"cycle": 19, "at": "2026-11-11T22:59:54.720809+00:00", "exitCode": 0, "leanFiles": 564, "checks": "142/142"}
+{"cycle": 16, "timestampUtc": "2026-11-11T23:01:40.055913+00:00", "exitCode": 0, "passed": 181, "failed": 0, "leanFiles": 564, "totalZeroSorryLeanFiles": 621, "durationSec": 32.42}
+{"cycle": 18, "timestampUtc": "2026-11-11T23:02:06.137309+00:00", "exitCode": 0, "passed": 181, "failed": 0, "leanFiles": 564, "totalZeroSorryLeanFiles": 621, "durationSec": 32.49}
+{"cycle": 18, "timestampUtc": "2026-11-11T23:03:25.412653+00:00", "exitCode": 0, "passed": 181, "failed": 0, "leanFiles": 564, "totalZeroSorryLeanFiles": 621, "durationSec": 32.27}
+{"cycle": 9, "version": "V157", "timestampUtc": "2026-11-11T23:04:00.609877+00:00", "exitCode": 0, "passed": 181, "failed": 0, "leanFiles": 564, "totalZeroSorryLeanFiles": 621, "durationSec": 34.11}
+{"cycle": 22, "at": "2026-11-11T23:04:10.503718+00:00", "exitCode": 0, "leanFiles": 564, "checks": "142/142"}
+{"cycle": 18, "timestampUtc": "2026-11-11T23:05:19.097334+00:00", "exitCode": 0, "passed": 181, "failed": 0, "leanFiles": 564, "totalZeroSorryLeanFiles": 621, "durationSec": 34.09}
+{"cycle": 12, "timestampUtc": "2026-11-11T23:05:21.270035+00:00", "exitCode": 0, "passed": 181, "failed": 0, "leanFiles": 564, "totalZeroSorryLeanFiles": 621, "durationSec": 34.19}
+{"cycle": 18, "timestampUtc": "2026-11-11T23:06:06.614619+00:00", "exitCode": 0, "passed": 181, "failed": 0, "leanFiles": 564, "totalZeroSorryLeanFiles": 621, "durationSec": 32.33}
+{"cycle": 18, "timestampUtc": "2026-11-11T23:07:06.263647+00:00", "exitCode": 0, "passed": 181, "failed": 0, "leanFiles": 564, "totalZeroSorryLeanFiles": 621, "durationSec": 35.86}
+{"cycle": 1, "version": "V162", "timestampUtc": "2026-11-11T23:13:01.687486+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 36.26}
+{"cycle": 20, "at": "2026-11-11T23:14:03.272330+00:00", "exitCode": 0, "leanFiles": 565, "checks": "142/142"}
+{"cycle": 20, "at": "2026-11-11T23:15:30.880433+00:00", "exitCode": 0, "leanFiles": 565, "checks": "142/142"}
+{"cycle": 17, "timestampUtc": "2026-11-11T23:17:16.851016+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 36.29}
+{"cycle": 19, "timestampUtc": "2026-11-11T23:17:42.679376+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 36.54}
+{"cycle": 19, "timestampUtc": "2026-11-11T23:19:01.342686+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 35.93}
+{"cycle": 10, "version": "V157", "timestampUtc": "2026-11-11T23:19:37.406803+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 36.29}
+{"cycle": 23, "at": "2026-11-11T23:19:47.724363+00:00", "exitCode": 0, "leanFiles": 565, "checks": "142/142"}
+{"cycle": 19, "timestampUtc": "2026-11-11T23:20:55.970490+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 36.86}
+{"cycle": 13, "timestampUtc": "2026-11-11T23:20:58.786179+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 37.01}
+{"cycle": 19, "timestampUtc": "2026-11-11T23:21:42.682471+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 36.06}
+{"cycle": 19, "timestampUtc": "2026-11-11T23:22:42.731028+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 35.95}
+{"cycle": 21, "at": "2026-11-11T23:29:41.333210+00:00", "exitCode": 0, "leanFiles": 565, "checks": "142/142"}
+{"cycle": 21, "at": "2026-11-11T23:31:09.156306+00:00", "exitCode": 0, "leanFiles": 565, "checks": "142/142"}
+{"cycle": 18, "timestampUtc": "2026-11-11T23:32:53.783992+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 36.43}
+{"cycle": 20, "timestampUtc": "2026-11-11T23:33:18.856078+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 36.16}
+{"cycle": 20, "timestampUtc": "2026-11-11T23:34:37.411483+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 36.06}
+{"cycle": 11, "version": "V157", "timestampUtc": "2026-11-11T23:35:14.561807+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 36.62}
+{"cycle": 24, "at": "2026-11-11T23:35:25.234983+00:00", "exitCode": 0, "leanFiles": 565, "checks": "142/142"}
+{"cycle": 20, "timestampUtc": "2026-11-11T23:36:32.976349+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 36.99}
+{"cycle": 14, "timestampUtc": "2026-11-11T23:36:36.249293+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 36.94}
+{"cycle": 20, "timestampUtc": "2026-11-11T23:37:18.875371+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 36.18}
+{"cycle": 20, "timestampUtc": "2026-11-11T23:38:19.268819+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 35.97}
+{"cycle": 22, "at": "2026-11-11T23:45:18.564038+00:00", "exitCode": 0, "leanFiles": 565, "checks": "142/142"}
+{"cycle": 22, "at": "2026-11-11T23:46:42.564525+00:00", "exitCode": 0, "leanFiles": 565, "checks": "142/142"}
+{"cycle": 19, "timestampUtc": "2026-11-11T23:48:27.071759+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 32.75}
+{"cycle": 21, "timestampUtc": "2026-11-11T23:48:53.853959+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 34.97}
+{"cycle": 21, "timestampUtc": "2026-11-11T23:50:10.198480+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 32.76}
+{"cycle": 12, "version": "V157", "timestampUtc": "2026-11-11T23:50:48.989974+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 33.85}
+{"cycle": 25, "at": "2026-11-11T23:50:59.630295+00:00", "exitCode": 0, "leanFiles": 565, "checks": "142/142"}
+{"cycle": 21, "timestampUtc": "2026-11-11T23:52:08.045911+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 35.04}
+{"cycle": 15, "timestampUtc": "2026-11-11T23:52:11.679247+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 34.9}
+{"cycle": 21, "timestampUtc": "2026-11-11T23:52:51.661291+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 32.75}
+{"cycle": 21, "timestampUtc": "2026-11-11T23:53:54.339497+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 34.5}
+{"cycle": 23, "at": "2026-11-12T00:00:51.617533+00:00", "exitCode": 0, "leanFiles": 565, "checks": "142/142"}
+{"cycle": 23, "at": "2026-11-12T00:02:16.548078+00:00", "exitCode": 0, "leanFiles": 565, "checks": "142/142"}
+{"cycle": 20, "timestampUtc": "2026-11-12T00:04:01.410005+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 33.83}
+{"cycle": 22, "timestampUtc": "2026-11-12T00:04:26.767192+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 32.89}
+{"cycle": 22, "timestampUtc": "2026-11-12T00:05:42.849342+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 32.64}
+{"cycle": 13, "version": "V157", "timestampUtc": "2026-11-12T00:06:23.144715+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 33.61}
+{"cycle": 26, "at": "2026-11-12T00:06:34.279212+00:00", "exitCode": 0, "leanFiles": 565, "checks": "142/142"}
+{"cycle": 22, "timestampUtc": "2026-11-12T00:07:43.582248+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 35.52}
+{"cycle": 16, "timestampUtc": "2026-11-12T00:07:48.710095+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 36.5}
+{"cycle": 22, "timestampUtc": "2026-11-12T00:08:26.095137+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 565, "totalZeroSorryLeanFiles": 622, "durationSec": 34.41}
+{"cycle": 22, "timestampUtc": "2026-11-12T00:09:27.504428+00:00", "exitCode": 0, "passed": 185, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 32.64}
+{"cycle": 24, "at": "2026-11-12T00:16:24.007856+00:00", "exitCode": 1, "leanFiles": 566, "checks": "0/142"}
+{"cycle": 1, "version": "V163", "timestampUtc": "2026-11-12T00:17:54.486764+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 39.28}
+{"cycle": 24, "at": "2026-11-12T00:17:56.428662+00:00", "exitCode": 0, "leanFiles": 566, "checks": "142/142"}
+{"cycle": 21, "timestampUtc": "2026-11-12T00:19:38.436591+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 36.51}
+{"cycle": 23, "timestampUtc": "2026-11-12T00:20:00.597454+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 33.81}
+{"cycle": 23, "timestampUtc": "2026-11-12T00:21:17.398425+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 34.54}
+{"cycle": 14, "version": "V157", "timestampUtc": "2026-11-12T00:21:58.951535+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 35.26}
+{"cycle": 27, "at": "2026-11-12T00:22:10.387568+00:00", "exitCode": 0, "leanFiles": 566, "checks": "142/142"}
+{"cycle": 23, "timestampUtc": "2026-11-12T00:23:19.507178+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 35.91}
+{"cycle": 17, "timestampUtc": "2026-11-12T00:23:25.137057+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 35.92}
+{"cycle": 23, "timestampUtc": "2026-11-12T00:23:59.573524+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 33.46}
+{"cycle": 23, "timestampUtc": "2026-11-12T00:25:02.527823+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 34.5}
+{"cycle": 25, "at": "2026-11-12T00:31:59.345409+00:00", "exitCode": 0, "leanFiles": 566, "checks": "142/142"}
+{"cycle": 25, "at": "2026-11-12T00:33:29.714448+00:00", "exitCode": 0, "leanFiles": 566, "checks": "142/142"}
+{"cycle": 22, "timestampUtc": "2026-11-12T00:35:13.710747+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 34.79}
+{"cycle": 24, "timestampUtc": "2026-11-12T00:35:35.746878+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 35.15}
+{"cycle": 24, "timestampUtc": "2026-11-12T00:36:52.145056+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 34.75}
+{"cycle": 15, "version": "V157", "timestampUtc": "2026-11-12T00:37:35.134623+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 35.67}
+{"cycle": 28, "at": "2026-11-12T00:37:46.016717+00:00", "exitCode": 0, "leanFiles": 566, "checks": "142/142"}
+{"cycle": 24, "timestampUtc": "2026-11-12T00:38:55.578755+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 36.08}
+{"cycle": 18, "timestampUtc": "2026-11-12T00:39:01.980578+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 36.32}
+{"cycle": 24, "timestampUtc": "2026-11-12T00:39:34.317591+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 34.75}
+{"cycle": 24, "timestampUtc": "2026-11-12T00:40:37.808693+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 34.76}
+{"cycle": 26, "at": "2026-11-12T00:47:31.888264+00:00", "exitCode": 0, "leanFiles": 566, "checks": "142/142"}
+{"cycle": 26, "at": "2026-11-12T00:49:02.257137+00:00", "exitCode": 0, "leanFiles": 566, "checks": "142/142"}
+{"cycle": 23, "timestampUtc": "2026-11-12T00:50:46.914902+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 32.69}
+{"cycle": 25, "timestampUtc": "2026-11-12T00:51:08.641391+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 32.88}
+{"cycle": 25, "timestampUtc": "2026-11-12T00:52:24.389389+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 32.23}
+{"cycle": 16, "version": "V157", "timestampUtc": "2026-11-12T00:53:09.073159+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 33.43}
+{"cycle": 29, "at": "2026-11-12T00:53:20.276895+00:00", "exitCode": 0, "leanFiles": 566, "checks": "142/142"}
+{"cycle": 25, "timestampUtc": "2026-11-12T00:54:29.408061+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 33.82}
+{"cycle": 19, "timestampUtc": "2026-11-12T00:54:36.591779+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 34.09}
+{"cycle": 25, "timestampUtc": "2026-11-12T00:55:06.700492+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 32.37}
+{"cycle": 25, "timestampUtc": "2026-11-12T00:56:10.549503+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 32.23}
+{"cycle": 27, "at": "2026-11-12T01:03:04.333837+00:00", "exitCode": 0, "leanFiles": 566, "checks": "142/142"}
+{"cycle": 27, "at": "2026-11-12T01:04:34.872533+00:00", "exitCode": 0, "leanFiles": 566, "checks": "142/142"}
+{"cycle": 24, "timestampUtc": "2026-11-12T01:06:20.116901+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 32.72}
+{"cycle": 26, "timestampUtc": "2026-11-12T01:06:41.580528+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 32.94}
+{"cycle": 26, "timestampUtc": "2026-11-12T01:07:56.545875+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 32.15}
+{"cycle": 17, "version": "V157", "timestampUtc": "2026-11-12T01:08:42.927119+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 33.35}
+{"cycle": 30, "at": "2026-11-12T01:08:54.460476+00:00", "exitCode": 0, "leanFiles": 566, "checks": "142/142"}
+{"cycle": 26, "timestampUtc": "2026-11-12T01:10:03.151828+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 33.74}
+{"cycle": 20, "timestampUtc": "2026-11-12T01:10:11.403933+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 34.32}
+{"cycle": 26, "timestampUtc": "2026-11-12T01:10:39.273968+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 32.58}
+{"cycle": 26, "timestampUtc": "2026-11-12T01:11:43.380831+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 32.33}
+{"cycle": 28, "at": "2026-11-12T01:18:36.834216+00:00", "exitCode": 0, "leanFiles": 566, "checks": "142/142"}
+{"cycle": 28, "at": "2026-11-12T01:20:07.322974+00:00", "exitCode": 0, "leanFiles": 566, "checks": "142/142"}
+{"cycle": 25, "timestampUtc": "2026-11-12T01:21:53.129648+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 32.51}
+{"cycle": 27, "timestampUtc": "2026-11-12T01:22:14.537230+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 32.95}
+{"cycle": 27, "timestampUtc": "2026-11-12T01:23:28.557816+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 31.99}
+{"cycle": 18, "version": "V157", "timestampUtc": "2026-11-12T01:24:16.912172+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 33.45}
+{"cycle": 31, "at": "2026-11-12T01:24:28.548992+00:00", "exitCode": 0, "leanFiles": 566, "checks": "142/142"}
+{"cycle": 27, "timestampUtc": "2026-11-12T01:25:36.779787+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 33.59}
+{"cycle": 21, "timestampUtc": "2026-11-12T01:25:46.272652+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 34.33}
+{"cycle": 27, "timestampUtc": "2026-11-12T01:26:11.862177+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 32.56}
+{"cycle": 27, "timestampUtc": "2026-11-12T01:27:16.069447+00:00", "exitCode": 0, "passed": 189, "failed": 0, "leanFiles": 566, "totalZeroSorryLeanFiles": 623, "durationSec": 32.15}
+{"cycle": 29, "at": "2026-11-12T01:34:10.104213+00:00", "exitCode": 0, "leanFiles": 567, "checks": "142/142"}
+{"cycle": 29, "at": "2026-11-12T01:35:39.948701+00:00", "exitCode": 0, "leanFiles": 567, "checks": "142/142"}
+{"cycle": 1, "version": "V164", "timestampUtc": "2026-11-12T01:37:20.452817+00:00", "exitCode": 0, "passed": 193, "failed": 0, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 34.99}
+{"cycle": 26, "timestampUtc": "2026-11-12T01:37:29.763340+00:00", "exitCode": 0, "passed": 193, "failed": 0, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 36.1}
+{"cycle": 28, "timestampUtc": "2026-11-12T01:37:50.168221+00:00", "exitCode": 0, "passed": 193, "failed": 0, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 35.6}
+{"cycle": 28, "timestampUtc": "2026-11-12T01:39:03.035024+00:00", "exitCode": 0, "passed": 193, "failed": 0, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 34.46}
+{"cycle": 19, "version": "V157", "timestampUtc": "2026-11-12T01:39:52.860596+00:00", "exitCode": 0, "passed": 193, "failed": 0, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 35.42}
+{"cycle": 32, "at": "2026-11-12T01:40:05.713920+00:00", "exitCode": 0, "leanFiles": 567, "checks": "142/142"}
+{"cycle": 28, "timestampUtc": "2026-11-12T01:41:13.439672+00:00", "exitCode": 0, "passed": 193, "failed": 0, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 36.64}
+{"cycle": 22, "timestampUtc": "2026-11-12T01:41:23.415115+00:00", "exitCode": 0, "passed": 193, "failed": 0, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 36.64}
+{"cycle": 28, "timestampUtc": "2026-11-12T01:41:47.064477+00:00", "exitCode": 0, "passed": 193, "failed": 0, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 35.19}
+{"cycle": 28, "timestampUtc": "2026-11-12T01:42:51.046503+00:00", "exitCode": 0, "passed": 193, "failed": 0, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 34.45}
+{"cycle": 30, "at": "2026-11-12T01:49:48.401653+00:00", "exitCode": 0, "leanFiles": 567, "checks": "142/142"}
+{"cycle": 30, "at": "2026-11-12T01:51:18.908137+00:00", "exitCode": 0, "leanFiles": 567, "checks": "142/142"}
+{"cycle": 27, "timestampUtc": "2026-11-12T01:53:11.406904+00:00", "exitCode": 1, "passed": 194, "failed": 4, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 41.12}
+{"cycle": 29, "timestampUtc": "2026-11-12T01:53:30.069420+00:00", "exitCode": 1, "passed": 194, "failed": 4, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 39.88}
+{"cycle": 29, "timestampUtc": "2026-11-12T01:54:40.789593+00:00", "exitCode": 1, "passed": 194, "failed": 4, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 37.74}
+{"cycle": 20, "version": "V157", "timestampUtc": "2026-11-12T01:55:31.209325+00:00", "exitCode": 1, "passed": 194, "failed": 4, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 37.76}
+{"cycle": 33, "at": "2026-11-12T01:55:44.199574+00:00", "exitCode": 1, "leanFiles": 567, "checks": "0/142"}
+{"cycle": 29, "timestampUtc": "2026-11-12T01:56:51.377270+00:00", "exitCode": 1, "passed": 194, "failed": 4, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 37.93}
+{"cycle": 23, "timestampUtc": "2026-11-12T01:57:02.173184+00:00", "exitCode": 1, "passed": 194, "failed": 4, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 38.2}
+{"cycle": 29, "timestampUtc": "2026-11-12T01:57:25.058115+00:00", "exitCode": 1, "passed": 194, "failed": 4, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 37.98}
+{"cycle": 29, "timestampUtc": "2026-11-12T01:58:23.603618+00:00", "exitCode": 1, "passed": 197, "failed": 1, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 31.98}
+{"cycle": 1, "version": "V165", "timestampUtc": "2026-11-12T02:03:54.350468+00:00", "exitCode": 0, "passed": 198, "failed": 0, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 41.36}
+{"cycle": 31, "at": "2026-11-12T02:05:32.375716+00:00", "exitCode": 0, "leanFiles": 567, "checks": "142/142"}
+{"cycle": 31, "at": "2026-11-12T02:07:01.195162+00:00", "exitCode": 0, "leanFiles": 567, "checks": "142/142"}
+{"cycle": 28, "timestampUtc": "2026-11-12T02:08:53.489028+00:00", "exitCode": 0, "passed": 198, "failed": 0, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 41.57}
+{"cycle": 30, "timestampUtc": "2026-11-12T02:09:11.737291+00:00", "exitCode": 0, "passed": 198, "failed": 0, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 41.66}
+{"cycle": 30, "timestampUtc": "2026-11-12T02:10:21.464220+00:00", "exitCode": 0, "passed": 198, "failed": 0, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 40.66}
+{"cycle": 21, "version": "V157", "timestampUtc": "2026-11-12T02:11:13.463805+00:00", "exitCode": 0, "passed": 198, "failed": 0, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 41.71}
+{"cycle": 34, "at": "2026-11-12T02:11:26.355396+00:00", "exitCode": 0, "leanFiles": 567, "checks": "142/142"}
+{"cycle": 30, "timestampUtc": "2026-11-12T02:12:39.273154+00:00", "exitCode": 0, "passed": 198, "failed": 0, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 47.88}
+{"cycle": 24, "timestampUtc": "2026-11-12T02:12:52.602639+00:00", "exitCode": 0, "passed": 198, "failed": 0, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 49.85}
+{"cycle": 30, "timestampUtc": "2026-11-12T02:13:13.246855+00:00", "exitCode": 0, "passed": 198, "failed": 0, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 48.18}
+{"cycle": 30, "timestampUtc": "2026-11-12T02:14:09.271148+00:00", "exitCode": 0, "passed": 198, "failed": 0, "leanFiles": 567, "totalZeroSorryLeanFiles": 624, "durationSec": 45.13}
+{"cycle": 32, "at": "2026-11-12T02:21:18.955735+00:00", "exitCode": 0, "leanFiles": 568, "checks": "142/142"}
+{"cycle": 32, "at": "2026-11-12T02:22:45.715686+00:00", "exitCode": 0, "leanFiles": 568, "checks": "142/142"}
+{"cycle": 29, "timestampUtc": "2026-11-12T02:24:39.916253+00:00", "exitCode": 0, "passed": 198, "failed": 0, "leanFiles": 568, "totalZeroSorryLeanFiles": 625, "durationSec": 45.86}
+{"cycle": 31, "timestampUtc": "2026-11-12T02:24:57.132177+00:00", "exitCode": 0, "passed": 198, "failed": 0, "leanFiles": 568, "totalZeroSorryLeanFiles": 625, "durationSec": 45.37}
+{"cycle": 31, "timestampUtc": "2026-11-12T02:26:06.210006+00:00", "exitCode": 0, "passed": 198, "failed": 0, "leanFiles": 568, "totalZeroSorryLeanFiles": 625, "durationSec": 44.72}
+{"cycle": 22, "version": "V157", "timestampUtc": "2026-11-12T02:27:00.101094+00:00", "exitCode": 0, "passed": 198, "failed": 0, "leanFiles": 568, "totalZeroSorryLeanFiles": 625, "durationSec": 46.06}
+{"cycle": 35, "at": "2026-11-12T02:27:12.984165+00:00", "exitCode": 0, "leanFiles": 568, "checks": "142/142"}
+{"cycle": 31, "timestampUtc": "2026-11-12T02:28:22.355412+00:00", "exitCode": 0, "passed": 198, "failed": 0, "leanFiles": 568, "totalZeroSorryLeanFiles": 625, "durationSec": 43.05}
+{"cycle": 25, "timestampUtc": "2026-11-12T02:28:36.323479+00:00", "exitCode": 0, "passed": 198, "failed": 0, "leanFiles": 568, "totalZeroSorryLeanFiles": 625, "durationSec": 43.17}
+{"cycle": 31, "timestampUtc": "2026-11-12T02:28:55.383227+00:00", "exitCode": 0, "passed": 198, "failed": 0, "leanFiles": 568, "totalZeroSorryLeanFiles": 625, "durationSec": 42.11}
+{"cycle": 31, "timestampUtc": "2026-11-12T02:29:50.968179+00:00", "exitCode": 0, "passed": 198, "failed": 0, "leanFiles": 568, "totalZeroSorryLeanFiles": 625, "durationSec": 41.13}
+{"cycle": 1, "version": "V166", "timestampUtc": "2026-11-12T02:36:46.341329+00:00", "exitCode": 0, "passed": 204, "failed": 0, "leanFiles": 568, "totalZeroSorryLeanFiles": 625, "durationSec": 43.44}
+{"cycle": 33, "at": "2026-11-12T02:37:02.572500+00:00", "exitCode": 0, "leanFiles": 568, "checks": "142/142"}
+{"cycle": 33, "at": "2026-11-12T02:38:28.767890+00:00", "exitCode": 0, "leanFiles": 568, "checks": "142/142"}
+{"cycle": 30, "timestampUtc": "2026-11-12T02:40:24.729410+00:00", "exitCode": 0, "passed": 204, "failed": 0, "leanFiles": 568, "totalZeroSorryLeanFiles": 625, "durationSec": 44.25}
+{"cycle": 32, "timestampUtc": "2026-11-12T02:40:41.268781+00:00", "exitCode": 0, "passed": 204, "failed": 0, "leanFiles": 568, "totalZeroSorryLeanFiles": 625, "durationSec": 44.11}
+{"cycle": 32, "timestampUtc": "2026-11-12T02:41:50.926531+00:00", "exitCode": 0, "passed": 204, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 44.69}
+{"cycle": 23, "version": "V157", "timestampUtc": "2026-11-12T02:42:45.028587+00:00", "exitCode": 0, "passed": 204, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 44.39}
+{"cycle": 36, "at": "2026-11-12T02:42:57.738566+00:00", "exitCode": 0, "leanFiles": 569, "checks": "142/142"}
+{"cycle": 32, "timestampUtc": "2026-11-12T02:44:07.937941+00:00", "exitCode": 0, "passed": 204, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 45.56}
+{"cycle": 26, "timestampUtc": "2026-11-12T02:44:22.523945+00:00", "exitCode": 0, "passed": 204, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 45.66}
+{"cycle": 32, "timestampUtc": "2026-11-12T02:44:39.644960+00:00", "exitCode": 0, "passed": 204, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 44.24}
+{"cycle": 32, "timestampUtc": "2026-11-12T02:45:33.834292+00:00", "exitCode": 0, "passed": 204, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 42.27}
+{"cycle": 1, "version": "V167", "timestampUtc": "2026-11-12T02:49:25.575965+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 43.76}
+{"cycle": 34, "at": "2026-11-12T02:52:46.527737+00:00", "exitCode": 0, "leanFiles": 569, "checks": "142/142"}
+{"cycle": 34, "at": "2026-11-12T02:54:12.054186+00:00", "exitCode": 0, "leanFiles": 569, "checks": "142/142"}
+{"cycle": 31, "timestampUtc": "2026-11-12T02:56:09.781670+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 44.5}
+{"cycle": 33, "timestampUtc": "2026-11-12T02:56:26.447231+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 45.16}
+{"cycle": 33, "timestampUtc": "2026-11-12T02:57:34.053230+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 43.1}
+{"cycle": 24, "version": "V157", "timestampUtc": "2026-11-12T02:58:29.750813+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 44.21}
+{"cycle": 37, "at": "2026-11-12T02:58:42.378234+00:00", "exitCode": 0, "leanFiles": 569, "checks": "142/142"}
+{"cycle": 33, "timestampUtc": "2026-11-12T02:59:53.289784+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 45.33}
+{"cycle": 27, "timestampUtc": "2026-11-12T03:00:08.859785+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 45.8}
+{"cycle": 33, "timestampUtc": "2026-11-12T03:00:24.512515+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 44.85}
+{"cycle": 33, "timestampUtc": "2026-11-12T03:01:17.615561+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 43.26}
+{"cycle": 35, "at": "2026-11-12T03:08:30.249475+00:00", "exitCode": 0, "leanFiles": 569, "checks": "142/142"}
+{"cycle": 35, "at": "2026-11-12T03:09:55.919888+00:00", "exitCode": 0, "leanFiles": 569, "checks": "142/142"}
+{"cycle": 32, "timestampUtc": "2026-11-12T03:11:55.051743+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 44.73}
+{"cycle": 34, "timestampUtc": "2026-11-12T03:12:10.673711+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 44.22}
+{"cycle": 34, "timestampUtc": "2026-11-12T03:13:17.225058+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 43.17}
+{"cycle": 25, "version": "V157", "timestampUtc": "2026-11-12T03:14:15.665977+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 45.4}
+{"cycle": 38, "at": "2026-11-12T03:14:28.102858+00:00", "exitCode": 0, "leanFiles": 569, "checks": "142/142"}
+{"cycle": 34, "timestampUtc": "2026-11-12T03:15:42.597251+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 49.3}
+{"cycle": 28, "timestampUtc": "2026-11-12T03:15:58.428027+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 49.04}
+{"cycle": 34, "timestampUtc": "2026-11-12T03:16:12.533054+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 48.02}
+{"cycle": 34, "timestampUtc": "2026-11-12T03:17:01.050097+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 569, "totalZeroSorryLeanFiles": 626, "durationSec": 42.86}
+{"cycle": 36, "at": "2026-11-12T03:24:15.818384+00:00", "exitCode": 0, "leanFiles": 570, "checks": "142/142"}
+{"cycle": 36, "at": "2026-11-12T03:25:40.019978+00:00", "exitCode": 0, "leanFiles": 570, "checks": "142/142"}
+{"cycle": 33, "timestampUtc": "2026-11-12T03:27:40.232634+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 44.62}
+{"cycle": 35, "timestampUtc": "2026-11-12T03:27:54.954744+00:00", "exitCode": 0, "passed": 208, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 44.26}
+{"cycle": 35, "timestampUtc": "2026-11-12T03:29:03.977560+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 46.73}
+{"cycle": 26, "version": "V157", "timestampUtc": "2026-11-12T03:30:15.905072+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 59.62}
+{"cycle": 39, "at": "2026-11-12T03:30:26.809780+00:00", "exitCode": 0, "leanFiles": 570, "checks": "142/142"}
+{"cycle": 1, "version": "V168", "timestampUtc": "2026-11-12T03:30:28.445098+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 57.77}
+{"cycle": 35, "timestampUtc": "2026-11-12T03:31:30.723804+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 48.11}
+{"cycle": 29, "timestampUtc": "2026-11-12T03:31:46.878246+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 47.86}
+{"cycle": 35, "timestampUtc": "2026-11-12T03:31:59.230391+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 46.68}
+{"cycle": 35, "timestampUtc": "2026-11-12T03:32:45.699404+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 44.09}
+{"cycle": 37, "at": "2026-11-12T03:40:00.704970+00:00", "exitCode": 0, "leanFiles": 570, "checks": "142/142"}
+{"cycle": 37, "at": "2026-11-12T03:41:25.392569+00:00", "exitCode": 0, "leanFiles": 570, "checks": "142/142"}
+{"cycle": 34, "timestampUtc": "2026-11-12T03:43:26.808452+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 46.01}
+{"cycle": 36, "timestampUtc": "2026-11-12T03:43:40.602014+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 45.63}
+{"cycle": 36, "timestampUtc": "2026-11-12T03:44:48.148740+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 44.15}
+{"cycle": 27, "version": "V157", "timestampUtc": "2026-11-12T03:46:00.978080+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 44.48}
+{"cycle": 40, "at": "2026-11-12T03:46:11.311744+00:00", "exitCode": 0, "leanFiles": 570, "checks": "142/142"}
+{"cycle": 36, "timestampUtc": "2026-11-12T03:47:11.169869+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 40.42}
+{"cycle": 30, "timestampUtc": "2026-11-12T03:47:29.272245+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 41.85}
+{"cycle": 36, "timestampUtc": "2026-11-12T03:47:40.851285+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 41.6}
+{"cycle": 36, "timestampUtc": "2026-11-12T03:48:26.418240+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 40.2}
+{"cycle": 38, "at": "2026-11-12T03:55:41.804579+00:00", "exitCode": 0, "leanFiles": 570, "checks": "142/142"}
+{"cycle": 38, "at": "2026-11-12T03:57:06.602757+00:00", "exitCode": 0, "leanFiles": 570, "checks": "142/142"}
+{"cycle": 35, "timestampUtc": "2026-11-12T03:59:08.869559+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 41.5}
+{"cycle": 37, "timestampUtc": "2026-11-12T03:59:22.927342+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 42.29}
+{"cycle": 37, "timestampUtc": "2026-11-12T04:00:28.815810+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 40.64}
+{"cycle": 28, "version": "V157", "timestampUtc": "2026-11-12T04:01:43.357911+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 41.87}
+{"cycle": 41, "at": "2026-11-12T04:01:54.252978+00:00", "exitCode": 0, "leanFiles": 570, "checks": "142/142"}
+{"cycle": 37, "timestampUtc": "2026-11-12T04:02:52.798957+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 41.62}
+{"cycle": 31, "timestampUtc": "2026-11-12T04:03:12.584439+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 42.78}
+{"cycle": 37, "timestampUtc": "2026-11-12T04:03:24.084972+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 43.22}
+{"cycle": 37, "timestampUtc": "2026-11-12T04:04:07.823821+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 40.86}
+{"cycle": 39, "at": "2026-11-12T04:11:26.541708+00:00", "exitCode": 0, "leanFiles": 570, "checks": "142/142"}
+{"cycle": 39, "at": "2026-11-12T04:12:50.955197+00:00", "exitCode": 0, "leanFiles": 570, "checks": "142/142"}
+{"cycle": 36, "timestampUtc": "2026-11-12T04:14:53.472867+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 44.07}
+{"cycle": 38, "timestampUtc": "2026-11-12T04:15:05.878673+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 42.93}
+{"cycle": 38, "timestampUtc": "2026-11-12T04:16:10.298502+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 41.47}
+{"cycle": 29, "version": "V157", "timestampUtc": "2026-11-12T04:17:23.301253+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 570, "totalZeroSorryLeanFiles": 627, "durationSec": 39.43}
+{"cycle": 42, "at": "2026-11-12T04:17:33.566958+00:00", "exitCode": 0, "leanFiles": 570, "checks": "142/142"}
+{"cycle": 38, "timestampUtc": "2026-11-12T04:18:31.088779+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 38.28}
+{"cycle": 32, "timestampUtc": "2026-11-12T04:18:54.178774+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 41.06}
+{"cycle": 38, "timestampUtc": "2026-11-12T04:19:03.796210+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 39.69}
+{"cycle": 38, "timestampUtc": "2026-11-12T04:19:44.244726+00:00", "exitCode": 0, "passed": 212, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 35.91}
+{"cycle": 1, "version": "V169", "timestampUtc": "2026-11-12T04:23:28.870962+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 36.64}
+{"cycle": 40, "at": "2026-11-12T04:27:03.237772+00:00", "exitCode": 0, "leanFiles": 571, "checks": "142/142"}
+{"cycle": 40, "at": "2026-11-12T04:28:27.625267+00:00", "exitCode": 0, "leanFiles": 571, "checks": "142/142"}
+{"cycle": 37, "timestampUtc": "2026-11-12T04:30:31.916682+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 37.95}
+{"cycle": 39, "timestampUtc": "2026-11-12T04:30:44.129880+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 38.23}
+{"cycle": 39, "timestampUtc": "2026-11-12T04:31:46.824201+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 36.51}
+{"cycle": 30, "version": "V157", "timestampUtc": "2026-11-12T04:33:01.348774+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 37.55}
+{"cycle": 43, "at": "2026-11-12T04:33:11.932681+00:00", "exitCode": 0, "leanFiles": 571, "checks": "142/142"}
+{"cycle": 39, "timestampUtc": "2026-11-12T04:34:08.154483+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 37.05}
+{"cycle": 33, "timestampUtc": "2026-11-12T04:34:33.260537+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 38.6}
+{"cycle": 39, "timestampUtc": "2026-11-12T04:34:42.219887+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 38.43}
+{"cycle": 39, "timestampUtc": "2026-11-12T04:35:21.228370+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 36.51}
+{"cycle": 41, "at": "2026-11-12T04:42:39.786529+00:00", "exitCode": 0, "leanFiles": 571, "checks": "142/142"}
+{"cycle": 41, "at": "2026-11-12T04:44:04.191722+00:00", "exitCode": 0, "leanFiles": 571, "checks": "142/142"}
+{"cycle": 38, "timestampUtc": "2026-11-12T04:46:10.317550+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 37.94}
+{"cycle": 40, "timestampUtc": "2026-11-12T04:46:23.161991+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 39.04}
+{"cycle": 40, "timestampUtc": "2026-11-12T04:47:23.119320+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 36.3}
+{"cycle": 31, "version": "V157", "timestampUtc": "2026-11-12T04:48:39.686973+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 37.86}
+{"cycle": 44, "at": "2026-11-12T04:48:50.373734+00:00", "exitCode": 0, "leanFiles": 571, "checks": "142/142"}
+{"cycle": 40, "timestampUtc": "2026-11-12T04:49:44.864223+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 36.7}
+{"cycle": 34, "timestampUtc": "2026-11-12T04:50:12.429565+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 38.68}
+{"cycle": 40, "timestampUtc": "2026-11-12T04:50:20.633893+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 38.41}
+{"cycle": 40, "timestampUtc": "2026-11-12T04:50:58.026880+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 36.32}
+{"cycle": 42, "at": "2026-11-12T04:58:16.495373+00:00", "exitCode": 0, "leanFiles": 571, "checks": "142/142"}
+{"cycle": 42, "at": "2026-11-12T04:59:40.738912+00:00", "exitCode": 0, "leanFiles": 571, "checks": "142/142"}
+{"cycle": 39, "timestampUtc": "2026-11-12T05:01:48.369035+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 37.56}
+{"cycle": 41, "timestampUtc": "2026-11-12T05:02:01.234502+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 38.07}
+{"cycle": 41, "timestampUtc": "2026-11-12T05:02:59.365396+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 36.24}
+{"cycle": 32, "version": "V157", "timestampUtc": "2026-11-12T05:04:18.960744+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 38.74}
+{"cycle": 45, "at": "2026-11-12T05:04:28.979124+00:00", "exitCode": 0, "leanFiles": 571, "checks": "142/142"}
+{"cycle": 41, "timestampUtc": "2026-11-12T05:05:21.355978+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 36.49}
+{"cycle": 35, "timestampUtc": "2026-11-12T05:05:51.448381+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 38.54}
+{"cycle": 41, "timestampUtc": "2026-11-12T05:05:59.086161+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 38.45}
+{"cycle": 41, "timestampUtc": "2026-11-12T05:06:35.056491+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 36.54}
+{"cycle": 43, "at": "2026-11-12T05:13:52.996040+00:00", "exitCode": 0, "leanFiles": 571, "checks": "142/142"}
+{"cycle": 43, "at": "2026-11-12T05:15:18.494657+00:00", "exitCode": 0, "leanFiles": 571, "checks": "142/142"}
+{"cycle": 40, "timestampUtc": "2026-11-12T05:17:26.586018+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 37.72}
+{"cycle": 42, "timestampUtc": "2026-11-12T05:17:39.243156+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 38.0}
+{"cycle": 42, "timestampUtc": "2026-11-12T05:18:35.707953+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 36.34}
+{"cycle": 33, "version": "V157", "timestampUtc": "2026-11-12T05:19:57.549998+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 38.06}
+{"cycle": 46, "at": "2026-11-12T05:20:07.926636+00:00", "exitCode": 0, "leanFiles": 571, "checks": "142/142"}
+{"cycle": 42, "timestampUtc": "2026-11-12T05:20:58.282130+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 36.91}
+{"cycle": 36, "timestampUtc": "2026-11-12T05:21:32.148162+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 40.19}
+{"cycle": 42, "timestampUtc": "2026-11-12T05:21:38.286223+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 571, "totalZeroSorryLeanFiles": 628, "durationSec": 39.19}
+{"cycle": 42, "timestampUtc": "2026-11-12T05:22:14.225255+00:00", "exitCode": 0, "passed": 216, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 38.67}
+{"cycle": 44, "at": "2026-11-12T05:29:24.014227+00:00", "exitCode": 1, "leanFiles": 572, "checks": "0/142"}
+{"cycle": 44, "at": "2026-11-12T05:30:48.027275+00:00", "exitCode": 1, "leanFiles": 572, "checks": "0/142"}
+{"cycle": 1, "version": "V170", "timestampUtc": "2026-11-12T05:32:51.925433+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 39.03}
+{"cycle": 41, "timestampUtc": "2026-11-12T05:33:06.969846+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 39.89}
+{"cycle": 43, "timestampUtc": "2026-11-12T05:33:20.024201+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 40.78}
+{"cycle": 43, "timestampUtc": "2026-11-12T05:34:14.533870+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 38.82}
+{"cycle": 34, "version": "V157", "timestampUtc": "2026-11-12T05:35:37.280522+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 39.22}
+{"cycle": 47, "at": "2026-11-12T05:35:46.870905+00:00", "exitCode": 0, "leanFiles": 572, "checks": "142/142"}
+{"cycle": 43, "timestampUtc": "2026-11-12T05:36:35.118847+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 36.84}
+{"cycle": 37, "timestampUtc": "2026-11-12T05:37:11.686327+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 39.04}
+{"cycle": 43, "timestampUtc": "2026-11-12T05:37:17.575747+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 39.29}
+{"cycle": 43, "timestampUtc": "2026-11-12T05:37:51.541537+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 36.84}
+{"cycle": 45, "at": "2026-11-12T05:45:01.979116+00:00", "exitCode": 0, "leanFiles": 572, "checks": "142/142"}
+{"cycle": 45, "at": "2026-11-12T05:46:25.215228+00:00", "exitCode": 0, "leanFiles": 572, "checks": "142/142"}
+{"cycle": 42, "timestampUtc": "2026-11-12T05:48:45.619275+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 38.16}
+{"cycle": 44, "timestampUtc": "2026-11-12T05:48:58.512735+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 38.48}
+{"cycle": 44, "timestampUtc": "2026-11-12T05:49:51.395596+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 36.85}
+{"cycle": 35, "version": "V157", "timestampUtc": "2026-11-12T05:51:16.119988+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 38.32}
+{"cycle": 48, "at": "2026-11-12T05:51:26.020286+00:00", "exitCode": 0, "leanFiles": 572, "checks": "142/142"}
+{"cycle": 44, "timestampUtc": "2026-11-12T05:52:11.934631+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 36.81}
+{"cycle": 38, "timestampUtc": "2026-11-12T05:52:50.849253+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 38.66}
+{"cycle": 44, "timestampUtc": "2026-11-12T05:52:58.225502+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 40.64}
+{"cycle": 44, "timestampUtc": "2026-11-12T05:53:30.410511+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 38.38}
+{"cycle": 46, "at": "2026-11-12T06:00:38.931798+00:00", "exitCode": 0, "leanFiles": 572, "checks": "142/142"}
+{"cycle": 46, "at": "2026-11-12T06:02:02.570799+00:00", "exitCode": 0, "leanFiles": 572, "checks": "142/142"}
+{"cycle": 43, "timestampUtc": "2026-11-12T06:04:24.717804+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 38.59}
+{"cycle": 45, "timestampUtc": "2026-11-12T06:04:37.068927+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 38.53}
+{"cycle": 45, "timestampUtc": "2026-11-12T06:05:28.309579+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 36.88}
+{"cycle": 36, "version": "V157", "timestampUtc": "2026-11-12T06:06:54.842769+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 38.21}
+{"cycle": 49, "at": "2026-11-12T06:07:05.230225+00:00", "exitCode": 0, "leanFiles": 572, "checks": "142/142"}
+{"cycle": 45, "timestampUtc": "2026-11-12T06:07:48.594562+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 36.63}
+{"cycle": 39, "timestampUtc": "2026-11-12T06:08:29.935443+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 38.57}
+{"cycle": 45, "timestampUtc": "2026-11-12T06:08:37.384908+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 39.13}
+{"cycle": 45, "timestampUtc": "2026-11-12T06:09:08.117939+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 572, "totalZeroSorryLeanFiles": 629, "durationSec": 37.19}
+{"cycle": 47, "at": "2026-11-12T06:16:17.235422+00:00", "exitCode": 0, "leanFiles": 572, "checks": "142/142"}
+{"cycle": 47, "at": "2026-11-12T06:17:40.714798+00:00", "exitCode": 0, "leanFiles": 573, "checks": "142/142"}
+{"cycle": 44, "timestampUtc": "2026-11-12T06:20:04.007461+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 38.78}
+{"cycle": 46, "timestampUtc": "2026-11-12T06:20:17.167930+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 40.09}
+{"cycle": 46, "timestampUtc": "2026-11-12T06:21:06.246339+00:00", "exitCode": 0, "passed": 220, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 37.93}
+{"cycle": 37, "version": "V157", "timestampUtc": "2026-11-12T06:22:25.208369+00:00", "exitCode": 1, "passed": 221, "failed": 3, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 29.88}
+{"cycle": 50, "at": "2026-11-12T06:22:35.473638+00:00", "exitCode": 1, "leanFiles": 573, "checks": "0/142"}
+{"cycle": 46, "timestampUtc": "2026-11-12T06:23:17.753779+00:00", "exitCode": 1, "passed": 221, "failed": 3, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 29.15}
+{"cycle": 40, "timestampUtc": "2026-11-12T06:24:00.648226+00:00", "exitCode": 1, "passed": 221, "failed": 3, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 30.22}
+{"cycle": 46, "timestampUtc": "2026-11-12T06:24:07.777415+00:00", "exitCode": 1, "passed": 221, "failed": 3, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 30.38}
+{"cycle": 46, "timestampUtc": "2026-11-12T06:24:38.017888+00:00", "exitCode": 1, "passed": 221, "failed": 3, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 29.41}
+{"cycle": 48, "at": "2026-11-12T06:31:58.316994+00:00", "exitCode": 0, "leanFiles": 573, "checks": "142/142"}
+{"cycle": 1, "version": "V171", "timestampUtc": "2026-11-12T06:32:35.726222+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 38.75}
+{"cycle": 48, "at": "2026-11-12T06:33:19.560061+00:00", "exitCode": 0, "leanFiles": 573, "checks": "142/142"}
+{"cycle": 45, "timestampUtc": "2026-11-12T06:35:43.033768+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 38.52}
+{"cycle": 47, "timestampUtc": "2026-11-12T06:35:56.213718+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 39.04}
+{"cycle": 47, "timestampUtc": "2026-11-12T06:36:43.506652+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 37.25}
+{"cycle": 38, "version": "V157", "timestampUtc": "2026-11-12T06:38:04.549634+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 38.85}
+{"cycle": 51, "at": "2026-11-12T06:38:14.794721+00:00", "exitCode": 0, "leanFiles": 573, "checks": "142/142"}
+{"cycle": 47, "timestampUtc": "2026-11-12T06:38:55.058090+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 37.3}
+{"cycle": 41, "timestampUtc": "2026-11-12T06:39:41.196003+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 40.07}
+{"cycle": 47, "timestampUtc": "2026-11-12T06:39:47.297027+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 39.53}
+{"cycle": 47, "timestampUtc": "2026-11-12T06:40:16.555589+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 38.07}
+{"cycle": 49, "at": "2026-11-12T06:47:35.957579+00:00", "exitCode": 0, "leanFiles": 573, "checks": "142/142"}
+{"cycle": 49, "at": "2026-11-12T06:48:57.174603+00:00", "exitCode": 0, "leanFiles": 573, "checks": "142/142"}
+{"cycle": 46, "timestampUtc": "2026-11-12T06:51:22.259604+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 38.74}
+{"cycle": 48, "timestampUtc": "2026-11-12T06:51:35.274465+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 39.07}
+{"cycle": 48, "timestampUtc": "2026-11-12T06:52:20.935514+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 37.44}
+{"cycle": 39, "version": "V157", "timestampUtc": "2026-11-12T06:53:43.767107+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 38.7}
+{"cycle": 52, "at": "2026-11-12T06:53:54.463977+00:00", "exitCode": 0, "leanFiles": 573, "checks": "142/142"}
+{"cycle": 48, "timestampUtc": "2026-11-12T06:54:32.589092+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 37.52}
+{"cycle": 42, "timestampUtc": "2026-11-12T06:55:21.161225+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 39.47}
+{"cycle": 48, "timestampUtc": "2026-11-12T06:55:27.475978+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 40.18}
+{"cycle": 48, "timestampUtc": "2026-11-12T06:55:55.202378+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 573, "totalZeroSorryLeanFiles": 630, "durationSec": 38.15}
+{"cycle": 50, "at": "2026-11-12T07:03:13.678460+00:00", "exitCode": 0, "leanFiles": 573, "checks": "142/142"}
+{"cycle": 50, "at": "2026-11-12T07:04:35.544111+00:00", "exitCode": 0, "leanFiles": 573, "checks": "142/142"}
+{"cycle": 47, "timestampUtc": "2026-11-12T07:07:02.520942+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 39.7}
+{"cycle": 49, "timestampUtc": "2026-11-12T07:07:14.904280+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 39.56}
+{"cycle": 49, "timestampUtc": "2026-11-12T07:07:58.516384+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 37.51}
+{"cycle": 40, "version": "V157", "timestampUtc": "2026-11-12T07:09:23.270700+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 38.91}
+{"cycle": 53, "at": "2026-11-12T07:09:34.240307+00:00", "exitCode": 0, "leanFiles": 574, "checks": "142/142"}
+{"cycle": 49, "timestampUtc": "2026-11-12T07:10:10.927990+00:00", "exitCode": 0, "passed": 224, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 38.27}
+{"cycle": 43, "timestampUtc": "2026-11-12T07:10:52.442801+00:00", "exitCode": 1, "passed": 227, "failed": 1, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 30.69}
+{"cycle": 49, "timestampUtc": "2026-11-12T07:10:58.230750+00:00", "exitCode": 1, "passed": 227, "failed": 1, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 30.69}
+{"cycle": 49, "timestampUtc": "2026-11-12T07:11:26.870482+00:00", "exitCode": 1, "passed": 227, "failed": 1, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 31.09}
+{"cycle": 1, "version": "V172", "timestampUtc": "2026-11-12T07:13:07.735592+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 38.39}
+{"cycle": 51, "at": "2026-11-12T07:18:52.013424+00:00", "exitCode": 0, "leanFiles": 574, "checks": "142/142"}
+{"cycle": 51, "at": "2026-11-12T07:20:13.946756+00:00", "exitCode": 0, "leanFiles": 574, "checks": "142/142"}
+{"cycle": 48, "timestampUtc": "2026-11-12T07:22:42.415383+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 39.38}
+{"cycle": 50, "timestampUtc": "2026-11-12T07:22:54.610503+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 39.69}
+{"cycle": 50, "timestampUtc": "2026-11-12T07:23:36.620045+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 38.08}
+{"cycle": 41, "version": "V157", "timestampUtc": "2026-11-12T07:25:03.147837+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 39.35}
+{"cycle": 54, "at": "2026-11-12T07:25:14.559538+00:00", "exitCode": 0, "leanFiles": 574, "checks": "142/142"}
+{"cycle": 50, "timestampUtc": "2026-11-12T07:25:49.219856+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 38.27}
+{"cycle": 44, "timestampUtc": "2026-11-12T07:26:33.538098+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 40.58}
+{"cycle": 50, "timestampUtc": "2026-11-12T07:26:39.261216+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 41.01}
+{"cycle": 50, "timestampUtc": "2026-11-12T07:27:06.630883+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 39.26}
+{"cycle": 52, "at": "2026-11-12T07:34:30.698238+00:00", "exitCode": 0, "leanFiles": 574, "checks": "142/142"}
+{"cycle": 52, "at": "2026-11-12T07:35:52.195991+00:00", "exitCode": 0, "leanFiles": 574, "checks": "142/142"}
+{"cycle": 49, "timestampUtc": "2026-11-12T07:38:22.378779+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 39.43}
+{"cycle": 51, "timestampUtc": "2026-11-12T07:38:34.689644+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 40.05}
+{"cycle": 51, "timestampUtc": "2026-11-12T07:39:14.721062+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 38.06}
+{"cycle": 42, "version": "V157", "timestampUtc": "2026-11-12T07:40:43.131244+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 39.44}
+{"cycle": 55, "at": "2026-11-12T07:40:54.813806+00:00", "exitCode": 0, "leanFiles": 574, "checks": "142/142"}
+{"cycle": 51, "timestampUtc": "2026-11-12T07:41:27.730947+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 38.47}
+{"cycle": 45, "timestampUtc": "2026-11-12T07:42:14.338909+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 40.27}
+{"cycle": 51, "timestampUtc": "2026-11-12T07:42:20.145976+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 40.85}
+{"cycle": 51, "timestampUtc": "2026-11-12T07:42:46.222451+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 39.07}
+{"cycle": 53, "at": "2026-11-12T07:50:09.117405+00:00", "exitCode": 0, "leanFiles": 574, "checks": "142/142"}
+{"cycle": 53, "at": "2026-11-12T07:51:30.769562+00:00", "exitCode": 0, "leanFiles": 574, "checks": "142/142"}
+{"cycle": 50, "timestampUtc": "2026-11-12T07:54:02.137857+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 39.26}
+{"cycle": 52, "timestampUtc": "2026-11-12T07:54:14.401774+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 39.69}
+{"cycle": 52, "timestampUtc": "2026-11-12T07:54:52.783771+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 38.04}
+{"cycle": 43, "version": "V157", "timestampUtc": "2026-11-12T07:56:23.296215+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 39.64}
+{"cycle": 56, "at": "2026-11-12T07:56:35.276206+00:00", "exitCode": 0, "leanFiles": 574, "checks": "142/142"}
+{"cycle": 52, "timestampUtc": "2026-11-12T07:57:06.223242+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 38.47}
+{"cycle": 46, "timestampUtc": "2026-11-12T07:57:54.960325+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 40.12}
+{"cycle": 52, "timestampUtc": "2026-11-12T07:58:01.078659+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 40.91}
+{"cycle": 52, "timestampUtc": "2026-11-12T07:58:26.147270+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 39.42}
+{"cycle": 54, "at": "2026-11-12T08:05:47.447834+00:00", "exitCode": 0, "leanFiles": 574, "checks": "142/142"}
+{"cycle": 54, "at": "2026-11-12T08:07:09.580734+00:00", "exitCode": 0, "leanFiles": 574, "checks": "142/142"}
+{"cycle": 51, "timestampUtc": "2026-11-12T08:09:42.099555+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 39.45}
+{"cycle": 53, "timestampUtc": "2026-11-12T08:09:54.768809+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 40.35}
+{"cycle": 53, "timestampUtc": "2026-11-12T08:10:31.669593+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 38.87}
+{"cycle": 44, "version": "V157", "timestampUtc": "2026-11-12T08:12:03.906569+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 40.08}
+{"cycle": 57, "at": "2026-11-12T08:12:16.370544+00:00", "exitCode": 0, "leanFiles": 574, "checks": "142/142"}
+{"cycle": 53, "timestampUtc": "2026-11-12T08:12:45.528582+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 574, "totalZeroSorryLeanFiles": 631, "durationSec": 39.29}
+{"cycle": 47, "timestampUtc": "2026-11-12T08:13:37.588188+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 42.09}
+{"cycle": 53, "timestampUtc": "2026-11-12T08:13:43.855168+00:00", "exitCode": 0, "passed": 228, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 42.76}
+{"cycle": 53, "timestampUtc": "2026-11-12T08:14:10.219643+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 43.55}
+{"cycle": 1, "version": "V173", "timestampUtc": "2026-11-12T08:14:49.415939+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 39.3}
+{"cycle": 55, "at": "2026-11-12T08:21:26.207167+00:00", "exitCode": 0, "leanFiles": 575, "checks": "142/142"}
+{"cycle": 55, "at": "2026-11-12T08:22:48.585787+00:00", "exitCode": 0, "leanFiles": 575, "checks": "142/142"}
+{"cycle": 52, "timestampUtc": "2026-11-12T08:25:22.606470+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 39.98}
+{"cycle": 54, "timestampUtc": "2026-11-12T08:25:35.250252+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 40.46}
+{"cycle": 54, "timestampUtc": "2026-11-12T08:26:10.425417+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 38.73}
+{"cycle": 45, "version": "V157", "timestampUtc": "2026-11-12T08:27:44.371760+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 39.92}
+{"cycle": 58, "at": "2026-11-12T08:27:57.487459+00:00", "exitCode": 0, "leanFiles": 575, "checks": "142/142"}
+{"cycle": 54, "timestampUtc": "2026-11-12T08:28:24.891601+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 39.34}
+{"cycle": 48, "timestampUtc": "2026-11-12T08:29:18.946928+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 40.84}
+{"cycle": 54, "timestampUtc": "2026-11-12T08:29:24.601063+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 40.72}
+{"cycle": 54, "timestampUtc": "2026-11-12T08:29:50.476100+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 39.73}
+{"cycle": 56, "at": "2026-11-12T08:37:05.002266+00:00", "exitCode": 0, "leanFiles": 575, "checks": "142/142"}
+{"cycle": 56, "at": "2026-11-12T08:38:27.384241+00:00", "exitCode": 0, "leanFiles": 575, "checks": "142/142"}
+{"cycle": 53, "timestampUtc": "2026-11-12T08:41:02.986974+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 39.91}
+{"cycle": 55, "timestampUtc": "2026-11-12T08:41:15.757589+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 40.52}
+{"cycle": 55, "timestampUtc": "2026-11-12T08:41:49.178223+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 38.78}
+{"cycle": 46, "version": "V157", "timestampUtc": "2026-11-12T08:43:24.690717+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 39.81}
+{"cycle": 59, "at": "2026-11-12T08:43:38.812584+00:00", "exitCode": 0, "leanFiles": 575, "checks": "142/142"}
+{"cycle": 55, "timestampUtc": "2026-11-12T08:44:04.378662+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 39.51}
+{"cycle": 49, "timestampUtc": "2026-11-12T08:44:59.999171+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 40.56}
+{"cycle": 55, "timestampUtc": "2026-11-12T08:45:06.021639+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 41.44}
+{"cycle": 55, "timestampUtc": "2026-11-12T08:45:30.816969+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 39.87}
+{"cycle": 57, "at": "2026-11-12T08:52:43.796083+00:00", "exitCode": 0, "leanFiles": 575, "checks": "142/142"}
+{"cycle": 57, "at": "2026-11-12T08:54:06.183192+00:00", "exitCode": 0, "leanFiles": 575, "checks": "142/142"}
+{"cycle": 54, "timestampUtc": "2026-11-12T08:56:43.440877+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 39.95}
+{"cycle": 56, "timestampUtc": "2026-11-12T08:56:56.384032+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 40.61}
+{"cycle": 56, "timestampUtc": "2026-11-12T08:57:28.179820+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 38.99}
+{"cycle": 47, "version": "V157", "timestampUtc": "2026-11-12T08:59:04.808400+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 39.59}
+{"cycle": 60, "at": "2026-11-12T08:59:19.932375+00:00", "exitCode": 0, "leanFiles": 575, "checks": "142/142"}
+{"cycle": 56, "timestampUtc": "2026-11-12T08:59:43.765096+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 39.38}
+{"cycle": 50, "timestampUtc": "2026-11-12T09:00:41.324050+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 40.81}
+{"cycle": 56, "timestampUtc": "2026-11-12T09:00:47.425150+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 41.4}
+{"cycle": 56, "timestampUtc": "2026-11-12T09:01:11.226212+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 39.91}
+{"cycle": 58, "at": "2026-11-12T09:08:23.782497+00:00", "exitCode": 0, "leanFiles": 575, "checks": "142/142"}
+{"cycle": 58, "at": "2026-11-12T09:09:46.227458+00:00", "exitCode": 0, "leanFiles": 575, "checks": "142/142"}
+{"cycle": 55, "timestampUtc": "2026-11-12T09:12:24.438247+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 40.48}
+{"cycle": 57, "timestampUtc": "2026-11-12T09:12:37.653856+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 41.24}
+{"cycle": 57, "timestampUtc": "2026-11-12T09:13:08.096674+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 39.89}
+{"cycle": 48, "version": "V157", "timestampUtc": "2026-11-12T09:14:45.618783+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 40.27}
+{"cycle": 61, "at": "2026-11-12T09:15:01.523897+00:00", "exitCode": 0, "leanFiles": 575, "checks": "142/142"}
+{"cycle": 57, "timestampUtc": "2026-11-12T09:15:24.384736+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 40.59}
+{"cycle": 51, "timestampUtc": "2026-11-12T09:16:23.220419+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 41.37}
+{"cycle": 57, "timestampUtc": "2026-11-12T09:16:29.335150+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 575, "totalZeroSorryLeanFiles": 632, "durationSec": 41.88}
+{"cycle": 57, "timestampUtc": "2026-11-12T09:16:52.627367+00:00", "exitCode": 0, "passed": 232, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 40.87}
+{"cycle": 1, "version": "V174", "timestampUtc": "2026-11-12T09:21:18.446315+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 39.95}
+{"cycle": 59, "at": "2026-11-12T09:24:03.170009+00:00", "exitCode": 0, "leanFiles": 576, "checks": "142/142"}
+{"cycle": 59, "at": "2026-11-12T09:25:25.661673+00:00", "exitCode": 0, "leanFiles": 576, "checks": "142/142"}
+{"cycle": 56, "timestampUtc": "2026-11-12T09:28:06.642914+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 41.7}
+{"cycle": 58, "timestampUtc": "2026-11-12T09:28:19.039157+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 41.37}
+{"cycle": 58, "timestampUtc": "2026-11-12T09:28:47.731764+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 39.62}
+{"cycle": 49, "version": "V157", "timestampUtc": "2026-11-12T09:30:27.447065+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 41.35}
+{"cycle": 62, "at": "2026-11-12T09:30:43.047903+00:00", "exitCode": 0, "leanFiles": 576, "checks": "142/142"}
+{"cycle": 58, "timestampUtc": "2026-11-12T09:31:04.892303+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 40.53}
+{"cycle": 52, "timestampUtc": "2026-11-12T09:32:04.988244+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 41.27}
+{"cycle": 58, "timestampUtc": "2026-11-12T09:32:11.344488+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 42.03}
+{"cycle": 58, "timestampUtc": "2026-11-12T09:32:33.960918+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 40.86}
+{"cycle": 60, "at": "2026-11-12T09:39:42.574182+00:00", "exitCode": 0, "leanFiles": 576, "checks": "142/142"}
+{"cycle": 60, "at": "2026-11-12T09:41:05.177572+00:00", "exitCode": 0, "leanFiles": 576, "checks": "142/142"}
+{"cycle": 57, "timestampUtc": "2026-11-12T09:43:47.645435+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 40.54}
+{"cycle": 59, "timestampUtc": "2026-11-12T09:44:00.275596+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 41.25}
+{"cycle": 59, "timestampUtc": "2026-11-12T09:44:28.363266+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 40.63}
+{"cycle": 50, "version": "V157", "timestampUtc": "2026-11-12T09:46:08.110448+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 40.15}
+{"cycle": 63, "at": "2026-11-12T09:46:24.786878+00:00", "exitCode": 0, "leanFiles": 576, "checks": "142/142"}
+{"cycle": 59, "timestampUtc": "2026-11-12T09:46:45.329929+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 40.43}
+{"cycle": 53, "timestampUtc": "2026-11-12T09:47:46.507120+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 41.02}
+{"cycle": 59, "timestampUtc": "2026-11-12T09:47:53.531068+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 42.18}
+{"cycle": 59, "timestampUtc": "2026-11-12T09:48:15.544205+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 41.07}
+{"cycle": 61, "at": "2026-11-12T09:55:21.954951+00:00", "exitCode": 0, "leanFiles": 576, "checks": "142/142"}
+{"cycle": 61, "at": "2026-11-12T09:56:44.485359+00:00", "exitCode": 0, "leanFiles": 576, "checks": "142/142"}
+{"cycle": 58, "timestampUtc": "2026-11-12T09:59:28.703193+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 40.56}
+{"cycle": 60, "timestampUtc": "2026-11-12T09:59:41.025341+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 40.72}
+{"cycle": 60, "timestampUtc": "2026-11-12T10:00:07.898748+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 39.5}
+{"cycle": 51, "version": "V157", "timestampUtc": "2026-11-12T10:01:48.756934+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 40.12}
+{"cycle": 64, "at": "2026-11-12T10:02:06.531076+00:00", "exitCode": 0, "leanFiles": 576, "checks": "142/142"}
+{"cycle": 60, "timestampUtc": "2026-11-12T10:02:26.264355+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 40.9}
+{"cycle": 54, "timestampUtc": "2026-11-12T10:03:28.318701+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 41.29}
+{"cycle": 60, "timestampUtc": "2026-11-12T10:03:35.487601+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 41.93}
+{"cycle": 60, "timestampUtc": "2026-11-12T10:03:56.793727+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 40.72}
+{"cycle": 62, "at": "2026-11-12T10:11:01.425891+00:00", "exitCode": 0, "leanFiles": 576, "checks": "142/142"}
+{"cycle": 62, "at": "2026-11-12T10:12:23.885627+00:00", "exitCode": 0, "leanFiles": 576, "checks": "142/142"}
+{"cycle": 59, "timestampUtc": "2026-11-12T10:15:09.794234+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 40.57}
+{"cycle": 61, "timestampUtc": "2026-11-12T10:15:22.597144+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 41.56}
+{"cycle": 61, "timestampUtc": "2026-11-12T10:15:47.919153+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 40.0}
+{"cycle": 52, "version": "V157", "timestampUtc": "2026-11-12T10:17:28.740728+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 39.45}
+{"cycle": 65, "at": "2026-11-12T10:17:48.118513+00:00", "exitCode": 0, "leanFiles": 576, "checks": "142/142"}
+{"cycle": 61, "timestampUtc": "2026-11-12T10:18:07.005790+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 40.73}
+{"cycle": 55, "timestampUtc": "2026-11-12T10:19:10.215852+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 41.39}
+{"cycle": 61, "timestampUtc": "2026-11-12T10:19:17.411282+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 41.92}
+{"cycle": 61, "timestampUtc": "2026-11-12T10:19:38.352950+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 41.04}
+{"cycle": 63, "at": "2026-11-12T10:26:40.811625+00:00", "exitCode": 0, "leanFiles": 576, "checks": "142/142"}
+{"cycle": 63, "at": "2026-11-12T10:28:03.834660+00:00", "exitCode": 0, "leanFiles": 576, "checks": "142/142"}
+{"cycle": 60, "timestampUtc": "2026-11-12T10:30:50.914885+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 40.56}
+{"cycle": 62, "timestampUtc": "2026-11-12T10:31:04.296989+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 41.65}
+{"cycle": 62, "timestampUtc": "2026-11-12T10:31:28.304827+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 40.34}
+{"cycle": 53, "version": "V157", "timestampUtc": "2026-11-12T10:33:09.095969+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 576, "totalZeroSorryLeanFiles": 633, "durationSec": 39.82}
+{"cycle": 66, "at": "2026-11-12T10:33:29.994570+00:00", "exitCode": 0, "leanFiles": 576, "checks": "142/142"}
+{"cycle": 62, "timestampUtc": "2026-11-12T10:33:48.008772+00:00", "exitCode": 0, "passed": 236, "failed": 0, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 40.95}
+{"cycle": 56, "timestampUtc": "2026-11-12T10:34:11.564466+00:00", "exitCode": 1, "passed": 0, "failed": 0, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 0.8}
+{"cycle": 62, "timestampUtc": "2026-11-12T10:34:18.249289+00:00", "exitCode": 1, "passed": 0, "failed": 0, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 0.8}
+{"cycle": 62, "timestampUtc": "2026-11-12T10:34:39.813991+00:00", "exitCode": 1, "passed": 0, "failed": 0, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 0.9}
+{"cycle": 64, "at": "2026-11-12T10:42:10.656914+00:00", "exitCode": 1, "leanFiles": 577, "checks": "0/142"}
+{"cycle": 64, "at": "2026-11-12T10:43:34.162033+00:00", "exitCode": 1, "leanFiles": 577, "checks": "0/142"}
+{"cycle": 61, "timestampUtc": "2026-11-12T10:46:23.619829+00:00", "exitCode": 1, "passed": 238, "failed": 2, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 32.2}
+{"cycle": 63, "timestampUtc": "2026-11-12T10:46:35.624347+00:00", "exitCode": 1, "passed": 238, "failed": 2, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 31.31}
+{"cycle": 63, "timestampUtc": "2026-11-12T10:46:59.832336+00:00", "exitCode": 1, "passed": 238, "failed": 2, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 31.51}
+{"cycle": 54, "version": "V157", "timestampUtc": "2026-11-12T10:48:39.866800+00:00", "exitCode": 1, "passed": 238, "failed": 2, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 30.25}
+{"cycle": 67, "at": "2026-11-12T10:49:01.358272+00:00", "exitCode": 1, "leanFiles": 577, "checks": "0/142"}
+{"cycle": 63, "timestampUtc": "2026-11-12T10:49:18.940603+00:00", "exitCode": 1, "passed": 238, "failed": 2, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 30.91}
+{"cycle": 57, "timestampUtc": "2026-11-12T10:49:43.782439+00:00", "exitCode": 1, "passed": 238, "failed": 2, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 31.75}
+{"cycle": 63, "timestampUtc": "2026-11-12T10:49:49.923501+00:00", "exitCode": 1, "passed": 238, "failed": 2, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 31.7}
+{"cycle": 63, "timestampUtc": "2026-11-12T10:50:11.184812+00:00", "exitCode": 1, "passed": 238, "failed": 2, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 30.92}
+{"cycle": 1, "version": "V175", "timestampUtc": "2026-11-12T10:53:54.955153+00:00", "exitCode": 0, "passed": 240, "failed": 0, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 40.51}
+{"cycle": 65, "at": "2026-11-12T10:57:50.541572+00:00", "exitCode": 0, "leanFiles": 577, "checks": "142/142"}
+{"cycle": 65, "at": "2026-11-12T10:59:14.032521+00:00", "exitCode": 0, "leanFiles": 577, "checks": "142/142"}
+{"cycle": 62, "timestampUtc": "2026-11-12T11:02:05.258213+00:00", "exitCode": 0, "passed": 240, "failed": 0, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 41.17}
+{"cycle": 64, "timestampUtc": "2026-11-12T11:02:18.032081+00:00", "exitCode": 0, "passed": 240, "failed": 0, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 42.45}
+{"cycle": 64, "timestampUtc": "2026-11-12T11:02:40.824016+00:00", "exitCode": 0, "passed": 240, "failed": 0, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 41.04}
+{"cycle": 55, "version": "V157", "timestampUtc": "2026-11-12T11:04:20.836825+00:00", "exitCode": 0, "passed": 240, "failed": 0, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 40.54}
+{"cycle": 68, "at": "2026-11-12T11:04:44.094317+00:00", "exitCode": 0, "leanFiles": 577, "checks": "142/142"}
+{"cycle": 64, "timestampUtc": "2026-11-12T11:05:01.469618+00:00", "exitCode": 0, "passed": 240, "failed": 0, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 42.52}
+{"cycle": 58, "timestampUtc": "2026-11-12T11:05:28.209579+00:00", "exitCode": 0, "passed": 240, "failed": 0, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 43.9}
+{"cycle": 64, "timestampUtc": "2026-11-12T11:05:33.827512+00:00", "exitCode": 0, "passed": 240, "failed": 0, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 43.9}
+{"cycle": 64, "timestampUtc": "2026-11-12T11:05:54.009789+00:00", "exitCode": 0, "passed": 240, "failed": 0, "leanFiles": 577, "totalZeroSorryLeanFiles": 634, "durationSec": 42.34}
+{"cycle": 66, "at": "2026-11-12T11:13:32.679984+00:00", "exitCode": 0, "leanFiles": 578, "checks": "142/142"}
+{"cycle": 1, "version": "V176", "timestampUtc": "2026-11-12T11:14:32.384290+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 41.36}
+{"cycle": 66, "at": "2026-11-12T11:14:56.250526+00:00", "exitCode": 0, "leanFiles": 578, "checks": "142/142"}
+{"cycle": 63, "timestampUtc": "2026-11-12T11:17:47.688958+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 41.92}
+{"cycle": 65, "timestampUtc": "2026-11-12T11:18:01.109288+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 43.08}
+{"cycle": 65, "timestampUtc": "2026-11-12T11:18:22.848851+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 42.02}
+{"cycle": 56, "version": "V157", "timestampUtc": "2026-11-12T11:20:02.576447+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 41.26}
+{"cycle": 69, "at": "2026-11-12T11:20:27.804698+00:00", "exitCode": 0, "leanFiles": 578, "checks": "142/142"}
+{"cycle": 65, "timestampUtc": "2026-11-12T11:20:44.425296+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 42.96}
+{"cycle": 59, "timestampUtc": "2026-11-12T11:21:12.636739+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 43.93}
+{"cycle": 65, "timestampUtc": "2026-11-12T11:21:17.743234+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 43.92}
+{"cycle": 65, "timestampUtc": "2026-11-12T11:21:37.286734+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 42.78}
+{"cycle": 67, "at": "2026-11-12T11:29:13.470619+00:00", "exitCode": 0, "leanFiles": 578, "checks": "142/142"}
+{"cycle": 67, "at": "2026-11-12T11:30:37.192063+00:00", "exitCode": 0, "leanFiles": 578, "checks": "142/142"}
+{"cycle": 64, "timestampUtc": "2026-11-12T11:33:30.284412+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 42.11}
+{"cycle": 66, "timestampUtc": "2026-11-12T11:33:44.203356+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 43.09}
+{"cycle": 66, "timestampUtc": "2026-11-12T11:34:04.803602+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 41.96}
+{"cycle": 57, "version": "V157", "timestampUtc": "2026-11-12T11:35:43.959726+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 40.9}
+{"cycle": 70, "at": "2026-11-12T11:36:10.615667+00:00", "exitCode": 0, "leanFiles": 578, "checks": "142/142"}
+{"cycle": 66, "timestampUtc": "2026-11-12T11:36:27.195424+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 42.76}
+{"cycle": 60, "timestampUtc": "2026-11-12T11:36:56.874841+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 43.74}
+{"cycle": 66, "timestampUtc": "2026-11-12T11:37:02.569366+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 44.82}
+{"cycle": 66, "timestampUtc": "2026-11-12T11:37:20.950932+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 43.19}
+{"cycle": 68, "at": "2026-11-12T11:44:54.005343+00:00", "exitCode": 0, "leanFiles": 578, "checks": "142/142"}
+{"cycle": 68, "at": "2026-11-12T11:46:18.130819+00:00", "exitCode": 0, "leanFiles": 578, "checks": "142/142"}
+{"cycle": 65, "timestampUtc": "2026-11-12T11:49:12.525129+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 41.66}
+{"cycle": 67, "timestampUtc": "2026-11-12T11:49:28.123942+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 43.84}
+{"cycle": 67, "timestampUtc": "2026-11-12T11:49:47.101066+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 42.22}
+{"cycle": 58, "version": "V157", "timestampUtc": "2026-11-12T11:51:26.781574+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 42.27}
+{"cycle": 71, "at": "2026-11-12T11:51:53.423559+00:00", "exitCode": 0, "leanFiles": 578, "checks": "142/142"}
+{"cycle": 67, "timestampUtc": "2026-11-12T11:52:10.360825+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 43.08}
+{"cycle": 61, "timestampUtc": "2026-11-12T11:52:41.421727+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 43.98}
+{"cycle": 67, "timestampUtc": "2026-11-12T11:52:46.964359+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 44.32}
+{"cycle": 67, "timestampUtc": "2026-11-12T11:53:04.656956+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 43.14}
+{"cycle": 69, "at": "2026-11-12T12:00:35.252970+00:00", "exitCode": 0, "leanFiles": 578, "checks": "142/142"}
+{"cycle": 69, "at": "2026-11-12T12:01:59.502886+00:00", "exitCode": 0, "leanFiles": 578, "checks": "142/142"}
+{"cycle": 66, "timestampUtc": "2026-11-12T12:04:54.549917+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 41.49}
+{"cycle": 68, "timestampUtc": "2026-11-12T12:05:11.629103+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 43.49}
+{"cycle": 68, "timestampUtc": "2026-11-12T12:05:29.222231+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 42.1}
+{"cycle": 59, "version": "V157", "timestampUtc": "2026-11-12T12:07:07.448278+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 40.14}
+{"cycle": 72, "at": "2026-11-12T12:07:36.160334+00:00", "exitCode": 0, "leanFiles": 578, "checks": "142/142"}
+{"cycle": 68, "timestampUtc": "2026-11-12T12:07:53.083480+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 42.7}
+{"cycle": 62, "timestampUtc": "2026-11-12T12:08:25.972917+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 44.05}
+{"cycle": 68, "timestampUtc": "2026-11-12T12:08:31.807752+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 44.82}
+{"cycle": 68, "timestampUtc": "2026-11-12T12:08:48.293000+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 43.11}
+{"cycle": 70, "at": "2026-11-12T12:16:17.119169+00:00", "exitCode": 0, "leanFiles": 578, "checks": "142/142"}
+{"cycle": 70, "at": "2026-11-12T12:17:40.159682+00:00", "exitCode": 0, "leanFiles": 578, "checks": "142/142"}
+{"cycle": 67, "timestampUtc": "2026-11-12T12:20:37.501494+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 42.43}
+{"cycle": 69, "timestampUtc": "2026-11-12T12:20:54.431626+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 42.79}
+{"cycle": 69, "timestampUtc": "2026-11-12T12:21:11.355161+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 42.12}
+{"cycle": 60, "version": "V157", "timestampUtc": "2026-11-12T12:22:48.767222+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 40.79}
+{"cycle": 73, "at": "2026-11-12T12:23:18.668843+00:00", "exitCode": 0, "leanFiles": 578, "checks": "142/142"}
+{"cycle": 69, "timestampUtc": "2026-11-12T12:23:35.710842+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 42.61}
+{"cycle": 63, "timestampUtc": "2026-11-12T12:24:10.088626+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 43.57}
+{"cycle": 69, "timestampUtc": "2026-11-12T12:24:15.449032+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 43.62}
+{"cycle": 69, "timestampUtc": "2026-11-12T12:24:31.870502+00:00", "exitCode": 0, "passed": 244, "failed": 0, "leanFiles": 578, "totalZeroSorryLeanFiles": 635, "durationSec": 43.06}
+{"cycle": 71, "at": "2026-11-12T12:31:18.331892+00:00", "exitCode": 1, "leanFiles": 579, "checks": "0/142"}
+{"cycle": 71, "at": "2026-11-12T12:32:41.383958+00:00", "exitCode": 1, "leanFiles": 579, "checks": "0/142"}
+{"cycle": 1, "version": "V177", "timestampUtc": "2026-11-12T12:36:20.989852+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 44.87}
+{"cycle": 68, "timestampUtc": "2026-11-12T12:36:24.024742+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 45.98}
+{"cycle": 70, "timestampUtc": "2026-11-12T12:36:39.343422+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 44.89}
+{"cycle": 70, "timestampUtc": "2026-11-12T12:36:55.410040+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 44.04}
+{"cycle": 61, "version": "V157", "timestampUtc": "2026-11-12T12:38:30.967777+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 41.68}
+{"cycle": 74, "at": "2026-11-12T12:39:01.786060+00:00", "exitCode": 0, "leanFiles": 579, "checks": "142/142"}
+{"cycle": 70, "timestampUtc": "2026-11-12T12:39:18.686144+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 42.95}
+{"cycle": 64, "timestampUtc": "2026-11-12T12:39:55.825510+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 45.19}
+{"cycle": 70, "timestampUtc": "2026-11-12T12:40:00.399772+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 44.93}
+{"cycle": 70, "timestampUtc": "2026-11-12T12:40:16.660838+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 44.27}
+{"cycle": 72, "at": "2026-11-12T12:46:59.518158+00:00", "exitCode": 0, "leanFiles": 579, "checks": "142/142"}
+{"cycle": 72, "at": "2026-11-12T12:48:22.772914+00:00", "exitCode": 0, "leanFiles": 579, "checks": "142/142"}
+{"cycle": 69, "timestampUtc": "2026-11-12T12:52:06.863200+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 42.34}
+{"cycle": 71, "timestampUtc": "2026-11-12T12:52:23.068947+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 43.7}
+{"cycle": 71, "timestampUtc": "2026-11-12T12:52:38.416916+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 42.98}
+{"cycle": 62, "version": "V157", "timestampUtc": "2026-11-12T12:54:13.149717+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 41.64}
+{"cycle": 75, "at": "2026-11-12T12:54:44.976718+00:00", "exitCode": 0, "leanFiles": 579, "checks": "142/142"}
+{"cycle": 71, "timestampUtc": "2026-11-12T12:55:01.636922+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 42.92}
+{"cycle": 65, "timestampUtc": "2026-11-12T12:55:40.671512+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 44.31}
+{"cycle": 71, "timestampUtc": "2026-11-12T12:55:45.509649+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 45.07}
+{"cycle": 71, "timestampUtc": "2026-11-12T12:56:01.310448+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 44.13}
+{"cycle": 73, "at": "2026-11-12T13:02:40.901023+00:00", "exitCode": 0, "leanFiles": 579, "checks": "142/142"}
+{"cycle": 73, "at": "2026-11-12T13:04:04.168733+00:00", "exitCode": 0, "leanFiles": 579, "checks": "142/142"}
+{"cycle": 70, "timestampUtc": "2026-11-12T13:07:49.450475+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 42.08}
+{"cycle": 72, "timestampUtc": "2026-11-12T13:08:06.826658+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 43.73}
+{"cycle": 72, "timestampUtc": "2026-11-12T13:08:21.606531+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 43.16}
+{"cycle": 63, "version": "V157", "timestampUtc": "2026-11-12T13:09:54.687666+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 41.01}
+{"cycle": 76, "at": "2026-11-12T13:10:28.090307+00:00", "exitCode": 0, "leanFiles": 579, "checks": "142/142"}
+{"cycle": 72, "timestampUtc": "2026-11-12T13:10:44.429989+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 42.77}
+{"cycle": 66, "timestampUtc": "2026-11-12T13:11:25.598443+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 44.4}
+{"cycle": 72, "timestampUtc": "2026-11-12T13:11:30.413491+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 44.88}
+{"cycle": 72, "timestampUtc": "2026-11-12T13:11:45.897447+00:00", "exitCode": 0, "passed": 248, "failed": 0, "leanFiles": 579, "totalZeroSorryLeanFiles": 636, "durationSec": 44.07}
+{"cycle": 74, "at": "2026-11-12T13:18:22.314557+00:00", "exitCode": 0, "leanFiles": 580, "checks": "142/142"}
+{"cycle": 74, "at": "2026-11-12T13:19:05.377160+00:00", "exitCode": 1, "leanFiles": 580, "checks": "0/142"}
+{"cycle": 1, "version": "V178", "timestampUtc": "2026-11-12T13:20:51.749617+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 41.64}
+{"cycle": 71, "timestampUtc": "2026-11-12T13:23:32.559139+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 42.6}
+{"cycle": 73, "timestampUtc": "2026-11-12T13:23:51.084441+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 44.23}
+{"cycle": 73, "timestampUtc": "2026-11-12T13:24:05.794391+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 44.16}
+{"cycle": 64, "version": "V157", "timestampUtc": "2026-11-12T13:25:37.067481+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 41.85}
+{"cycle": 77, "at": "2026-11-12T13:26:11.585896+00:00", "exitCode": 0, "leanFiles": 580, "checks": "142/142"}
+{"cycle": 73, "timestampUtc": "2026-11-12T13:26:27.832500+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 43.38}
+{"cycle": 67, "timestampUtc": "2026-11-12T13:27:11.450132+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 45.34}
+{"cycle": 73, "timestampUtc": "2026-11-12T13:27:15.907648+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 45.47}
+{"cycle": 73, "timestampUtc": "2026-11-12T13:27:30.986797+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 44.56}
+{"cycle": 75, "at": "2026-11-12T13:34:04.136133+00:00", "exitCode": 0, "leanFiles": 580, "checks": "142/142"}
+{"cycle": 75, "at": "2026-11-12T13:34:47.382656+00:00", "exitCode": 0, "leanFiles": 580, "checks": "142/142"}
+{"cycle": 72, "timestampUtc": "2026-11-12T13:39:18.908405+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 45.86}
+{"cycle": 74, "timestampUtc": "2026-11-12T13:39:37.409348+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 46.34}
+{"cycle": 74, "timestampUtc": "2026-11-12T13:39:51.472130+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 45.7}
+{"cycle": 1, "version": "V178", "timestampUtc": "2026-11-12T13:41:07.465685+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 45.47}
+{"cycle": 65, "version": "V157", "timestampUtc": "2026-11-12T13:41:23.771686+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 46.17}
+{"cycle": 78, "at": "2026-11-12T13:41:59.080515+00:00", "exitCode": 0, "leanFiles": 580, "checks": "142/142"}
+{"cycle": 74, "timestampUtc": "2026-11-12T13:42:15.232581+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 47.42}
+{"cycle": 68, "timestampUtc": "2026-11-12T13:43:03.203459+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 51.27}
+{"cycle": 74, "timestampUtc": "2026-11-12T13:43:08.029901+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 52.14}
+{"cycle": 74, "timestampUtc": "2026-11-12T13:43:20.572477+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 49.13}
+{"cycle": 1, "version": "V178", "timestampUtc": "2026-11-12T13:45:29.325205+00:00", "exitCode": 0, "passed": 252, "failed": 0, "leanFiles": 580, "totalZeroSorryLeanFiles": 637, "durationSec": 42.61}
+{"cycle": 1, "version": "V179", "timestampUtc": "2026-11-12T14:29:36.758198+00:00", "exitCode": 0, "passed": 256, "failed": 0, "leanFiles": 581, "totalZeroSorryLeanFiles": 638, "durationSec": 42.97}
+{"cycle": 1, "version": "V180", "timestampUtc": "2026-11-12T14:44:01.085425+00:00", "exitCode": 0, "passed": 260, "failed": 0, "leanFiles": 582, "totalZeroSorryLeanFiles": 639, "durationSec": 47.38}
+{"cycle": 1, "version": "V180", "timestampUtc": "2026-11-12T14:47:12.821944+00:00", "exitCode": 0, "passed": 260, "failed": 0, "leanFiles": 582, "totalZeroSorryLeanFiles": 639, "durationSec": 46.42}
+{"cycle": 1, "version": "V181", "timestampUtc": "2026-11-12T15:02:39.056149+00:00", "exitCode": 0, "passed": 260, "failed": 0, "leanFiles": 582, "totalZeroSorryLeanFiles": 639, "durationSec": 50.07}

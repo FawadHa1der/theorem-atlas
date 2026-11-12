@@ -1,0 +1,4 @@
+# Cloudflare Pages Clean URL & Legacy Route Redirects
+/preview/v20/* /universe/sources/:splat 200
+/safari/* /:splat 301
+/universe /universe/sources/ 301

@@ -1,0 +1,14 @@
+# Cloudflare Pages & Workers Static Assets Configuration for Common Ground Observatory
+name = "commonground-observatory"
+compatibility_date = "2026-10-01"
+pages_build_output_dir = "./dist-cloudflare"
+
+[assets]
+directory = "./dist-cloudflare"
+not_found_handling = "single-page-application"
+
+[vars]
+OBSERVATORY_VERSION = "V148"
+LEAN_KERNEL_VERSION = "leanprover/lean4:v4.33.0"
+TOTAL_GALAXY_IDEAS = "8400"
+TOTAL_PHYSICAL_LEAN_SUITES = "554"

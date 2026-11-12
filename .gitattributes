@@ -1,0 +1,17 @@
+# Normalize line endings for Lean 4 proofs, scripts, and web assets
+*.lean text eol=lf
+*.toml text eol=lf
+*.py text eol=lf
+*.js text eol=lf
+*.mjs text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.sh text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+
+# Unrestricted >100 MiB Lean 4 archives or monolithic proof snapshots route cleanly via Git LFS
+# (Standard .lean files < 100 MiB stay directly in Git with zero LFS bandwidth usage; all >25 MiB .lean files stream via Cloudflare R2)
+archive/large-lean/** filter=lfs diff=lfs merge=lfs -text
+*.lean.zst filter=lfs diff=lfs merge=lfs -text
+*.tar.zst filter=lfs diff=lfs merge=lfs -text

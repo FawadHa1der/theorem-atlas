@@ -1,0 +1,6 @@
+name = "commonground-verification"
+version = "1.57.0"
+defaultTargets = ["CommonGround"]
+
+[[lean_lib]]
+name = "CommonGround"

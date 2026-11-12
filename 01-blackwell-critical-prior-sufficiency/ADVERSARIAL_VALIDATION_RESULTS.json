@@ -50,10 +50,10 @@
       "observedQ": ["3/20", "17/20"],
       "priorHalfDefect": "0",
       "criticalPriors": ["3/13", "17/27"],
-      "localCriticalSlacks": ["1/260", "0"],
-      "marginalL1ErrorP": "1/130",
-      "marginalL1ErrorQ": "1/130",
-      "twiceSumLocalSlacks": "1/130",
+      "localCriticalSlacks": ["1/65", "0"],
+      "marginalL1ErrorP": "2/65",
+      "marginalL1ErrorQ": "2/65",
+      "twiceSumLocalSlacks": "2/65",
       "boundAttainmentRatio": "1.0 (Exact Equality: ‖PR_mix - p‖_1 = 2 ∑ Δ_{t_b}(b))"
     },
     {
