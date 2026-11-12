@@ -1,6 +1,25 @@
-# Common Ground V34 Verification & Cross-Domain Breakthroughs in Lean 4
+# Common Ground · Cross-Domain Mathematical Observatory (`V181`) & Lean 4.33.0 Corpus
 
-This repository contains the complete verification archive, preserved Lean 4 proof sources, **13 novel cross-domain Lean 4 formalization modules (47 new theorems)**, two interactive exact-rational browser laboratories, automated exact-rational adversarial validation suites, and publication-grade papers extending the [**Common Ground V34 / V36 Candidate Atlas**](http://127.0.0.1:4200/preview/v34/) ([Exact Proofs & Reproduction Index](http://127.0.0.1:4200/preview/v34/reproduction.html)) and connecting its foundations to [`https://hodge.computer`](https://hodge.computer) ([`arXiv:2603.29157`](https://arxiv.org/pdf/2603.29157)).
+- **Live Observatory (Chrome & Safari Unified):** [`https://common-ground-atlas.com`](https://common-ground-atlas.com) · Local entrypoint: [`observatory/index.html`](./observatory/index.html)
+- **Kernel-Verified Lean 4.33.0 Corpus:** **639 zero-sorry `.lean` files** (`582` cross-domain bridge modules in [`CommonGround/Verification/`](./CommonGround/Verification/) + `57` frontier modules across `01`–`10`, with **599 modules compiled directly through the Lean 4.33.0 kernel**)
+- **Observatory Scale & Provenance Gating:** **1,400 cross-domain proof mechanisms**, **1,887 unique endpoint bridges** (deduplicated from 7,000 AST pairs across 40 projects and 593 source repositories), **91 reviewed (`★`) bridges**, **2,800 discovery paths**, **36 exact finite micro-labs**, and **260 automated UX, provenance & mathematical checks**
+
+This repository houses the unified **Common Ground Cross-Domain Mathematical Observatory**, all **639 zero-sorry Lean 4.33.0 proof files**, interactive exact-rational browser laboratories, adversarial validation suites, and research papers connecting cross-domain proof mechanisms to [`https://hodge.computer`](https://hodge.computer) ([`arXiv:2603.29157`](https://arxiv.org/pdf/2603.29157)).
+
+## Quickstart: Run & Verify Locally
+
+```bash
+# 1. Serve the unified Chrome & Safari 8-shard Observatory locally on http://localhost:4190/
+python3 -B observatory/scripts/serve-observatory.py
+
+# 2. Verify 0 sorry across all 639 .lean files & compile through the Lean 4.33.0 kernel
+python3 -B observatory/scripts/compile-all-lean4.py
+
+# 3. Rebuild unified shards (<16 MiB each, 0 truncation) & run all 260 headless E2E checks
+python3 -B observatory/scripts/reconstruct-bundle-data.py
+python3 -B observatory/scripts/build-cloudflare-dist.py
+bash observatory/tests/run-tests.sh
+```
 
 ## Featured Papers, Interactive Demos & Validation Suites
 
