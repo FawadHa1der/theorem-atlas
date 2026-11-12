@@ -17,8 +17,9 @@ jobs:
   build-verify-and-deploy:
     name: Build, Sync Unrestricted .lean Corpus to R2 & Deploy Cloudflare Pages
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 35
     env:
+      NODE_OPTIONS: "--max-old-space-size=6144"
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       R2_BUCKET_NAME: ${{ vars.R2_BUCKET_NAME || 'common-ground-lean-corpus' }}
@@ -35,15 +36,16 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Cache Lean 4 elan toolchain & .lake build
+      - name: Cache Lean 4 elan toolchain, .lake build & R2 SHA-256 sync state
         uses: actions/cache@v4
         with:
           path: |
             ~/.elan
             .lake
-          key: lean4-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lakefile.toml', 'CommonGround/**/*.lean') }}
+            observatory/logs/r2-uploaded-sha256.json
+          key: lean4-r2-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lakefile.toml', 'CommonGround/**/*.lean') }}
           restore-keys: |
-            lean4-${{ runner.os }}-
+            lean4-r2-${{ runner.os }}-
 
       - name: Install Lean 4.33.0 & Verify Zero-Sorry Kernel Build
         run: |
@@ -63,9 +65,10 @@ jobs:
       - name: Sync Unrestricted-Size Lean 4 Corpus to Cloudflare R2 & Ensure Pages Project Exists
         if: ${{ env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != '' }}
         run: |
-          npx --yes wrangler@4 r2 bucket create "$R2_BUCKET_NAME" || true
-          npx --yes wrangler@4 pages project create "$CF_PAGES_PROJECT" --production-branch=main || true
-          python3 -B observatory/scripts/sync-lean-to-r2.py --bucket "$R2_BUCKET_NAME"
+          npm install --no-save --no-audit --no-fund wrangler@4.14.0
+          ./node_modules/.bin/wrangler r2 bucket create "$R2_BUCKET_NAME" || true
+          ./node_modules/.bin/wrangler pages project create "$CF_PAGES_PROJECT" --production-branch=main || true
+          python3 -B observatory/scripts/sync-lean-to-r2.py --bucket "$R2_BUCKET_NAME" --workers 12
 
       - name: Deploy Static Shards + R2 Streaming Function (/api/lean/*) to Cloudflare Pages
         if: ${{ env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != '' }}

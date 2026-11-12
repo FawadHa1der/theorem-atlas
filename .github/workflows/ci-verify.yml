@@ -16,6 +16,8 @@ jobs:
     name: Verify Zero-Sorry Lean 4 Corpus & Unified Chrome/Safari Observatory E2E Checks
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    env:
+      NODE_OPTIONS: "--max-old-space-size=6144"
 
     steps:
       - name: Checkout repository

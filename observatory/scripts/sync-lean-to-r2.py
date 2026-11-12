@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
 """
-Cloudflare R2 Unrestricted-Size Lean 4 Corpus Sync (`sync-lean-to-r2.py` · V157)
+Cloudflare R2 Unrestricted-Size Lean 4 Corpus Sync (`sync-lean-to-r2.py` · V181)
 =================================================================================
-Since `.lean` files have NO 25 MiB restriction (and monolithic proofs in corpora like
-`ten-proofs` can grow to tens or hundreds of megabytes), Cloudflare Pages' 25 MiB static
-per-file cap is bypassed cleanly by storing `.lean` artifacts in Cloudflare R2 (`$0` egress)
-and streaming them from `/api/lean/<path>` via Cloudflare Pages Functions!
+Stores all `.lean` artifacts (including any >25 MiB or >100 MiB monolithic proofs) in
+Cloudflare R2 (`$0` egress) and streams them via `/api/lean/<path>` on Cloudflare Pages Functions.
 
 Features:
-- Computes SHA-256 hashes for all `.lean` files (`CommonGround/Verification/` + `01..10-*` + optional `--extra-dir`).
-- Writes `observatory/dist-cloudflare/lean-corpus-manifest.json` (< 250 KB, safe for Pages static hosting)
-  so the UI & `/api/lean/[[path]]` know exact byte sizes, SHA-256 digests, and theorem counts.
-- Incremental sync: skips unchanged objects unless `--force` is passed, minimizing R2 Class A PUT operations.
+- Computes SHA-256 hashes for all `.lean` files (`CommonGround/Verification/` + `01..10-*` + optional `archive/large-lean/`).
+- Writes `observatory/dist-cloudflare/lean-corpus-manifest.json` (< 250 KB, safe for Pages static hosting).
+- Incremental SHA-256 sync + bounded parallel uploads (12 workers) using locally installed `wrangler` binary
+  so initial 639-file R2 upload finishes in ~30-45s instead of timing out sequential `npx` cold starts.
 """
 from __future__ import annotations
 import argparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import hashlib
 import json
 import os
@@ -69,6 +68,16 @@ def build_manifest(files: list[Path], bucket: str) -> dict:
     }
 
 
+def resolve_wrangler_cmd() -> list[str]:
+    local_bin = REPO_ROOT / "node_modules" / ".bin" / "wrangler"
+    if local_bin.exists():
+        return [str(local_bin)]
+    found = shutil.which("wrangler")
+    if found:
+        return [found]
+    return ["npx", "--yes", "wrangler@4"]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--bucket", default=os.environ.get("R2_BUCKET_NAME", "common-ground-lean-corpus"))
@@ -76,6 +85,7 @@ def main():
     ap.add_argument("--dry-run", action="store_true", help="Print R2 uploads that would run without calling wrangler")
     ap.add_argument("--only-over-25mb", action="store_true", help="Only upload .lean files >= 25 MiB to R2")
     ap.add_argument("--force", action="store_true", help="Re-upload all files even if SHA-256 matches cached state")
+    ap.add_argument("--workers", type=int, default=12, help="Parallel R2 upload workers (default: 12)")
     args = ap.parse_args()
 
     CF_DIR.mkdir(parents=True, exist_ok=True)
@@ -111,19 +121,37 @@ def main():
         print(f"[R2 Dry Run] Would upload {len(to_upload)}/{manifest['totalFiles']} .lean objects to R2 bucket `{args.bucket}`.")
         return
 
-    wrangler = shutil.which("wrangler") or "npx"
-    uploaded = 0
-    for item in to_upload:
+    if not to_upload:
+        print(f"[R2 Sync OK] 0 changed .lean files (all {manifest['totalFiles']} objects already up to date in `{args.bucket}`).")
+        return
+
+    base_cmd = resolve_wrangler_cmd()
+    print(f"[R2 Sync] Uploading {len(to_upload)} .lean files to `{args.bucket}` via {' '.join(base_cmd)} ({args.workers} workers)...")
+
+    def upload_one(item: dict) -> tuple[str, str]:
         src_file = REPO_ROOT / item["path"]
         key = f"{args.bucket}/{item['path']}"
-        cmd = (
-            [wrangler, "r2", "object", "put", key, "--file", str(src_file), "--content-type", "text/plain; charset=utf-8", "--remote"]
-            if wrangler != "npx"
-            else ["npx", "--yes", "wrangler@4", "r2", "object", "put", key, "--file", str(src_file), "--content-type", "text/plain; charset=utf-8", "--remote"]
-        )
-        subprocess.run(cmd, cwd=str(REPO_ROOT), check=True)
-        prev_hashes[item["path"]] = item["sha256"]
-        uploaded += 1
+        cmd = base_cmd + [
+            "r2", "object", "put", key,
+            "--file", str(src_file),
+            "--content-type", "text/plain; charset=utf-8",
+            "--remote",
+        ]
+        res = subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True)
+        if res.returncode != 0:
+            raise RuntimeError(f"Failed R2 upload for {item['path']} (exit {res.returncode}): {res.stderr or res.stdout}")
+        return item["path"], item["sha256"]
+
+    uploaded = 0
+    with ThreadPoolExecutor(max_workers=max(1, args.workers)) as pool:
+        futs = [pool.submit(upload_one, item) for item in to_upload]
+        for fut in as_completed(futs):
+            rel_path, sha = fut.result()
+            prev_hashes[rel_path] = sha
+            uploaded += 1
+            if uploaded % 50 == 0 or uploaded == len(to_upload):
+                print(f"  [R2 Progress] {uploaded}/{len(to_upload)} .lean files uploaded...")
+                STATE_CACHE.write_text(json.dumps(prev_hashes, indent=2), encoding="utf-8")
 
     STATE_CACHE.write_text(json.dumps(prev_hashes, indent=2), encoding="utf-8")
     print(f"[R2 Sync OK] Uploaded {uploaded} changed/new .lean files to R2 bucket `{args.bucket}`.")

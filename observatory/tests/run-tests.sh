@@ -28,8 +28,8 @@ if [ -x "$JSC" ] && [ "$REPO_ROOT" = "/Users/fawadhaider/code/commonground-verif
 fi
 
 if command -v node >/dev/null 2>&1; then
-  echo "=== Running Cross-Platform Headless Node VM CI Suite (Linux & macOS Parity) ==="
-  node "$OBS_DIR/tests/node-ci-runner.mjs"
+  echo "=== Running Cross-Platform Headless Node VM CI Suite (Isolated 6 GiB Heap Subprocesses) ==="
+  node --max-old-space-size=6144 "$OBS_DIR/tests/node-ci-runner.mjs"
 elif [ ! -x "$JSC" ]; then
   echo "ERROR: Neither WebKit jsc nor Node.js found to execute headless JS suites!" >&2
   exit 1

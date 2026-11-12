@@ -3,12 +3,18 @@
  * Cross-Platform Headless Node.js VM E2E Test Runner (`node-ci-runner.mjs` · V181)
  * ================================================================================
  * Runs identically on Ubuntu Linux (GitHub Actions CI) and macOS with ZERO external npm packages!
+ *
+ * Memory-safe process isolation:
+ *   Each 103 MiB Observatory suite runs in its own isolated child Node process with
+ *   `--max-old-space-size=6144` so the OS reclaims 100% of V8 heap memory between suites
+ *   and never hits Node's default 2 GiB V8 heap limit on GitHub Actions `ubuntu-latest`.
+ *
  * Executes:
  *   1. `automated-ux-functional-suite.js` (against reconstructed `bundle-data.js`)
  *   2. `cloudflare-shards-e2e-suite.js` (against the 8 `<25 MiB` Cloudflare Pages shards)
  *   3. Unified `observatory/index.html` + 8 untruncated shards strict `file://` SecurityError survival test
- *      (proving Safari and Chrome share the exact same HTML + 8 shards on https://, localhost, and file://)
  */
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
@@ -23,8 +29,7 @@ function remapRepoPaths(codeStr) {
   return codeStr.replaceAll("/Users/fawadhaider/code/commonground-verification-gemini", REPO_ROOT);
 }
 
-function runJscSuiteInNodeVm(label, suiteFilePath) {
-  console.log(`\n=== [Node VM] ${label} ===`);
+function makeBaseSandbox() {
   const sandbox = {
     console,
     Math,
@@ -60,6 +65,12 @@ function runJscSuiteInNodeVm(label, suiteFilePath) {
     print: (...args) => console.log(...args),
   };
   sandbox.globalThis = sandbox;
+  return sandbox;
+}
+
+function runJscSuiteInNodeVm(label, suiteFilePath) {
+  console.log(`\n=== [Node VM] ${label} ===`);
+  const sandbox = makeBaseSandbox();
   const ctx = vm.createContext(sandbox);
   sandbox.load = (targetPath) => {
     const resolved = remapRepoPaths(String(targetPath));
@@ -72,7 +83,7 @@ function runJscSuiteInNodeVm(label, suiteFilePath) {
 }
 
 function runUnifiedIndexFileOriginSuite() {
-  console.log("\n=== [Node VM] Unified Chrome & Safari file:// SecurityError E2E on observatory/index.html + 8 Shards ===");
+  console.log("\n=== [Node VM] 3. Unified Chrome & Safari file:// SecurityError E2E on observatory/index.html + 8 Shards ===");
   if (fs.existsSync(path.join(OBS_DIR, "safari-standalone.html")) || fs.existsSync(path.join(OBS_DIR, "safari"))) {
     throw new Error("Obsolete Safari standalone fork files still exist in observatory/!");
   }
@@ -86,32 +97,7 @@ function runUnifiedIndexFileOriginSuite() {
   const suiteSrc = fs.readFileSync(path.join(TESTS_DIR, "automated-ux-functional-suite.js"), "utf8");
   const domPreamble = suiteSrc.slice(0, suiteSrc.indexOf("// Load bundle-data.js"));
 
-  const sandbox = {
-    console,
-    Math,
-    Date,
-    JSON,
-    Object,
-    Array,
-    String,
-    Number,
-    Boolean,
-    RegExp,
-    Set,
-    Map,
-    Error,
-    TypeError,
-    parseInt,
-    parseFloat,
-    isNaN,
-    isFinite,
-    encodeURIComponent,
-    decodeURIComponent,
-    setTimeout,
-    clearTimeout,
-    print: (...args) => console.log(...args),
-  };
-  sandbox.globalThis = sandbox;
+  const sandbox = makeBaseSandbox();
   const ctx = vm.createContext(sandbox);
 
   vm.runInContext(domPreamble, ctx, { filename: "dom-preamble.js" });
@@ -175,7 +161,24 @@ function runUnifiedIndexFileOriginSuite() {
   );
 }
 
-runJscSuiteInNodeVm("1. Local Monolithic Bundle Automated UX & Math Suite", path.join(TESTS_DIR, "automated-ux-functional-suite.js"));
-runJscSuiteInNodeVm("2. Cloudflare 8-Shard (<25 MiB) Automated UX & Math Suite", path.join(TESTS_DIR, "cloudflare-shards-e2e-suite.js"));
-runUnifiedIndexFileOriginSuite();
-console.log("\nNODE_CI_ALL_E2E_SUITES_PASSED_OK");
+const suiteArg = process.argv.find((a) => a.startsWith("--suite="));
+if (suiteArg) {
+  const which = suiteArg.split("=")[1];
+  if (which === "1") {
+    runJscSuiteInNodeVm("1. Local Monolithic Bundle Automated UX & Math Suite", path.join(TESTS_DIR, "automated-ux-functional-suite.js"));
+  } else if (which === "2") {
+    runJscSuiteInNodeVm("2. Cloudflare 8-Shard (<25 MiB) Automated UX & Math Suite", path.join(TESTS_DIR, "cloudflare-shards-e2e-suite.js"));
+  } else if (which === "3") {
+    runUnifiedIndexFileOriginSuite();
+  } else {
+    throw new Error(`Unknown --suite=${which}`);
+  }
+} else {
+  for (const s of ["1", "2", "3"]) {
+    execFileSync(process.execPath, ["--max-old-space-size=6144", __filename, `--suite=${s}`], {
+      stdio: "inherit",
+      env: { ...process.env, NODE_OPTIONS: "--max-old-space-size=6144" },
+    });
+  }
+  console.log("\nNODE_CI_ALL_E2E_SUITES_PASSED_OK");
+}

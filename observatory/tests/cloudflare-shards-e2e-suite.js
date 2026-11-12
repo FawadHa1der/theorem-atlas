@@ -131,6 +131,9 @@ function makeDomNode(tag, attrObj) {
     }
   });
   if (node.id) elById[node.id] = node;
+  if (allCreatedEls.length > 4000) {
+    allCreatedEls.splice(0, allCreatedEls.length - 2000);
+  }
   allCreatedEls.push(node);
   return node;
 }
