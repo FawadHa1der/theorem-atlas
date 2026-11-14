@@ -11,6 +11,11 @@ __pycache__/
 .env.*
 .wrangler/
 
+# Gemini CLI, CI reference mount & GitHub Actions temporary credentials
+.gemini/
+gha-creds-*.json
+.theorem-atlas-ref/
+
 # Node tooling (if installed locally)
 node_modules/
 

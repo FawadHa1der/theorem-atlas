@@ -1,0 +1,40 @@
+{
+  "name": "Common Ground Observatory (Lean 4.33.0 + Unified Shards)",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "16gb",
+    "storage": "32gb"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    }
+  },
+  "containerEnv": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "NODE_OPTIONS": "--max-old-space-size=6144"
+  },
+  "postCreateCommand": "curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain none && $HOME/.elan/bin/elan toolchain install $(cat lean-toolchain) && npm install -g wrangler@4.14.0 @google/gemini-cli && python3 -B observatory/scripts/reconstruct-bundle-data.py",
+  "remoteEnv": {
+    "PATH": "${containerEnv:PATH}:/home/vscode/.elan/bin"
+  },
+  "forwardPorts": [4190],
+  "portsAttributes": {
+    "4190": {
+      "label": "Common Ground Observatory (Unified Chrome & Safari)",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "leanprover.lean4",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
+}

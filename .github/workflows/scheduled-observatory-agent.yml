@@ -1,0 +1,169 @@
+name: Scheduled · Improve Common Ground Observatory (Cloud Agent)
+
+on:
+  schedule:
+    # Runs hourly at minute 17 UTC (avoids top-of-hour GitHub Actions queue spikes)
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  deployments: write
+
+concurrency:
+  group: scheduled-observatory-agent-main
+  cancel-in-progress: false
+
+jobs:
+  autonomous-observatory-pass:
+    name: Hourly Gemini Verification, Bridge Critique, Shard Build & Cloudflare Deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+      NODE_OPTIONS: "--max-old-space-size=6144"
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      R2_BUCKET_NAME: ${{ vars.R2_BUCKET_NAME || 'common-ground-lean-corpus' }}
+      CF_PAGES_PROJECT: ${{ vars.CF_PAGES_PROJECT || 'common-ground-observatory' }}
+      READONLY_ATLAS_REPO: ${{ vars.READONLY_ATLAS_REPO || '' }}
+      READONLY_ATLAS_PAT: ${{ secrets.READONLY_ATLAS_PAT }}
+
+    steps:
+      - name: Check whether GEMINI_API_KEY secret is configured
+        id: check_key
+        run: |
+          if [ -z "$GEMINI_API_KEY" ]; then
+            echo "::notice::GEMINI_API_KEY secret is not set yet. Add GEMINI_API_KEY in Settings -> Secrets and variables -> Actions to activate autonomous cloud passes."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout main repository
+        if: steps.check_key.outputs.ready == 'true'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: Checkout optional private read-only theorem-atlas reference corpus
+        if: steps.check_key.outputs.ready == 'true' && env.READONLY_ATLAS_REPO != '' && env.READONLY_ATLAS_PAT != ''
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.READONLY_ATLAS_REPO }}
+          token: ${{ secrets.READONLY_ATLAS_PAT }}
+          path: .theorem-atlas-ref
+          lfs: true
+
+      - name: Enforce OS-level read-only permissions on .theorem-atlas-ref
+        if: steps.check_key.outputs.ready == 'true' && env.READONLY_ATLAS_REPO != '' && env.READONLY_ATLAS_PAT != ''
+        run: chmod -R a-w .theorem-atlas-ref
+
+      - name: Set up Node.js 22
+        if: steps.check_key.outputs.ready == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Cache Lean 4 elan toolchain, .lake build & R2 SHA-256 sync state
+        if: steps.check_key.outputs.ready == 'true'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.elan
+            .lake
+            observatory/logs/r2-uploaded-sha256.json
+          key: lean4-r2-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lakefile.toml', 'CommonGround/**/*.lean') }}
+          restore-keys: |
+            lean4-r2-${{ runner.os }}-
+
+      - name: Install Lean 4.33.0, Gemini CLI & reconstruct working bundle-data.js
+        if: steps.check_key.outputs.ready == 'true'
+        run: |
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/elan" toolchain install "$(cat lean-toolchain)"
+          npm install -g --no-audit --no-fund @google/gemini-cli@latest
+          python3 -B observatory/scripts/reconstruct-bundle-data.py --force
+
+      - name: Run autonomous Common Ground Observatory pass via Gemini CLI
+        if: steps.check_key.outputs.ready == 'true'
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          read -r -d '' AGENT_PROMPT <<'EOF' || true
+          Follow GEMINI.md strictly. Execute one bounded, high-rigor Common Ground Observatory improvement pass inside the current repository (if .theorem-atlas-ref exists, treat .theorem-atlas-ref as strictly read-only and always pass -B to python3):
+          1. Read observatory/logs/continuous-audit-status.json, observatory/logs/continuous-audit-runs.jsonl, and git log -n 5 to inspect the latest verification baseline so no prior pass is repeated.
+          2. Explore candidate mathematical bridges in observatory/bundle-data.js (and .theorem-atlas-ref if present) alongside CommonGround/Verification/ and 01..10-*, verifying zero sorry/admit tokens, ambient section assumptions, and exact finite witnesses plus premise-failure counterexamples in Lean 4.33.0 before importing or promoting any bridge.
+          3. Critique existing records in observatory/unified-standalone.js and observatory/bundle-data.js in place: sharpen at least 2 genuine cross-domain bridges to ★ with clear "Why & How Connected" explanations, concrete unlocked statements, real-world use cases, and honest failure boundaries, and downgrade tactical/syntactic lookalikes to ⚠ without adding visual clutter or new top-level panels.
+          4. Rebuild all 8 unified Chrome, Safari, and Cloudflare shards on observatory/index.html via `python3 -B observatory/scripts/build-cloudflare-dist.py` (never create a safari-standalone fork), then run `python3 -B observatory/scripts/continuous-verify-and-audit.py` and resolve any failure until exit code is 0.
+          5. Write a concise Markdown summary of newly verified insights, downgraded lookalikes, and updated Lean 4 / E2E counts to observatory/logs/last-cloud-pass-summary.md.
+          EOF
+          gemini --approval-mode=yolo -p "$AGENT_PROMPT"
+
+      - name: Independent Deterministic Lean 4.33.0 Kernel + 8-Shard + E2E Gate
+        if: steps.check_key.outputs.ready == 'true'
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 -B observatory/scripts/build-cloudflare-dist.py
+          python3 -B observatory/scripts/continuous-verify-and-audit.py
+          if [ -f observatory/logs/last-cloud-pass-summary.md ]; then
+            cat observatory/logs/last-cloud-pass-summary.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Commit & push verified updates to main
+        id: git_push
+        if: steps.check_key.outputs.ready == 'true'
+        run: |
+          if [ -d .theorem-atlas-ref ]; then
+            chmod -R u+w .theorem-atlas-ref
+            rm -rf .theorem-atlas-ref
+          fi
+          rm -f observatory/logs/last-cloud-pass-summary.md
+          git status -s
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No repository changes produced during this pass."
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "fawad haider"
+          git config user.email "153737+FawadHa1der@users.noreply.github.com"
+          git add -A
+          python3 -B - <<'PY'
+          import subprocess
+          from pathlib import Path
+          staged = subprocess.check_output(["git", "diff", "--cached", "--name-only"], text=True).splitlines()
+          for rel in staged:
+              p = Path(rel)
+              if p.exists() and p.is_file():
+                  sz = p.stat().st_size
+                  assert sz < 95 * 1024 * 1024, f"Staged file {rel} exceeds 95 MiB Git safety limit!"
+                  if p.suffix != ".lean":
+                      assert sz < 25 * 1024 * 1024, f"Non-Lean staged file {rel} exceeds 25 MiB!"
+          print(f"Verified {len(staged)} staged files pass size & artifact gates.")
+          PY
+          git commit --author="fawad haider <153737+FawadHa1der@users.noreply.github.com>" \
+            -m "Automated Observatory pass: verified Lean 4.33.0 bridges & unified shards"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Sync Lean 4 Corpus to Cloudflare R2
+        if: steps.check_key.outputs.ready == 'true' && steps.git_push.outputs.pushed == 'true' && env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
+        run: |
+          npm install --no-save --no-audit --no-fund wrangler@4.14.0
+          ./node_modules/.bin/wrangler r2 bucket create "$R2_BUCKET_NAME" || true
+          ./node_modules/.bin/wrangler pages project create "$CF_PAGES_PROJECT" --production-branch=main || true
+          python3 -B observatory/scripts/sync-lean-to-r2.py --bucket "$R2_BUCKET_NAME" --workers 12
+
+      - name: Deploy Updated Unified Shards to Cloudflare Pages (common-ground-atlas.com)
+        if: steps.check_key.outputs.ready == 'true' && steps.git_push.outputs.pushed == 'true' && env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: "4.14.0"
+          command: pages deploy observatory/dist-cloudflare --project-name=${{ env.CF_PAGES_PROJECT }} --branch=main
