@@ -1,10 +1,10 @@
-# Common Ground · Cross-Domain Mathematical Observatory (`V181`) & Lean 4.33.0 Corpus
+# Common Ground · Cross-Domain Mathematical Observatory (`V182`) & Lean 4.33.0 Corpus
 
 - **Live Observatory (Chrome & Safari Unified):** [`https://common-ground-atlas.com`](https://common-ground-atlas.com) · Local entrypoint: [`observatory/index.html`](./observatory/index.html)
-- **Kernel-Verified Lean 4.33.0 Corpus:** **639 zero-sorry `.lean` files** (`582` cross-domain bridge modules in [`CommonGround/Verification/`](./CommonGround/Verification/) + `57` frontier formalization modules across `01`–`10`, with **599 modules compiled directly through the Lean 4.33.0 kernel**)
-- **Observatory Scale & Provenance Gating:** **1,400 cross-domain proof mechanisms**, **1,887 unique endpoint bridges** (deduplicated from 7,000 AST pairs across 40 projects and 593 source repositories), **91 reviewed (`★`) bridges**, **2,800 discovery paths**, **36 exact finite micro-labs**, and **260/260 passing automated UX, WebKit `file://`, & mathematical checks**
+- **Kernel-Verified Lean 4.33.0 Corpus:** **640 zero-sorry `.lean` files** (`583` cross-domain bridge modules in [`CommonGround/Verification/`](./CommonGround/Verification/) + `57` frontier formalization modules across `01`–`10`, with **600 modules compiled directly through the Lean 4.33.0 kernel**)
+- **Observatory Scale & Provenance Gating:** **1,400 cross-domain proof mechanisms**, **1,887 unique endpoint bridges** (deduplicated from 7,000 AST pairs across 40 projects and 593 source repositories), **94 reviewed (`★`) bridges**, **2,800 discovery paths**, **37 exact finite micro-labs**, and **264/264 passing automated UX, WebKit `file://`, & mathematical checks**
 
-This repository contains the unified **Common Ground Cross-Domain Mathematical Observatory**, all **639 zero-sorry Lean 4.33.0 proof modules**, interactive exact-rational browser laboratories, automated adversarial validation suites, and formal cross-domain bridge papers.
+This repository contains the unified **Common Ground Cross-Domain Mathematical Observatory**, all **640 zero-sorry Lean 4.33.0 proof modules**, interactive exact-rational browser laboratories, automated adversarial validation suites, and formal cross-domain bridge papers.
 
 ## Quickstart: Run, Rebuild & Verify Locally
 
@@ -15,14 +15,14 @@ python3 -B observatory/scripts/serve-observatory.py
 # 2. Rebuild unified Chrome, Safari & Cloudflare shards (<16 MiB each, 0 truncation)
 python3 -B observatory/scripts/build-cloudflare-dist.py
 
-# 3. Run full Lean 4.33.0 zero-sorry verification + all 260 automated E2E checks
+# 3. Run full Lean 4.33.0 zero-sorry verification + all 264 automated E2E checks
 python3 -B observatory/scripts/continuous-verify-and-audit.py
 bash observatory/tests/run-tests.sh
 ```
 
 ## Key Entrypoints, Suites & CI/CD Workflows
 
-- **Unified Web Observatory (`V181`):** [`observatory/index.html`](./observatory/index.html) · Runtime: [`observatory/unified-standalone.js`](./observatory/unified-standalone.js) · Data shards: [`observatory/chunks/`](./observatory/chunks/)
+- **Unified Web Observatory (`V182`):** [`observatory/index.html`](./observatory/index.html) · Runtime: [`observatory/unified-standalone.js`](./observatory/unified-standalone.js) · Data shards: [`observatory/chunks/`](./observatory/chunks/)
 - **Continuous Verification & Audit Status:** [`observatory/logs/continuous-audit-status.json`](./observatory/logs/continuous-audit-status.json) · Runner: [`observatory/scripts/continuous-verify-and-audit.py`](./observatory/scripts/continuous-verify-and-audit.py)
 - **Lean 4.33.0 Toolchain & Package Manifest:** [`lean-toolchain`](./lean-toolchain) · [`lakefile.toml`](./lakefile.toml) · [`CommonGround.lean`](./CommonGround.lean)
 - **Standalone Paper — Quantitative Critical-Prior Sufficiency & Le Cam Slack:** [`01-blackwell-critical-prior-sufficiency/PAPER_QUANTITATIVE_CRITICAL_PRIOR_SUFFICIENCY.md`](./01-blackwell-critical-prior-sufficiency/PAPER_QUANTITATIVE_CRITICAL_PRIOR_SUFFICIENCY.md)
@@ -35,8 +35,8 @@ bash observatory/tests/run-tests.sh
 
 | Directory | Scope & Mathematical Domain | Key Entrypoints & Lean 4 Modules | Verified Highlights |
 | :--- | :--- | :--- | :--- |
-| [`observatory`](./observatory/) | Unified Chrome & Safari Web Observatory (`V181`) | [`index.html`](./observatory/index.html), [`unified-standalone.js`](./observatory/unified-standalone.js), [`chunks/`](./observatory/chunks/) | 8 stack-safe sub-16 MiB data shards (100% untruncated across `https://` and `file://`), 6 interactive lenses, 36 finite micro-labs, Cloudflare Pages + R2 `/api/lean/*` proof streaming, and 260/260 automated E2E checks. |
-| [`CommonGround/Verification`](./CommonGround/Verification/) | Core Cross-Domain Lean 4.33.0 Bridge Suite (`582` modules) | [`CommonGround.lean`](./CommonGround.lean), [`AllBridges.lean`](./CommonGround/Verification/AllBridges.lean), [`TheoremAtlasSplitNormalChartInjectiveLiftChartInvarianceAndBoltzmannDissipationBridge.lean`](./CommonGround/Verification/TheoremAtlasSplitNormalChartInjectiveLiftChartInvarianceAndBoltzmannDissipationBridge.lean) | 582 zero-sorry, kernel-compiled Lean 4.33.0 bridge files verifying finite witnesses, premise boundaries, and structural adapters across distinct disciplines. |
+| [`observatory`](./observatory/) | Unified Chrome & Safari Web Observatory (`V182`) | [`index.html`](./observatory/index.html), [`unified-standalone.js`](./observatory/unified-standalone.js), [`chunks/`](./observatory/chunks/) | 8 stack-safe sub-16 MiB data shards (100% untruncated across `https://` and `file://`), 6 interactive lenses, 37 finite micro-labs, Cloudflare Pages + R2 `/api/lean/*` proof streaming, and 264/264 automated E2E checks. |
+| [`CommonGround/Verification`](./CommonGround/Verification/) | Core Cross-Domain Lean 4.33.0 Bridge Suite (`583` modules) | [`CommonGround.lean`](./CommonGround.lean), [`AllBridges.lean`](./CommonGround/Verification/AllBridges.lean), [`TheoremAtlasHopfRinowLipschitzFlowBurauAlexanderAndWedgeSumBridge.lean`](./CommonGround/Verification/TheoremAtlasHopfRinowLipschitzFlowBurauAlexanderAndWedgeSumBridge.lean) | 583 zero-sorry, kernel-compiled Lean 4.33.0 bridge files verifying finite witnesses, premise boundaries, and structural adapters across distinct disciplines. |
 | [`01-blackwell-critical-prior-sufficiency`](./01-blackwell-critical-prior-sufficiency/) | Blackwell Sufficiency & Differential Privacy | [`RecoveryConverseFull.lean`](./01-blackwell-critical-prior-sufficiency/RecoveryConverseFull.lean), [`QuantitativeCriticalSlack.lean`](./01-blackwell-critical-prior-sufficiency/QuantitativeCriticalSlack.lean), [`AdversarialTightnessAndMarginalBound.lean`](./01-blackwell-critical-prior-sufficiency/AdversarialTightnessAndMarginalBound.lean) | Exact fiberwise & marginal $L^1$ Le Cam deficiency bound ($2\Delta_{t_b}(b)$) at critical priors $t_b = Q_b/(P_b+Q_b)$, deterministic tightness, multi-grid evasion theorem, and $(\varepsilon, \delta)$-DP Hockey-Stick equivalence. |
 | [`02-universal-affine-query-compression`](./02-universal-affine-query-compression/) | Convex Geometry & Moment Coresets | [`FiniteConvexAndMoments.lean`](./02-universal-affine-query-compression/FiniteConvexAndMoments.lean), [`ObservableSpan.lean`](./02-universal-affine-query-compression/ObservableSpan.lean), [`ApproximateAffineCoreset.lean`](./02-universal-affine-query-compression/ApproximateAffineCoreset.lean) | Extends universal $(k+1)$-point affine query compression to the $(\varepsilon, \eta)$-approximate moment and misspecified feature regime ($2M\eta + \sum \|a_j\|\varepsilon_j$). |
 | [`03-information-recovery-kl-pythagorean`](./03-information-recovery-kl-pythagorean/) | Information Geometry & Sufficiency | [`InformationRecoveryTrilogy.lean`](./03-information-recovery-kl-pythagorean/InformationRecoveryTrilogy.lean), [`UnifiedSufficiencyBridge.lean`](./03-information-recovery-kl-pythagorean/UnifiedSufficiencyBridge.lean) | Proves that deterministic `FiberLikelihoodConstant` and canonical decoder $R_{\text{ref}}$ coincide with stochastic `ChannelCriticalBalance` and sum-mixture decoder $R_{\text{mix}}$. |

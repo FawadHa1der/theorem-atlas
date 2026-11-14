@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-V181 Unified Chrome & Safari Shard Builder (< 25 MiB static assets)
+V182 Unified Chrome & Safari Shard Builder (< 25 MiB static assets)
 & Cloudflare R2 Unrestricted-Size Lean 4 Streaming Function Generator.
 
 - Reconstructs `bundle-data.js` from `observatory/chunks/` if missing in a fresh Git clone.
@@ -25,7 +25,7 @@ LOCAL_CHUNKS_DIR = OBS_DIR / "chunks"
 CF_DIR = OBS_DIR / "dist-cloudflare"
 CF_CHUNKS_DIR = CF_DIR / "chunks"
 LIMIT_BYTES = 25 * 1024 * 1024  # Cloudflare Pages 25 MiB static asset limit (does NOT restrict .lean files in R2!)
-ASSET_VER = "181"
+ASSET_VER = "182"
 
 SHARD_NAMES = [
     "bundle-shard-1-core.js",
@@ -274,15 +274,15 @@ def build_shards_and_sync_routes():
     health_payload = {
         "ok": True,
         "service": "common-ground-observatory",
-        "version": "V181-Unified-Chrome-Safari-Shards-Zero-Truncation",
+        "version": "V182-Unified-Chrome-Safari-Shards-HopfRinow-LipschitzFlow-BurauAlexander-WedgeSum",
         "unifiedBrowserPipeline": True,
         "galaxyIdeas": len(mechs) + len(isos),
         "highLevelMechanisms": len(mechs),
         "customAstIsomorphisms": len(isos),
         "discoveryPaths": len(conns),
         "physicalLean4Suites": len(sm.get("verifiedLeanSuites", [])),
-        "totalZeroSorryLeanFiles": 639,
-        "kernelCompiledLeanModules": 599,
+        "totalZeroSorryLeanFiles": 640,
+        "kernelCompiledLeanModules": 600,
         "lean25MiBRestriction": False,
         "largeLeanStreamingEndpoint": "/api/lean/<path>",
         "customSearchIndexDeclarations": len(preloaded.get("customSearchIndex", [])),
