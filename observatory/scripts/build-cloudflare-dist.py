@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-V182 Unified Chrome & Safari Shard Builder (< 25 MiB static assets)
+V230 Unified Chrome & Safari Shard Builder (< 25 MiB static assets)
 & Cloudflare R2 Unrestricted-Size Lean 4 Streaming Function Generator.
 
 - Reconstructs `bundle-data.js` from `observatory/chunks/` if missing in a fresh Git clone.
@@ -25,7 +25,7 @@ LOCAL_CHUNKS_DIR = OBS_DIR / "chunks"
 CF_DIR = OBS_DIR / "dist-cloudflare"
 CF_CHUNKS_DIR = CF_DIR / "chunks"
 LIMIT_BYTES = 25 * 1024 * 1024  # Cloudflare Pages 25 MiB static asset limit (does NOT restrict .lean files in R2!)
-ASSET_VER = "182"
+ASSET_VER = "230"
 
 SHARD_NAMES = [
     "bundle-shard-1-core.js",
@@ -156,14 +156,18 @@ def build_shards_and_sync_routes():
     sm = preloaded["semanticMechanisms"]
     mechs = sm["highLevelMechanisms"]
     isos = sm["customIsomorphisms"]
+    suites = sm.get("verifiedLeanSuites", [])
     conns = preloaded["insightPaths"]["connections"]
+
+    suite_split = min(250, len(suites))
 
     core_sm = {
         k: v for k, v in sm.items()
-        if k not in ("highLevelMechanisms", "customIsomorphisms")
+        if k not in ("highLevelMechanisms", "customIsomorphisms", "verifiedLeanSuites")
     }
     core_sm["highLevelMechanisms"] = []
     core_sm["customIsomorphisms"] = []
+    core_sm["verifiedLeanSuites"] = suites[:suite_split]
 
     core_ip = dict(preloaded["insightPaths"])
     core_ip["connections"] = []
@@ -185,7 +189,7 @@ def build_shards_and_sync_routes():
         s1_code += tail_js if tail_js.endswith("\n") else (tail_js + "\n")
     write_dual_shard("bundle-shard-1-core.js", s1_code)
 
-    m_mid = len(mechs) // 2
+    m_mid = int(len(mechs) * 0.45)
     write_dual_shard(
         "bundle-shard-2a-mechanisms.js",
         "window.__CG_PRELOADED__.semanticMechanisms.highLevelMechanisms = window.__CG_PRELOADED__.semanticMechanisms.highLevelMechanisms.concat("
@@ -221,11 +225,23 @@ def build_shards_and_sync_routes():
         "window.__CG_PRELOADED__.insightPaths.connections = window.__CG_PRELOADED__.insightPaths.connections.concat("
         + json.dumps(conns[:c_mid], ensure_ascii=False, separators=(",", ":")) + ");\n"
     )
-    write_dual_shard(
-        "bundle-shard-4b-paths.js",
+    s4b_code = (
         "window.__CG_PRELOADED__.insightPaths.connections = window.__CG_PRELOADED__.insightPaths.connections.concat("
         + json.dumps(conns[c_mid:], ensure_ascii=False, separators=(",", ":")) + ");\n"
     )
+    if suite_split < len(suites):
+        s4b_code += (
+            "window.__CG_PRELOADED__.semanticMechanisms.verifiedLeanSuites = window.__CG_PRELOADED__.semanticMechanisms.verifiedLeanSuites.concat("
+            + json.dumps(suites[suite_split:], ensure_ascii=False, separators=(",", ":")) + ");\n"
+        )
+    s4b_code += (
+        "(function(){if(typeof window!=='undefined'&&window.__CG_PRELOADED__){"
+        "var sm=window.__CG_PRELOADED__.semanticMechanisms;"
+        "if(sm){sm.mechanisms=sm.highLevelMechanisms;sm.astIsomorphisms=sm.customIsomorphisms;"
+        "sm.verifiedLean4BridgeModules=sm.verifiedLeanSuites;sm.verifiedLeanBridges=sm.verifiedLeanSuites;}"
+        "var ip=window.__CG_PRELOADED__.insightPaths;if(ip){ip.paths=ip.connections;}}})();\n"
+    )
+    write_dual_shard("bundle-shard-4b-paths.js", s4b_code)
 
     src_html = (OBS_DIR / "index.html").read_text(encoding="utf-8")
     root_tags = "\n  ".join([f'<script src="./chunks/{s}?v={ASSET_VER}"></script>' for s in SHARD_NAMES])
@@ -274,15 +290,15 @@ def build_shards_and_sync_routes():
     health_payload = {
         "ok": True,
         "service": "common-ground-observatory",
-        "version": "V182-Unified-Chrome-Safari-Shards-HopfRinow-LipschitzFlow-BurauAlexander-WedgeSum",
+        "version": "V230-Unified-Chrome-Safari-Shards-736LeanFiles-Milestone85Labs-FanoCramerRaoReedSolomonHammingAndCalmOmniboxToursUi",
         "unifiedBrowserPipeline": True,
         "galaxyIdeas": len(mechs) + len(isos),
         "highLevelMechanisms": len(mechs),
         "customAstIsomorphisms": len(isos),
         "discoveryPaths": len(conns),
         "physicalLean4Suites": len(sm.get("verifiedLeanSuites", [])),
-        "totalZeroSorryLeanFiles": 640,
-        "kernelCompiledLeanModules": 600,
+        "totalZeroSorryLeanFiles": 736,
+        "kernelCompiledLeanModules": 696,
         "lean25MiBRestriction": False,
         "largeLeanStreamingEndpoint": "/api/lean/<path>",
         "customSearchIndexDeclarations": len(preloaded.get("customSearchIndex", [])),

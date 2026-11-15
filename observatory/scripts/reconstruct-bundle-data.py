@@ -46,12 +46,19 @@ def reconstruct(force: bool = False) -> Path:
         isos.extend(arr)
 
     conns = []
+    extra_suites = []
     for name in ("bundle-shard-4a-paths.js", "bundle-shard-4b-paths.js"):
-        arr, _ = extract_json_arg((CHUNKS_DIR / name).read_text(encoding="utf-8"), ".concat(")
+        raw_shard = (CHUNKS_DIR / name).read_text(encoding="utf-8")
+        arr, rem = extract_json_arg(raw_shard, ".concat(")
         conns.extend(arr)
+        if "verifiedLeanSuites.concat(" in rem:
+            s_arr, _ = extract_json_arg(rem, "verifiedLeanSuites.concat(")
+            extra_suites.extend(s_arr)
 
     core["semanticMechanisms"]["highLevelMechanisms"] = mechs
     core["semanticMechanisms"]["customIsomorphisms"] = isos
+    if extra_suites:
+        core["semanticMechanisms"]["verifiedLeanSuites"] = list(core["semanticMechanisms"].get("verifiedLeanSuites", [])) + extra_suites
     core["insightPaths"]["connections"] = conns
 
     out_text = "window.__CG_PRELOADED__ = " + json.dumps(core, ensure_ascii=False, separators=(",", ":")) + ";"
@@ -63,7 +70,7 @@ def reconstruct(force: bool = False) -> Path:
     OUT_PATH.write_text(out_text, encoding="utf-8")
     print(
         f"[reconstruct-bundle-data] Rebuilt {OUT_PATH.name} ({OUT_PATH.stat().st_size / (1024*1024):.2f} MiB): "
-        f"mechanisms={len(mechs)}, isomorphisms={len(isos)}, paths={len(conns)}"
+        f"mechanisms={len(mechs)}, isomorphisms={len(isos)}, paths={len(conns)}, suites={len(core['semanticMechanisms'].get('verifiedLeanSuites', []))}"
     )
     return OUT_PATH
 

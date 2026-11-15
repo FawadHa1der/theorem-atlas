@@ -2946,59 +2946,72 @@ body.cg-calm-editorial {
 
 /* Sleeker Above-the-Fold Editorial Hero & Entry Cards */
 .cg-editorial-intro {
-  padding: 12px 24px 10px;
+  padding: 10px 24px 8px;
 }
 .cg-intro-inner {
   padding: 14px 20px;
   gap: 18px;
   background:
-    radial-gradient(circle at 12% 20%, rgba(56, 189, 248, 0.08), transparent 48%),
-    radial-gradient(circle at 92% 80%, rgba(230, 200, 138, 0.08), transparent 48%),
-    linear-gradient(160deg, rgba(14, 24, 40, 0.82), rgba(8, 14, 25, 0.86));
-  border: 1px solid rgba(230, 200, 138, 0.2);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    radial-gradient(circle at 10% 18%, rgba(56, 189, 248, 0.065), transparent 46%),
+    radial-gradient(circle at 92% 82%, rgba(230, 200, 138, 0.07), transparent 46%),
+    linear-gradient(165deg, rgba(12, 21, 36, 0.86), rgba(7, 13, 24, 0.92));
+  border: 1px solid rgba(230, 200, 138, 0.18);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 .cg-intro-headline {
-  font-size: clamp(21px, 2vw, 28px);
+  font-size: clamp(20px, 1.95vw, 27px);
+  font-weight: 680;
+  letter-spacing: -0.022em;
+  line-height: 1.22;
   margin: 0 0 5px;
-  background: linear-gradient(92deg, #ffffff 0%, #f5efe2 58%, #e6c88a 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: #f7f4ec;
+  color: #f8f6f0;
 }
 .cg-intro-lead {
   font-size: 13px;
-  line-height: 1.52;
+  line-height: 1.54;
+  color: #cbd5e1;
 }
 .cg-entry-card {
   position: relative;
   overflow: hidden;
   padding: 10px 13px;
-  background: linear-gradient(155deg, rgba(14, 24, 40, 0.88), rgba(8, 15, 27, 0.92));
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  background: linear-gradient(160deg, rgba(13, 22, 38, 0.88), rgba(8, 14, 26, 0.94));
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045);
   transition: transform 0.2s var(--ease-out-expo), border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 .cg-entry-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(230, 200, 138, 0.62);
-  background: linear-gradient(155deg, rgba(20, 34, 56, 0.94), rgba(11, 20, 35, 0.96));
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.42), 0 0 18px rgba(230, 200, 138, 0.12);
+  border-color: rgba(230, 200, 138, 0.58);
+  background: linear-gradient(160deg, rgba(19, 32, 54, 0.94), rgba(10, 19, 34, 0.97));
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.42), 0 0 16px rgba(230, 200, 138, 0.1);
 }
 
-/* Unified Filter Bar Glass Polish */
+/* Serene Single-Row Command Bar & Progressive Filter Disclosure */
 .cg-unified-controls {
-  padding: 10px 15px;
+  padding: 9px 14px;
   margin-bottom: 12px;
-  background: rgba(10, 18, 30, 0.76);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  border-radius: 14px;
+  background: rgba(9, 16, 28, 0.78);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(148, 163, 184, 0.17);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+.cg-unified-controls .cg-controls-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.cg-unified-controls #gal-search-form {
+  flex: 1 1 320px;
+  min-width: 240px;
 }
 .search-box input {
-  background: rgba(5, 10, 19, 0.88);
-  border-color: rgba(148, 163, 184, 0.26);
+  background: rgba(4, 9, 18, 0.9);
+  border-color: rgba(148, 163, 184, 0.24);
   transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 .search-box input:focus {
@@ -3006,40 +3019,95 @@ body.cg-calm-editorial {
   box-shadow: 0 0 0 3px rgba(230, 200, 138, 0.15);
   outline: none;
 }
+details.cg-refine-disclosure {
+  margin-top: 8px;
+}
+details.cg-refine-disclosure > summary.cg-refine-summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #cbd5e1;
+  background: rgba(15, 25, 42, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  transition: border-color 0.16s ease, color 0.16s ease, background 0.16s ease;
+  user-select: none;
+}
+details.cg-refine-disclosure > summary.cg-refine-summary::-webkit-details-marker {
+  display: none;
+}
+details.cg-refine-disclosure > summary.cg-refine-summary:hover,
+details.cg-refine-disclosure[open] > summary.cg-refine-summary {
+  border-color: rgba(230, 200, 138, 0.52);
+  color: #fff8e7;
+  background: rgba(23, 37, 61, 0.88);
+}
+.cg-refine-count-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 700;
+  background: rgba(230, 200, 138, 0.2);
+  color: var(--gold);
+  border: 1px solid rgba(230, 200, 138, 0.42);
+}
+.cg-refine-body {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(148, 163, 184, 0.14);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cg-refine-select-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 
 /* Immersive 3D Galaxy Viewport & Floating HUD */
 .galaxy-panel {
   position: relative;
   border-radius: 18px;
-  border: 1px solid rgba(165, 190, 224, 0.22);
+  border: 1px solid rgba(165, 190, 224, 0.24);
   background:
-    radial-gradient(ellipse 75% 65% at 50% 48%, rgba(22, 52, 92, 0.44), transparent 72%),
-    radial-gradient(circle at 28% 28%, rgba(52, 211, 153, 0.06), transparent 46%),
-    radial-gradient(circle at 74% 68%, rgba(230, 200, 138, 0.07), transparent 48%),
-    #030710;
-  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.56), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    radial-gradient(ellipse 78% 68% at 50% 48%, rgba(19, 48, 88, 0.48), transparent 74%),
+    radial-gradient(circle at 24% 26%, rgba(52, 211, 153, 0.075), transparent 48%),
+    radial-gradient(circle at 76% 70%, rgba(230, 200, 138, 0.085), transparent 50%),
+    #02060e;
+  box-shadow: 0 26px 68px rgba(0, 0, 0, 0.62), inset 0 1px 0 rgba(255, 255, 255, 0.075);
 }
 .galaxy-scene {
-  height: 615px;
+  height: min(74vh, 654px);
+  min-height: 590px;
   transition: height 0.32s var(--ease-out-expo);
 }
 .hub-node {
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  background: rgba(6, 12, 22, 0.84);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
-  transition: transform 0.18s var(--ease-out-expo), background 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background: rgba(5, 11, 21, 0.85);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s var(--ease-out-expo), background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 .hub-node:hover, .hub-node.is-highlighted {
-  transform: translate(-50%, -50%) scale(1.14);
-  background: rgba(17, 32, 54, 0.95);
+  transform: translate(-50%, -50%) scale(1.15);
+  background: rgba(16, 31, 53, 0.96);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.62), 0 0 16px rgba(230, 200, 138, 0.26);
 }
 .galaxy-tooltip {
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  backdrop-filter: blur(16px) saturate(140%);
-  background: rgba(8, 15, 28, 0.92);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+  backdrop-filter: blur(18px) saturate(145%);
+  background: rgba(7, 14, 26, 0.94);
   border: 1px solid rgba(230, 200, 138, 0.65);
-  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.72), 0 0 20px rgba(230, 200, 138, 0.14);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.76), 0 0 22px rgba(230, 200, 138, 0.15);
   border-radius: 12px;
   padding: 10px 13px;
 }
@@ -3101,8 +3169,8 @@ body.cg-zen-theater main {
   grid-template-columns: 1fr !important;
 }
 .galaxy-workspace.is-zen-theater .galaxy-scene {
-  height: min(79vh, 840px);
-  min-height: 660px;
+  height: min(81vh, 860px);
+  min-height: 670px;
 }
 .galaxy-workspace.is-zen-theater .inspector-panel {
   position: absolute;
@@ -3146,10 +3214,10 @@ body.cg-zen-theater main {
 /* Elegant Glassmorphic Inspector & 3-Tab Progressive Disclosure */
 .inspector-panel {
   border-radius: 18px;
-  background: linear-gradient(165deg, rgba(15, 26, 44, 0.92) 0%, rgba(8, 15, 27, 0.95) 100%);
+  background: linear-gradient(165deg, rgba(14, 24, 42, 0.93) 0%, rgba(7, 14, 25, 0.96) 100%);
   border: 1px solid rgba(165, 190, 224, 0.24);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  max-height: 705px;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.44), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  max-height: 735px;
 }
 .cg-ins-tabbar {
   display: flex;
@@ -3197,19 +3265,41 @@ body.cg-zen-theater main {
   display: none;
 }
 
-/* Refined Catalogue Cards */
+/* Refined Catalogue Cards & Epistemic Provenance Accents */
 .cg-calm-editorial .ingredient-card {
   border-radius: 13px;
-  background: linear-gradient(160deg, rgba(13, 22, 37, 0.82), rgba(9, 15, 27, 0.88));
+  background: linear-gradient(160deg, rgba(12, 21, 36, 0.84), rgba(8, 14, 26, 0.9));
   border: 1px solid rgba(148, 163, 184, 0.16);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.04);
   transition: transform 0.18s var(--ease-out-expo), border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+.cg-calm-editorial .ingredient-card[data-epi-glyph="★"] {
+  border-left: 3px solid rgba(52, 211, 153, 0.65);
+}
+.cg-calm-editorial .ingredient-card[data-epi-glyph="◆"] {
+  border-left: 3px solid rgba(230, 200, 138, 0.55);
+}
+.cg-calm-editorial .ingredient-card[data-epi-glyph="○"] {
+  border-left: 3px solid rgba(89, 194, 255, 0.36);
+}
+.cg-calm-editorial .ingredient-card[data-epi-glyph="✕"] {
+  border-left: 3px solid rgba(248, 113, 113, 0.38);
 }
 .cg-calm-editorial .ingredient-card:hover {
   transform: translateY(-2px);
   border-color: rgba(230, 200, 138, 0.52);
-  background: linear-gradient(160deg, rgba(18, 30, 50, 0.92), rgba(11, 20, 35, 0.95));
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.36), 0 0 16px rgba(230, 200, 138, 0.09);
+  background: linear-gradient(160deg, rgba(18, 30, 50, 0.92), rgba(11, 20, 35, 0.96));
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.38), 0 0 16px rgba(230, 200, 138, 0.09);
+}
+.cg-inline-breakthrough-box {
+  margin: 8px 0;
+  padding: 9px 11px;
+  border-radius: 9px;
+  background: linear-gradient(145deg, rgba(16, 185, 129, 0.09), rgba(14, 26, 44, 0.72));
+  border: 1px solid rgba(52, 211, 153, 0.28);
+  font-size: 11.5px;
+  line-height: 1.48;
+  color: #e2e8f0;
 }
 
 /* Universal ⌘K Spotlight Omnibox Modal */
@@ -3318,4 +3408,720 @@ body.cg-zen-theater main {
   color: #94a3b8;
   border-top: 1px solid rgba(148, 163, 184, 0.14);
   background: rgba(4, 8, 16, 0.78);
+}
+
+/* V184 Serene Discovery Lead Navigator, Compact Lab Ribbon & Breathing Compass */
+#v136-finite-backdrop .v61-prog-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-height: 84px;
+  overflow-y: auto;
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: rgba(5, 11, 22, 0.76);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  scrollbar-width: thin;
+}
+.cg-lead-nav-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0 9px;
+}
+.cg-lead-select {
+  flex: 1;
+  min-width: 0;
+  padding: 5px 9px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #f8fafc;
+  background: rgba(5, 11, 22, 0.9);
+  border: 1px solid rgba(52, 211, 153, 0.38);
+  text-overflow: ellipsis;
+}
+.cg-lead-select:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(230, 200, 138, 0.18);
+}
+.cg-lead-pill-step {
+  flex: none;
+  padding: 4px 9px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #d1fae5;
+  background: rgba(16, 185, 129, 0.13);
+  border: 1px solid rgba(52, 211, 153, 0.34);
+  cursor: pointer;
+}
+.cg-lead-pill-step:hover {
+  background: rgba(16, 185, 129, 0.25);
+  color: #fff;
+}
+.cg-lead-insight-grid {
+  display: grid;
+  gap: 6px;
+  margin-top: 6px;
+}
+.cg-lead-insight-block {
+  padding: 6px 9px;
+  border-radius: 7px;
+  background: rgba(6, 12, 24, 0.66);
+  border-left: 2px solid rgba(52, 211, 153, 0.55);
+  font-size: 11.5px;
+  line-height: 1.46;
+  color: #dbeafe;
+}
+.cg-lead-insight-block.is-impact {
+  border-left-color: rgba(230, 200, 138, 0.68);
+}
+.cg-lead-insight-block.is-gate {
+  border-left-color: rgba(251, 191, 36, 0.65);
+  color: #fef3c7;
+}
+details.cg-secondary-compass-drawer {
+  margin-top: 12px;
+  padding: 8px 11px;
+  border-radius: 10px;
+  background: rgba(7, 13, 25, 0.62);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+}
+details.cg-secondary-compass-drawer > summary {
+  cursor: pointer;
+  list-style: none;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #94a3b8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+details.cg-secondary-compass-drawer > summary::-webkit-details-marker {
+  display: none;
+}
+details.cg-secondary-compass-drawer > summary:hover {
+  color: #f8fafc;
+}
+
+/* === V185 Luminous Inline SVG Commutative Bridge Blueprint === */
+.cg-bridge-diagram-wrap {
+  margin: 7px 0 9px 0;
+  padding: 6px 8px;
+  border-radius: 9px;
+  background: radial-gradient(120% 140% at 50% 50%, rgba(15, 29, 54, 0.86) 0%, rgba(5, 10, 20, 0.94) 100%);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  overflow: hidden;
+}
+.cg-bridge-diagram-wrap.is-kernel {
+  border-color: rgba(52, 211, 153, 0.36);
+  box-shadow: inset 0 0 22px rgba(16, 185, 129, 0.08);
+}
+.cg-bridge-diagram-wrap.is-blocked {
+  border-color: rgba(251, 191, 36, 0.34);
+  background: radial-gradient(120% 140% at 50% 50%, rgba(40, 22, 16, 0.72) 0%, rgba(10, 11, 18, 0.94) 100%);
+}
+.cg-bridge-diagram-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 82px;
+}
+@keyframes cgSvgPhotonFlow {
+  from { stroke-dashoffset: 36; }
+  to { stroke-dashoffset: 0; }
+}
+.cg-svg-photon-arc {
+  stroke-dasharray: 5 13;
+  animation: cgSvgPhotonFlow 2.6s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cg-svg-photon-arc {
+    animation: none;
+  }
+}
+
+/* === V186 60fps Discovery Paths Virtualization, Constellation Hop-Ribbon & 40x40 Star-Bridge Glow === */
+.path-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 215px;
+  transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+}
+.path-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(230, 200, 138, 0.52);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.36);
+}
+.cg-path-hop-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 14px 0;
+  padding: 11px 15px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(8, 17, 34, 0.94) 0%, rgba(12, 24, 46, 0.92) 100%);
+  border: 1px solid rgba(230, 200, 138, 0.34);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.32);
+}
+.cg-path-hop-nodes {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.cg-path-hop-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: rgba(5, 11, 22, 0.88);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  font-size: 12px;
+  font-weight: 650;
+  color: #f8fafc;
+}
+.cg-path-hop-arrow {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #6ee7b7;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+}
+.cell-btn.has-star-bridge {
+  box-shadow: inset 0 0 0 1px rgba(52, 211, 153, 0.42);
+}
+.cell-btn .cg-cell-star {
+  color: #6ee7b7;
+  font-size: 9px;
+  margin-right: 1px;
+}
+
+/* === V187 7-Axis Celestial Mathematical DNA Radar & Luminous Oscilloscope Stage === */
+.cg-dna-radar-card {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  margin: 14px 0 18px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: radial-gradient(120% 130% at 30% 50%, rgba(16, 32, 60, 0.88) 0%, rgba(6, 12, 24, 0.95) 100%);
+  border: 1px solid rgba(230, 200, 138, 0.28);
+  box-shadow: inset 0 0 28px rgba(56, 189, 248, 0.06);
+}
+@media (max-width: 780px) {
+  .cg-dna-radar-card {
+    grid-template-columns: 1fr;
+  }
+}
+.cg-dna-radar-svg {
+  display: block;
+  width: 100%;
+  max-width: 270px;
+  height: auto;
+  margin: 0 auto;
+}
+.cg-dna-radar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+  font-size: 11.5px;
+  color: #cbd5e1;
+}
+.cg-dna-legend-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(5, 11, 22, 0.82);
+  border: 1px solid rgba(148, 163, 184, 0.24);
+}
+.cg-sim-oscilloscope-wrap {
+  background: radial-gradient(120% 140% at 50% 45%, #0b1930 0%, #050b16 100%);
+  border: 1px solid rgba(89, 194, 255, 0.34);
+  border-radius: 12px;
+  padding: 10px;
+  position: relative;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42), inset 0 0 26px rgba(56, 189, 248, 0.08);
+}
+
+/* === V188 Celestial Source-Atlas Spectrum Ribbon & Motif Triad SVG Blueprint === */
+.cg-atlas-spectrum-card {
+  margin: 14px 0 6px;
+  padding: 13px 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(8, 17, 34, 0.94) 0%, rgba(13, 27, 50, 0.90) 100%);
+  border: 1px solid rgba(230, 200, 138, 0.28);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.32);
+}
+.cg-atlas-spectrum-bar {
+  display: flex;
+  width: 100%;
+  height: 9px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(5, 10, 20, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  margin: 8px 0 10px;
+}
+.cg-atlas-spectrum-seg {
+  height: 100%;
+  transition: width 0.25s ease;
+}
+.cg-atlas-disc-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-items: center;
+}
+.cg-atlas-family-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 190px;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.cg-atlas-family-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(230, 200, 138, 0.5);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.34);
+}
+.cg-motif-triad-wrap {
+  margin: 10px 0 12px;
+  padding: 10px 12px;
+  border-radius: 11px;
+  background: radial-gradient(120% 135% at 50% 50%, rgba(16, 31, 58, 0.88) 0%, rgba(6, 11, 22, 0.95) 100%);
+  border: 1px solid rgba(230, 200, 138, 0.3);
+}
+.cg-motif-triad-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 132px;
+}
+
+/* === V189 Serendipity 2-Hop Pivot Relay SVG, 4-World Quartet Diamond SVG & 60fps Virtualization === */
+.cg-chain-relay-wrap {
+  margin: 10px 0 12px;
+  padding: 10px 12px;
+  border-radius: 11px;
+  background: radial-gradient(125% 140% at 50% 50%, rgba(17, 34, 64, 0.90) 0%, rgba(6, 11, 22, 0.96) 100%);
+  border: 1px solid rgba(230, 200, 138, 0.32);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 8px 22px rgba(0, 0, 0, 0.3);
+}
+.cg-chain-relay-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 118px;
+}
+.cg-quartet-diamond-wrap {
+  margin: 8px 0 10px;
+  padding: 7px 10px;
+  border-radius: 10px;
+  background: radial-gradient(115% 135% at 50% 50%, rgba(16, 30, 54, 0.85) 0%, rgba(7, 13, 25, 0.94) 100%);
+  border: 1px solid rgba(230, 200, 138, 0.24);
+}
+.cg-quartet-diamond-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 92px;
+}
+.cg-quartet-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 360px;
+  transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+}
+.cg-quartet-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.38);
+}
+.cg-seren-spot-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 150px;
+}
+
+/* === V190 Conjecture Studio Premise-Gate Blueprint SVG & Discovery Path Quick-Picker === */
+.cg-conjecture-blueprint-wrap {
+  margin: 12px 0 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: radial-gradient(125% 145% at 50% 42%, rgba(17, 34, 66, 0.90) 0%, rgba(6, 11, 22, 0.96) 100%);
+  border: 1px solid rgba(230, 200, 138, 0.34);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 10px 26px rgba(0, 0, 0, 0.34);
+}
+.cg-conjecture-blueprint-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 132px;
+}
+.cg-path-quick-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, rgba(13, 25, 46, 0.88), rgba(7, 13, 26, 0.92));
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+.cg-ep-sig-preview {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: #dbeafe;
+  background: rgba(6, 13, 26, 0.78);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin: 8px 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* === V191 40x40 Matrix Quick-Preset Bar & Pairwise Resonance Blueprint SVG === */
+.cg-matrix-preset-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 0 0 10px;
+  padding: 7px 11px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(13, 24, 44, 0.84), rgba(7, 13, 24, 0.90));
+  border: 1px solid rgba(229, 198, 135, 0.22);
+}
+.cg-matrix-pair-svg-wrap {
+  margin: 8px 0 12px;
+  padding: 9px 10px;
+  border-radius: 11px;
+  background: radial-gradient(120% 140% at 50% 45%, rgba(16, 32, 62, 0.90) 0%, rgba(6, 11, 22, 0.96) 100%);
+  border: 1px solid rgba(229, 198, 135, 0.32);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 8px 22px rgba(0, 0, 0, 0.32);
+}
+.cg-matrix-pair-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 118px;
+}
+
+/* === V192 Lead Constellation Arc Mini-Blueprint SVG & 3D Star-Hopper HUD === */
+.cg-lead-mini-arc-wrap {
+  margin: 6px 0 8px;
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: radial-gradient(125% 145% at 50% 38%, rgba(16, 36, 66, 0.88) 0%, rgba(5, 10, 20, 0.96) 100%);
+  border: 1px solid rgba(52, 211, 153, 0.28);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 6px 18px rgba(0, 0, 0, 0.28);
+  cursor: pointer;
+  transition: border-color 0.16s ease, transform 0.16s ease;
+}
+.cg-lead-mini-arc-wrap:hover {
+  border-color: rgba(230, 200, 138, 0.62);
+  transform: translateY(-1px);
+}
+.cg-lead-mini-arc-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 68px;
+}
+.cg-hud-star-step {
+  background: rgba(230, 200, 138, 0.12) !important;
+  border: 1px solid rgba(230, 200, 138, 0.42) !important;
+  color: #fde68a !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 3px 8px !important;
+  border-radius: 999px !important;
+  cursor: pointer;
+  transition: background 0.14s ease, border-color 0.14s ease, transform 0.14s ease;
+}
+.cg-hud-star-step:hover {
+  background: rgba(230, 200, 138, 0.26) !important;
+  border-color: #fbbf24 !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+/* === V193 Finite Micro-Labs Single-Row Quick-Select Bar, Progressive Pill Drawer & Studio Selector === */
+.cg-finite-lab-nav-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(12, 24, 44, 0.90), rgba(5, 11, 22, 0.95));
+  border: 1px solid rgba(52, 211, 153, 0.30);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.cg-finite-lab-select,
+.cg-mech-quick-select {
+  flex: 1 1 280px;
+  min-width: 210px;
+  padding: 7px 11px;
+  border-radius: 8px;
+  background: rgba(6, 13, 26, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.34);
+  color: #f8fafc;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.cg-finite-lab-select:hover,
+.cg-finite-lab-select:focus,
+.cg-mech-quick-select:hover,
+.cg-mech-quick-select:focus {
+  border-color: rgba(230, 200, 138, 0.65);
+  box-shadow: 0 0 0 2px rgba(230, 200, 138, 0.14);
+}
+.cg-finite-all-tabs-drawer {
+  margin-bottom: 12px;
+  padding: 6px 10px;
+  border-radius: 9px;
+  background: rgba(8, 15, 28, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+.cg-finite-all-tabs-drawer > summary {
+  cursor: pointer;
+  font-size: 11.5px;
+  font-weight: 650;
+  color: #94a3b8;
+  user-select: none;
+}
+.cg-finite-all-tabs-drawer > summary:hover {
+  color: #fde68a;
+}
+
+/* === V204 Serendipity Quick-Select Spotlight, 4-Stage Pipeline SVG & Active Playbook Blueprint SVG === */
+.cg-seren-quick-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 10px 0 14px;
+  padding: 9px 13px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, rgba(13, 25, 48, 0.90), rgba(6, 12, 24, 0.94));
+  border: 1px solid rgba(230, 200, 138, 0.30);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+.cg-pipeline-stage-wrap {
+  margin: 8px 0 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: radial-gradient(125% 145% at 50% 45%, rgba(16, 33, 62, 0.90) 0%, rgba(6, 11, 22, 0.96) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+.cg-pipeline-stage-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 70px;
+}
+.cg-playbook-blueprint-wrap {
+  margin: 6px 0 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: radial-gradient(125% 145% at 50% 45%, rgba(15, 34, 60, 0.92) 0%, rgba(5, 11, 21, 0.97) 100%);
+  border: 1px solid rgba(52, 211, 153, 0.32);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.cg-playbook-blueprint-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 74px;
+}
+.cg-tools-mini-popover {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 120;
+  min-width: 245px;
+  background: #0b1322;
+  border: 1px solid rgba(230, 200, 138, 0.38);
+  border-radius: 11px;
+  padding: 8px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.72);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* === V205 Discovery Path Spotlight SVG, Progressive Path/Family Drawers, Rosetta & Complexity Blueprint SVGs === */
+.cg-active-path-spotlight {
+  border: 1px solid rgba(230, 200, 138, 0.52) !important;
+  background: linear-gradient(135deg, rgba(16, 31, 58, 0.95), rgba(7, 14, 28, 0.98)) !important;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  margin-bottom: 14px;
+}
+.cg-path-spot-svg-wrap {
+  margin: 10px 0 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: radial-gradient(125% 145% at 50% 45%, rgba(18, 38, 72, 0.90) 0%, rgba(5, 10, 20, 0.97) 100%);
+  border: 1px solid rgba(230, 200, 138, 0.28);
+}
+.cg-path-spot-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 78px;
+}
+.cg-lab-blueprint-card {
+  margin: 12px 0 14px;
+  padding: 10px 12px;
+  border-radius: 11px;
+  background: radial-gradient(130% 150% at 50% 40%, rgba(15, 33, 62, 0.92) 0%, rgba(6, 11, 22, 0.98) 100%);
+  border: 1px solid rgba(89, 194, 255, 0.30);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.cg-rosetta-waring-svg,
+.cg-complexity-eth-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 152px;
+}
+
+/* === V206 Lean 4.33.0 Kernel Certificate Shield SVG & 4-Ecosystem Orbital Convergence SVG === */
+.cg-ver-shield-wrap {
+  margin: 8px 0 11px;
+  padding: 8px 11px;
+  border-radius: 10px;
+  background: radial-gradient(130% 150% at 50% 42%, rgba(12, 38, 48, 0.92) 0%, rgba(5, 11, 22, 0.98) 100%);
+  border: 1px solid rgba(52, 211, 153, 0.36);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.cg-ver-shield-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 86px;
+}
+.cg-eco-convergence-wrap {
+  margin: 12px 0 16px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: radial-gradient(125% 150% at 50% 45%, rgba(16, 33, 62, 0.90) 0%, rgba(6, 11, 22, 0.97) 100%);
+  border: 1px solid rgba(230, 200, 138, 0.28);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.cg-eco-convergence-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 118px;
+}
+
+/* === V207 Serendipity Mechanism Proof-DAG & 12D AST Alignment Blueprint SVGs + Calm Pager === */
+.cg-mech-arch-wrap,
+.cg-iso-ast-wrap {
+  margin: 8px 0 11px;
+  padding: 8px 11px;
+  border-radius: 10px;
+  background: radial-gradient(130% 150% at 50% 42%, rgba(14, 34, 62, 0.92) 0%, rgba(5, 11, 22, 0.98) 100%);
+  border: 1px solid rgba(89, 194, 255, 0.34);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.cg-mech-arch-wrap {
+  border-color: rgba(230, 200, 138, 0.36);
+}
+.cg-mech-arch-svg,
+.cg-iso-ast-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 88px;
+}
+.cg-seren-pager {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  padding: 9px 13px;
+  border-radius: 10px;
+  background: rgba(9, 16, 28, 0.84);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+}
+
+/* === V208 Galaxy Inspector Star-Spoke & Dual-World AST Blueprint SVGs + 40/40 Repo Horizon Pill === */
+.cg-inspector-star-wrap,
+.cg-inspector-iso-wrap {
+  margin: 8px 0 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: radial-gradient(130% 150% at 50% 42%, rgba(14, 34, 62, 0.94) 0%, rgba(5, 11, 22, 0.98) 100%);
+  border: 1px solid rgba(230, 200, 138, 0.36);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.cg-inspector-iso-wrap {
+  border-color: rgba(89, 194, 255, 0.36);
+}
+.cg-inspector-star-svg,
+.cg-inspector-iso-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 92px;
+}
+.cg-40repo-horizon-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #d1fae5;
+  background: rgba(16, 185, 129, 0.14);
+  border: 1px solid rgba(52, 211, 153, 0.42);
+}
+
+/* V209: Constellation Radial Discipline Blueprint SVG & 40x40 Bridges Matrix Calm Controls */
+.cg-constellation-radial-wrap {
+  margin: 10px 0 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: radial-gradient(125% 145% at 50% 44%, rgba(12, 30, 56, 0.94) 0%, rgba(5, 11, 22, 0.98) 100%);
+  border: 1px solid rgba(230, 200, 138, 0.34);
+}
+.cg-constellation-radial-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 112px;
+}
+.cg-matrix-controls-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding: 6px 10px;
+  border-radius: 9px;
+  background: rgba(8, 17, 32, 0.82);
+  border: 1px solid rgba(89, 194, 255, 0.24);
 }
