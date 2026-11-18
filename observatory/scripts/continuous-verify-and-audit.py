@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V232).
+Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V235).
 Verifies:
-1. All 740+ physical Lean 4 files (633 in CommonGround/Verification/ + 107 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
+1. All 746+ physical Lean 4 files (636 in CommonGround/Verification/ + 110 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
    tokens outside comments (with NO 25 MiB cap on `.lean` files — large `.lean` files stream via Cloudflare R2 `/api/lean/*`)
    AND compile cleanly through the real Lean 4.33.0 kernel (`compile-all-lean4.py`).
 2. Reconstructs `bundle-data.js` from the 8 tracked `<16 MiB` shards and builds `dist-cloudflare/` if absent in CI.
@@ -63,6 +63,11 @@ def check_end_to_end_connections_and_clutter():
             assert (REPO_ROOT / vf).exists(), f"Broken insightPaths.connections.verifiedLeanFile: {vf}"
         assert "sourceAstBefore" not in c, "Unreferenced duplicate v40 field reintroduced into insightPaths.connections!"
     assert "verificationSuiteBridges" not in sm, "Unreferenced verificationSuiteBridges clutter reintroduced!"
+    for iso in sm.get("customIsomorphisms", []):
+        if iso.get("epistemicSymbol") == "⚠":
+            assert "transferHypothesis" not in iso and "transferBlueprint" not in iso, (
+                f"Contradicted optimistic transferHypothesis/transferBlueprint clutter found on ⚠ lookalike {iso.get('id')}!"
+            )
 
     readme_txt = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
     for forbidden in ("hodge.computer", "hodge-computer", "arXiv:2603.29157", "sextics"):
@@ -72,7 +77,7 @@ def check_end_to_end_connections_and_clutter():
         assert target.exists(), f"Broken relative link {rel_link} in README.md -> {target}"
     print(
         f"  [OK] End-to-end connection bijection verified: {len(suites)} suites == {len(disk_verif)} CommonGround/Verification/*.lean, "
-        f"0 broken mechanism/path .lean refs, 0 dead duplicate v40 fields, 0 clutter scripts, 0 .pyc files, README clean."
+        f"0 broken mechanism/path .lean refs, 0 dead/contradicted lookalike fields, 0 clutter scripts, 0 .pyc files, README clean."
     )
 
 
@@ -106,13 +111,13 @@ def check_unified_static_assets():
 
 
 def main():
-    print("=== Running V234 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
+    print("=== Running V235 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
     ensure_bundle_reconstructed()
     check_lean_corpus_and_kernel()
     check_end_to_end_connections_and_clutter()
     check_unified_static_assets()
     subprocess.run(["bash", str(OBS_DIR / "tests" / "run-tests.sh")], check=True)
-    print("=== ALL V234 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
+    print("=== ALL V235 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
 
 
 if __name__ == "__main__":
