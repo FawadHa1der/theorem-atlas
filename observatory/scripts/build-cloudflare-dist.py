@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-V230 Unified Chrome & Safari Shard Builder (< 25 MiB static assets)
+V231 Unified Chrome & Safari Shard Builder (< 25 MiB static assets)
 & Cloudflare R2 Unrestricted-Size Lean 4 Streaming Function Generator.
 
 - Reconstructs `bundle-data.js` from `observatory/chunks/` if missing in a fresh Git clone.
@@ -25,7 +25,7 @@ LOCAL_CHUNKS_DIR = OBS_DIR / "chunks"
 CF_DIR = OBS_DIR / "dist-cloudflare"
 CF_CHUNKS_DIR = CF_DIR / "chunks"
 LIMIT_BYTES = 25 * 1024 * 1024  # Cloudflare Pages 25 MiB static asset limit (does NOT restrict .lean files in R2!)
-ASSET_VER = "230"
+ASSET_VER = "231"
 
 SHARD_NAMES = [
     "bundle-shard-1-core.js",
@@ -236,10 +236,17 @@ def build_shards_and_sync_routes():
         )
     s4b_code += (
         "(function(){if(typeof window!=='undefined'&&window.__CG_PRELOADED__){"
-        "var sm=window.__CG_PRELOADED__.semanticMechanisms;"
-        "if(sm){sm.mechanisms=sm.highLevelMechanisms;sm.astIsomorphisms=sm.customIsomorphisms;"
+        "var pre=window.__CG_PRELOADED__,sm=pre.semanticMechanisms;"
+        "if(sm){"
+        "var ms=sm.highLevelMechanisms||[];for(var i=0;i<ms.length;i++){var m=ms[i];if(m){"
+        "if(!m.plainIntuition&&m.whyItMatters)m.plainIntuition=m.whyItMatters;"
+        "if(!m.physicalAnalogy&&m.analogy)m.physicalAnalogy=m.analogy;"
+        "if(!m.name&&m.title)m.name=m.title;}}"
+        "var is=sm.customIsomorphisms||[];for(var j=0;j<is.length;j++){var iso=is[j];if(iso&&!iso.whyItMatters&&iso.plainEnglishWhy)iso.whyItMatters=iso.plainEnglishWhy;}"
+        "sm.mechanisms=ms;sm.astIsomorphisms=is;"
         "sm.verifiedLean4BridgeModules=sm.verifiedLeanSuites;sm.verifiedLeanBridges=sm.verifiedLeanSuites;}"
-        "var ip=window.__CG_PRELOADED__.insightPaths;if(ip){ip.paths=ip.connections;}}})();\n"
+        "var ip=pre.insightPaths;if(ip){ip.paths=ip.connections;}"
+        "var ub=pre.unrelatedBridges;if(ub&&ub.discoveries&&!ub.bridges){ub.bridges=ub.discoveries;}}})();\n"
     )
     write_dual_shard("bundle-shard-4b-paths.js", s4b_code)
 
@@ -290,15 +297,15 @@ def build_shards_and_sync_routes():
     health_payload = {
         "ok": True,
         "service": "common-ground-observatory",
-        "version": "V230-Unified-Chrome-Safari-Shards-736LeanFiles-Milestone85Labs-FanoCramerRaoReedSolomonHammingAndCalmOmniboxToursUi",
+        "version": "V231-Unified-Chrome-Safari-Shards-738LeanFiles-Milestone86Labs-PerformativeHockeyStickCvarConformalDrCbfAndResearchCompassUi",
         "unifiedBrowserPipeline": True,
         "galaxyIdeas": len(mechs) + len(isos),
         "highLevelMechanisms": len(mechs),
         "customAstIsomorphisms": len(isos),
         "discoveryPaths": len(conns),
         "physicalLean4Suites": len(sm.get("verifiedLeanSuites", [])),
-        "totalZeroSorryLeanFiles": 736,
-        "kernelCompiledLeanModules": 696,
+        "totalZeroSorryLeanFiles": 738,
+        "kernelCompiledLeanModules": 698,
         "lean25MiBRestriction": False,
         "largeLeanStreamingEndpoint": "/api/lean/<path>",
         "customSearchIndexDeclarations": len(preloaded.get("customSearchIndex", [])),
