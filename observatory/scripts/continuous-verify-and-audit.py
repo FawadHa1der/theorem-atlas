@@ -61,6 +61,8 @@ def check_end_to_end_connections_and_clutter():
         vf = c.get("verifiedLeanFile")
         if vf:
             assert (REPO_ROOT / vf).exists(), f"Broken insightPaths.connections.verifiedLeanFile: {vf}"
+        assert "sourceAstBefore" not in c, "Unreferenced duplicate v40 field reintroduced into insightPaths.connections!"
+    assert "verificationSuiteBridges" not in sm, "Unreferenced verificationSuiteBridges clutter reintroduced!"
 
     readme_txt = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
     for forbidden in ("hodge.computer", "hodge-computer", "arXiv:2603.29157", "sextics"):
@@ -70,7 +72,7 @@ def check_end_to_end_connections_and_clutter():
         assert target.exists(), f"Broken relative link {rel_link} in README.md -> {target}"
     print(
         f"  [OK] End-to-end connection bijection verified: {len(suites)} suites == {len(disk_verif)} CommonGround/Verification/*.lean, "
-        f"0 broken mechanism/path .lean refs, 0 clutter scripts, 0 .pyc files, README clean."
+        f"0 broken mechanism/path .lean refs, 0 dead duplicate v40 fields, 0 clutter scripts, 0 .pyc files, README clean."
     )
 
 
@@ -104,13 +106,13 @@ def check_unified_static_assets():
 
 
 def main():
-    print("=== Running V233 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
+    print("=== Running V234 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
     ensure_bundle_reconstructed()
     check_lean_corpus_and_kernel()
     check_end_to_end_connections_and_clutter()
     check_unified_static_assets()
     subprocess.run(["bash", str(OBS_DIR / "tests" / "run-tests.sh")], check=True)
-    print("=== ALL V233 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
+    print("=== ALL V234 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
 
 
 if __name__ == "__main__":
