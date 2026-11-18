@@ -4145,3 +4145,15 @@ details.cg-secondary-compass-drawer > summary:hover {
   border: 1px solid rgba(89, 194, 255, 0.22);
 }
 
+/* V232: In-Place Multi-Hop Conjecture Chain Breadcrumb Bar */
+.cg-active-chain-bar {
+  margin-top: 7px;
+  padding: 6px 9px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(229, 198, 135, 0.1), rgba(8, 18, 34, 0.92));
+  border: 1px solid rgba(229, 198, 135, 0.42);
+  font-size: 11px;
+  color: #fef3c7;
+}
+
+
