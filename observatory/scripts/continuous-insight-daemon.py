@@ -225,7 +225,7 @@ def run_cycle(cycle_num, start_ts, end_ts):
 
     status = {
         "status": "running" if remaining_hours > 0 else "completed",
-        "version": "V277",
+        "version": "V278",
         "daemonPid": os.getpid(),
         "cycle": cycle_num,
         "timestampUtc": now_iso,
@@ -249,7 +249,7 @@ def run_cycle(cycle_num, start_ts, end_ts):
     with RUNS_JSONL.open("a", encoding="utf-8") as f:
         f.write(json.dumps({
             "cycle": cycle_num,
-            "version": "V277",
+            "version": "V278",
             "timestampUtc": now_iso,
             "exitCode": proc.returncode,
             "passed": passed_checks,
