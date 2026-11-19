@@ -2,7 +2,7 @@
 # Elon Lindenstrauss Positive Entropy Hecke Recurrence ↔ Arithmetic Quantum Unique Ergodicity
 ## CommonGround Formal Verification Suite #336 (`LindenstraussMeasureRigidityArithmeticQUEBridge.lean`)
 
-* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `probability-lean` ↔ `PhysLean`
+* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `tc-probcomb` ↔ `PhysLean`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

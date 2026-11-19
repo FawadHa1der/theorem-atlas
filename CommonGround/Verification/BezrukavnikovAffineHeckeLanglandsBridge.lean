@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #116 (`BezrukavnikovAffineHeckeLanglandsBridge.lean`)
 
 * **Mechanism ID**: `bezrukavnikov-geometric-langlands-affine-hecke`
-* **Cross-Domain Triad**: `FLT` ↔ `lean-liquid` ↔ `category-theory-lean`
+* **Cross-Domain Triad**: `FLT` ↔ `lean-liquid` ↔ `tc-reptheory`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

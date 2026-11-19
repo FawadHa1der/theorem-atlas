@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #135 (`FurstenbergKatznelsonCompactExtensionBridge.lean`)
 
 * **Mechanism ID**: `furstenberg-katznelson-ip-szemeredi-ergodic`
-* **Cross-Domain Triad**: `erdos-problems` ↔ `pfr` ↔ `probability-lean`
+* **Cross-Domain Triad**: `erdos-problems` ↔ `oai-szemeredi` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

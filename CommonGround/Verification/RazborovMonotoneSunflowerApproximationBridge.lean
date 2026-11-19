@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite (`RazborovMonotoneSunflowerApproximationBridge.lean`)
 
 * **Mechanism ID**: `razborov-monotone-circuit-sunflower-approximation`
-* **Cross-Domain Triad**: `aks` ↔ `combinatorics-lean` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `tc-probcomb` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

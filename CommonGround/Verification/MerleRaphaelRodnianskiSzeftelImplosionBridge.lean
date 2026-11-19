@@ -2,7 +2,7 @@
 # Merle–Raphaël–Rodnianski–Szeftel Repulsive Smooth Self-Similar Profile ↔ Compressible Euler/NLS Implosion
 ## CommonGround Formal Verification Suite #395 (`MerleRaphaelRodnianskiSzeftelImplosionBridge.lean`)
 
-* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

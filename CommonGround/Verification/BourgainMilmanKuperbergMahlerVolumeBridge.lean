@@ -2,7 +2,7 @@
 # Bourgain–Milman–Kuperberg Symplectic Polar Volume ↔ Convex Body Mahler Product Lower Bound
 ## CommonGround Formal Verification Suite #346 (`BourgainMilmanKuperbergMahlerVolumeBridge.lean`)
 
-* **Cross-Domain Triad**: `SpherePacking` ↔ `optlib` ↔ `carleson`
+* **Cross-Domain Triad**: `SpherePacking` ↔ `econlib` ↔ `carleson`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

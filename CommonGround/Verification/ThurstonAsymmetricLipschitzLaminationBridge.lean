@@ -2,7 +2,7 @@
 # Thurston Asymmetric Stretch Geodesic Metric ↔ Maximal Geodesic Lamination Dual Ratio
 ## CommonGround Formal Verification Suite #362 (`ThurstonAsymmetricLipschitzLaminationBridge.lean`)
 
-* **Cross-Domain Triad**: `SpherePacking` ↔ `carleson` ↔ `group-theory-lean`
+* **Cross-Domain Triad**: `SpherePacking` ↔ `carleson` ↔ `tauceti`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

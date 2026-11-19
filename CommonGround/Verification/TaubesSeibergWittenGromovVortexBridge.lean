@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #130 (`TaubesSeibergWittenGromovVortexBridge.lean`)
 
 * **Mechanism ID**: `seiberg-witten-monopole-floer-taubes-symplectic`
-* **Cross-Domain Triad**: `PhysLean` ↔ `formal-conjectures` ↔ `carleson`
+* **Cross-Domain Triad**: `PhysLean` ↔ `erdos` ↔ `carleson`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #271 (`MacWilliamsDelsarteKrawtchoukCodingBridge.lean`)
 
 * **Mechanism ID**: `delsarte-macwilliams-krawtchouk-coding-linear-duality`
-* **Cross-Domain Triad**: `SpherePacking` ↔ `combinatorics-lean` ↔ `optlib`
+* **Cross-Domain Triad**: `SpherePacking` ↔ `tc-probcomb` ↔ `econlib`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

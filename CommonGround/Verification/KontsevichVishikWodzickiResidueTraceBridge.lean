@@ -2,7 +2,7 @@
 # Kontsevich–Vishik Canonical Zeta Trace ↔ Wodzicki Noncommutative Pseudodifferential Residue
 ## CommonGround Formal Verification Suite #303 (`KontsevichVishikWodzickiResidueTraceBridge.lean`)
 
-* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `algebra-lean`
+* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `tc-alggeom`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

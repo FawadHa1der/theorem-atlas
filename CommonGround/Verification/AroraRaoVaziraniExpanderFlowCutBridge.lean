@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #138 (`AroraRaoVaziraniExpanderFlowCutBridge.lean`)
 
 * **Mechanism ID**: `arora-rao-vazirani-expander-flow-sqrt-log-cut`
-* **Cross-Domain Triad**: `optlib` ↔ `aks` ↔ `graph-theory-lean`
+* **Cross-Domain Triad**: `econlib` ↔ `apsp3sum` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

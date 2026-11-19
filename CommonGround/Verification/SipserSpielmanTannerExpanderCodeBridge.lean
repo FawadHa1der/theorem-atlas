@@ -2,7 +2,7 @@
 # Sipser–Spielman Vertex Expansion Tanner Graph ↔ Linear-Time Iterative Bit-Flipping Decoding
 ## CommonGround Formal Verification Suite #340 (`SipserSpielmanTannerExpanderCodeBridge.lean`)
 
-* **Cross-Domain Triad**: `aks` ↔ `graph-theory-lean` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `erdos` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

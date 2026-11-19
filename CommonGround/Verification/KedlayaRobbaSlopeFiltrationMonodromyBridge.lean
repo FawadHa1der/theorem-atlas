@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #99 (`KedlayaRobbaSlopeFiltrationMonodromyBridge.lean`)
 
 * **Mechanism ID**: `kedlaya-monodromy-slope-filtration-p-adic-diff`
-* **Cross-Domain Triad**: `FLT` ↔ `lean-liquid` ↔ `number-theory-lean`
+* **Cross-Domain Triad**: `FLT` ↔ `lean-liquid` ↔ `tc-numtheory`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

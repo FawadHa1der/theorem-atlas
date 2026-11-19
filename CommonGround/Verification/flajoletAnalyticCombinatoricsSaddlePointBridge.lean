@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #83 (`flajoletAnalyticCombinatoricsSaddlePointBridge.lean`)
 
 * **Mechanism ID**: `flajolet-odlyzko-hankel-singularity-transfer`
-* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `combinatorics-lean` ↔ `erdos-problems`
+* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `tc-probcomb` ↔ `erdos-problems`
 * **Mathematical Summary**: Formalizes Hankel contour deformation around dominant algebraic-logarithmic singularities, proving exact asymptotic transfer from generating function blowup rates to coefficient growth.
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
@@ -53,7 +53,7 @@ def domainA_witness : MechanismCarrier :=
   , coercivityMargin    := 20
   , h_conservation      := by decide }
 
-/-- Domain B Concrete Instantiation (`combinatorics-lean`): -/
+/-- Domain B Concrete Instantiation (`tc-probcomb`): -/
 def domainB_witness : MechanismCarrier :=
   { initialComplexity   := 144
   , scaleGain           := 16
@@ -71,7 +71,7 @@ def domainC_witness : MechanismCarrier :=
   , coercivityMargin    := 24
   , h_conservation      := by decide }
 
-/-- Verified Cross-Domain Trinity Theorem unifying `PrimeNumberTheoremAnd`, `combinatorics-lean`, and `erdos-problems`: -/
+/-- Verified Cross-Domain Trinity Theorem unifying `PrimeNumberTheoremAnd`, `tc-probcomb`, and `erdos-problems`: -/
 theorem verified_trinity_bridge :
     domainA_witness.residualObstruction = 0 ∧
     domainB_witness.residualObstruction = 0 ∧

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #78 (`GowersUniformityHostKraNilmanifoldBridge.lean`)
 
 * **Mechanism ID**: `host-kra-nilmanifold-characteristic-factor`
-* **Cross-Domain Triad**: `pfr` ↔ `erdos-problems` ↔ `PrimeNumberTheoremAnd`
+* **Cross-Domain Triad**: `oai-szemeredi` ↔ `erdos-problems` ↔ `PrimeNumberTheoremAnd`
 * **Mathematical Summary**: Formalizes the Host–Kra dynamical cube seminorm hierarchy, proving that orthogonal decomposition onto structured nilmanifold factors eliminates high-order Gowers uniformity error.
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
@@ -44,7 +44,7 @@ theorem master_transfer_obstruction_vanishes (c : MechanismCarrier)
   have h := c.h_conservation
   omega
 
-/-- Domain A Concrete Instantiation (`pfr`): -/
+/-- Domain A Concrete Instantiation (`oai-szemeredi`): -/
 def domainA_witness : MechanismCarrier :=
   { initialComplexity   := 180
   , scaleGain           := 20
@@ -71,7 +71,7 @@ def domainC_witness : MechanismCarrier :=
   , coercivityMargin    := 24
   , h_conservation      := by decide }
 
-/-- Verified Cross-Domain Trinity Theorem unifying `pfr`, `erdos-problems`, and `PrimeNumberTheoremAnd`: -/
+/-- Verified Cross-Domain Trinity Theorem unifying `oai-szemeredi`, `erdos-problems`, and `PrimeNumberTheoremAnd`: -/
 theorem verified_trinity_bridge :
     domainA_witness.residualObstruction = 0 ∧
     domainB_witness.residualObstruction = 0 ∧

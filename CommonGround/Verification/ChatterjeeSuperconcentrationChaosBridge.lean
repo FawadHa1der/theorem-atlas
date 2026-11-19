@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite (`ChatterjeeSuperconcentrationChaosBridge.lean`)
 
 * **Mechanism ID**: `chatterjee-superconcentration-chaos-equivalence`
-* **Cross-Domain Triad**: `probability-lean` ↔ `pfr` ↔ `PhysLean`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `oai-szemeredi` ↔ `PhysLean`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

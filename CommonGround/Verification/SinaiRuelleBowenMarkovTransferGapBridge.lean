@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #219 (`SinaiRuelleBowenMarkovTransferGapBridge.lean`)
 
 * **Mechanism ID**: `sinai-ruelle-bowen-markov-partition-transfer-gap`
-* **Cross-Domain Triad**: `PhysLean` ↔ `probability-lean` ↔ `carleson`
+* **Cross-Domain Triad**: `PhysLean` ↔ `tc-probcomb` ↔ `carleson`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -19,7 +19,7 @@ structure MechanismCarrier where
   deriving Repr, DecidableEq
 
 /-- Bidirectional Duality Dictionary Structure (V35 Loop 3):
-    Certifies that translating a state from `PhysLean` to `probability-lean` and back preserves
+    Certifies that translating a state from `PhysLean` to `tc-probcomb` and back preserves
     both the total complexity budget and the monotone scale gain. -/
 structure BidirectionalDualityPair where
   forwardState  : MechanismCarrier

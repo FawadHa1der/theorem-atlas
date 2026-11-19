@@ -2,7 +2,7 @@
 # Dimitrov–Gao–Habegger–Kühne Degenerating Arakelov Height ↔ Uniform Mordell–Lang Bound
 ## CommonGround Formal Verification Suite #368 (`DimitrovGaoHabeggerUniformMordellLangBridge.lean`)
 
-* **Cross-Domain Triad**: `FLT` ↔ `number-theory-lean` ↔ `lean-liquid`
+* **Cross-Domain Triad**: `FLT` ↔ `tc-numtheory` ↔ `lean-liquid`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

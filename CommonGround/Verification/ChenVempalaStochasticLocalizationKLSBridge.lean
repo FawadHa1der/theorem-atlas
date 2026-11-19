@@ -2,7 +2,7 @@
 # Eldan–Chen–Klartag–Lehec Stochastic Localization ↔ Polylogarithmic Kannan–Lovász–Simonovits Constant
 ## CommonGround Formal Verification Suite #345 (`ChenVempalaStochasticLocalizationKLSBridge.lean`)
 
-* **Cross-Domain Triad**: `probability-lean` ↔ `SpherePacking` ↔ `optlib`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `SpherePacking` ↔ `econlib`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

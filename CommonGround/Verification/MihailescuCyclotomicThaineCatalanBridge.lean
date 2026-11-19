@@ -2,7 +2,7 @@
 # Mihăilescu Stickelberger–Thaine Cyclotomic Annihilation ↔ Complete Resolution of Catalan's Conjecture
 ## CommonGround Formal Verification Suite #333 (`MihailescuCyclotomicThaineCatalanBridge.lean`)
 
-* **Cross-Domain Triad**: `FLT` ↔ `number-theory-lean` ↔ `algebra-lean`
+* **Cross-Domain Triad**: `FLT` ↔ `tc-numtheory` ↔ `tc-alggeom`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

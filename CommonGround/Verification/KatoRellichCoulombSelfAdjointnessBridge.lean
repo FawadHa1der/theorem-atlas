@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #209 (`KatoRellichCoulombSelfAdjointnessBridge.lean`)
 
 * **Mechanism ID**: `kato-rellich-hardy-coulomb-self-adjointness`
-* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #240 (`SzemerediTrotterCrossingNumberIncidenceBridge.lean`)
 
 * **Mechanism ID**: `szemeredi-trotter-elekes-crossing-number-incidence`
-* **Cross-Domain Triad**: `erdos-problems` ↔ `combinatorics-lean` ↔ `graph-theory-lean`
+* **Cross-Domain Triad**: `erdos-problems` ↔ `tc-probcomb` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -19,7 +19,7 @@ structure MechanismCarrier where
   deriving Repr, DecidableEq
 
 /-- Bidirectional Duality Dictionary Structure (V35 Loop 3):
-    Certifies that translating a state from `erdos-problems` to `combinatorics-lean` and back preserves
+    Certifies that translating a state from `erdos-problems` to `tc-probcomb` and back preserves
     both the total complexity budget and the monotone scale gain. -/
 structure BidirectionalDualityPair where
   forwardState  : MechanismCarrier

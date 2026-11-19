@@ -2,7 +2,7 @@
 # Brändén–Huh Lorentzian Hessian Signature (1, n-1) ↔ Mason Ultra-Log-Concavity of Independent Sets
 ## CommonGround Formal Verification Suite #344 (`BrandenHuhLorentzianPolynomialLogConcaveBridge.lean`)
 
-* **Cross-Domain Triad**: `combinatorics-lean` ↔ `optlib` ↔ `probability-lean`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `econlib` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #252 (`PontryaginVanKampenLCADualityBridge.lean`)
 
 * **Mechanism ID**: `pontryagin-van-kampen-locally-compact-abelian-duality`
-* **Cross-Domain Triad**: `carleson` ↔ `PrimeNumberTheoremAnd` ↔ `pfr`
+* **Cross-Domain Triad**: `carleson` ↔ `PrimeNumberTheoremAnd` ↔ `oai-szemeredi`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

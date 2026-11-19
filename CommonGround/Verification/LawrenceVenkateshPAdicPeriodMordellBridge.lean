@@ -2,7 +2,7 @@
 # Lawrence–Venkatesh p-Adic Period Map Monodromy ↔ Geometric Proof of Faltings Mordell Conjecture
 ## CommonGround Formal Verification Suite #331 (`LawrenceVenkateshPAdicPeriodMordellBridge.lean`)
 
-* **Cross-Domain Triad**: `FLT` ↔ `lean-liquid` ↔ `number-theory-lean`
+* **Cross-Domain Triad**: `FLT` ↔ `lean-liquid` ↔ `tc-numtheory`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

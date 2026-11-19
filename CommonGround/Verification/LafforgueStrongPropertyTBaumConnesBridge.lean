@@ -2,7 +2,7 @@
 # Vincent Lafforgue Banach Strong Property (T) ↔ Bost–Baum–Connes Assembly Isomorphism
 ## CommonGround Formal Verification Suite #316 (`LafforgueStrongPropertyTBaumConnesBridge.lean`)
 
-* **Cross-Domain Triad**: `group-theory-lean` ↔ `category-theory-lean` ↔ `lean-liquid`
+* **Cross-Domain Triad**: `tauceti` ↔ `tc-reptheory` ↔ `lean-liquid`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

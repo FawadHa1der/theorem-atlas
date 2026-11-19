@@ -2,7 +2,7 @@
 # CKLPGS Dynamic L₁ Oblivious Routing & Rebuild Game ↔ O(m^{1+o(1)}) Minimum-Cost Flow
 ## CommonGround Formal Verification Suite #338 (`ChenKyngLiuPengAlmostLinearMinCostFlowBridge.lean`)
 
-* **Cross-Domain Triad**: `optlib` ↔ `graph-theory-lean` ↔ `aks`
+* **Cross-Domain Triad**: `econlib` ↔ `erdos` ↔ `apsp3sum`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

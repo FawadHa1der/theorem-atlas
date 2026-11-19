@@ -2,7 +2,7 @@
 # GGOW Alternating Quantum Operator Scaling ↔ Noncommutative Symbolic Determinant Identity
 ## CommonGround Formal Verification Suite #337 (`GargGurvitsOliveiraWigdersonOperatorScalingBridge.lean`)
 
-* **Cross-Domain Triad**: `aks` ↔ `optlib` ↔ `algebra-lean`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `econlib` ↔ `tc-alggeom`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

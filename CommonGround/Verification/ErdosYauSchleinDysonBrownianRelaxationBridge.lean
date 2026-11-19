@@ -2,7 +2,7 @@
 # Erdős–Schlein–Yau Local Semicircle Law ↔ Dyson Brownian Motion Local Equilibrium
 ## CommonGround Formal Verification Suite #313 (`ErdosYauSchleinDysonBrownianRelaxationBridge.lean`)
 
-* **Cross-Domain Triad**: `probability-lean` ↔ `PhysLean` ↔ `pfr`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `PhysLean` ↔ `oai-szemeredi`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

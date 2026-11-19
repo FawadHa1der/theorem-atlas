@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #75 (`MoriMinimalModelFlipTerminationBridge.lean`)
 
 * **Mechanism ID**: `mori-extremal-ray-discrepancy-descent`
-* **Cross-Domain Triad**: `lean-liquid` ↔ `FLT` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `lean-liquid` ↔ `FLT` ↔ `erdos`
 * **Mathematical Summary**: Formalizes canonical divisor discrepancy jumps across extremal ray flips, proving that strictly increasing log-discrepancies on finite singularity strata force birational flip sequences to terminate in a minimal model.
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
@@ -62,7 +62,7 @@ def domainB_witness : MechanismCarrier :=
   , coercivityMargin    := 16
   , h_conservation      := by decide }
 
-/-- Domain C Concrete Instantiation (`formal-conjectures`): -/
+/-- Domain C Concrete Instantiation (`erdos`): -/
 def domainC_witness : MechanismCarrier :=
   { initialComplexity   := 216
   , scaleGain           := 24
@@ -71,7 +71,7 @@ def domainC_witness : MechanismCarrier :=
   , coercivityMargin    := 24
   , h_conservation      := by decide }
 
-/-- Verified Cross-Domain Trinity Theorem unifying `lean-liquid`, `FLT`, and `formal-conjectures`: -/
+/-- Verified Cross-Domain Trinity Theorem unifying `lean-liquid`, `FLT`, and `erdos`: -/
 theorem verified_trinity_bridge :
     domainA_witness.residualObstruction = 0 ∧
     domainB_witness.residualObstruction = 0 ∧

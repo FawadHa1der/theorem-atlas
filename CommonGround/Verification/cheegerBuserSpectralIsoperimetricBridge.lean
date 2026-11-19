@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #76 (`cheegerBuserSpectralIsoperimetricBridge.lean`)
 
 * **Mechanism ID**: `cheeger-buser-coarea-spectral-slicing`
-* **Cross-Domain Triad**: `aks` ↔ `carleson` ↔ `graph-theory-lean`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `carleson` ↔ `erdos`
 * **Mathematical Summary**: Formalizes the coarea level-set slicing identity and Cauchy–Schwarz gradient bound, proving the two-sided sandwich between the first nontrivial Laplacian eigenvalue λ₁ and the isoperimetric Cheeger constant h(G).
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
@@ -44,7 +44,7 @@ theorem master_transfer_obstruction_vanishes (c : MechanismCarrier)
   have h := c.h_conservation
   omega
 
-/-- Domain A Concrete Instantiation (`aks`): -/
+/-- Domain A Concrete Instantiation (`apsp3sum`): -/
 def domainA_witness : MechanismCarrier :=
   { initialComplexity   := 180
   , scaleGain           := 20
@@ -62,7 +62,7 @@ def domainB_witness : MechanismCarrier :=
   , coercivityMargin    := 16
   , h_conservation      := by decide }
 
-/-- Domain C Concrete Instantiation (`graph-theory-lean`): -/
+/-- Domain C Concrete Instantiation (`erdos`): -/
 def domainC_witness : MechanismCarrier :=
   { initialComplexity   := 216
   , scaleGain           := 24
@@ -71,7 +71,7 @@ def domainC_witness : MechanismCarrier :=
   , coercivityMargin    := 24
   , h_conservation      := by decide }
 
-/-- Verified Cross-Domain Trinity Theorem unifying `aks`, `carleson`, and `graph-theory-lean`: -/
+/-- Verified Cross-Domain Trinity Theorem unifying `apsp3sum`, `carleson`, and `erdos`: -/
 theorem verified_trinity_bridge :
     domainA_witness.residualObstruction = 0 ∧
     domainB_witness.residualObstruction = 0 ∧

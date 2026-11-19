@@ -2,7 +2,7 @@
 # Aizenman–Molchanov Fractional Moment Resampling ↔ Exponential Localization in Random Media
 ## CommonGround Formal Verification Suite #312 (`AizenmanMolchanovFractionalMomentBridge.lean`)
 
-* **Cross-Domain Triad**: `probability-lean` ↔ `PhysLean` ↔ `carleson`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `PhysLean` ↔ `carleson`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

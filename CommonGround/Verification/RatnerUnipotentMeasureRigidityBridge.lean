@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #149 (`RatnerUnipotentMeasureRigidityBridge.lean`)
 
 * **Mechanism ID**: `ratner-unipotent-measure-rigidity-horocycle-orbit`
-* **Cross-Domain Triad**: `FLT` ↔ `PrimeNumberTheoremAnd` ↔ `probability-lean`
+* **Cross-Domain Triad**: `FLT` ↔ `PrimeNumberTheoremAnd` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

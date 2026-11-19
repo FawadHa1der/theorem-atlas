@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #266 (`ScarfGaleShapleyCoreStabilityBridge.lean`)
 
 * **Mechanism ID**: `gale-shapley-scarf-top-trading-core-fractional-duality`
-* **Cross-Domain Triad**: `optlib` ↔ `combinatorics-lean` ↔ `graph-theory-lean`
+* **Cross-Domain Triad**: `econlib` ↔ `tc-probcomb` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

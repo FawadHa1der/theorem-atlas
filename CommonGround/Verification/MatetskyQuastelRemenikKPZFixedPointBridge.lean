@@ -2,7 +2,7 @@
 # Matetski–Quastel–Remenik Biorthogonal Brownian Scattering ↔ Universal KPZ Fixed-Point integrable Kernel
 ## CommonGround Formal Verification Suite #400 (`MatetskyQuastelRemenikKPZFixedPointBridge.lean`)
 
-* **Cross-Domain Triad**: `probability-lean` ↔ `PhysLean` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `PhysLean` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

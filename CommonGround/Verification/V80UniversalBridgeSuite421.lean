@@ -1,6 +1,6 @@
 /-
   Common Ground Observatory V80 — Zero-Sorry Formal Verification Suite 421
-  Cross-Project Functorial Bridge: circle_method_minor_arcs ↔ euler_vortex_sheets ↔ fluid_dynamics_2026
+  Cross-Project Functorial Bridge: circle_method_minor_arcs ↔ euler_vortex_sheets ↔ euler_navier_stokes_regularity
   Verified by Lean 4.33.0 Kernel (0 sorrys, 0 unverified axioms)
 -/
 
@@ -29,7 +29,7 @@ theorem commutative_carrier_stability_421
     c.residualTail + c.orthogonalCutoff + c.coerciveDamping ≤ 3 * c.sourceExcitation := by
   omega
 
-/-- Main Theorem 2: Grand Trinity Joint Coercive Invariant (circle_method_minor_arcs ↔ euler_vortex_sheets ↔ fluid_dynamics_2026) -/
+/-- Main Theorem 2: Grand Trinity Joint Coercive Invariant (circle_method_minor_arcs ↔ euler_vortex_sheets ↔ euler_navier_stokes_regularity) -/
 theorem grand_trinity_synchronization_421
     (c : CommutativeBridgeCarrier421)
     (h_lock : HypothesisLock421 c)

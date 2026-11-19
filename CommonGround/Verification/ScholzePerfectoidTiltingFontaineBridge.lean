@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #108 (`ScholzePerfectoidTiltingFontaineBridge.lean`)
 
 * **Mechanism ID**: `scholze-perfectoid-tilting-characteristic-transfer`
-* **Cross-Domain Triad**: `lean-liquid` ↔ `FLT` ↔ `number-theory-lean`
+* **Cross-Domain Triad**: `lean-liquid` ↔ `FLT` ↔ `tc-numtheory`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -2,7 +2,7 @@
 # Kronheimer–Mrowka Symplectic Cobordism Non-Vanishing ↔ Resolution of the Property P Knot Conjecture
 ## CommonGround Formal Verification Suite #357 (`KronheimerMrowkaInstantonPropertyPBridge.lean`)
 
-* **Cross-Domain Triad**: `PhysLean` ↔ `formal-conjectures` ↔ `carleson`
+* **Cross-Domain Triad**: `PhysLean` ↔ `erdos` ↔ `carleson`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

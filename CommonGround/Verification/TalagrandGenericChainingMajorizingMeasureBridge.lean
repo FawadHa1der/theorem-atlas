@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #112 (`TalagrandGenericChainingMajorizingMeasureBridge.lean`)
 
 * **Mechanism ID**: `talagrand-generic-chaining-gamma2-majorizing`
-* **Cross-Domain Triad**: `probability-lean` ↔ `pfr` ↔ `optlib`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `oai-szemeredi` ↔ `econlib`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

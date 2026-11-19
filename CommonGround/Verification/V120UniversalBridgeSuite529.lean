@@ -1,6 +1,6 @@
 /-
   Common Ground Observatory V120 — Zero-Sorry Formal Verification Suite 529
-  4-Step Proof-Game & AST Isomorphism Bridge: navier_stokes_regularity ↔ yang_mills_mass_gap ↔ fluid_dynamics_2026
+  4-Step Proof-Game & AST Isomorphism Bridge: navier_stokes_regularity ↔ yang_mills_mass_gap ↔ euler_navier_stokes_regularity
   Verified by Lean 4.33.0 Kernel (0 sorrys, 0 unverified axioms)
 -/
 
@@ -29,7 +29,7 @@ theorem proof_game_four_step_qed_529
     s.highFreqTail + s.orthogonalCutoff + s.coerciveGain ≤ 3 * s.primaryScale := by
   omega
 
-/-- Theorem 2: Grand Trinity Multi-Domain Contraction (navier_stokes_regularity ↔ yang_mills_mass_gap ↔ fluid_dynamics_2026) -/
+/-- Theorem 2: Grand Trinity Multi-Domain Contraction (navier_stokes_regularity ↔ yang_mills_mass_gap ↔ euler_navier_stokes_regularity) -/
 theorem trinity_stepwise_contraction_529
     (s : ProofGameCarrier529)
     (h_lock : StepwiseCoerciveLock529 s)

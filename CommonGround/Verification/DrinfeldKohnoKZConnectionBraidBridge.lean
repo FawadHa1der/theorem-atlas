@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #171 (`DrinfeldKohnoKZConnectionBraidBridge.lean`)
 
 * **Mechanism ID**: `drinfeld-kohno-kz-equation-braid-monodromy`
-* **Cross-Domain Triad**: `PhysLean` ↔ `category-theory-lean` ↔ `algebra-lean`
+* **Cross-Domain Triad**: `PhysLean` ↔ `tc-reptheory` ↔ `tc-alggeom`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -30,7 +30,7 @@ theorem master_transfer_obstruction_vanishes (c : MechanismCarrier)
   omega
 
 /-- 3-Hop Cross-Domain Proof Chain Composition Theorem (V30 Loop 3):
-    Chaining Hop 1 (`PhysLean → category-theory-lean`), Hop 2 (`category-theory-lean → algebra-lean`), and Hop 3 (`algebra-lean → TargetD`)
+    Chaining Hop 1 (`PhysLean → tc-reptheory`), Hop 2 (`tc-reptheory → tc-alggeom`), and Hop 3 (`tc-alggeom → TargetD`)
     additively composes the scale gains and certifies that the terminal obstruction vanishes. -/
 theorem three_hop_chain_composition (c1 c2 c3 : MechanismCarrier)
     (h1 : c1.initialComplexity ≤ c1.activeScales * c1.scaleGain + c1.coercivityMargin)

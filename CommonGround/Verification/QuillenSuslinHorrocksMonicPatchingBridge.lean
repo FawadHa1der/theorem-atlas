@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #245 (`QuillenSuslinHorrocksMonicPatchingBridge.lean`)
 
 * **Mechanism ID**: `quillen-suslin-horrocks-serre-projective-module-patching`
-* **Cross-Domain Triad**: `algebra-lean` ↔ `category-theory-lean` ↔ `lean-liquid`
+* **Cross-Domain Triad**: `tc-alggeom` ↔ `tc-reptheory` ↔ `lean-liquid`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -19,7 +19,7 @@ structure MechanismCarrier where
   deriving Repr, DecidableEq
 
 /-- Bidirectional Duality Dictionary Structure (V35 Loop 3):
-    Certifies that translating a state from `algebra-lean` to `category-theory-lean` and back preserves
+    Certifies that translating a state from `tc-alggeom` to `tc-reptheory` and back preserves
     both the total complexity budget and the monotone scale gain. -/
 structure BidirectionalDualityPair where
   forwardState  : MechanismCarrier

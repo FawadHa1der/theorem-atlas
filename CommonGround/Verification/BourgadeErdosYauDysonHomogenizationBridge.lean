@@ -2,7 +2,7 @@
 # Bourgade–Erdős–Yau Stochastic Eigenvalue Homogenization ↔ Fixed-Energy Wigner Universality
 ## CommonGround Formal Verification Suite #353 (`BourgadeErdosYauDysonHomogenizationBridge.lean`)
 
-* **Cross-Domain Triad**: `probability-lean` ↔ `PhysLean` ↔ `pfr`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `PhysLean` ↔ `oai-szemeredi`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -2,7 +2,7 @@
 # Connes–Takesaki Flow of Weights Duality ↔ Uniqueness of the Hyperfinite II₁/III_λ Factor
 ## CommonGround Formal Verification Suite #355 (`ConnesTakesakiInjectiveFactorDualityBridge.lean`)
 
-* **Cross-Domain Triad**: `algebra-lean` ↔ `PhysLean` ↔ `category-theory-lean`
+* **Cross-Domain Triad**: `tc-alggeom` ↔ `PhysLean` ↔ `tc-reptheory`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

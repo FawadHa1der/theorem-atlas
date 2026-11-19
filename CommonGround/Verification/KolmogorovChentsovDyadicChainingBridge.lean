@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite (`KolmogorovChentsovDyadicChainingBridge.lean`)
 
 * **Mechanism ID**: `kolmogorov-chentsov-dyadic-chaining-continuity`
-* **Cross-Domain Triad**: `probability-lean` ↔ `carleson` ↔ `pfr`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `carleson` ↔ `oai-szemeredi`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #157 (`BourgainFRTProbabilisticTreeEmbeddingBridge.lean`)
 
 * **Mechanism ID**: `assouad-bourgain-l1-metric-tree-embedding-distortion`
-* **Cross-Domain Triad**: `optlib` ↔ `graph-theory-lean` ↔ `aks`
+* **Cross-Domain Triad**: `econlib` ↔ `erdos` ↔ `apsp3sum`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -30,7 +30,7 @@ theorem master_transfer_obstruction_vanishes (c : MechanismCarrier)
   omega
 
 /-- 3-Hop Cross-Domain Proof Chain Composition Theorem (V30 Loop 3):
-    Chaining Hop 1 (`optlib → graph-theory-lean`), Hop 2 (`graph-theory-lean → aks`), and Hop 3 (`aks → TargetD`)
+    Chaining Hop 1 (`econlib → erdos`), Hop 2 (`erdos → apsp3sum`), and Hop 3 (`apsp3sum → TargetD`)
     additively composes the scale gains and certifies that the terminal obstruction vanishes. -/
 theorem three_hop_chain_composition (c1 c2 c3 : MechanismCarrier)
     (h1 : c1.initialComplexity ≤ c1.activeScales * c1.scaleGain + c1.coercivityMargin)

@@ -2,7 +2,7 @@
 # Minhyong Kim Non-Abelian Unipotent Albanese Map ↔ Iterated Coleman Integral Rational Point Bound
 ## CommonGround Formal Verification Suite #332 (`ChabautyKimNonAbelianUnipotentSelmerBridge.lean`)
 
-* **Cross-Domain Triad**: `FLT` ↔ `number-theory-lean` ↔ `lean-liquid`
+* **Cross-Domain Triad**: `FLT` ↔ `tc-numtheory` ↔ `lean-liquid`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

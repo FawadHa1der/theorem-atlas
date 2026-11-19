@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #299 (`PanteleevKalachevAnshuNLTSQuantumLDPCBridge.lean`)
 
 * **Mechanism ID**: `ananshu-breuckmann-ebeling-nlts-quantum-ldpc-good-code`
-* **Cross-Domain Triad**: `PhysLean` ↔ `graph-theory-lean` ↔ `aks`
+* **Cross-Domain Triad**: `PhysLean` ↔ `erdos` ↔ `apsp3sum`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

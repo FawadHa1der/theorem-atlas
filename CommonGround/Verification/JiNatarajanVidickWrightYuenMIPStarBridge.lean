@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #300 (`JiNatarajanVidickWrightYuenMIPStarBridge.lean`)
 
 * **Mechanism ID**: `ji-natarajan-vidick-wright-yuen-mip-star-re-connes`
-* **Cross-Domain Triad**: `aks` ↔ `PhysLean` ↔ `algebra-lean`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `PhysLean` ↔ `tc-alggeom`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

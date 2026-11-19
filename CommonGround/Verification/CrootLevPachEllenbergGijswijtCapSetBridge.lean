@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #295 (`CrootLevPachEllenbergGijswijtCapSetBridge.lean`)
 
 * **Mechanism ID**: `croot-lev-pach-ellenberg-gijswijt-cap-set-slice-rank`
-* **Cross-Domain Triad**: `combinatorics-lean` ↔ `erdos-problems` ↔ `pfr`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `erdos-problems` ↔ `oai-szemeredi`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

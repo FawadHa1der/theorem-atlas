@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #228 (`IsettDeLellisSzekelyhidiOnsagerMikadoBridge.lean`)
 
 * **Mechanism ID**: `de-lellis-szekelyhidi-iset-beltrami-mikado-onsager`
-* **Cross-Domain Triad**: `carleson` ↔ `PhysLean` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `carleson` ↔ `PhysLean` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite (`CalogeroMoserPoleDynamicsPDEBridge.lean`)
 
 * **Mechanism ID**: `michelson-sivashinsky-pole-dynamics-reduction`
-* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #136 (`DrinfeldLafforgueShtukaExcursionBridge.lean`)
 
 * **Mechanism ID**: `drinfeld-shtuka-langlands-reciprocity-cohomology`
-* **Cross-Domain Triad**: `FLT` ↔ `lean-liquid` ↔ `category-theory-lean`
+* **Cross-Domain Triad**: `FLT` ↔ `lean-liquid` ↔ `tc-reptheory`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

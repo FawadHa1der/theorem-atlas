@@ -2,7 +2,7 @@
 # Ocneanu–Turaev–Viro Spherical 6j-Symbol State Sum ↔ Drinfeld Center Reshetikhin–Turaev Invariant
 ## CommonGround Formal Verification Suite #356 (`OcneanuTuraevViroStateSum3ManifoldBridge.lean`)
 
-* **Cross-Domain Triad**: `category-theory-lean` ↔ `PhysLean` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `tc-reptheory` ↔ `PhysLean` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

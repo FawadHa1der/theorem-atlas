@@ -2,7 +2,7 @@
 # Culler–Vogtmann Marked Metric Graph Spine ↔ Virtual Cohomological Dimension of Out(F_n)
 ## CommonGround Formal Verification Suite #364 (`CullerVogtmannOuterSpaceSpineContractibleBridge.lean`)
 
-* **Cross-Domain Triad**: `group-theory-lean` ↔ `combinatorics-lean` ↔ `category-theory-lean`
+* **Cross-Domain Triad**: `tauceti` ↔ `tc-probcomb` ↔ `tc-reptheory`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #101 (`ShearerSokalHardCorePartitionZeroBridge.lean`)
 
 * **Mechanism ID**: `lovasz-local-lemma-shearer-hard-core-gas`
-* **Cross-Domain Triad**: `combinatorics-lean` ↔ `probability-lean` ↔ `PhysLean`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `tc-probcomb` ↔ `PhysLean`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

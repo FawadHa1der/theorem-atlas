@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #232 (`FeffermanSteinBurkholderGoodLambdaBridge.lean`)
 
 * **Mechanism ID**: `fefferman-stein-burkholder-good-lambda-sharp-maximal`
-* **Cross-Domain Triad**: `carleson` ↔ `probability-lean` ↔ `PhysLean`
+* **Cross-Domain Triad**: `carleson` ↔ `tc-probcomb` ↔ `PhysLean`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -19,7 +19,7 @@ structure MechanismCarrier where
   deriving Repr, DecidableEq
 
 /-- Bidirectional Duality Dictionary Structure (V35 Loop 3):
-    Certifies that translating a state from `carleson` to `probability-lean` and back preserves
+    Certifies that translating a state from `carleson` to `tc-probcomb` and back preserves
     both the total complexity budget and the monotone scale gain. -/
 structure BidirectionalDualityPair where
   forwardState  : MechanismCarrier

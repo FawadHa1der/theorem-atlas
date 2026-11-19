@@ -2,7 +2,7 @@
 # Cohen–Lee–Song Sketch-and-Project Inverse Maintenance ↔ Matrix-Multiplication-Time Linear Programming
 ## CommonGround Formal Verification Suite #375 (`CohenLeeSongSidfordInverseMaintenanceLPBridge.lean`)
 
-* **Cross-Domain Triad**: `optlib` ↔ `aks` ↔ `probability-lean`
+* **Cross-Domain Triad**: `econlib` ↔ `apsp3sum` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

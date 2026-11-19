@@ -2,7 +2,7 @@
 # CGLNPS Deterministic Cut-Matching Game ↔ Dynamic Expander Hierarchy Decomposition
 ## CommonGround Formal Verification Suite #378 (`ChuzhoyGaoLiNanongkaiPengSaranurakExpanderBridge.lean`)
 
-* **Cross-Domain Triad**: `graph-theory-lean` ↔ `aks` ↔ `optlib`
+* **Cross-Domain Triad**: `erdos` ↔ `apsp3sum` ↔ `econlib`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

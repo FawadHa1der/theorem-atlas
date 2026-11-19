@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #277 (`KontsevichFukayaHomologicalMirrorBridge.lean`)
 
 * **Mechanism ID**: `homological-mirror-symmetry-kontsevich-fukaya-dbcoh`
-* **Cross-Domain Triad**: `category-theory-lean` ↔ `lean-liquid` ↔ `PhysLean`
+* **Cross-Domain Triad**: `tc-reptheory` ↔ `lean-liquid` ↔ `PhysLean`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

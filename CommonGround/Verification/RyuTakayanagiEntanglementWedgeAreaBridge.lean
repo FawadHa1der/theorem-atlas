@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #275 (`RyuTakayanagiEntanglementWedgeAreaBridge.lean`)
 
 * **Mechanism ID**: `ads-cft-maldacena-ryu-takayanagi-entanglement-wedge`
-* **Cross-Domain Triad**: `PhysLean` ↔ `SpherePacking` ↔ `optlib`
+* **Cross-Domain Triad**: `PhysLean` ↔ `SpherePacking` ↔ `econlib`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

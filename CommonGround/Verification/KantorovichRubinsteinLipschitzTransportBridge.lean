@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #260 (`KantorovichRubinsteinLipschitzTransportBridge.lean`)
 
 * **Mechanism ID**: `kantorovich-rubinstein-lipschitz-wasserstein-duality`
-* **Cross-Domain Triad**: `probability-lean` ↔ `optlib` ↔ `PhysLean`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `econlib` ↔ `PhysLean`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #253 (`TannakaKreinMonoidalFiberReconstructionBridge.lean`)
 
 * **Mechanism ID**: `tannaka-krein-hopf-reconstruction-monoidal-fiber`
-* **Cross-Domain Triad**: `category-theory-lean` ↔ `FLT` ↔ `lean-liquid`
+* **Cross-Domain Triad**: `tc-reptheory` ↔ `FLT` ↔ `lean-liquid`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #297 (`ReingoldZigZagProductLogspaceBridge.lean`)
 
 * **Mechanism ID**: `reingold-zig-zag-graph-product-deterministic-logspace`
-* **Cross-Domain Triad**: `aks` ↔ `graph-theory-lean` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `erdos` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

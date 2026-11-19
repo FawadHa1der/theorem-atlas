@@ -2,7 +2,7 @@
 # Lott–Villani–Sturm Wasserstein Geodesic Entropy Convexity ↔ Synthetic Curvature-Dimension CD(K, N)
 ## CommonGround Formal Verification Suite #349 (`LottVillaniSturmSyntheticRicciCurvatureBridge.lean`)
 
-* **Cross-Domain Triad**: `carleson` ↔ `probability-lean` ↔ `PhysLean`
+* **Cross-Domain Triad**: `carleson` ↔ `tc-probcomb` ↔ `PhysLean`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

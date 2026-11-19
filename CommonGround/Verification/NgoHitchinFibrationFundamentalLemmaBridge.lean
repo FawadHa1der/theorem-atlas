@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #282 (`NgoHitchinFibrationFundamentalLemmaBridge.lean`)
 
 * **Mechanism ID**: `yun-zhiwei-ngo-fundamental-lemma-hitchin-perverse`
-* **Cross-Domain Triad**: `FLT` ↔ `lean-liquid` ↔ `group-theory-lean`
+* **Cross-Domain Triad**: `FLT` ↔ `lean-liquid` ↔ `tauceti`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

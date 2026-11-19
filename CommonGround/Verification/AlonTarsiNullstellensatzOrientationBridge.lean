@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite (`AlonTarsiNullstellensatzOrientationBridge.lean`)
 
 * **Mechanism ID**: `alon-tarsi-combinatorial-nullstellensatz-orientation`
-* **Cross-Domain Triad**: `combinatorics-lean` ↔ `erdos-problems` ↔ `graph-theory-lean`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `erdos-problems` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite (`BourgainGamburdExpansionFlatteningBridge.lean`)
 
 * **Mechanism ID**: `bourgain-furman-lindensrauss-mozess-spectral-gap`
-* **Cross-Domain Triad**: `aks` ↔ `FLT` ↔ `erdos-problems`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `FLT` ↔ `erdos-problems`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

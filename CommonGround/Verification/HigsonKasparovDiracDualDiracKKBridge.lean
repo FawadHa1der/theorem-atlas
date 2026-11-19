@@ -2,7 +2,7 @@
 # Higson–Kasparov Equivariant KK-Theory ↔ Dirac-Dual-Dirac Bott Element Homotopy
 ## CommonGround Formal Verification Suite #318 (`HigsonKasparovDiracDualDiracKKBridge.lean`)
 
-* **Cross-Domain Triad**: `category-theory-lean` ↔ `lean-liquid` ↔ `PhysLean`
+* **Cross-Domain Triad**: `tc-reptheory` ↔ `lean-liquid` ↔ `PhysLean`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -2,7 +2,7 @@
 # Fröhlich–Spencer Multi-Scale Wegner Resolvent Induction ↔ Anderson Localization Green's Decay
 ## CommonGround Formal Verification Suite #311 (`FrohlichSpencerMultiScaleAndersonBridge.lean`)
 
-* **Cross-Domain Triad**: `PhysLean` ↔ `probability-lean` ↔ `carleson`
+* **Cross-Domain Triad**: `PhysLean` ↔ `tc-probcomb` ↔ `carleson`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

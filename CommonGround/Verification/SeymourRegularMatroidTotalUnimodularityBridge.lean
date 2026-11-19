@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #208 (`SeymourRegularMatroidTotalUnimodularityBridge.lean`)
 
 * **Mechanism ID**: `seymour-regular-matroid-123-sum-unimodular`
-* **Cross-Domain Triad**: `combinatorics-lean` ↔ `optlib` ↔ `graph-theory-lean`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `econlib` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -19,7 +19,7 @@ structure MechanismCarrier where
   deriving Repr, DecidableEq
 
 /-- Bidirectional Duality Dictionary Structure (V35 Loop 3):
-    Certifies that translating a state from `combinatorics-lean` to `optlib` and back preserves
+    Certifies that translating a state from `tc-probcomb` to `econlib` and back preserves
     both the total complexity budget and the monotone scale gain. -/
 structure BidirectionalDualityPair where
   forwardState  : MechanismCarrier

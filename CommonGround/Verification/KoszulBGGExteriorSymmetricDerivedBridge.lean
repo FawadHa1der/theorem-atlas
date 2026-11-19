@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #262 (`KoszulBGGExteriorSymmetricDerivedBridge.lean`)
 
 * **Mechanism ID**: `koszul-beilinson-ggl-exterior-symmetric-derived-duality`
-* **Cross-Domain Triad**: `algebra-lean` ↔ `category-theory-lean` ↔ `lean-liquid`
+* **Cross-Domain Triad**: `tc-alggeom` ↔ `tc-reptheory` ↔ `lean-liquid`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

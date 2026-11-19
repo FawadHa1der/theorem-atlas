@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite (`WiedemannBerlekampMasseyKrylovBridge.lean`)
 
 * **Mechanism ID**: `wiedemann-coppersmith-krylov-berlekamp-massey`
-* **Cross-Domain Triad**: `aks` ↔ `algebra-lean` ↔ `optlib`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `tc-alggeom` ↔ `econlib`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

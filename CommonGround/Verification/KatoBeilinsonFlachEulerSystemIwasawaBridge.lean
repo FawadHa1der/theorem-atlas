@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #222 (`KatoBeilinsonFlachEulerSystemIwasawaBridge.lean`)
 
 * **Mechanism ID**: `kato-beilinson-flach-euler-system-iwasawa-reciprocity`
-* **Cross-Domain Triad**: `FLT` ↔ `number-theory-lean` ↔ `PrimeNumberTheoremAnd`
+* **Cross-Domain Triad**: `FLT` ↔ `tc-numtheory` ↔ `PrimeNumberTheoremAnd`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -19,7 +19,7 @@ structure MechanismCarrier where
   deriving Repr, DecidableEq
 
 /-- Bidirectional Duality Dictionary Structure (V35 Loop 3):
-    Certifies that translating a state from `FLT` to `number-theory-lean` and back preserves
+    Certifies that translating a state from `FLT` to `tc-numtheory` and back preserves
     both the total complexity budget and the monotone scale gain. -/
 structure BidirectionalDualityPair where
   forwardState  : MechanismCarrier

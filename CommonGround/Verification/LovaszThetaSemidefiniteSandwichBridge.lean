@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite (`LovaszThetaSemidefiniteSandwichBridge.lean`)
 
 * **Mechanism ID**: `lovasz-theta-semidefinite-sandwich`
-* **Cross-Domain Triad**: `SpherePacking` ↔ `combinatorics-lean` ↔ `optlib`
+* **Cross-Domain Triad**: `SpherePacking` ↔ `tc-probcomb` ↔ `econlib`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

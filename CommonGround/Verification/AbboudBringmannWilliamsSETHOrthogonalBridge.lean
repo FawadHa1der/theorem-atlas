@@ -2,7 +2,7 @@
 # Williams Distributed Polynomial Evaluation ↔ Fine-Grained SETH Hardness for Dynamic/String Problems
 ## CommonGround Formal Verification Suite #379 (`AbboudBringmannWilliamsSETHOrthogonalBridge.lean`)
 
-* **Cross-Domain Triad**: `aks` ↔ `combinatorics-lean` ↔ `algebra-lean`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `tc-probcomb` ↔ `tc-alggeom`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #254 (`StonePriestleyCondensedProfiniteBridge.lean`)
 
 * **Mechanism ID**: `stone-duality-locales-profinite-boolean-condensed`
-* **Cross-Domain Triad**: `lean-liquid` ↔ `category-theory-lean` ↔ `algebra-lean`
+* **Cross-Domain Triad**: `lean-liquid` ↔ `tc-reptheory` ↔ `tc-alggeom`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

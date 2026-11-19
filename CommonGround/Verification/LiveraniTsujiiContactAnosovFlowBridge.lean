@@ -2,7 +2,7 @@
 # Liverani–Tsujii Anisotropic Sobolev Spaces ↔ Exponential Mixing of Contact Anosov Flows
 ## CommonGround Formal Verification Suite #308 (`LiveraniTsujiiContactAnosovFlowBridge.lean`)
 
-* **Cross-Domain Triad**: `carleson` ↔ `PhysLean` ↔ `probability-lean`
+* **Cross-Domain Triad**: `carleson` ↔ `PhysLean` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #290 (`PelusePrendivilleDegreeLoweringSzemerediBridge.lean`)
 
 * **Mechanism ID**: `peluse-prendiville-polynomial-progression-degree-lowering`
-* **Cross-Domain Triad**: `erdos-problems` ↔ `pfr` ↔ `PrimeNumberTheoremAnd`
+* **Cross-Domain Triad**: `erdos-problems` ↔ `oai-szemeredi` ↔ `PrimeNumberTheoremAnd`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #242 (`BhattScholzeProEtaleRepleteToposBridge.lean`)
 
 * **Mechanism ID**: `bhatt-scholze-pro-etale-replete-topos-w-contractible`
-* **Cross-Domain Triad**: `lean-liquid` ↔ `FLT` ↔ `category-theory-lean`
+* **Cross-Domain Triad**: `lean-liquid` ↔ `FLT` ↔ `tc-reptheory`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

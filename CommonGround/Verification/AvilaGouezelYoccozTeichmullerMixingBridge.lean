@@ -2,7 +2,7 @@
 # Avila–Gouëzel–Yoccoz Марков Roof Renewal ↔ Exponential Mixing of Teichmüller Geodesic Flow
 ## CommonGround Formal Verification Suite #359 (`AvilaGouezelYoccozTeichmullerMixingBridge.lean`)
 
-* **Cross-Domain Triad**: `carleson` ↔ `probability-lean` ↔ `PhysLean`
+* **Cross-Domain Triad**: `carleson` ↔ `tc-probcomb` ↔ `PhysLean`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

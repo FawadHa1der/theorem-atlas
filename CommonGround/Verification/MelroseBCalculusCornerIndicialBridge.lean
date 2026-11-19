@@ -2,7 +2,7 @@
 # Melrose b-Calculus on Manifolds with Corners ↔ Indicial Operator Fredholm Parametrix
 ## CommonGround Formal Verification Suite #304 (`MelroseBCalculusCornerIndicialBridge.lean`)
 
-* **Cross-Domain Triad**: `carleson` ↔ `PhysLean` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `carleson` ↔ `PhysLean` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

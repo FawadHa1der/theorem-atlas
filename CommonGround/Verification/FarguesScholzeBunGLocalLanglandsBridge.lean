@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #281 (`FarguesScholzeBunGLocalLanglandsBridge.lean`)
 
 * **Mechanism ID**: `fargues-scholze-geometrization-local-langlands-bun-g`
-* **Cross-Domain Triad**: `lean-liquid` ↔ `FLT` ↔ `number-theory-lean`
+* **Cross-Domain Triad**: `lean-liquid` ↔ `FLT` ↔ `tc-numtheory`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

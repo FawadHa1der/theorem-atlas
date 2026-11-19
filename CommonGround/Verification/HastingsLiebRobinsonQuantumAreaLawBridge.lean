@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #298 (`HastingsLiebRobinsonQuantumAreaLawBridge.lean`)
 
 * **Mechanism ID**: `hastings-quantum-area-law-lieb-robinson-light-cone`
-* **Cross-Domain Triad**: `PhysLean` ↔ `probability-lean` ↔ `optlib`
+* **Cross-Domain Triad**: `PhysLean` ↔ `tc-probcomb` ↔ `econlib`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

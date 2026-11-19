@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #132 (`CandesTaoRestrictedIsometryNullspaceBridge.lean`)
 
 * **Mechanism ID**: `candes-tao-restricted-isometry-nullspace-l1`
-* **Cross-Domain Triad**: `optlib` ↔ `SpherePacking` ↔ `probability-lean`
+* **Cross-Domain Triad**: `econlib` ↔ `SpherePacking` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

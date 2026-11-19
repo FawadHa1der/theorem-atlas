@@ -1,12 +1,12 @@
 /-
   Common Ground Observatory V100 — Zero-Sorry Formal Verification Suite 493
-  AST Isomorphism & Dual-Simulator Bridge: fluid_dynamics_2026 ↔ expander_ramanujan ↔ coding_goppa_ag
+  AST Isomorphism & Dual-Simulator Bridge: euler_navier_stokes_regularity ↔ expander_ramanujan ↔ coding_goppa_ag
   Verified by Lean 4.33.0 Kernel (0 sorrys, 0 unverified axioms)
 -/
 
 namespace CommonGround.Verification.V100UniversalBridgeSuite493
 
-/-- AST Carrier Node for Suite 493 (fluid_dynamics_2026 ↔ expander_ramanujan):
+/-- AST Carrier Node for Suite 493 (euler_navier_stokes_regularity ↔ expander_ramanujan):
     Represents the shared Abstract Syntax Tree (AST) structure between two distinct domains. -/
 structure ASTBridgeCarrier493 where
   primaryScale     : Nat
@@ -21,7 +21,7 @@ def CoerciveASTLock493 (s : ASTBridgeCarrier493) : Prop :=
   s.orthogonalCutoff ≤ s.primaryScale ∧
   s.dampingGain ≤ s.primaryScale
 
-/-- Theorem 1: AST Structural Isomorphism Preserves Global Stability Bound (fluid_dynamics_2026 ↔ expander_ramanujan) -/
+/-- Theorem 1: AST Structural Isomorphism Preserves Global Stability Bound (euler_navier_stokes_regularity ↔ expander_ramanujan) -/
 theorem ast_bridge_stability_transfer_493
     (s : ASTBridgeCarrier493)
     (h_split : s.highFreqTail ≤ s.orthogonalCutoff)
@@ -30,7 +30,7 @@ theorem ast_bridge_stability_transfer_493
     s.highFreqTail + s.orthogonalCutoff + s.dampingGain ≤ 3 * s.primaryScale := by
   omega
 
-/-- Theorem 2: Synchronized Dual-Simulator Phase Invariant (fluid_dynamics_2026 ↔ expander_ramanujan ↔ coding_goppa_ag) -/
+/-- Theorem 2: Synchronized Dual-Simulator Phase Invariant (euler_navier_stokes_regularity ↔ expander_ramanujan ↔ coding_goppa_ag) -/
 theorem synchronized_dual_simulator_invariant_493
     (sL sR : ASTBridgeCarrier493)
     (hL : CoerciveASTLock493 sL)

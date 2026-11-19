@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #97 (`FeigeKimOfekPlanted3SATRefutationBridge.lean`)
 
 * **Mechanism ID**: `feige-kim-ofek-planted-3sat-refutation-witness`
-* **Cross-Domain Triad**: `aks` ↔ `combinatorics-lean` ↔ `probability-lean`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `tc-probcomb` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -2,7 +2,7 @@
 # Terence Tao Etale Lang–Weil Fiber Dimension ↔ O(1)-Step Algebraic Regularity over Finite Fields
 ## CommonGround Formal Verification Suite #384 (`TaoAlgebraicRegularityLangWeilBridge.lean`)
 
-* **Cross-Domain Triad**: `FLT` ↔ `combinatorics-lean` ↔ `erdos-problems`
+* **Cross-Domain Triad**: `FLT` ↔ `tc-probcomb` ↔ `erdos-problems`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

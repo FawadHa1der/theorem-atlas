@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #294 (`HaoHuangHypercubeSensitivityInterlacingBridge.lean`)
 
 * **Mechanism ID**: `huang-hao-sensitivity-conjecture-signed-hypercube-cauchy`
-* **Cross-Domain Triad**: `combinatorics-lean` ↔ `aks` ↔ `algebra-lean`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `apsp3sum` ↔ `tc-alggeom`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

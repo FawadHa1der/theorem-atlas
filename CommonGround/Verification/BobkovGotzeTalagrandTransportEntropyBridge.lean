@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #167 (`BobkovGotzeTalagrandTransportEntropyBridge.lean`)
 
 * **Mechanism ID**: `bobkov-gotze-talagrand-transportation-entropy`
-* **Cross-Domain Triad**: `probability-lean` ↔ `pfr` ↔ `optlib`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `oai-szemeredi` ↔ `econlib`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -30,7 +30,7 @@ theorem master_transfer_obstruction_vanishes (c : MechanismCarrier)
   omega
 
 /-- 3-Hop Cross-Domain Proof Chain Composition Theorem (V30 Loop 3):
-    Chaining Hop 1 (`probability-lean → pfr`), Hop 2 (`pfr → optlib`), and Hop 3 (`optlib → TargetD`)
+    Chaining Hop 1 (`tc-probcomb → oai-szemeredi`), Hop 2 (`oai-szemeredi → econlib`), and Hop 3 (`econlib → TargetD`)
     additively composes the scale gains and certifies that the terminal obstruction vanishes. -/
 theorem three_hop_chain_composition (c1 c2 c3 : MechanismCarrier)
     (h1 : c1.initialComplexity ≤ c1.activeScales * c1.scaleGain + c1.coercivityMargin)

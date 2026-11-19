@@ -2,7 +2,7 @@
 # High-Dimensional Expander Coboundary Local-to-Global ↔ Constant-Rate Agreement Testing & PCP
 ## CommonGround Formal Verification Suite #381 (`BafnaMinzerVyasYunHDXGrassmannPCPBridge.lean`)
 
-* **Cross-Domain Triad**: `aks` ↔ `combinatorics-lean` ↔ `graph-theory-lean`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `tc-probcomb` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -2,7 +2,7 @@
 # Habegger–Pila O-Minimal Bi-Algebraic Monodromy ↔ Ax–Lindemann–Weierstrass Functional Transcendence
 ## CommonGround Formal Verification Suite #367 (`HabeggerPilaAxLindemannWeierstrassBridge.lean`)
 
-* **Cross-Domain Triad**: `FLT` ↔ `number-theory-lean` ↔ `lean-liquid`
+* **Cross-Domain Triad**: `FLT` ↔ `tc-numtheory` ↔ `lean-liquid`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

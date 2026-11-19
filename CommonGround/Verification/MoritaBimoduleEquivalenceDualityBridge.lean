@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #251 (`MoritaBimoduleEquivalenceDualityBridge.lean`)
 
 * **Mechanism ID**: `artin-wedderburn-morita-equivalence-module-duality`
-* **Cross-Domain Triad**: `algebra-lean` ↔ `category-theory-lean` ↔ `FLT`
+* **Cross-Domain Triad**: `tc-alggeom` ↔ `tc-reptheory` ↔ `FLT`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

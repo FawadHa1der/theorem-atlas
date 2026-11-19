@@ -2,7 +2,7 @@
 # McMullen Teichmüller Alexander NormCone ↔ Fibered 3-Manifold Pseudo-Anosov Dilatation
 ## CommonGround Formal Verification Suite #361 (`McMullenTeichmullerPolynomialDilatationBridge.lean`)
 
-* **Cross-Domain Triad**: `group-theory-lean` ↔ `combinatorics-lean` ↔ `algebra-lean`
+* **Cross-Domain Triad**: `tauceti` ↔ `tc-probcomb` ↔ `tc-alggeom`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

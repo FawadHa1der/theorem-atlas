@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #184 (`AtiyahBottGoldmanCharacterSymplecticBridge.lean`)
 
 * **Mechanism ID**: `goldman-millson-kaniuth-symplectic-character-moduli`
-* **Cross-Domain Triad**: `PhysLean` ↔ `FLT` ↔ `group-theory-lean`
+* **Cross-Domain Triad**: `PhysLean` ↔ `FLT` ↔ `tauceti`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -30,7 +30,7 @@ theorem master_transfer_obstruction_vanishes (c : MechanismCarrier)
   omega
 
 /-- 3-Hop Cross-Domain Proof Chain Composition Theorem (V30 Loop 3):
-    Chaining Hop 1 (`PhysLean → FLT`), Hop 2 (`FLT → group-theory-lean`), and Hop 3 (`group-theory-lean → TargetD`)
+    Chaining Hop 1 (`PhysLean → FLT`), Hop 2 (`FLT → tauceti`), and Hop 3 (`tauceti → TargetD`)
     additively composes the scale gains and certifies that the terminal obstruction vanishes. -/
 theorem three_hop_chain_composition (c1 c2 c3 : MechanismCarrier)
     (h1 : c1.initialComplexity ≤ c1.activeScales * c1.scaleGain + c1.coercivityMargin)

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #137 (`BrascampLiebBartheGaussianTransportBridge.lean`)
 
 * **Mechanism ID**: `brascamp-lieb-barthe-gaussian-extremizer-transport`
-* **Cross-Domain Triad**: `carleson` ↔ `SpherePacking` ↔ `pfr`
+* **Cross-Domain Triad**: `carleson` ↔ `SpherePacking` ↔ `oai-szemeredi`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

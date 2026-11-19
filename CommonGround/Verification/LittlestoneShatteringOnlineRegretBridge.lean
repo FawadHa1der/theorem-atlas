@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite (`LittlestoneShatteringOnlineRegretBridge.lean`)
 
 * **Mechanism ID**: `vovk-littlestone-online-mistake-minimax`
-* **Cross-Domain Triad**: `optlib` ↔ `probability-lean` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `econlib` ↔ `tc-probcomb` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

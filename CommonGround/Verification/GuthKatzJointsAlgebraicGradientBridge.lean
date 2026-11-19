@@ -2,7 +2,7 @@
 # Guth–Katz Low-Degree Polynomial Gradient Vanishing ↔ Sharp N^{3/2} 3D Line Joints Bound
 ## CommonGround Formal Verification Suite #342 (`GuthKatzJointsAlgebraicGradientBridge.lean`)
 
-* **Cross-Domain Triad**: `combinatorics-lean` ↔ `erdos-problems` ↔ `SpherePacking`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `erdos-problems` ↔ `SpherePacking`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

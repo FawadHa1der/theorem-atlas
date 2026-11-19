@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #176 (`GromovFillingRadiusSystolicVolumeBridge.lean`)
 
 * **Mechanism ID**: `mikhaelov-gromov-filling-radius-systolic-inequality`
-* **Cross-Domain Triad**: `SpherePacking` ↔ `carleson` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `SpherePacking` ↔ `carleson` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -30,7 +30,7 @@ theorem master_transfer_obstruction_vanishes (c : MechanismCarrier)
   omega
 
 /-- 3-Hop Cross-Domain Proof Chain Composition Theorem (V30 Loop 3):
-    Chaining Hop 1 (`SpherePacking → carleson`), Hop 2 (`carleson → formal-conjectures`), and Hop 3 (`formal-conjectures → TargetD`)
+    Chaining Hop 1 (`SpherePacking → carleson`), Hop 2 (`carleson → erdos`), and Hop 3 (`erdos → TargetD`)
     additively composes the scale gains and certifies that the terminal obstruction vanishes. -/
 theorem three_hop_chain_composition (c1 c2 c3 : MechanismCarrier)
     (h1 : c1.initialComplexity ≤ c1.activeScales * c1.scaleGain + c1.coercivityMargin)

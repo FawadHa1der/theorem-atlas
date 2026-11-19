@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #223 (`TalagrandConvexHullProductConcentrationBridge.lean`)
 
 * **Mechanism ID**: `alon-milman-talagrand-convex-hull-product-concentration`
-* **Cross-Domain Triad**: `probability-lean` ↔ `combinatorics-lean` ↔ `pfr`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `tc-probcomb` ↔ `oai-szemeredi`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -19,7 +19,7 @@ structure MechanismCarrier where
   deriving Repr, DecidableEq
 
 /-- Bidirectional Duality Dictionary Structure (V35 Loop 3):
-    Certifies that translating a state from `probability-lean` to `combinatorics-lean` and back preserves
+    Certifies that translating a state from `tc-probcomb` to `tc-probcomb` and back preserves
     both the total complexity budget and the monotone scale gain. -/
 structure BidirectionalDualityPair where
   forwardState  : MechanismCarrier

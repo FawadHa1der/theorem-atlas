@@ -2,7 +2,7 @@
 # Ellenberg–Michel–Venkatesh Linnik Ergodic Joining ↔ Sparse Heegner Equidistribution
 ## CommonGround Formal Verification Suite #373 (`VenkateshEllenbergMichelSparseEquidistributionBridge.lean`)
 
-* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `FLT` ↔ `probability-lean`
+* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `FLT` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #259 (`FenchelRockafellarMoreauYosidaBridge.lean`)
 
 * **Mechanism ID**: `fenchel-rockafellar-moreau-yosida-convex-conjugate`
-* **Cross-Domain Triad**: `optlib` ↔ `carleson` ↔ `probability-lean`
+* **Cross-Domain Triad**: `econlib` ↔ `carleson` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

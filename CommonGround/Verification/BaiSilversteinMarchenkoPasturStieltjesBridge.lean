@@ -2,7 +2,7 @@
 # Bai–Silverstein Stieltjes Transform Fixed Point ↔ Marchenko–Pastur Sample Covariance Spectrum
 ## CommonGround Formal Verification Suite #354 (`BaiSilversteinMarchenkoPasturStieltjesBridge.lean`)
 
-* **Cross-Domain Triad**: `probability-lean` ↔ `optlib` ↔ `SpherePacking`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `econlib` ↔ `SpherePacking`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

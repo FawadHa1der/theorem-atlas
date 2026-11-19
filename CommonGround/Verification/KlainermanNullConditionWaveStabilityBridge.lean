@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #111 (`KlainermanNullConditionWaveStabilityBridge.lean`)
 
 * **Mechanism ID**: `klainerman-null-condition-vector-field-method`
-* **Cross-Domain Triad**: `carleson` ↔ `PhysLean` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `carleson` ↔ `PhysLean` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

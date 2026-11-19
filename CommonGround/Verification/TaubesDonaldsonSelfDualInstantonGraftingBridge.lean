@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #238 (`TaubesDonaldsonSelfDualInstantonGraftingBridge.lean`)
 
 * **Mechanism ID**: `uhlenbeck-taubes-self-dual-instanton-grafting-moduli`
-* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

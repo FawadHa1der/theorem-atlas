@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #127 (`GoldreichLevinHeavyFourierBucketBridge.lean`)
 
 * **Mechanism ID**: `goldreich-levin-kushilevitz-mansour-hardcore-fourier`
-* **Cross-Domain Triad**: `aks` ↔ `probability-lean` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `tc-probcomb` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

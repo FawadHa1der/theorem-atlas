@@ -2,7 +2,7 @@
 # ALOV Lorentzian Walk Down-Up Spectral Gap ↔ Optimal O(r log r) Matroid Basis Mixing
 ## CommonGround Formal Verification Suite #387 (`AnariOveisGharanVinzantLogConcaveMatroidBridge.lean`)
 
-* **Cross-Domain Triad**: `probability-lean` ↔ `combinatorics-lean` ↔ `optlib`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `tc-probcomb` ↔ `econlib`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

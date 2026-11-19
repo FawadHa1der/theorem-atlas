@@ -2,7 +2,7 @@
 # Reshetikhin–Turaev Modular Tensor Kirby Calculus ↔ 3-Manifold Dehn Surgery Quantum Invariant
 ## CommonGround Formal Verification Suite #321 (`ReshetikhinTuraevModularCategory3ManifoldBridge.lean`)
 
-* **Cross-Domain Triad**: `category-theory-lean` ↔ `PhysLean` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `tc-reptheory` ↔ `PhysLean` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

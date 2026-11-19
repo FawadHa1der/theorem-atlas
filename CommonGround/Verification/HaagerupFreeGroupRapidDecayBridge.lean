@@ -2,7 +2,7 @@
 # Haagerup Free Group Length-Function Kernel ↔ Reduced C*-Algebra Rapid Decay Property
 ## CommonGround Formal Verification Suite #315 (`HaagerupFreeGroupRapidDecayBridge.lean`)
 
-* **Cross-Domain Triad**: `group-theory-lean` ↔ `algebra-lean` ↔ `carleson`
+* **Cross-Domain Triad**: `tauceti` ↔ `tc-alggeom` ↔ `carleson`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

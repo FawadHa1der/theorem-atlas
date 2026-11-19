@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #243 (`CaffarelliKohnNirenbergParabolicSingularBridge.lean`)
 
 * **Mechanism ID**: `caffarelli-kohn-nirenberg-parabolic-partial-regularity`
-* **Cross-Domain Triad**: `carleson` ↔ `PhysLean` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `carleson` ↔ `PhysLean` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

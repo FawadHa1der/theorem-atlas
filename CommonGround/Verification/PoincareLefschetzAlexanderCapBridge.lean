@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #258 (`PoincareLefschetzAlexanderCapBridge.lean`)
 
 * **Mechanism ID**: `poincare-lefschetz-alexander-intersection-cap-duality`
-* **Cross-Domain Triad**: `SpherePacking` ↔ `PhysLean` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `SpherePacking` ↔ `PhysLean` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

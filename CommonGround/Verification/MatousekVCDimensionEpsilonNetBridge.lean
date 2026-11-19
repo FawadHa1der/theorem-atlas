@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #122 (`MatousekVCDimensionEpsilonNetBridge.lean`)
 
 * **Mechanism ID**: `matousek-vc-dimension-epsilon-net-packing`
-* **Cross-Domain Triad**: `combinatorics-lean` ↔ `optlib` ↔ `probability-lean`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `econlib` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

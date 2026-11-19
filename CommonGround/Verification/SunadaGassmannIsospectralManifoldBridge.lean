@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #203 (`SunadaGassmannIsospectralManifoldBridge.lean`)
 
 * **Mechanism ID**: `sunada-gassmann-isospectral-manifold-quotient`
-* **Cross-Domain Triad**: `group-theory-lean` ↔ `PhysLean` ↔ `carleson`
+* **Cross-Domain Triad**: `tauceti` ↔ `PhysLean` ↔ `carleson`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -19,7 +19,7 @@ structure MechanismCarrier where
   deriving Repr, DecidableEq
 
 /-- Bidirectional Duality Dictionary Structure (V35 Loop 3):
-    Certifies that translating a state from `group-theory-lean` to `PhysLean` and back preserves
+    Certifies that translating a state from `tauceti` to `PhysLean` and back preserves
     both the total complexity budget and the monotone scale gain. -/
 structure BidirectionalDualityPair where
   forwardState  : MechanismCarrier

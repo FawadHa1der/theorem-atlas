@@ -2,7 +2,7 @@
 # Zeev Dvir Homogeneous Degree Vanishing ↔ Sharp Finite-Field Kakeya Set Lower Bound
 ## CommonGround Formal Verification Suite #341 (`DvirFiniteFieldKakeyaPolynomialMethodBridge.lean`)
 
-* **Cross-Domain Triad**: `combinatorics-lean` ↔ `erdos-problems` ↔ `algebra-lean`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `erdos-problems` ↔ `tc-alggeom`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

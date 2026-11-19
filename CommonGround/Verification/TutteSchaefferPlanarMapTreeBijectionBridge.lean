@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #179 (`TutteSchaefferPlanarMapTreeBijectionBridge.lean`)
 
 * **Mechanism ID**: `bender-canfield-tutte-planar-map-bijection-schaeffer`
-* **Cross-Domain Triad**: `combinatorics-lean` ↔ `probability-lean` ↔ `graph-theory-lean`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `tc-probcomb` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -30,7 +30,7 @@ theorem master_transfer_obstruction_vanishes (c : MechanismCarrier)
   omega
 
 /-- 3-Hop Cross-Domain Proof Chain Composition Theorem (V30 Loop 3):
-    Chaining Hop 1 (`combinatorics-lean → probability-lean`), Hop 2 (`probability-lean → graph-theory-lean`), and Hop 3 (`graph-theory-lean → TargetD`)
+    Chaining Hop 1 (`tc-probcomb → tc-probcomb`), Hop 2 (`tc-probcomb → erdos`), and Hop 3 (`erdos → TargetD`)
     additively composes the scale gains and certifies that the terminal obstruction vanishes. -/
 theorem three_hop_chain_composition (c1 c2 c3 : MechanismCarrier)
     (h1 : c1.initialComplexity ≤ c1.activeScales * c1.scaleGain + c1.coercivityMargin)

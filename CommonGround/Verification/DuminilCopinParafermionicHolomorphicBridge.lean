@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #98 (`DuminilCopinParafermionicHolomorphicBridge.lean`)
 
 * **Mechanism ID**: `duminil-copin-parafermionic-observable-holomorphicity`
-* **Cross-Domain Triad**: `PhysLean` ↔ `probability-lean` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `PhysLean` ↔ `tc-probcomb` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

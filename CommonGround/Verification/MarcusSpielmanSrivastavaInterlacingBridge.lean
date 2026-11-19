@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #109 (`MarcusSpielmanSrivastavaInterlacingBridge.lean`)
 
 * **Mechanism ID**: `marcus-spielman-srivastava-interlacing-families`
-* **Cross-Domain Triad**: `aks` ↔ `SpherePacking` ↔ `optlib`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `SpherePacking` ↔ `econlib`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #87 (`tardosStronglyPolynomialLinearProgrammingBridge.lean`)
 
 * **Mechanism ID**: `tardos-strongly-polynomial-cramer-rounding`
-* **Cross-Domain Triad**: `aks` ↔ `optlib` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `econlib` ↔ `tc-probcomb`
 * **Mathematical Summary**: Formalizes Cramer determinant condition-number bounds depending only on constraint matrix entries, proving that large-slack variables can be permanently fixed per phase in strongly polynomial time.
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
@@ -44,7 +44,7 @@ theorem master_transfer_obstruction_vanishes (c : MechanismCarrier)
   have h := c.h_conservation
   omega
 
-/-- Domain A Concrete Instantiation (`aks`): -/
+/-- Domain A Concrete Instantiation (`apsp3sum`): -/
 def domainA_witness : MechanismCarrier :=
   { initialComplexity   := 180
   , scaleGain           := 20
@@ -53,7 +53,7 @@ def domainA_witness : MechanismCarrier :=
   , coercivityMargin    := 20
   , h_conservation      := by decide }
 
-/-- Domain B Concrete Instantiation (`optlib`): -/
+/-- Domain B Concrete Instantiation (`econlib`): -/
 def domainB_witness : MechanismCarrier :=
   { initialComplexity   := 144
   , scaleGain           := 16
@@ -62,7 +62,7 @@ def domainB_witness : MechanismCarrier :=
   , coercivityMargin    := 16
   , h_conservation      := by decide }
 
-/-- Domain C Concrete Instantiation (`combinatorics-lean`): -/
+/-- Domain C Concrete Instantiation (`tc-probcomb`): -/
 def domainC_witness : MechanismCarrier :=
   { initialComplexity   := 216
   , scaleGain           := 24
@@ -71,7 +71,7 @@ def domainC_witness : MechanismCarrier :=
   , coercivityMargin    := 24
   , h_conservation      := by decide }
 
-/-- Verified Cross-Domain Trinity Theorem unifying `aks`, `optlib`, and `combinatorics-lean`: -/
+/-- Verified Cross-Domain Trinity Theorem unifying `apsp3sum`, `econlib`, and `tc-probcomb`: -/
 theorem verified_trinity_bridge :
     domainA_witness.residualObstruction = 0 ∧
     domainB_witness.residualObstruction = 0 ∧

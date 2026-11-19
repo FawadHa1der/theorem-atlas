@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #79 (`TateShafarevichCasselsPairingDescentBridge.lean`)
 
 * **Mechanism ID**: `cassels-tate-skew-pairing-selmer-descent`
-* **Cross-Domain Triad**: `FLT` ↔ `lean-liquid` ↔ `number-theory-lean`
+* **Cross-Domain Triad**: `FLT` ↔ `lean-liquid` ↔ `tc-numtheory`
 * **Mathematical Summary**: Formalizes non-degenerate alternating bilinear pairings on finite Selmer quotients, proving that the kernel dimension changes by even steps and bounding Mordell–Weil rank via local-to-global Selmer kernels.
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
@@ -62,7 +62,7 @@ def domainB_witness : MechanismCarrier :=
   , coercivityMargin    := 16
   , h_conservation      := by decide }
 
-/-- Domain C Concrete Instantiation (`number-theory-lean`): -/
+/-- Domain C Concrete Instantiation (`tc-numtheory`): -/
 def domainC_witness : MechanismCarrier :=
   { initialComplexity   := 216
   , scaleGain           := 24
@@ -71,7 +71,7 @@ def domainC_witness : MechanismCarrier :=
   , coercivityMargin    := 24
   , h_conservation      := by decide }
 
-/-- Verified Cross-Domain Trinity Theorem unifying `FLT`, `lean-liquid`, and `number-theory-lean`: -/
+/-- Verified Cross-Domain Trinity Theorem unifying `FLT`, `lean-liquid`, and `tc-numtheory`: -/
 theorem verified_trinity_bridge :
     domainA_witness.residualObstruction = 0 ∧
     domainB_witness.residualObstruction = 0 ∧

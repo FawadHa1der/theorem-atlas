@@ -2,7 +2,7 @@
 # Razborov–Rudich–Wigderson Constructivity + Largeness ↔ Natural Proofs Barrier Dual to PRGs
 ## CommonGround Formal Verification Suite #380 (`RazborovRudichNaturalProofsPseudorandomBridge.lean`)
 
-* **Cross-Domain Triad**: `aks` ↔ `probability-lean` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `tc-probcomb` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

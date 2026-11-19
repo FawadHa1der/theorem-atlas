@@ -2,7 +2,7 @@
 # Eskin–Mirzakhani–Mohammadi SL₂(ℝ) Orbit Closure ↔ Affine Invariant Submanifold Rigidity
 ## CommonGround Formal Verification Suite #326 (`EskinMirzakhaniMohammadiRatnerTeichmullerBridge.lean`)
 
-* **Cross-Domain Triad**: `carleson` ↔ `FLT` ↔ `probability-lean`
+* **Cross-Domain Triad**: `carleson` ↔ `FLT` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

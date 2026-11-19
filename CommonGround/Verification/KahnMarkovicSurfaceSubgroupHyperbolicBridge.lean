@@ -2,7 +2,7 @@
 # Kahn–Markovic Good Pants Gluing & Exponential Mixing ↔ Incompressible Surface Subgroups
 ## CommonGround Formal Verification Suite #324 (`KahnMarkovicSurfaceSubgroupHyperbolicBridge.lean`)
 
-* **Cross-Domain Triad**: `group-theory-lean` ↔ `carleson` ↔ `SpherePacking`
+* **Cross-Domain Triad**: `tauceti` ↔ `carleson` ↔ `SpherePacking`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

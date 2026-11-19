@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #201 (`BehrendFantechiVirtualFundamentalClassBridge.lean`)
 
 * **Mechanism ID**: `kontsevich-behrend-virtual-fundamental-class-obstruction`
-* **Cross-Domain Triad**: `lean-liquid` ↔ `PhysLean` ↔ `category-theory-lean`
+* **Cross-Domain Triad**: `lean-liquid` ↔ `PhysLean` ↔ `tc-reptheory`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

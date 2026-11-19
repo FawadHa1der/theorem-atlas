@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite (`YauChernLuSchwarzRicciComparisonBridge.lean`)
 
 * **Mechanism ID**: `yau-schwarz-lemma-chern-lu-bochner`
-* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

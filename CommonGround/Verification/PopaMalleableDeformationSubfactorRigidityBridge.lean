@@ -2,7 +2,7 @@
 # Sorin Popa Malleable Deformation & Spectral Gap ↔ Intertwining-by-Bimodules II₁ Factor Rigidity
 ## CommonGround Formal Verification Suite #319 (`PopaMalleableDeformationSubfactorRigidityBridge.lean`)
 
-* **Cross-Domain Triad**: `algebra-lean` ↔ `probability-lean` ↔ `group-theory-lean`
+* **Cross-Domain Triad**: `tc-alggeom` ↔ `tc-probcomb` ↔ `tauceti`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

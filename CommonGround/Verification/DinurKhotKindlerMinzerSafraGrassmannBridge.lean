@@ -2,7 +2,7 @@
 # DKKMS Grassmann Graph Non-AbelianFourier Expansion ↔ Proof of the 2-to-2 Games Conjecture
 ## CommonGround Formal Verification Suite #339 (`DinurKhotKindlerMinzerSafraGrassmannBridge.lean`)
 
-* **Cross-Domain Triad**: `aks` ↔ `combinatorics-lean` ↔ `probability-lean`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `tc-probcomb` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

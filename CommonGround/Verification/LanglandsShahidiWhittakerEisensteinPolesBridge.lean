@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #231 (`LanglandsShahidiWhittakerEisensteinPolesBridge.lean`)
 
 * **Mechanism ID**: `langlands-shahidi-whittaker-eisenstein-constant-term`
-* **Cross-Domain Triad**: `FLT` ↔ `PrimeNumberTheoremAnd` ↔ `group-theory-lean`
+* **Cross-Domain Triad**: `FLT` ↔ `PrimeNumberTheoremAnd` ↔ `tauceti`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

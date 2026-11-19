@@ -2,7 +2,7 @@
 # Bilu–Parent–Rebolledo Runge–Baker–Wüstholz Bound ↔ Triviality of Split Cartan Modular Points
 ## CommonGround Formal Verification Suite #370 (`BiluParentRebolledoSplitCartanRungeBridge.lean`)
 
-* **Cross-Domain Triad**: `FLT` ↔ `number-theory-lean` ↔ `PrimeNumberTheoremAnd`
+* **Cross-Domain Triad**: `FLT` ↔ `tc-numtheory` ↔ `PrimeNumberTheoremAnd`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

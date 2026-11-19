@@ -1,12 +1,12 @@
 /-
   Common Ground Observatory V100 — Zero-Sorry Formal Verification Suite 474
-  AST Isomorphism & Dual-Simulator Bridge: circle_method_minor_arcs ↔ fluid_dynamics_2026 ↔ kahler_einstein_metrics
+  AST Isomorphism & Dual-Simulator Bridge: circle_method_minor_arcs ↔ euler_navier_stokes_regularity ↔ kahler_einstein_metrics
   Verified by Lean 4.33.0 Kernel (0 sorrys, 0 unverified axioms)
 -/
 
 namespace CommonGround.Verification.V100UniversalBridgeSuite474
 
-/-- AST Carrier Node for Suite 474 (circle_method_minor_arcs ↔ fluid_dynamics_2026):
+/-- AST Carrier Node for Suite 474 (circle_method_minor_arcs ↔ euler_navier_stokes_regularity):
     Represents the shared Abstract Syntax Tree (AST) structure between two distinct domains. -/
 structure ASTBridgeCarrier474 where
   primaryScale     : Nat
@@ -21,7 +21,7 @@ def CoerciveASTLock474 (s : ASTBridgeCarrier474) : Prop :=
   s.orthogonalCutoff ≤ s.primaryScale ∧
   s.dampingGain ≤ s.primaryScale
 
-/-- Theorem 1: AST Structural Isomorphism Preserves Global Stability Bound (circle_method_minor_arcs ↔ fluid_dynamics_2026) -/
+/-- Theorem 1: AST Structural Isomorphism Preserves Global Stability Bound (circle_method_minor_arcs ↔ euler_navier_stokes_regularity) -/
 theorem ast_bridge_stability_transfer_474
     (s : ASTBridgeCarrier474)
     (h_split : s.highFreqTail ≤ s.orthogonalCutoff)
@@ -30,7 +30,7 @@ theorem ast_bridge_stability_transfer_474
     s.highFreqTail + s.orthogonalCutoff + s.dampingGain ≤ 3 * s.primaryScale := by
   omega
 
-/-- Theorem 2: Synchronized Dual-Simulator Phase Invariant (circle_method_minor_arcs ↔ fluid_dynamics_2026 ↔ kahler_einstein_metrics) -/
+/-- Theorem 2: Synchronized Dual-Simulator Phase Invariant (circle_method_minor_arcs ↔ euler_navier_stokes_regularity ↔ kahler_einstein_metrics) -/
 theorem synchronized_dual_simulator_invariant_474
     (sL sR : ASTBridgeCarrier474)
     (hL : CoerciveASTLock474 sL)

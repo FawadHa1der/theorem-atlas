@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #114 (`EliashbergGromovHolonomichPrincipleBridge.lean`)
 
 * **Mechanism ID**: `gromov-eliashberg-convex-integration-corrugation`
-* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

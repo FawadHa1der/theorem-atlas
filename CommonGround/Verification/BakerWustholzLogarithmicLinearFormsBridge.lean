@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #215 (`BakerWustholzLogarithmicLinearFormsBridge.lean`)
 
 * **Mechanism ID**: `baker-wustholz-logarithmic-linear-forms-multiplicity`
-* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `FLT` ↔ `number-theory-lean`
+* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `FLT` ↔ `tc-numtheory`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

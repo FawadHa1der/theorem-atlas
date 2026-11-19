@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #263 (`RingelHallQuiverQuantumGroupBridge.lean`)
 
 * **Mechanism ID**: `ringel-hall-algebra-lusztig-quiver-quantum-duality`
-* **Cross-Domain Triad**: `algebra-lean` ↔ `combinatorics-lean` ↔ `FLT`
+* **Cross-Domain Triad**: `tc-alggeom` ↔ `tc-probcomb` ↔ `FLT`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

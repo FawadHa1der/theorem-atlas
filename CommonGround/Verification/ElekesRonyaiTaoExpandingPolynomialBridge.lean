@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #220 (`ElekesRonyaiTaoExpandingPolynomialBridge.lean`)
 
 * **Mechanism ID**: `elekes-ronyai-tao-expanding-polynomial-incidence`
-* **Cross-Domain Triad**: `erdos-problems` ↔ `pfr` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `erdos-problems` ↔ `oai-szemeredi` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -19,7 +19,7 @@ structure MechanismCarrier where
   deriving Repr, DecidableEq
 
 /-- Bidirectional Duality Dictionary Structure (V35 Loop 3):
-    Certifies that translating a state from `erdos-problems` to `pfr` and back preserves
+    Certifies that translating a state from `erdos-problems` to `oai-szemeredi` and back preserves
     both the total complexity budget and the monotone scale gain. -/
 structure BidirectionalDualityPair where
   forwardState  : MechanismCarrier

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #129 (`BonamiBecknerNelsonHypercontractivityBridge.lean`)
 
 * **Mechanism ID**: `nelson-hypercontractivity-bonami-beckner-semigroup`
-* **Cross-Domain Triad**: `pfr` ↔ `probability-lean` ↔ `carleson`
+* **Cross-Domain Triad**: `oai-szemeredi` ↔ `tc-probcomb` ↔ `carleson`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

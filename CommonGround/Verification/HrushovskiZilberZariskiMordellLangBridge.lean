@@ -2,7 +2,7 @@
 # Hrushovski–Zilber Model-Theoretic Socle Rigidity ↔ Function-Field Mordell–Lang Conjecture
 ## CommonGround Formal Verification Suite #365 (`HrushovskiZilberZariskiMordellLangBridge.lean`)
 
-* **Cross-Domain Triad**: `FLT` ↔ `algebra-lean` ↔ `lean-liquid`
+* **Cross-Domain Triad**: `FLT` ↔ `tc-alggeom` ↔ `lean-liquid`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

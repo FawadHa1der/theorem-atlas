@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #133 (`SchoofElkiesAtkinIsogenyVolcanoBridge.lean`)
 
 * **Mechanism ID**: `schoof-elkies-atkin-modular-isogeny-volcano`
-* **Cross-Domain Triad**: `FLT` ↔ `number-theory-lean` ↔ `aks`
+* **Cross-Domain Triad**: `FLT` ↔ `tc-numtheory` ↔ `apsp3sum`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

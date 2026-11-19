@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #77 (`KontsevichDeformationFormalityStarProductBridge.lean`)
 
 * **Mechanism ID**: `kontsevich-linfinity-formality-star-product`
-* **Cross-Domain Triad**: `PhysLean` ↔ `lean-liquid` ↔ `category-theory-lean`
+* **Cross-Domain Triad**: `PhysLean` ↔ `lean-liquid` ↔ `tc-reptheory`
 * **Mathematical Summary**: Formalizes L_∞ quasi-isomorphism Taylor coefficients and Stokes boundary cancellation on configuration spaces, proving that Poisson bivectors lift to associative deformation quantization star products with zero obstruction.
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
@@ -62,7 +62,7 @@ def domainB_witness : MechanismCarrier :=
   , coercivityMargin    := 16
   , h_conservation      := by decide }
 
-/-- Domain C Concrete Instantiation (`category-theory-lean`): -/
+/-- Domain C Concrete Instantiation (`tc-reptheory`): -/
 def domainC_witness : MechanismCarrier :=
   { initialComplexity   := 216
   , scaleGain           := 24
@@ -71,7 +71,7 @@ def domainC_witness : MechanismCarrier :=
   , coercivityMargin    := 24
   , h_conservation      := by decide }
 
-/-- Verified Cross-Domain Trinity Theorem unifying `PhysLean`, `lean-liquid`, and `category-theory-lean`: -/
+/-- Verified Cross-Domain Trinity Theorem unifying `PhysLean`, `lean-liquid`, and `tc-reptheory`: -/
 theorem verified_trinity_bridge :
     domainA_witness.residualObstruction = 0 ∧
     domainB_witness.residualObstruction = 0 ∧

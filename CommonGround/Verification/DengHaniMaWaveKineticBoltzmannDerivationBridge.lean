@@ -2,7 +2,7 @@
 # Deng–Hani–Ma Feynman Diagram Tree Cancellations ↔ Long-Time Hilbert6th Derivation of Boltzmann & Wave Kinetic
 ## CommonGround Formal Verification Suite #396 (`DengHaniMaWaveKineticBoltzmannDerivationBridge.lean`)
 
-* **Cross-Domain Triad**: `PhysLean` ↔ `probability-lean` ↔ `carleson`
+* **Cross-Domain Triad**: `PhysLean` ↔ `tc-probcomb` ↔ `carleson`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

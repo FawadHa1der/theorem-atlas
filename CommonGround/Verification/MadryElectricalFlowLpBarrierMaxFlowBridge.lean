@@ -2,7 +2,7 @@
 # Aleksander Mądry Congested Electrical L_p Barrier ↔ Sub-Quadratic O(m^{10/7}) Directed Maximum Flow
 ## CommonGround Formal Verification Suite #376 (`MadryElectricalFlowLpBarrierMaxFlowBridge.lean`)
 
-* **Cross-Domain Triad**: `optlib` ↔ `graph-theory-lean` ↔ `aks`
+* **Cross-Domain Triad**: `econlib` ↔ `erdos` ↔ `apsp3sum`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

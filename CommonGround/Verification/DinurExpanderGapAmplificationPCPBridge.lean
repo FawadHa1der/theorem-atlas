@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #296 (`DinurExpanderGapAmplificationPCPBridge.lean`)
 
 * **Mechanism ID**: `dinur-expander-gap-amplification-pcp-theorem`
-* **Cross-Domain Triad**: `aks` ↔ `graph-theory-lean` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `erdos` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -2,7 +2,7 @@
 # Rasmussen Lee-Deformed Khovanov Spectral Sequence ↔ Combinatorial Proof of Milnor Slice Conjecture
 ## CommonGround Formal Verification Suite #322 (`RasmussenKhovanovLeeSliceGenusBridge.lean`)
 
-* **Cross-Domain Triad**: `combinatorics-lean` ↔ `category-theory-lean` ↔ `PhysLean`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `tc-reptheory` ↔ `PhysLean`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

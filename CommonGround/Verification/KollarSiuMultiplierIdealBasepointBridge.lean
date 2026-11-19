@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #128 (`KollarSiuMultiplierIdealBasepointBridge.lean`)
 
 * **Mechanism ID**: `kollar-matsusaka-effective-basepoint-freeness`
-* **Cross-Domain Triad**: `lean-liquid` ↔ `FLT` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `lean-liquid` ↔ `FLT` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #115 (`GreenTaoNilsequenceLinearPrimesBridge.lean`)
 
 * **Mechanism ID**: `green-tao-pseudorandom-transference-nilsequence`
-* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `pfr` ↔ `erdos-problems`
+* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `oai-szemeredi` ↔ `erdos-problems`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

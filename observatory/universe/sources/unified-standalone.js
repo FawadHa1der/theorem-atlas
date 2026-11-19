@@ -26,11 +26,30 @@
     const vls = sm.verifiedLeanSuites || [];
     for (let si = 0; si < vls.length; si++) {
       const sv = vls[si];
-      if (!sv || !sv.leanFile || !Array.isArray(sv.declarations)) continue;
-      for (let di2 = 0; di2 < sv.declarations.length; di2++) {
-        const dc = sv.declarations[di2];
-        if (dc && !dc.file) dc.file = sv.leanFile;
+      if (!sv) continue;
+      if (!sv.module && sv.leanFile) sv.module = sv.leanFile;
+      if (sv.plainSummary === undefined && sv.summary !== undefined) sv.plainSummary = sv.summary;
+      if (sv.code === undefined && sv.snippet !== undefined) sv.code = sv.snippet;
+      if (sv.leanFile && Array.isArray(sv.declarations)) {
+        for (let di2 = 0; di2 < sv.declarations.length; di2++) {
+          const dc = sv.declarations[di2];
+          if (dc && !dc.file) dc.file = sv.leanFile;
+        }
       }
+    }
+    const snPool = sm.snippetPool || [];
+    const dm = sm.declMeta || {}, dmKd = dm.kinds || [], dmSk = dm.skels || [], dmPa = dm.archs || [], dmFl = dm.files || [], dmUb = dm.urlBases || [];
+    const dp = sm.isoDeclPool || [], w1 = sm.isoWhy1Pool || [], w2 = sm.isoWhy2Pool || [], tp = sm.isoTierPool || [];
+    for (let di = 0; di < dp.length; di++) {
+      const d = dp[di];
+      if (!d) continue;
+      if (d.file === undefined && typeof d._fl === 'number') d.file = dmFl[d._fl] || '';
+      if (d.snippet === undefined && typeof d._sn === 'number') d.snippet = snPool[d._sn] || '';
+      if (d.kind === undefined && typeof d._k === 'number') d.kind = dmKd[d._k] || '';
+      if (d.skeleton === undefined && typeof d._sk === 'number') d.skeleton = dmSk[d._sk] || '';
+      if (d.proofArch === undefined && typeof d._pa === 'number') d.proofArch = dmPa[d._pa] || '';
+      if (d.signature === undefined && d._sg === 1) d.signature = d.file || '';
+      if (d.url === undefined && typeof d._ub === 'number') d.url = (dmUb[d._ub] || '') + '/' + (d.file || '') + '#L' + d.line;
     }
     const trp = sm.trinityPools || {};
     const trDm = trp.domains || [], trPs = trp.summaries || [], trBo = trp.opportunities || [], trAn = trp.analogies || [];
@@ -43,7 +62,6 @@
       if (gt.breakthroughOpportunity === undefined && typeof gt._bo === 'number') gt.breakthroughOpportunity = trBo[gt._bo] || '';
       if (gt.analogy === undefined && typeof gt._an === 'number') gt.analogy = trAn[gt._an] || '';
     }
-    const dp = sm.isoDeclPool || [], w1 = sm.isoWhy1Pool || [], w2 = sm.isoWhy2Pool || [], tp = sm.isoTierPool || [];
     const imp = sm.isoMetaPools || {};
     const iSk = imp.skels || [], iPa = imp.archs || [], iPn = imp.pnames || [], iDc = imp.discs || [];
     const iOc = imp.obs || [], iDg = imp.dags || [], iKd = imp.kinds || [], iSo = imp.sops || [], iWm = imp.whys || [], iTb = imp.tbs || [];
@@ -74,6 +92,27 @@
     const mp = sm.mechPools || {};
     const mpPart = mp.partItems || [], mpPb = mp.playbooks || [], mpPs = mp.steppers || [], mpAn = mp.analogies || [];
     const mpId = mp.invDirs || [], mpTd = mp.transDicts || [], mpVs = mp.visSteps || [], mpAst = mp.astTypes || [], mpGr = mp.grades || [];
+    const pm = mp.partMeta || {}, pmPj = pm.projs || [], pmPn = pm.pnames || [], pmSh = pm.shorts || [], pmDc = pm.discs || [], pmRl = pm.roles || [];
+    const pmKd = pm.kinds || [], pmSk = pm.skels || [], pmPa = pm.archs || [], pmFl = pm.files || [], pmUb = pm.urlBases || [];
+    for (let pi = 0; pi < mpPart.length; pi++) {
+      const pt = mpPart[pi];
+      if (!pt) continue;
+      if (pt.projectId === undefined && typeof pt._p === 'number') pt.projectId = pmPj[pt._p] || '';
+      if (pt.projectName === undefined && typeof pt._pn === 'number') pt.projectName = pmPn[pt._pn] || '';
+      if (pt.short === undefined && typeof pt._sh === 'number') pt.short = pmSh[pt._sh] || '';
+      if (pt.discipline === undefined && typeof pt._dc === 'number') pt.discipline = pmDc[pt._dc] || '';
+      if (pt.role === undefined && typeof pt._rl === 'number') pt.role = pmRl[pt._rl] || '';
+      const cd = pt.customDecl;
+      if (cd) {
+        if (cd.file === undefined && typeof cd._fl === 'number') cd.file = pmFl[cd._fl] || '';
+        if (cd.snippet === undefined && typeof cd._sn === 'number') cd.snippet = snPool[cd._sn] || '';
+        if (cd.kind === undefined && typeof cd._k === 'number') cd.kind = pmKd[cd._k] || '';
+        if (cd.skeleton === undefined && typeof cd._sk === 'number') cd.skeleton = pmSk[cd._sk] || '';
+        if (cd.proofArch === undefined && typeof cd._pa === 'number') cd.proofArch = pmPa[cd._pa] || '';
+        if (cd.signature === undefined && cd._sg === 1) cd.signature = cd.file || '';
+        if (cd.url === undefined && typeof cd._ub === 'number') cd.url = (pmUb[cd._ub] || '') + '/' + (cd.file || '') + '#L' + cd.line;
+      }
+    }
     const ms = sm.highLevelMechanisms || [];
     for (let j = 0; j < ms.length; j++) {
       const m = ms[j];
@@ -174,6 +213,18 @@
     const ppLs = pp.sketches || [], ppSm = pp.summaries || [], ppRw = pp.reqWorks || [];
     const ppDb = pp.discBridges || [], ppTl = pp.tools || [], ppAn = pp.analogies || [], ppSi = pp.sharedIngs || [];
     const ppRl = pp.relLevels || [], ppDs = pp.discs || [], ppKd = pp.kinds || [], ppWm = pp.whys || [], ppOc = pp.obsCats || [];
+    const snPoolIp = (sm && sm.snippetPool) || [];
+    const em = pp.epMeta || {}, emPj = em.projs || [], emCm = em.commits || [], emPa = em.paths || [], emUb = em.urlBases || [];
+    for (let ei = 0; ei < ppEp.length; ei++) {
+      const ep = ppEp[ei];
+      if (!ep) continue;
+      if (ep.commit === undefined && typeof ep._cm === 'number') ep.commit = emCm[ep._cm] || '';
+      if (ep.path === undefined && typeof ep._pa === 'number') ep.path = emPa[ep._pa] || '';
+      if (ep.project === undefined && typeof ep._p === 'number') ep.project = emPj[ep._p] || '';
+      if (ep.statement === undefined && typeof ep._sn === 'number') ep.statement = snPoolIp[ep._sn] || '';
+      if (ep.sourceUrl === undefined && typeof ep._ub === 'number') ep.sourceUrl = (emUb[ep._ub] || '') + '/' + (ep.path || '') + '#L' + ep.lineStart;
+      if (ep.sourceSha256 === undefined && typeof ep._st === 'string') ep.sourceSha256 = (ep.commit || '') + ep._st;
+    }
     const cs = ip.connections || [];
     for (let k = 0; k < cs.length; k++) {
       const c = cs[k];
@@ -189,7 +240,7 @@
       if (c.analogy === undefined && typeof c._an === 'number') c.analogy = ppAn[c._an] || '';
       if (!c.sharedIngredients && typeof c._si === 'number') c.sharedIngredients = ppSi[c._si] || [];
       if (c.relationLevel === undefined && typeof c._rl === 'number') c.relationLevel = ppRl[c._rl] || '';
-      if (!c.disciplines && typeof c._ds === 'number') c.disciplines = ppDs[c._ds] || [];
+      if (!c.disciplines && typeof c._ds === 'number') c.disciplines = ppDs[c._ds] || '';
       if (c.kind === undefined && typeof c._kd === 'number') c.kind = ppKd[c._kd] || '';
       if (c.whyItMatters === undefined && typeof c._wm === 'number') c.whyItMatters = ppWm[c._wm] || '';
       if (c.obstacleCategory === undefined && typeof c._oc === 'number') c.obstacleCategory = ppOc[c._oc] || '';
@@ -244,6 +295,7 @@ const state = {
   selectedMechanismId: null,
   selectedIsoId: null,
   selectedVerifiedId: null,
+  verSortOrder: 'newest',
   rosettaMechIdx: 0,
   rosettaDim: 4,
   rosettaDegree: 3,
@@ -4289,7 +4341,8 @@ function renderSerendipityLens(mount) {
 
   if (state.serenSubmode === 'verified') {
     const allVer = semanticMechanisms?.verifiedLeanSuites || semanticMechanisms?.verifiedLean4BridgeModules || unrelatedBridges?.verifiedLean4BridgeModules || [];
-    const verList = allVer.filter(vm => {
+    const orderedVer = state.verSortOrder === 'az' ? allVer.slice() : allVer.slice().reverse();
+    const verList = orderedVer.filter(vm => {
       if (state.serenQuery.trim()) {
         const q = state.serenQuery.toLowerCase();
         const hay = `${vm.title} ${vm.folder} ${vm.category} ${vm.bridgeLabel} ${vm.summary} ${(vm.declarations || []).map(d => d.name + ' ' + d.snippet).join(' ')}`.toLowerCase();
@@ -4312,7 +4365,7 @@ function renderSerendipityLens(mount) {
           <div>
             <div class="badge-row">
               <span class="badge badge-gold">${vm.declarationCount || (vm.declarations || []).length || 1} Verified Decls</span>
-              <span class="badge">${esc(String(vm.category || 'Cross-Domain Suite').includes('Instance') ? 'Solved Open Instance' : 'Cross-Domain Suite')}</span>
+              <span class="badge">Zero-Sorry Kernel Suite</span>
             </div>
             <h3 style="margin:6px 0;color:#fff">${esc(vm.title)}</h3>
             <div style="font-size:11px;color:#34d399;margin-bottom:4px">${esc(vm.bridgeLabel || 'Cross-Domain Lean 4.33.0 Bridge')}</div>
@@ -4331,7 +4384,7 @@ function renderSerendipityLens(mount) {
         <form id="ver-search-form" class="field-group">
           <label for="ver-q">Search ${fmt(allVer.length)} Compiled Zero-Sorry Lean 4.33.0 Bridge Suites</label>
           <div class="search-box">
-            <input id="ver-q" type="search" value="${esc(state.serenQuery)}" placeholder="Try Blackwell, Mermin-Peres, Krylov, Walras, Kakutani, Waring…">
+            <input id="ver-q" type="search" value="${esc(state.serenQuery)}" placeholder="Try R1CS, MaxWeight, IBLT, MoE, ML-KEM, PeerDAS, Blackwell…">
             <button type="submit">Filter</button>
           </div>
         </form>
@@ -4341,7 +4394,8 @@ function renderSerendipityLens(mount) {
             ${verSelectPool.map(vm => `<option value="${esc(vm.id)}" ${activeVer && activeVer.id === vm.id ? 'selected' : ''}>★ ${esc(String(vm.title || vm.id).slice(0, 68))}</option>`).join('')}
           </select>
         </div>
-        <div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button type="button" id="cg-ver-sort-toggle" style="border-color:rgba(52,211,153,0.45);color:#6ee7b7">${state.verSortOrder === 'az' ? 'Sort: A–Z Canonical' : '★ Newest Frontier First'}</button>
           <button type="button" id="ver-random" style="border-color:var(--gold);color:var(--gold)">Random Verified Suite</button>
         </div>
       </div>
@@ -4435,6 +4489,13 @@ function renderSerendipityLens(mount) {
           syncUrl(true);
           renderSerendipityLens(mount);
         }
+      };
+    }
+    if ($('cg-ver-sort-toggle')) {
+      $('cg-ver-sort-toggle').onclick = () => {
+        state.verSortOrder = state.verSortOrder === 'az' ? 'newest' : 'az';
+        state.selectedVerifiedId = null;
+        renderSerendipityLens(mount);
       };
     }
     $('ver-random').onclick = () => {
@@ -23004,7 +23065,8 @@ window.v48RenderBlueprintWizardPanel = function() {
       "94. FRI Folding, KZG Commitments, 3f+1 BFT Quorum & EIP-1559 Suite #640",
       "95. Post-Quantum ML-KEM NTT/FO & ML-DSA Dilithium Rejection Suite #641",
       "96. Surface-Code CSS Peeling, 2D PeerDAS (k+1)² & Petri Siphon Suite #642",
-      "97. Loss-Free MoE Dual-Bias, Butterfly Network Coding & Shamir Secret Sharing Suite #643"
+      "97. Loss-Free MoE Dual-Bias, Butterfly Network Coding & Shamir Secret Sharing Suite #643",
+      "98. zkSNARK R1CS/QAP & Frozen-Heart, MaxWeight Backpressure & IBLT Peeling Suite #644"
     ];
     labTitles.forEach(function(lt, idx) {
       items.push({
@@ -61469,3 +61531,521 @@ window.v48RenderBlueprintWizardPanel = function() {
     };
   }
 })();
+
+// === V243 UPGRADE: zkSNARK R1CS/QAP & FROZEN-HEART GUARD, MAXWEIGHT BACKPRESSURE LYAPUNOV DRIFT & IBLT SET RECONCILIATION SUITE #644, 644-SUITE GROUND-TRUTH REPAIR, SUB-25 MiB CORPUS & SUITE 101 (508/508) ===
+(function initV243R1csQapMaxWeightIbltAndSub25MiB() {
+  if (typeof window === "undefined") return;
+
+  // 1. Register Suite #644 + Frontier #118 & Update R2 Corpus Config (762 .lean files, 722 compiled)
+  if (Array.isArray(window.V145_REAL_LEAN_SUITES)) {
+    var v243Suites = [
+      {
+        id: "lean-r1cs-qap-maxweight-backpressure-and-iblt-peeling-bridge",
+        projects: ["oai-codes", "tc-numtheory", "econlib", "cslib"],
+        file: "CommonGround/Verification/TheoremAtlasR1csQapMaxWeightBackpressureAndIbltPeelingBridge.lean",
+        line: 185,
+        theoremName: "master_r1cs_qap_maxweight_backpressure_and_iblt_peeling_bridge",
+        snippet: "theorem master_r1cs_qap_maxweight_backpressure_and_iblt_peeling_bridge : ((∀ b out : Fin 17, (∀ tau : Fin 17, qapErr17 b out tau = ⟨0, by decide⟩) ↔ ...) ∧ qapHits17 5 16 = 16 ∧ ...) ∧ ...",
+        zeroSorry: true
+      },
+      {
+        id: "lean-r1cs-qap-maxweight-backpressure-and-iblt-peeling-frontier",
+        projects: ["oai-codes", "tc-numtheory", "econlib", "cslib"],
+        file: "10-millennium-frontier-bridges/R1csQapMaxWeightBackpressureAndIbltPeelingFrontier.lean",
+        line: 169,
+        theoremName: "maxweight_negative_lyapunov_drift_bound",
+        snippet: "theorem maxweight_negative_lyapunov_drift_bound (K : Nat) (Q A S S_feas : Fin K → Int) (B ε : Int) ... : queueLyapunovSq K (fun i => Q i + (A i - S i)) - queueLyapunovSq K Q ≤ B - 2 * ε * finSumInt K Q",
+        zeroSorry: true
+      }
+    ];
+    v243Suites.forEach(function(vs) {
+      if (!window.V145_REAL_LEAN_SUITES.some(function(s) { return s && s.file === vs.file; })) {
+        window.V145_REAL_LEAN_SUITES.push(vs);
+      }
+    });
+  }
+
+  if (window.CG_R2_CORPUS_CONFIG) {
+    window.CG_R2_CORPUS_CONFIG.kernelCompiledModules = 722;
+    window.CG_R2_CORPUS_CONFIG.totalZeroSorryLeanFiles = 762;
+    window.CG_R2_CORPUS_CONFIG.verificationModules = 644;
+    window.CG_R2_CORPUS_CONFIG.frontierModules = 118;
+  }
+
+  // 2. Register Breakthroughs #362-365 (`365` total)
+  window.CG_VERIFIED_ATLAS_BREAKTHROUGHS = window.CG_VERIFIED_ATLAS_BREAKTHROUGHS || [];
+  var v243Breakthroughs = [
+    {
+      id: "bt-v243-zksnark-r1cs-qap-soundness-vs-underconstrained-and-frozen-heart",
+      title: "362. `zkSNARK` `R1CS`-to-`QAP` Vanishing Equivalence & `16/17` Schwartz–Zippel Soundness vs. Under-Constrained `5×` Mint & `100%` Keyless Frozen-Heart Forgery (`10`+`02`)",
+      projects: ["oai-codes", "tc-numtheory", "cslib"],
+      epistemicSymbol: "★",
+      epistemicGrade: "Lean 4.33.0 Pure-Core Kernel Checked (10-millennium-frontier-bridges/R1csQapMaxWeightBackpressureAndIbltPeelingFrontier.lean · 0 sorry)",
+      domains: "Succinct Zero-Knowledge Rollups (`Groth16`/`PLONK` `R1CS`) (`10`) ↔ Finite-Field Polynomial Interpolation & Fiat–Shamir Soundness (`02`)",
+      howConnected: "Why & How Connected: Proves `r1cs_qap_vanishing_equivalence_and_schwartz_zippel_soundness_17`: across all `289` witness pairs `(b, out) ∈ 𝔽₁₇²`, the interpolated `QAP` error polynomial `E(τ)` vanishes identically iff ALL `R1CS` gates hold, and any invalid witness (e.g. `5×` payout `b=5, out=16`) is caught on `16/17` (`94.1%`, `15/15` out-of-domain) verifier challenges!",
+      selfCritique: "Dual Premise-Failure Vulnerabilities (`under_constrained_r1cs_allows_5x_mint_forgery` & `frozen_heart_unhashed_public_input_universal_forgery_17`): (1) Dropping the boolean gate `b(1-b)=0` allows `b=5, out=16` (`5·10 ≡ 16 mod 17`) to pass `100%` of remaining constraints; (2) Omitting public statement `Y` from Fiat–Shamir `c = H(R)` ('Frozen Heart' CVE-2022-29566) lets a keyless attacker set `Y_forge = (S - R)·c⁻¹ mod 17` for `100%` (`4,624/4,624`) forgery!",
+      statement: "(∀ τ, E_{b,out}(τ)=0 ↔ Gate₀=0 ∧ Gate₁=0) ∧ (invalid ⟹ 16 ≤ detectCount) ∧ (∀ R c≠0 S, (R + c·Y_forge) % 17 = S).",
+      leanFile: "10-millennium-frontier-bridges/R1csQapMaxWeightBackpressureAndIbltPeelingFrontier.lean",
+      theoremName: "r1cs_qap_vanishing_equivalence_and_schwartz_zippel_soundness_17",
+      interactiveLab: 97
+    },
+    {
+      id: "bt-v243-maxweight-backpressure-lyapunov-drift-vs-priority-starvation",
+      title: "363. Universal `Fin K` `MaxWeight` Backpressure Negative Quadratic Lyapunov Drift (`≤ B - 2ε ∑ Q_i`) vs. Static-Priority Starvation Explosion (`04`+`08`)",
+      projects: ["econlib", "cslib"],
+      epistemicSymbol: "★",
+      epistemicGrade: "Lean 4.33.0 Pure-Core Kernel Checked (10-millennium-frontier-bridges/R1csQapMaxWeightBackpressureAndIbltPeelingFrontier.lean · 0 sorry)",
+      domains: "Datacenter Switch / Wireless / LLM Queue Scheduling (`04`) ↔ Foster–Lyapunov Saddle-Point Duality (`08`)",
+      howConnected: "Why & How Connected: Certifies `quadratic_queue_drift_exact_identity` and `maxweight_negative_lyapunov_drift_bound` over arbitrary `Fin K`: maximizing queue-weighted throughput `∑ Q_i S_i` under interior slack `A_i + ε ≤ S_feas(i)` upper-bounds quadratic backlog drift `∑(Q_i + A_i - S_i)² - ∑ Q_i²` by `B - 2ε ∑ Q_i`, guaranteeing negative drift (`100 → 53`) without knowing arrival rates!",
+      selfCritique: "Premise-Failure Counterexample (`maxweight_vs_static_priority_starvation_witness`): A queue-blind static priority policy serving Queue `0` even when `Q₀ = 0` starves Queue `1` under feasible arrivals `A = (2, 1)` (`capacity = 4`), driving `L₂` upward (`100 → 121`, `ΔL₂ = +21 > 0`) and `Q₁(T) = 10 + T → ∞`.",
+      statement: "∑(Q_i + A_i - S_i)² - ∑ Q_i² ≤ B - 2ε ∑ Q_i; `MaxWeight` `100 → 53` vs. Priority `100 → 121`.",
+      leanFile: "10-millennium-frontier-bridges/R1csQapMaxWeightBackpressureAndIbltPeelingFrontier.lean",
+      theoremName: "maxweight_negative_lyapunov_drift_bound",
+      interactiveLab: 97
+    },
+    {
+      id: "bt-v243-iblt-homomorphic-set-reconciliation-vs-phantom-key-collision",
+      title: "364. `IBLT` Homomorphic Symmetric-Difference Peeling (`O(|S_A Δ S_B|)`) vs. `2`-Core Collision & Checksum-Free Phantom Key `5 ⊕ 9 ⊕ 14 = 2` (`09`+`02`)",
+      projects: ["oai-codes", "cslib"],
+      epistemicSymbol: "★",
+      epistemicGrade: "Lean 4.33.0 Pure-Core Kernel Checked (10-millennium-frontier-bridges/R1csQapMaxWeightBackpressureAndIbltPeelingFrontier.lean · 0 sorry)",
+      domains: "Bitcoin `Erlay` (`BIP-330`) / Database Set Reconciliation (`09`) ↔ Homomorphic `𝔽₂` XOR Peeling & Nonlinear Checksums (`02`)",
+      howConnected: "Why & How Connected: Proves `iblt_shared_key_cancels_identically`: subtracting counts `(cA+1)-(cB+1) = cA-cB` and XORing keys/checksums cancels EVERY shared element `k ∈ S_A ∩ S_B` identically regardless of set size `|S_A ∩ S_B| = 10⁹`, so `O(|S_A Δ S_B|)` buckets suffice to peel exact set differences!",
+      selfCritique: "Dual Premise-Failure Counterexamples (`iblt_peeling_vs_2core_and_phantom_key_counterexamples`): (1) `+5` (Alice) and `-9` (Bob) colliding yield `Δcount = 0` with `ΔkeyXor = 12 ≠ 0` (`0` peelable cells); (2) `3` colliding keys `+5 - 9 + 14` yield `Δcount = +1` and phantom key `5 ⊕ 9 ⊕ 14 = 2 ∉ S_A ∪ S_B`, which count-only decoding accepts (`true`) while nonlinear `hashXor` rejects (`H(2) = 7 ≠ 15`)!",
+      statement: "diff(ins(cA,k), ins(cB,k)) = diff(cA,cB) ∧ (phantom3.count = 1 ∧ keyXor = 2 ∧ H(2)=7 ≠ 15).",
+      leanFile: "10-millennium-frontier-bridges/R1csQapMaxWeightBackpressureAndIbltPeelingFrontier.lean",
+      theoremName: "iblt_shared_key_cancels_identically",
+      interactiveLab: 97
+    },
+    {
+      id: "bt-v243-suite-644-r1cs-maxweight-iblt-master-synthesis",
+      title: "365. `Suite #644` Master Bridge: `zkSNARK` `R1CS`/`QAP` & Frozen-Heart Guard, `MaxWeight` Lyapunov Drift & `IBLT` Set Reconciliation (`10`+`04`+`09`+`02`)",
+      projects: ["oai-codes", "tc-numtheory", "econlib", "cslib"],
+      epistemicSymbol: "★",
+      epistemicGrade: "Lean 4.33.0 Pure-Core Kernel Checked (CommonGround/Verification/TheoremAtlasR1csQapMaxWeightBackpressureAndIbltPeelingBridge.lean · 0 sorry)",
+      domains: "Zero-Knowledge Proofs (`10`) ↔ Throughput-Optimal Queue Control (`04`) ↔ Bandwidth-Optimal P2P Sync (`09`)",
+      howConnected: "Why & How Connected: Unifies three compressed state-certification mechanisms — `QAP` polynomial vanishing (`O(1)` field checks), `MaxWeight` quadratic Lyapunov potential (`O(K)` local queue weights), and `IBLT` homomorphic XOR/count sketches (`O(Δ)` difference buckets) — together with exact kernel-checked counterexamples when boolean/transcript, queue-weight, or checksum invariants are omitted.",
+      selfCritique: "Verified Premise Gates: Missing boolean gates (`5×` mint), unhashed public inputs (`100%` Frozen-Heart forgery), queue-blind priority (`+21` Lyapunov divergence), and missing `hashXor` (`5⊕9⊕14 = 2` phantom key).",
+      statement: "master_r1cs_qap_maxweight_backpressure_and_iblt_peeling_bridge (`Suite #644`, `0` sorry).",
+      leanFile: "CommonGround/Verification/TheoremAtlasR1csQapMaxWeightBackpressureAndIbltPeelingBridge.lean",
+      theoremName: "master_r1cs_qap_maxweight_backpressure_and_iblt_peeling_bridge",
+      interactiveLab: 97
+    }
+  ];
+  var existingBtIds243 = new Set(window.CG_VERIFIED_ATLAS_BREAKTHROUGHS.map(function(b) { return b && b.id; }));
+  v243Breakthroughs.forEach(function(b) {
+    if (!existingBtIds243.has(b.id)) window.CG_VERIFIED_ATLAS_BREAKTHROUGHS.push(b);
+  });
+
+  // 3. Register Promising Research Leads #167-168 (`168/168` `100%` `.lean`-Anchored)
+  window.CG_PROMISING_RESEARCH_LEADS = window.CG_PROMISING_RESEARCH_LEADS || [];
+  var v243Leads = [
+    {
+      id: "lead-v243-frozen-heart-immune-fiat-shamir-and-underconstrained-r1cs-auditor",
+      title: "167. Compile-Time Frozen-Heart-Immune Fiat–Shamir Sponge Types & Automated Under-Constrained `R1CS`/`Plonkish` Circuit Certifiers (`10`+`02`)",
+      projects: ["oai-codes", "tc-numtheory", "cslib"],
+      targetStarId: "suite-644-r1cs-qap-maxweight-backpressure-iblt-peeling",
+      domains: "zkVM & L2 Rollup Prover Security (`10`) ↔ Algebraic Geometry / Polynomial Determinacy (`02`)",
+      whyPromising: "Combining `under_constrained_r1cs_allows_5x_mint_forgery` and `frozen_heart_unhashed_public_input_universal_forgery_17` into a phantom-typed Lean 4 transcript monad forces every public input `Y` and commitment `R` into the sponge state before squeezing `c`, while Jacobian rank checks flag unconstrained witness wires at compile time.",
+      whatStatementUnlocked: "Zero-sorry Lean 4 soundness theorem for multi-round Plonkish/AIR Fiat–Shamir compilation proving zero knowledge-error inflation when transcript absorption covers the full public instance tuple.",
+      realWorldUseCase: "Eliminating Frozen-Heart (`CVE-2022-29566`) and under-constrained witness minting vulnerabilities across `Halo2`, `Plonky3`, `SP1`, `RISC Zero`, and Ethereum ZK-rollup bridges.",
+      keyObstacle: "Scaling symbolic functional-determinacy (`∀ z₁ z₂, C(x, z₁)=0 ∧ C(x, z₂)=0 ⟹ out₁ = out₂`) across millions of custom lookup gates without SMT blowup.",
+      leanAnchor: "10-millennium-frontier-bridges/R1csQapMaxWeightBackpressureAndIbltPeelingFrontier.lean",
+      labIndex: 97
+    },
+    {
+      id: "lead-v243-maxweight-disaggregated-llm-serving-and-iblt-mempool-reconciliation",
+      title: "168. `MaxWeight` Disaggregated LLM Prefill/Decode Scheduling + `IBLT` `O(Δ)` KV-Prefix & Rollup Mempool Reconciliation (`04`+`08`+`09`)",
+      projects: ["econlib", "oai-codes", "cslib"],
+      targetStarId: "suite-644-r1cs-qap-maxweight-backpressure-iblt-peeling",
+      domains: "Disaggregated GPU Cluster Scheduling (`04`/`08`) ↔ Sublinear Set-Difference Gossip (`09`/`02`)",
+      whyPromising: "Pairing `maxweight_negative_lyapunov_drift_bound` (which stabilizes heterogeneous prefill, decode, and tool-call queues without arrival-rate estimation) with `iblt_shared_key_cancels_identically` allows distributed KV-cache routers and blockchain sequencers to synchronize million-entry cache/tx directories in `O(Δ)` bytes per tick.",
+      whatStatementUnlocked: "Joint Lean 4 Foster–Lyapunov + peeling-threshold theorem certifying bounded tail latency and `1 - O(m^{-k+1})` single-round `IBLT` cache-directory reconciliation under bursty arrivals.",
+      realWorldUseCase: "Throughput-optimal disaggregated LLM serving routers (`vLLM`/`Mooncake`/`SGLang`) and `Erlay`-grade sublinear P2P mempool synchronization for high-TPS L1/L2 networks.",
+      keyObstacle: "Sizing `IBLT` bucket count `m ≥ 1.23 Δ` adaptively when bursty queue surges spike symmetric-difference cardinality `Δ` between gossip ticks.",
+      leanAnchor: "CommonGround/Verification/TheoremAtlasR1csQapMaxWeightBackpressureAndIbltPeelingBridge.lean",
+      labIndex: 97
+    }
+  ];
+  var existingLeadIds243 = new Set(window.CG_PROMISING_RESEARCH_LEADS.map(function(l) { return l && l.id; }));
+  v243Leads.forEach(function(nl) {
+    if (!existingLeadIds243.has(nl.id)) window.CG_PROMISING_RESEARCH_LEADS.push(nl);
+  });
+
+  // 4. Register Premise-Boundary Guardrail & Archetype #36
+  if (Array.isArray(window.CG_BOUNDARY_RULES)) {
+    var v243Rule = {
+      id: "r1cs-frozen-heart-maxweight-starvation-and-iblt-checksum-boundary",
+      groups: [
+        ["r1cs", "qap", "zksnark", "plonk", "fiat_shamir", "maxweight", "backpressure", "lyapunov", "iblt", "set_reconciliation"],
+        ["under_constrained", "frozen_heart", "public_input", "priority", "starvation", "collision", "checksum", "phantom"]
+      ],
+      title: "Premise Boundary · Under-Constrained `R1CS` & Unhashed Fiat–Shamir Forge Proofs; Static Priority Starves Queues; Checksum-Free `IBLT` Emits Phantom Keys",
+      warning: "(1) Missing `R1CS` boolean gates (`b(1-b)=0`) allow `5×` payout forgery, and omitting public input `Y` from Fiat–Shamir `c = H(R)` ('Frozen Heart') enables `100%` keyless forgery `Y_forge = (S-R)c⁻¹`. (2) Queue-blind static priority diverges (`L₂: 100 → 121`). (3) Count-only `IBLT` (`|Δcount|=1`) mistakes `3`-key `+5-9+14` collisions for pure cells and emits phantom key `5⊕9⊕14 = 2`!",
+      remedy: "Constrain all witness range/boolean wires & hash `(public_inputs, commitments)` into Fiat–Shamir transcripts; schedule queues by `MaxWeight` `argmax ∑ Q_i S_i`; and verify nonlinear `hashXor == H(keyXor)` before peeling any `|Δcount|=1` `IBLT` cell.",
+      targetLab: 97
+    };
+    if (!window.CG_BOUNDARY_RULES.some(function(r) { return r && r.id === v243Rule.id; })) {
+      window.CG_BOUNDARY_RULES.push(v243Rule);
+    }
+  }
+
+  if (Array.isArray(window.V95_OBSTACLES)) {
+    var arch36 = {
+      id: "r1cs_qap_frozen_heart_maxweight_and_iblt_checksum_gate",
+      name: "36. R1CS/QAP Transcript Binding, MaxWeight Lyapunov Drift & IBLT Checksum Peeling Gate",
+      label: "36. `zkSNARK` `R1CS`/`QAP` + Frozen-Heart Guard, `MaxWeight` Lyapunov Drift & `IBLT` Peeling Gate (`10`+`04`+`09`+`02`)",
+      carrier: "PolynomialVanishingQuadraticLyapunovAndChecksummedSketchGate",
+      premiseGate: "Requires complete `R1CS` boolean/range constraints + public-input-bound Fiat–Shamir `H(Y, R)`, interior capacity slack `A_i + ε ≤ S_feas(i)` with `MaxWeight` `∑ Q_i S_i` maximization, and nonlinear `hashXor` pure-cell verification in `IBLT`",
+      tactic: "Discharge `𝔽₁₇` `QAP` & Frozen-Heart witnesses by `decide`, prove universal `Fin K` quadratic drift via `grind` + `Int.mul_le_mul_of_nonneg_left` + `omega`, and verify `Fin 16` XOR cancellation & phantom-key rejection."
+    };
+    if (!window.V95_OBSTACLES.some(function(o) { return o && o.id === arch36.id; })) {
+      window.V95_OBSTACLES.push(arch36);
+    }
+  }
+
+  // 5. Interactive Finite Micro-Lab #98 (index 97): zkSNARK R1CS/QAP & Frozen-Heart, MaxWeight Backpressure & IBLT Peeling Suite #644
+  window._v136State = Object.assign(window._v136State || {}, {
+    v243Mode: "r1cs-qap-and-frozen-heart",
+    v243ZkGuard: 2,       // 2 = Full R1CS + Bound Fiat-Shamir (94.1% catch), 1 = Under-Constrained R1CS (5x mint passes!), 0 = Frozen-Heart Unhashed Y (100% keyless forge!)
+    v243Scheduler: 1,     // 1 = MaxWeight Backpressure (L2: 100 -> 53, drift -47), 0 = Static Priority (L2: 100 -> 121, drift +21 starvation!)
+    v243IbltGuard: 1      // 1 = Checksummed IBLT (rejects 5^9^14=2 phantom key!), 0 = Count-Only IBLT (emits phantom key 2!)
+  });
+
+  window.v243R1csMaxWeightIbltLabModel = function(mode, opts) {
+    var o = opts || {};
+    var zkGuard = (typeof o.zkGuard === "number") ? o.zkGuard : 2;
+    var scheduler = (typeof o.scheduler === "number") ? o.scheduler : 1;
+    var ibltGuard = (typeof o.ibltGuard === "number") ? o.ibltGuard : 1;
+
+    var qapDetectHits17 = zkGuard === 2 ? 16 : 0;
+    var zkForgerySuccessPct = zkGuard === 2 ? 5.9 : 100; // 1/17 = 5.9% over F_17 (2^-256 over BN254!) vs 100% under-constrained / Frozen-Heart!
+
+    var lyapunovBefore = 100;
+    var lyapunovAfter = scheduler === 1 ? 53 : 121;
+    var lyapunovDelta = lyapunovAfter - lyapunovBefore; // -47 vs +21
+
+    var phantomKeyXor = 2; // 5 ^ 9 ^ 14 = 2
+    var phantomAccepted = ibltGuard === 1 ? false : true;
+
+    var mKey = mode || "r1cs-qap-and-frozen-heart";
+    var heading = zkGuard === 2
+      ? "Sound `zkSNARK` (`2`-Gate `R1CS` + `H(Y, R)` Fiat–Shamir): `16/17` (`94.1%`) Challenges Catch `5×` Mint & `0` Keyless Forgeries"
+      : (zkGuard === 1
+          ? "Premise Failure · Under-Constrained `R1CS` (Missing `b(1-b)=0`): Forged `b=5, out=16` (`5×` Mint) Passes `100%`!"
+          : "Premise Failure · Frozen-Heart Fiat–Shamir (`c = H(R)` Omits `Y`): `Y_forge = (S-R)c⁻¹` Forges `100%` (`4,624/4,624`) Keylessly!");
+    var operatorEq = "(∀ τ, E(τ)=0 ↔ Gate₀=0 ∧ Gate₁=0)   ∧   c = H(R) ⟹ R + c·((S-R)c⁻¹) ≡ S (mod 17) [Frozen Heart!]";
+    var witnessDetail = zkGuard === 2
+      ? "Enforcing Gate `0` (`b(1-b)=0`) + Gate `1` (`10b = out`) makes forged `b=5, out=16` evaluate `Gate₀(5) = 14 ≠ 0`, so `E(τ) ≠ 0` on `16/17` challenges (`15/15` out-of-domain), while hashing `(Y, R)` prevents post-challenge public-key inversion!"
+      : (zkGuard === 1
+          ? "Omitting the boolean constraint `b(1-b)=0` leaves `10·5 = 50 ≡ 16 (mod 17)` completely satisfied (`Gate₁ = 0`), allowing a malicious prover to mint `5×` the authorized payout with a valid proof!"
+          : "Computing Fiat–Shamir challenge `c = H(R)` without absorbing public statement `Y` ('Frozen Heart') lets an attacker pick arbitrary `R, S` and solve `Y_forge = (S - R)·c⁻¹ mod 17`, passing verification `100%` of the time with zero secret witness!");
+    var secondaryDetail = "`zkSNARK` Catch: `" + qapDetectHits17 + "/17` (`forge=" + zkForgerySuccessPct + "%`) · `L₂` Drift: `" + lyapunovBefore + " → " + lyapunovAfter + "` (`Δ=" + (lyapunovDelta > 0 ? "+" : "") + lyapunovDelta + "`) · `IBLT` `+5-9+14` Phantom `2`: `" + (phantomAccepted ? "ACCEPTED (Corrupt!)" : "REJECTED (H(2)=7≠15)") + "`.";
+
+    if (mKey === "maxweight-vs-priority-starvation") {
+      heading = scheduler === 1
+        ? "`MaxWeight` Backpressure (`argmax ∑ Q_i S_i`): `Q=(0,10) → (2,7)`, Quadratic Lyapunov Contracts `100 → 53` (`ΔL₂ = -47 < 0`)"
+        : "Premise Failure · Queue-Blind Static Priority (`Q₀` First): `Q=(0,10) → (0,11)`, Lyapunov Diverges `100 → 121` (`ΔL₂ = +21`)!";
+      operatorEq = "∑_i (Q_i + A_i - S_i)² - ∑_i Q_i² = ∑_i Δ_i² + 2 ∑_i Q_i Δ_i ≤ B - 2ε ∑_i Q_i";
+      witnessDetail = scheduler === 1
+        ? "With backlog `Q = (0, 10)` and feasible arrivals `A = (2, 1)` (`capacity = 4, slack ε = 1`), `MaxWeight` allocates all `4` service units to congested Queue `1` (`0·0 + 10·4 = 40`), slashing `L₂(Q)` from `100` to `53` without needing arrival-rate knowledge!"
+        : "Serving Queue `0` unconditionally wastes capacity when `Q₀ = 0` (`S_eff = (2, 0)`), starving Queue `1` so `Q₁(T) = 10 + T → ∞` and quadratic energy inflates `100 → 121` despite `2 + 1 < 4` spare capacity!";
+    } else if (mKey === "iblt-peeling-vs-phantom-collision") {
+      heading = ibltGuard === 1
+        ? "Checksummed `IBLT` (`isPureVerified`): Cancels `10⁹` Shared Keys & Blocks `+5-9+14` Phantom Key `2` (`H(2)=7 ≠ 15`)"
+        : "Premise Failure · Count-Only `IBLT` (`|Δcount|=1` Only): Emits Corrupted Phantom Key `5 ⊕ 9 ⊕ 14 = 2 ∉ S_A ∪ S_B`!";
+      operatorEq = "diff(ins(cA,k), ins(cB,k)) = diff(cA,cB)   ∧   (+5 - 9 + 14 ⟹ Δcount = +1, keyXor = 2, hashXor = 15 ≠ H(2) = 7)";
+      witnessDetail = ibltGuard === 1
+        ? "Shared keys cancel identically (`(cA+1)-(cB+1)=cA-cB`, `k⊕k=0`), singleton cells peel cleanly, and when `+5` (Alice), `-9` (Bob), `+14` (Alice) collide with `Δcount = +1`, nonlinear `hash16(2) = 7 ≠ 12 ⊕ 4 ⊕ 7 = 15` blocks silent set corruption!"
+        : "Relying on `|Δcount| = 1` without `hashXor` treats the `3`-key collision `(+5, -9, +14)` (`Δcount = +1 - 1 + 1 = +1`) as a pure singleton and injects the non-existent key `5 ⊕ 9 ⊕ 14 = 2` into the reconciled database/mempool!";
+    }
+
+    var failed = (zkGuard < 2) || (scheduler === 0) || (ibltGuard === 0);
+    return {
+      mode: mKey,
+      zkGuard: zkGuard,
+      qapDetectHits17: qapDetectHits17,
+      zkForgerySuccessPct: zkForgerySuccessPct,
+      scheduler: scheduler,
+      lyapunovBefore: lyapunovBefore,
+      lyapunovAfter: lyapunovAfter,
+      lyapunovDelta: lyapunovDelta,
+      ibltGuard: ibltGuard,
+      phantomKeyXor: phantomKeyXor,
+      phantomAccepted: phantomAccepted,
+      heading: heading,
+      operatorEq: operatorEq,
+      witnessDetail: witnessDetail,
+      secondaryDetail: secondaryDetail,
+      verdict: failed
+        ? (zkGuard === 1
+            ? "✕ UNDER-CONSTRAINED `R1CS` EXPLOIT: Missing boolean gate lets `5×` mint (`b=5, out=16`) pass `100%`!"
+            : (zkGuard === 0
+                ? "✕ FROZEN-HEART FIAT–SHAMIR EXPLOIT: Unhashed `Y` lets keyless attacker forge `100%` (`4,624/4,624`)!"
+                : (scheduler === 0
+                    ? "⚠ QUEUE STARVATION DIVERGENCE: Static priority inflates `L₂` `100 → 121` (`Q₁(T) → ∞`)!"
+                    : "✕ `IBLT` PHANTOM-KEY CORRUPTION: Count-only peeling accepts non-existent key `5⊕9⊕14 = 2`!")))
+        : "★ SUITE #644 VERIFIED: `QAP` `16/17` Sound + `H(Y,R)` Bound, `MaxWeight` `100 → 53` & `IBLT` `H(2)=7≠15` Guard!",
+      leanRef: "CommonGround/Verification/TheoremAtlasR1csQapMaxWeightBackpressureAndIbltPeelingBridge.lean :: master_r1cs_qap_maxweight_backpressure_and_iblt_peeling_bridge"
+    };
+  };
+
+  var prevRenderFiniteV242 = window.v136RenderFiniteBody;
+  window.v136RenderFiniteBody = function() {
+    var st = window._v136State || {};
+    for (var i = 0; i < 98; i++) {
+      var tb = document.getElementById("v136-tab-" + i);
+      if (tb) tb.className = "v61-prog-tab" + (st.activeLab === i ? " active" : "");
+    }
+    if (st.activeLab < 97 && typeof prevRenderFiniteV242 === "function") {
+      return prevRenderFiniteV242();
+    }
+    var mount = document.getElementById("v136-finite-mount") || document.getElementById("v136-finite-body");
+    if (!mount || st.activeLab !== 97) return;
+
+    var lm = window.v243R1csMaxWeightIbltLabModel(st.v243Mode, {
+      zkGuard: st.v243ZkGuard,
+      scheduler: st.v243Scheduler,
+      ibltGuard: st.v243IbltGuard
+    });
+
+    var modes = [
+      { id: "r1cs-qap-and-frozen-heart", label: "★ zkSNARK R1CS/QAP & Frozen-Heart" },
+      { id: "maxweight-vs-priority-starvation", label: "★ MaxWeight (100→53) vs. Starvation" },
+      { id: "iblt-peeling-vs-phantom-collision", label: "★ IBLT Peeling vs. Phantom Key 2" }
+    ];
+    var modeBtns = modes.map(function(md) {
+      var act = lm.mode === md.id;
+      return '<button type="button" class="cg-calm-chip' + (act ? ' is-active' : '') + '" onclick="window._v136State.v243Mode=\'' + md.id + '\';window.v136RenderFiniteBody();">' + md.label + '</button>';
+    }).join("");
+
+    var hBefore = 50;
+    var hAfter = Math.round((lm.lyapunovAfter / 130) * 65);
+    mount.innerHTML =
+      '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:12px;">' +
+        '<div style="display:flex;flex-wrap:wrap;gap:6px;">' + modeBtns + '</div>' +
+        '<span class="v136-status-pill">Lab #98 · Suite #644 · 762 Zero-Sorry .lean Files (508 Checks · &lt;25 MiB Corpus!)</span>' +
+      '</div>' +
+      '<div class="v136-grid-2">' +
+        '<div class="v136-finite-card">' +
+          '<div style="font-size:11px;font-weight:800;letter-spacing:0.07em;color:#fbbf24;text-transform:uppercase;margin-bottom:4px;">`zkSNARK` `R1CS`/`QAP` &amp; Frozen-Heart, `MaxWeight` Backpressure &amp; `IBLT` Set Reconciliation (`10`+`04`+`09`+`02`)</div>' +
+          '<h3 style="margin:0 0 8px 0;font-size:15.5px;color:#f8fafc;">' + lm.heading + '</h3>' +
+          '<div style="font-family:var(--font-mono);font-size:11.5px;color:#fde68a;margin-bottom:8px;">' + lm.operatorEq + '</div>' +
+          '<div style="font-size:12px;color:#cbd5e1;line-height:1.55;margin-bottom:10px;">' + lm.witnessDetail + '</div>' +
+          '<div style="padding:9px 11px;border-radius:8px;background:rgba(6,13,26,0.9);border:1px solid rgba(56,189,248,0.28);">' +
+            '<div style="font-size:10.5px;font-weight:800;color:#7dd3fc;margin-bottom:6px;">INTERACTIVE `R1CS`/FIAT–SHAMIR GUARD, `MAXWEIGHT` DRIFT &amp; `IBLT` CHECKSUM GATE</div>' +
+            '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:11.5px;color:#e2e8f0;">' +
+              '<label>ZK Guard (0..2): <strong style="color:' + (lm.zkGuard === 2 ? '#34d399' : '#fb7185') + '">' + (lm.zkGuard === 2 ? 'Full R1CS+H(Y,R)' : (lm.zkGuard === 1 ? 'No Bool (5× Mint!)' : 'Frozen-Heart!')) + '</strong><input type="range" min="0" max="2" value="' + lm.zkGuard + '" style="width:100%" oninput="window._v136State.v243ZkGuard=Number(this.value);window.v136RenderFiniteBody();"></label>' +
+              '<label>Queue Policy (0/1): <strong style="color:' + (lm.scheduler === 1 ? '#34d399' : '#fb7185') + '">' + (lm.scheduler === 1 ? 'MaxWeight (→53)' : 'Priority (→121!)') + '</strong><input type="range" min="0" max="1" value="' + lm.scheduler + '" style="width:100%" oninput="window._v136State.v243Scheduler=Number(this.value);window.v136RenderFiniteBody();"></label>' +
+              '<label>IBLT Checksum (0/1): <strong style="color:' + (lm.ibltGuard === 1 ? '#34d399' : '#fb7185') + '">' + (lm.ibltGuard === 1 ? 'H(k) Guard OK' : 'Phantom Key 2!') + '</strong><input type="range" min="0" max="1" value="' + lm.ibltGuard + '" style="width:100%" oninput="window._v136State.v243IbltGuard=Number(this.value);window.v136RenderFiniteBody();"></label>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="v136-finite-card">' +
+          '<div style="font-size:11px;font-weight:800;color:#34d399;margin-bottom:6px;">`L₂` LYAPUNOV DRIFT (`100 → ' + lm.lyapunovAfter + '`), `QAP` SOUNDNESS &amp; `IBLT` PHANTOM GUARD</div>' +
+          '<svg id="v243-r1cs-maxweight-iblt-svg" viewBox="0 0 380 104" style="width:100%;height:auto;margin-bottom:8px;border-radius:7px;background:rgba(5,11,22,0.92);border:1px solid rgba(148,163,184,0.2);">' +
+            '<text x="14" y="15" fill="#fde68a" font-size="7.3" font-family="ui-monospace,SFMono-Regular,monospace">L₂(Q): 100 → ' + lm.lyapunovAfter + ' (' + (lm.lyapunovDelta > 0 ? '+' : '') + lm.lyapunovDelta + ')</text>' +
+            '<rect x="24" y="' + (88 - hBefore) + '" width="28" height="' + hBefore + '" rx="2.5" fill="#64748b" />' +
+            '<text x="38" y="98" text-anchor="middle" fill="#cbd5e1" font-size="7" font-family="ui-monospace,SFMono-Regular,monospace">t=0:100</text>' +
+            '<rect x="66" y="' + (88 - hAfter) + '" width="28" height="' + hAfter + '" rx="2.5" fill="' + (lm.scheduler === 1 ? '#34d399' : '#fb7185') + '" />' +
+            '<text x="80" y="98" text-anchor="middle" fill="#cbd5e1" font-size="7" font-family="ui-monospace,SFMono-Regular,monospace">t=1:' + lm.lyapunovAfter + '</text>' +
+            '<line x1="114" y1="10" x2="114" y2="96" stroke="rgba(148,163,184,0.22)" stroke-width="1" />' +
+            '<rect x="122" y="16" width="246" height="35" rx="5" fill="' + (lm.zkGuard === 2 ? 'rgba(16,185,129,0.20)' : 'rgba(244,63,94,0.25)') + '" stroke="' + (lm.zkGuard === 2 ? '#34d399' : '#fb7185') + '" />' +
+            '<text x="245" y="37" text-anchor="middle" fill="#f8fafc" font-size="7.5" font-weight="700" font-family="ui-monospace,SFMono-Regular,monospace">' + (lm.zkGuard === 2 ? 'zkSNARK QAP: 16/17 Detect · H(Y,R) Blocks Frozen-Heart' : (lm.zkGuard === 1 ? 'Missing Bool Gate: b=5, out=16 (5× Mint) Passes!' : 'Frozen-Heart c=H(R): Keyless Y_forge Passes 100%!')) + '</text>' +
+            '<rect x="122" y="59" width="246" height="35" rx="5" fill="' + (!lm.phantomAccepted ? 'rgba(56,189,248,0.20)' : 'rgba(244,63,94,0.25)') + '" stroke="' + (!lm.phantomAccepted ? '#38bdf8' : '#fb7185') + '" />' +
+            '<text x="245" y="80" text-anchor="middle" fill="#f8fafc" font-size="7.5" font-weight="700" font-family="ui-monospace,SFMono-Regular,monospace">' + (!lm.phantomAccepted ? 'IBLT +5-9+14: Δc=1 · H(2)=7 ≠ 15 Rejects Phantom Key 2' : 'Count-Only IBLT: Δc=1 Accepts Corrupt Key 5⊕9⊕14 = 2!') + '</text>' +
+          '</svg>' +
+          '<div style="font-size:12px;color:#e2e8f0;line-height:1.55;">' +
+            '<div style="margin-bottom:8px;">' + lm.secondaryDetail + '</div>' +
+            '<div style="padding:8px 10px;border-radius:7px;background:rgba(16,185,129,0.12);border:1px solid rgba(52,211,153,0.35);color:#d1fae5;font-weight:650;">' + lm.verdict + '</div>' +
+            '<div style="margin-top:8px;font-size:11px;color:#94a3b8;">Kernel-checked in <code>' + lm.leanRef + '</code></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  };
+
+  var prevOpenFiniteV242 = window.v136OpenV34FiniteDiagramsModal;
+  window.v136OpenV34FiniteDiagramsModal = function(initialLab) {
+    window._v136LabFilterQuery = "";
+    prevOpenFiniteV242(typeof initialLab === "number" ? Math.min(initialLab, 96) : 0);
+    window._v136State.activeLab = typeof initialLab === "number" ? initialLab : 0;
+    var bd = document.getElementById("v136-finite-backdrop");
+    if (bd) {
+      var tabsWrap = bd.querySelector(".v61-prog-tabs");
+      if (tabsWrap && !document.getElementById("v136-tab-97")) {
+        tabsWrap.insertAdjacentHTML("beforeend",
+          '<button type="button" id="v136-tab-97" class="v61-prog-tab" onclick="window.v136SetLab(97);window.cgSyncFiniteLabSelect();">98. zkSNARK R1CS/QAP &amp; Frozen-Heart, MaxWeight Backpressure &amp; IBLT Peeling Suite #644</button>'
+        );
+      }
+    }
+    if (typeof window.cgSyncFiniteLabSelect === "function") {
+      window.cgSyncFiniteLabSelect();
+    }
+    window.v136RenderFiniteBody();
+  };
+
+  // Refresh live caches
+  window.CG_FINITE_LAB_TITLES = null;
+  window._cgOmniboxCachedPool = null;
+  window._cgHybridCorpusCache = null;
+  if (typeof window.cgGetFiniteLabCatalog === "function") {
+    window.cgGetFiniteLabCatalog();
+  }
+
+  // Suite 101: 508/508 E2E Checks — V243 Suite #644, 644-Suite Ground-Truth Alignment, Sub-25 MiB SnippetPool Hydration & Verified Suites Sort Continuity
+  var prevRunTestsV242 = window.v147RunAllAutomatedTests;
+  if (typeof prevRunTestsV242 === "function") {
+    window.v147RunAllAutomatedTests = function() {
+      var rep = prevRunTestsV242();
+      var extra243 = [];
+      function addV243Check(name, cond, detail) {
+        extra243.push({
+          id: "T" + (rep.total + extra243.length + 1),
+          category: "101. V243 Suite 101 (508/508 Checks): R1CS/QAP & Frozen-Heart, MaxWeight, IBLT Suite #644, 644-Suite Repair & Sub-25 MiB Corpus",
+          name: name,
+          passed: Boolean(cond),
+          detail: detail || ""
+        });
+      }
+
+      // Check 505: `Suite #644` (`762` Zero-Sorry `.lean` Files), `476+` Repaired Suite Titles (`0` `127.0.0.1` / `Solved Open Instance`) & Sub-`25 MiB` `snippetPool` Hydration
+      var pre243 = window.__CG_PRELOADED__ || {};
+      var sm243 = (typeof semanticMechanisms !== "undefined" && semanticMechanisms) || {};
+      var suites243 = sm243.verifiedLeanSuites || [];
+      var has644 = suites243.some(function(s) {
+        return s && s.leanFile === "CommonGround/Verification/TheoremAtlasR1csQapMaxWeightBackpressureAndIbltPeelingBridge.lean";
+      });
+      var s0Abboud = suites243[0] || {};
+      var noLocalhostSuites = suites243.every(function(s) {
+        var sum = String((s && s.summary) || "");
+        var ttl = String((s && s.title) || "");
+        return sum.indexOf("127.0.0.1") === -1 && ttl.indexOf("Solved Open Instance") === -1 && ttl.indexOf("Hodge Sextic") === -1;
+      });
+      var dp243 = sm243.isoDeclPool || [];
+      var mpPart243 = (sm243.mechPools && sm243.mechPools.partItems) || [];
+      var ppEp243 = (pre243.insightPaths && pre243.insightPaths.pathPools && pre243.insightPaths.pathPools.endpoints) || [];
+      var sub25HydratedOk = Boolean(
+        Array.isArray(sm243.snippetPool) && sm243.snippetPool.length >= 2000 &&
+        dp243[0] && String(dp243[0].snippet || "").length > 10 && String(dp243[0].url || "").indexOf("https://") === 0 &&
+        mpPart243[0] && mpPart243[0].customDecl && String(mpPart243[0].customDecl.snippet || "").length > 10 &&
+        ppEp243[0] && String(ppEp243[0].statement || "").length > 10 && String(ppEp243[0].sourceSha256 || "").length === 64
+      );
+      var bts243 = window.CG_VERIFIED_ATLAS_BREAKTHROUGHS || [];
+      var lds243 = window.CG_PROMISING_RESEARCH_LEADS || [];
+      var obs243 = window.V95_OBSTACLES || [];
+      var r2c243 = window.CG_R2_CORPUS_CONFIG || {};
+      addV243Check(
+        "`Suite #644` (`762` Zero-Sorry `.lean` Files), `644`-Suite Ground-Truth Title/Summary Alignment (`0` `127.0.0.1`) & Sub-`25 MiB` `snippetPool` Hydration verified",
+        Boolean(
+          has644 &&
+          suites243.length >= 644 &&
+          String(s0Abboud.title || "").indexOf("Williams") !== -1 &&
+          noLocalhostSuites &&
+          sub25HydratedOk &&
+          bts243.length >= 365 &&
+          lds243.length >= 168 &&
+          obs243.length >= 36 &&
+          r2c243.totalZeroSorryLeanFiles >= 762 &&
+          r2c243.kernelCompiledModules >= 722
+        ),
+        "suites=" + suites243.length + ", s0=" + (s0Abboud.title || "").slice(0, 32) + ", noLocalhost=" + noLocalhostSuites
+      );
+
+      // Check 506: `Lab #98` (`v243R1csMaxWeightIbltLabModel`) `QAP` `16/17` vs `100%` Frozen-Heart, `MaxWeight` `100→53` vs `121`, & `IBLT` Phantom Key `2` Guard
+      var mSafe243 = window.v243R1csMaxWeightIbltLabModel("r1cs-qap-and-frozen-heart", { zkGuard: 2, scheduler: 1, ibltGuard: 1 });
+      var mFail243 = window.v243R1csMaxWeightIbltLabModel("iblt-peeling-vs-phantom-collision", { zkGuard: 0, scheduler: 0, ibltGuard: 0 });
+      var lab98MathOk = Boolean(
+        mSafe243.qapDetectHits17 === 16 && mSafe243.lyapunovAfter === 53 && mSafe243.lyapunovDelta === -47 && mSafe243.phantomAccepted === false &&
+        mFail243.zkForgerySuccessPct === 100 && mFail243.lyapunovAfter === 121 && mFail243.lyapunovDelta === 21 &&
+        mFail243.phantomKeyXor === 2 && mFail243.phantomAccepted === true
+      );
+      addV243Check(
+        "`Lab #98` (`zkSNARK` `QAP` `16/17` vs. `100%` Frozen-Heart, `MaxWeight` `100→53` vs. `121` Starvation, & `IBLT` Phantom Key `2` Guard) verified",
+        lab98MathOk,
+        "safeL2=" + mSafe243.lyapunovAfter + ", failL2=" + mFail243.lyapunovAfter + ", phantom=" + mFail243.phantomKeyXor
+      );
+
+      // Check 507: Verified Suites Explorer Newest-First Spotlight (`Suite #644` Featured First) & `#cg-ver-sort-toggle` A-Z Switch Continuity
+      var prevLens243 = state.lens;
+      var prevSub243 = state.serenSubmode;
+      var prevSort243 = state.verSortOrder;
+      var prevVerId243 = state.selectedVerifiedId;
+      var prevQuery243 = state.serenQuery;
+      state.lens = "serendipity";
+      state.serenSubmode = "verified";
+      state.verSortOrder = "newest";
+      state.selectedVerifiedId = null;
+      state.serenQuery = "";
+      renderApp();
+      var mount243 = document.getElementById("app-mount");
+      var sortBtn243 = document.getElementById("cg-ver-sort-toggle");
+      var firstFeatured243 = mount243 ? mount243.querySelector(".cg-featured-ver-card") : null;
+      var firstCardIdNewest = (firstFeatured243 && firstFeatured243.dataset && firstFeatured243.dataset.verCard) || "";
+      var newestFirstOk = Boolean(
+        firstCardIdNewest &&
+        firstCardIdNewest.indexOf("verified-suite-001") === -1 &&
+        mount243 &&
+        (mount243.innerHTML || "").indexOf("Suite #644") !== -1
+      );
+      if (sortBtn243) sortBtn243.click();
+      var firstAz243 = mount243 ? mount243.querySelector(".cg-featured-ver-card") : null;
+      var firstCardIdAz = (firstAz243 && firstAz243.dataset && firstAz243.dataset.verCard) || "";
+      var azToggleOk = Boolean(
+        state.verSortOrder === "az" &&
+        firstCardIdAz.indexOf("AbboudBringmannWilliams") !== -1 &&
+        mount243 &&
+        (mount243.innerHTML || "").indexOf("Williams Distributed Polynomial") !== -1
+      );
+      state.lens = prevLens243;
+      state.serenSubmode = prevSub243;
+      state.verSortOrder = prevSort243 || "newest";
+      state.selectedVerifiedId = prevVerId243;
+      state.serenQuery = prevQuery243 || "";
+      renderApp();
+      addV243Check(
+        "Verified Suites Explorer Newest-First Spotlight (`Suite #644` Top Card) & `#cg-ver-sort-toggle` (`Newest` ↔ `A–Z Canonical`) verified",
+        Boolean(sortBtn243 && newestFirstOk && azToggleOk),
+        "newestFirstOk=" + newestFirstOk + ", azToggleOk=" + azToggleOk
+      );
+
+      // Check 508: `Lab #98` SVG (`#v243-r1cs-maxweight-iblt-svg`), `98`-Lab Search Filter & `⌘K` Omnibox (`98 Labs`, `168 Leads`)
+      window.v136OpenV34FiniteDiagramsModal(97);
+      var sel136V243 = document.getElementById("v136-lab-quick-select");
+      var r1csSvg243 = document.getElementById("v243-r1cs-maxweight-iblt-svg");
+      if (typeof window.cgFilterFiniteLabSelect === "function") {
+        window.cgFilterFiniteLabSelect("IBLT");
+      }
+      var lab98FilterOk = Boolean(
+        r1csSvg243 &&
+        sel136V243 &&
+        (sel136V243.innerHTML || "").indexOf("98. zkSNARK R1CS/QAP") !== -1 &&
+        (sel136V243.innerHTML || "").indexOf("1. Markov Counts") === -1
+      );
+      window.v136CloseFiniteModal();
+
+      window.cgOpenOmnibox("");
+      var omniCats243 = document.getElementById("cg-omnibox-cats");
+      var omniCatsTxt243 = omniCats243 ? (omniCats243.innerHTML || "") : "";
+      var mLabs243 = omniCatsTxt243.match(/(\d+)\s+Labs/);
+      var mLeads243 = omniCatsTxt243.match(/(\d+)\s+Leads/);
+      var omni98Ok = Boolean(mLabs243 && parseInt(mLabs243[1], 10) >= 98 && mLeads243 && parseInt(mLeads243[1], 10) >= 168);
+      window.cgCloseOmnibox();
+
+      addV243Check(
+        "`Lab #98` SVG (`#v243-r1cs-maxweight-iblt-svg`), `98`-Lab Search Filter & `⌘K` Omnibox (`98 Labs`, `168 Leads`) verified",
+        Boolean(lab98FilterOk && omni98Ok),
+        "lab98FilterOk=" + lab98FilterOk + ", omni98Ok=" + omni98Ok
+      );
+
+      for (var k7 = 0; k7 < extra243.length; k7++) {
+        rep.results.push(extra243[k7]);
+        rep.total++;
+        if (extra243[k7].passed) rep.passed++;
+        else rep.failed++;
+      }
+      window._v147LastReport = rep;
+      return rep;
+    };
+  }
+})();
+

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #105 (`AgolWiseVirtuallySpecialCubeComplexBridge.lean`)
 
 * **Mechanism ID**: `agol-wise-cat0-cube-complex-special-hierarchy`
-* **Cross-Domain Triad**: `group-theory-lean` ↔ `formal-conjectures` ↔ `carleson`
+* **Cross-Domain Triad**: `tauceti` ↔ `erdos` ↔ `carleson`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite (`GromovWaistInequalityPancakeBridge.lean`)
 
 * **Mechanism ID**: `gromov-waist-inequality-pancake-partition`
-* **Cross-Domain Triad**: `SpherePacking` ↔ `carleson` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `SpherePacking` ↔ `carleson` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

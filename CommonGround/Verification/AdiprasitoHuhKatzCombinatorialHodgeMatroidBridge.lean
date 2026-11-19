@@ -2,7 +2,7 @@
 # Adiprasito–Huh–Katz Bergman Fan Hard Lefschetz ↔ Log-Concavity of Matroid Characteristic Polynomials
 ## CommonGround Formal Verification Suite #343 (`AdiprasitoHuhKatzCombinatorialHodgeMatroidBridge.lean`)
 
-* **Cross-Domain Triad**: `combinatorics-lean` ↔ `algebra-lean` ↔ `optlib`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `tc-alggeom` ↔ `econlib`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

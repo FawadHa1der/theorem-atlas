@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #230 (`BabaiFranklWilsonInclusionPolynomialRankBridge.lean`)
 
 * **Mechanism ID**: `babai-frankl-ray-chaudhuri-wilson-polynomial-space`
-* **Cross-Domain Triad**: `combinatorics-lean` ↔ `erdos-problems` ↔ `algebra-lean`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `erdos-problems` ↔ `tc-alggeom`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -19,7 +19,7 @@ structure MechanismCarrier where
   deriving Repr, DecidableEq
 
 /-- Bidirectional Duality Dictionary Structure (V35 Loop 3):
-    Certifies that translating a state from `combinatorics-lean` to `erdos-problems` and back preserves
+    Certifies that translating a state from `tc-probcomb` to `erdos-problems` and back preserves
     both the total complexity budget and the monotone scale gain. -/
 structure BidirectionalDualityPair where
   forwardState  : MechanismCarrier

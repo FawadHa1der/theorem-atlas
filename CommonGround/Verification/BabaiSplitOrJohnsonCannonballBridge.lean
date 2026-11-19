@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #103 (`BabaiSplitOrJohnsonCannonballBridge.lean`)
 
 * **Mechanism ID**: `babai-quasipolynomial-graph-isomorphism-split-or-johnson`
-* **Cross-Domain Triad**: `aks` ↔ `group-theory-lean` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `tauceti` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

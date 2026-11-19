@@ -2,7 +2,7 @@
 # Connes Spectral Triple (𝒜, ℋ, D) ↔ Hochschild-Cyclic Noncommutative Local Index
 ## CommonGround Formal Verification Suite #302 (`ConnesSpectralTripleNoncommutativeIndexBridge.lean`)
 
-* **Cross-Domain Triad**: `PhysLean` ↔ `algebra-lean` ↔ `category-theory-lean`
+* **Cross-Domain Triad**: `PhysLean` ↔ `tc-alggeom` ↔ `tc-reptheory`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -2,7 +2,7 @@
 # Zlil Sela Makanin–Razborov Limit Group Tower ↔ Elementary Equivalence of Non-Abelian Free Groups
 ## CommonGround Formal Verification Suite #328 (`SelaLimitGroupTarskiFreeGroupBridge.lean`)
 
-* **Cross-Domain Triad**: `group-theory-lean` ↔ `algebra-lean` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `tauceti` ↔ `tc-alggeom` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

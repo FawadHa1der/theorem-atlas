@@ -2,7 +2,7 @@
 # Guoliang Yu Property A Coarse Hilbert Embedding ↔ Coarse Baum–Connes & Novikov Conjecture
 ## CommonGround Formal Verification Suite #317 (`YuCoarseEmbeddingPropertyANovikovBridge.lean`)
 
-* **Cross-Domain Triad**: `group-theory-lean` ↔ `SpherePacking` ↔ `lean-liquid`
+* **Cross-Domain Triad**: `tauceti` ↔ `SpherePacking` ↔ `lean-liquid`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

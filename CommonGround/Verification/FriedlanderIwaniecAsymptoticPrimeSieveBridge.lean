@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #287 (`FriedlanderIwaniecAsymptoticPrimeSieveBridge.lean`)
 
 * **Mechanism ID**: `iwaniec-fouvry-friedlander-opera-de-crible-bilinear-primes`
-* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `erdos-problems` ↔ `number-theory-lean`
+* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `erdos-problems` ↔ `tc-numtheory`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

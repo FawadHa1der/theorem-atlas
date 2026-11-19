@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #286 (`BhargavaShankarEllipticAverageRankBridge.lean`)
 
 * **Mechanism ID**: `bhargava-shankar-average-rank-elliptic-curves-selmer`
-* **Cross-Domain Triad**: `FLT` ↔ `number-theory-lean` ↔ `PrimeNumberTheoremAnd`
+* **Cross-Domain Triad**: `FLT` ↔ `tc-numtheory` ↔ `PrimeNumberTheoremAnd`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -2,7 +2,7 @@
 # Ding–Dubédat–Gwynne–Miller–Pfeffer–Sheffield Subadditive Percolation ↔ Uniqueness of the Liouville Quantum Gravity Metric
 ## CommonGround Formal Verification Suite #398 (`DingGwynneMillerSheffieldLiouvilleMetricBridge.lean`)
 
-* **Cross-Domain Triad**: `probability-lean` ↔ `PhysLean` ↔ `carleson`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `PhysLean` ↔ `carleson`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

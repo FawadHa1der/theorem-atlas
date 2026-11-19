@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite (`HairerRegularityBPHZRenormalizationBridge.lean`)
 
 * **Mechanism ID**: `hairer-regularity-structures-bphz-renormalization`
-* **Cross-Domain Triad**: `PhysLean` ↔ `probability-lean` ↔ `carleson`
+* **Cross-Domain Triad**: `PhysLean` ↔ `tc-probcomb` ↔ `carleson`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -2,7 +2,7 @@
 # Manolescu Pin(2)-Equivariant Seiberg–Witten Floer Spectrum ↔ Refutation of High-Dim Triangulation
 ## CommonGround Formal Verification Suite #323 (`ManolescuPin2SeibergWittenTriangulationBridge.lean`)
 
-* **Cross-Domain Triad**: `PhysLean` ↔ `lean-liquid` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `PhysLean` ↔ `lean-liquid` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

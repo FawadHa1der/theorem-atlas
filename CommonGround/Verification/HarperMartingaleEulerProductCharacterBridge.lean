@@ -2,7 +2,7 @@
 # Adam Harper Multiplicative Chaos Martingale ↔ Better-Than-Square-Root Random Character Sums
 ## CommonGround Formal Verification Suite #334 (`HarperMartingaleEulerProductCharacterBridge.lean`)
 
-* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `probability-lean` ↔ `erdos-problems`
+* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `tc-probcomb` ↔ `erdos-problems`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite (`DeligneLusztigCharacterSheafBridge.lean`)
 
 * **Mechanism ID**: `deligne-lusztig-etale-character-sheaf`
-* **Cross-Domain Triad**: `FLT` ↔ `lean-liquid` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `FLT` ↔ `lean-liquid` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

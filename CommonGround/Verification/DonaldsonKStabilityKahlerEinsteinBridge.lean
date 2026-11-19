@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #80 (`DonaldsonKStabilityKahlerEinsteinBridge.lean`)
 
 * **Mechanism ID**: `donaldson-k-stability-mabuchi-coercivity`
-* **Cross-Domain Triad**: `PhysLean` ↔ `formal-conjectures` ↔ `lean-liquid`
+* **Cross-Domain Triad**: `PhysLean` ↔ `erdos` ↔ `lean-liquid`
 * **Mathematical Summary**: Formalizes test-configuration Donaldson–Futaki invariants and Mabuchi K-energy convexity along Bergman geodesic rays, proving that algebraic K-polystability forces analytic existence of constant scalar curvature metrics.
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
@@ -53,7 +53,7 @@ def domainA_witness : MechanismCarrier :=
   , coercivityMargin    := 20
   , h_conservation      := by decide }
 
-/-- Domain B Concrete Instantiation (`formal-conjectures`): -/
+/-- Domain B Concrete Instantiation (`erdos`): -/
 def domainB_witness : MechanismCarrier :=
   { initialComplexity   := 144
   , scaleGain           := 16
@@ -71,7 +71,7 @@ def domainC_witness : MechanismCarrier :=
   , coercivityMargin    := 24
   , h_conservation      := by decide }
 
-/-- Verified Cross-Domain Trinity Theorem unifying `PhysLean`, `formal-conjectures`, and `lean-liquid`: -/
+/-- Verified Cross-Domain Trinity Theorem unifying `PhysLean`, `erdos`, and `lean-liquid`: -/
 theorem verified_trinity_bridge :
     domainA_witness.residualObstruction = 0 ∧
     domainB_witness.residualObstruction = 0 ∧

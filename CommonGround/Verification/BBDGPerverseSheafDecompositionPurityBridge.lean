@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #218 (`BBDGPerverseSheafDecompositionPurityBridge.lean`)
 
 * **Mechanism ID**: `beilinson-bernstein-deligne-gabber-perverse-purity`
-* **Cross-Domain Triad**: `FLT` ↔ `lean-liquid` ↔ `category-theory-lean`
+* **Cross-Domain Triad**: `FLT` ↔ `lean-liquid` ↔ `tc-reptheory`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

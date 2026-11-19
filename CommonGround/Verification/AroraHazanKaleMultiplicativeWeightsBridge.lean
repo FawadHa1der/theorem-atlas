@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #270 (`AroraHazanKaleMultiplicativeWeightsBridge.lean`)
 
 * **Mechanism ID**: `lp-duality-packing-covering-multiplicative-weights`
-* **Cross-Domain Triad**: `optlib` ↔ `aks` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `econlib` ↔ `apsp3sum` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

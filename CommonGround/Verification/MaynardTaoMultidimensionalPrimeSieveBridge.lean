@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #106 (`MaynardTaoMultidimensionalPrimeSieveBridge.lean`)
 
 * **Mechanism ID**: `maynard-tao-multidimensional-selberg-sieve`
-* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `erdos-problems` ↔ `pfr`
+* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `erdos-problems` ↔ `oai-szemeredi`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

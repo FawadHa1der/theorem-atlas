@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #144 (`EdmondsLovaszSubmodularUncrossingBridge.lean`)
 
 * **Mechanism ID**: `gavrilov-lovasz-edmonds-polymatroid-matroid-intersection`
-* **Cross-Domain Triad**: `combinatorics-lean` ↔ `optlib` ↔ `graph-theory-lean`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `econlib` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #73 (`KonyaginShkredovAdditiveEnergyCatalystBridge.lean`)
 
 * **Mechanism ID**: `konyagin-shkredov-higher-energy-compression`
-* **Cross-Domain Triad**: `pfr` ↔ `erdos-problems` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `oai-szemeredi` ↔ `erdos-problems` ↔ `tc-probcomb`
 * **Mathematical Summary**: Formalizes higher convolution energy decomposition and popular difference fibers, proving that excess additive energy forces a dense structured subset with small doubling constant.
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
@@ -44,7 +44,7 @@ theorem master_transfer_obstruction_vanishes (c : MechanismCarrier)
   have h := c.h_conservation
   omega
 
-/-- Domain A Concrete Instantiation (`pfr`): -/
+/-- Domain A Concrete Instantiation (`oai-szemeredi`): -/
 def domainA_witness : MechanismCarrier :=
   { initialComplexity   := 180
   , scaleGain           := 20
@@ -62,7 +62,7 @@ def domainB_witness : MechanismCarrier :=
   , coercivityMargin    := 16
   , h_conservation      := by decide }
 
-/-- Domain C Concrete Instantiation (`combinatorics-lean`): -/
+/-- Domain C Concrete Instantiation (`tc-probcomb`): -/
 def domainC_witness : MechanismCarrier :=
   { initialComplexity   := 216
   , scaleGain           := 24
@@ -71,7 +71,7 @@ def domainC_witness : MechanismCarrier :=
   , coercivityMargin    := 24
   , h_conservation      := by decide }
 
-/-- Verified Cross-Domain Trinity Theorem unifying `pfr`, `erdos-problems`, and `combinatorics-lean`: -/
+/-- Verified Cross-Domain Trinity Theorem unifying `oai-szemeredi`, `erdos-problems`, and `tc-probcomb`: -/
 theorem verified_trinity_bridge :
     domainA_witness.residualObstruction = 0 ∧
     domainB_witness.residualObstruction = 0 ∧

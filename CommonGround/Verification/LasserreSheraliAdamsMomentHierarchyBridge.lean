@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite (`LasserreSheraliAdamsMomentHierarchyBridge.lean`)
 
 * **Mechanism ID**: `sherali-adams-lasserre-moment-hierarchy`
-* **Cross-Domain Triad**: `optlib` ↔ `SpherePacking` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `econlib` ↔ `SpherePacking` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

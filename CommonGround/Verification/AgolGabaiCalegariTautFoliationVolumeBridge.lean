@@ -2,7 +2,7 @@
 # Agol–Gabai–Calegari Sutured Manifold Hierarchy ↔ Minimal Surface Volume Lower Bounds
 ## CommonGround Formal Verification Suite #358 (`AgolGabaiCalegariTautFoliationVolumeBridge.lean`)
 
-* **Cross-Domain Triad**: `SpherePacking` ↔ `carleson` ↔ `group-theory-lean`
+* **Cross-Domain Triad**: `SpherePacking` ↔ `carleson` ↔ `tauceti`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

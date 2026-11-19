@@ -2,7 +2,7 @@
 # Bestvina–Handel Relative Train-Track Map ↔ Perron–Frobenius Growth of Free Group Automorphisms
 ## CommonGround Formal Verification Suite #363 (`BestvinaHandelTrainTrackPerronFrobeniusBridge.lean`)
 
-* **Cross-Domain Triad**: `group-theory-lean` ↔ `combinatorics-lean` ↔ `aks`
+* **Cross-Domain Triad**: `tauceti` ↔ `tc-probcomb` ↔ `apsp3sum`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #255 (`GelfandNaimarkSegalCStarSpectrumBridge.lean`)
 
 * **Mechanism ID**: `gelfand-naimark-commutative-cstar-spectrum-duality`
-* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `optlib`
+* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `econlib`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

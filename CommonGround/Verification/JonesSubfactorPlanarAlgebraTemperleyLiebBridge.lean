@@ -2,7 +2,7 @@
 # Vaughan Jones Index Quantization 4 cos²(π/n) ↔ Temperley–Lieb Planar Braid Algebra
 ## CommonGround Formal Verification Suite #320 (`JonesSubfactorPlanarAlgebraTemperleyLiebBridge.lean`)
 
-* **Cross-Domain Triad**: `algebra-lean` ↔ `combinatorics-lean` ↔ `PhysLean`
+* **Cross-Domain Triad**: `tc-alggeom` ↔ `tc-probcomb` ↔ `PhysLean`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

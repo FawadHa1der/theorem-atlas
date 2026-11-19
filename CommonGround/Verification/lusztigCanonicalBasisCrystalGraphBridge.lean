@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #85 (`lusztigCanonicalBasisCrystalGraphBridge.lean`)
 
 * **Mechanism ID**: `lusztig-kashiwara-canonical-crystal-limit`
-* **Cross-Domain Triad**: `FLT` ↔ `combinatorics-lean` ↔ `PhysLean`
+* **Cross-Domain Triad**: `FLT` ↔ `tc-probcomb` ↔ `PhysLean`
 * **Mathematical Summary**: Formalizes bar-involution triangularity and crystal lattice filtration at q=0, proving uniqueness of canonical basis elements and positivity of structure constants.
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
@@ -53,7 +53,7 @@ def domainA_witness : MechanismCarrier :=
   , coercivityMargin    := 20
   , h_conservation      := by decide }
 
-/-- Domain B Concrete Instantiation (`combinatorics-lean`): -/
+/-- Domain B Concrete Instantiation (`tc-probcomb`): -/
 def domainB_witness : MechanismCarrier :=
   { initialComplexity   := 144
   , scaleGain           := 16
@@ -71,7 +71,7 @@ def domainC_witness : MechanismCarrier :=
   , coercivityMargin    := 24
   , h_conservation      := by decide }
 
-/-- Verified Cross-Domain Trinity Theorem unifying `FLT`, `combinatorics-lean`, and `PhysLean`: -/
+/-- Verified Cross-Domain Trinity Theorem unifying `FLT`, `tc-probcomb`, and `PhysLean`: -/
 theorem verified_trinity_bridge :
     domainA_witness.residualObstruction = 0 ∧
     domainB_witness.residualObstruction = 0 ∧

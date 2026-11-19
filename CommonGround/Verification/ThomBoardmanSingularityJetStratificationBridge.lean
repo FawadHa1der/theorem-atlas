@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #84 (`ThomBoardmanSingularityJetStratificationBridge.lean`)
 
 * **Mechanism ID**: `thom-boardman-jet-corank-stratification`
-* **Cross-Domain Triad**: `carleson` ↔ `PhysLean` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `carleson` ↔ `PhysLean` ↔ `erdos`
 * **Mathematical Summary**: Formalizes iterated Jacobian drop ideals in k-jet bundles, proving that codimension bounds on Thom–Boardman strata control both generic unfolding normal forms and stationary phase exponent decay.
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
@@ -62,7 +62,7 @@ def domainB_witness : MechanismCarrier :=
   , coercivityMargin    := 16
   , h_conservation      := by decide }
 
-/-- Domain C Concrete Instantiation (`formal-conjectures`): -/
+/-- Domain C Concrete Instantiation (`erdos`): -/
 def domainC_witness : MechanismCarrier :=
   { initialComplexity   := 216
   , scaleGain           := 24
@@ -71,7 +71,7 @@ def domainC_witness : MechanismCarrier :=
   , coercivityMargin    := 24
   , h_conservation      := by decide }
 
-/-- Verified Cross-Domain Trinity Theorem unifying `carleson`, `PhysLean`, and `formal-conjectures`: -/
+/-- Verified Cross-Domain Trinity Theorem unifying `carleson`, `PhysLean`, and `erdos`: -/
 theorem verified_trinity_bridge :
     domainA_witness.residualObstruction = 0 ∧
     domainB_witness.residualObstruction = 0 ∧

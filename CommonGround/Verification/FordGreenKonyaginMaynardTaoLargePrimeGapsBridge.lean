@@ -2,7 +2,7 @@
 # FGKMT Sieve Weight + Hypergraph Covering Nibble ↔ Super-Rankin Large Gaps Between Primes
 ## CommonGround Formal Verification Suite #372 (`FordGreenKonyaginMaynardTaoLargePrimeGapsBridge.lean`)
 
-* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `erdos-problems` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `erdos-problems` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #150 (`FriedmanBordenaveNonBacktrackingRamanujanBridge.lean`)
 
 * **Mechanism ID**: `alon-boppana-friedman-second-eigenvalue-nonbacktracking`
-* **Cross-Domain Triad**: `graph-theory-lean` ↔ `aks` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `erdos` ↔ `apsp3sum` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

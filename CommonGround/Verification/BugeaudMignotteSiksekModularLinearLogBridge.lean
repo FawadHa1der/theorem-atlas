@@ -2,7 +2,7 @@
 # Bugeaud–Mignotte–Siksek Frey Curve Level-Lowering + Linear Forms in Logs ↔ Fibonacci Perfect Powers
 ## CommonGround Formal Verification Suite #371 (`BugeaudMignotteSiksekModularLinearLogBridge.lean`)
 
-* **Cross-Domain Triad**: `FLT` ↔ `PrimeNumberTheoremAnd` ↔ `number-theory-lean`
+* **Cross-Domain Triad**: `FLT` ↔ `PrimeNumberTheoremAnd` ↔ `tc-numtheory`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

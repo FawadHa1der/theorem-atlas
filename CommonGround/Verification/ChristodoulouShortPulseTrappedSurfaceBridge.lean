@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #126 (`ChristodoulouShortPulseTrappedSurfaceBridge.lean`)
 
 * **Mechanism ID**: `christodoulou-trapped-surface-short-pulse-ansatz`
-* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

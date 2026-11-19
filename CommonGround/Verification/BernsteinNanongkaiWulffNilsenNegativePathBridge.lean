@@ -2,7 +2,7 @@
 # Bernstein–Nanongkai–Wulff-Nilsen Low-Diameter Price Scaling ↔ Near-Linear Negative-Weight Shortest Paths
 ## CommonGround Formal Verification Suite #377 (`BernsteinNanongkaiWulffNilsenNegativePathBridge.lean`)
 
-* **Cross-Domain Triad**: `optlib` ↔ `graph-theory-lean` ↔ `aks`
+* **Cross-Domain Triad**: `econlib` ↔ `erdos` ↔ `apsp3sum`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

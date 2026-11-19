@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #241 (`ConnesKreimerHopfBirkhoffFactorizationBridge.lean`)
 
 * **Mechanism ID**: `connes-kreimer-hopf-algebra-feynman-birkhoff-factorization`
-* **Cross-Domain Triad**: `PhysLean` ↔ `algebra-lean` ↔ `category-theory-lean`
+* **Cross-Domain Triad**: `PhysLean` ↔ `tc-alggeom` ↔ `tc-reptheory`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -19,7 +19,7 @@ structure MechanismCarrier where
   deriving Repr, DecidableEq
 
 /-- Bidirectional Duality Dictionary Structure (V35 Loop 3):
-    Certifies that translating a state from `PhysLean` to `algebra-lean` and back preserves
+    Certifies that translating a state from `PhysLean` to `tc-alggeom` and back preserves
     both the total complexity budget and the monotone scale gain. -/
 structure BidirectionalDualityPair where
   forwardState  : MechanismCarrier

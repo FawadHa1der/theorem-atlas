@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #125 (`LinialMeshulamGromovCoboundaryExpansionBridge.lean`)
 
 * **Mechanism ID**: `linial-meshulam-homological-connectivity-coboundary`
-* **Cross-Domain Triad**: `combinatorics-lean` ↔ `graph-theory-lean` ↔ `aks`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `erdos` ↔ `apsp3sum`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

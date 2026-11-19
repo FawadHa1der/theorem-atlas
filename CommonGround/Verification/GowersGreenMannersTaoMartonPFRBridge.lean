@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #292 (`GowersGreenMannersTaoMartonPFRBridge.lean`)
 
 * **Mechanism ID**: `gowers-green-manners-tao-marton-polynomial-freiman-ruzsa`
-* **Cross-Domain Triad**: `pfr` ↔ `erdos-problems` ↔ `probability-lean`
+* **Cross-Domain Triad**: `oai-szemeredi` ↔ `erdos-problems` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

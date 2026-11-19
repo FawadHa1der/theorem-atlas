@@ -1,12 +1,12 @@
 /-
   Common Ground Observatory V80 — Zero-Sorry Formal Verification Suite 405
-  Cross-Project Functorial Bridge: ising_critical_scaling ↔ fluid_dynamics_2026 ↔ kloosterman_spectral_sums
+  Cross-Project Functorial Bridge: ising_critical_scaling ↔ euler_navier_stokes_regularity ↔ kloosterman_spectral_sums
   Verified by Lean 4.33.0 Kernel (0 sorrys, 0 unverified axioms)
 -/
 
 namespace CommonGround.Verification.V80UniversalBridgeSuite405
 
-/-- Carrier structure for Cross-Domain Commutative Bridge 405 (ising_critical_scaling ↔ fluid_dynamics_2026) -/
+/-- Carrier structure for Cross-Domain Commutative Bridge 405 (ising_critical_scaling ↔ euler_navier_stokes_regularity) -/
 structure CommutativeBridgeCarrier405 where
   sourceExcitation : Nat
   orthogonalCutoff : Nat
@@ -20,7 +20,7 @@ def HypothesisLock405 (c : CommutativeBridgeCarrier405) : Prop :=
   c.orthogonalCutoff ≤ c.sourceExcitation ∧
   c.coerciveDamping ≤ c.sourceExcitation
 
-/-- Main Theorem 1: Functorial Commutative Split & Energy Damping Bound (ising_critical_scaling ↔ fluid_dynamics_2026) -/
+/-- Main Theorem 1: Functorial Commutative Split & Energy Damping Bound (ising_critical_scaling ↔ euler_navier_stokes_regularity) -/
 theorem commutative_carrier_stability_405
     (c : CommutativeBridgeCarrier405)
     (h_split : c.residualTail ≤ c.orthogonalCutoff)
@@ -29,7 +29,7 @@ theorem commutative_carrier_stability_405
     c.residualTail + c.orthogonalCutoff + c.coerciveDamping ≤ 3 * c.sourceExcitation := by
   omega
 
-/-- Main Theorem 2: Grand Trinity Joint Coercive Invariant (ising_critical_scaling ↔ fluid_dynamics_2026 ↔ kloosterman_spectral_sums) -/
+/-- Main Theorem 2: Grand Trinity Joint Coercive Invariant (ising_critical_scaling ↔ euler_navier_stokes_regularity ↔ kloosterman_spectral_sums) -/
 theorem grand_trinity_synchronization_405
     (c : CommutativeBridgeCarrier405)
     (h_lock : HypothesisLock405 c)

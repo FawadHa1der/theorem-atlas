@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #291 (`KelleyMeka3APSpectralPositivityBridge.lean`)
 
 * **Mechanism ID**: `kelley-meka-3ap-logarithmic-density-almost-periodicity`
-* **Cross-Domain Triad**: `pfr` ↔ `erdos-problems` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `oai-szemeredi` ↔ `erdos-problems` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

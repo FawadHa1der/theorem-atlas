@@ -2,7 +2,7 @@
 # Guruswami–Rudra Cyclotomic Shift Bundling ↔ Explicit List-Decoding Capacity 1 - R - ε
 ## CommonGround Formal Verification Suite #383 (`GuruswamiRudraExplicitCapacityFoldedRSBridge.lean`)
 
-* **Cross-Domain Triad**: `aks` ↔ `algebra-lean` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `tc-alggeom` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #72 (`BochnerBakryEmeryCurvatureDimensionBridge.lean`)
 
 * **Mechanism ID**: `bakry-emery-gamma2-curvature-dimension`
-* **Cross-Domain Triad**: `PhysLean` ↔ `formal-conjectures` ↔ `pfr`
+* **Cross-Domain Triad**: `PhysLean` ↔ `erdos` ↔ `oai-szemeredi`
 * **Mathematical Summary**: Formalizes the iterated Carré du Champ operator Γ₂(f,f) ≥ κ Γ₁(f,f) + (1/N)(Lf)², proving that positive lower curvature bounds force both spectral gap contraction and sub-Gaussian entropy decay on discrete and continuous Markov semigroups.
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
@@ -53,7 +53,7 @@ def domainA_witness : MechanismCarrier :=
   , coercivityMargin    := 20
   , h_conservation      := by decide }
 
-/-- Domain B Concrete Instantiation (`formal-conjectures`): -/
+/-- Domain B Concrete Instantiation (`erdos`): -/
 def domainB_witness : MechanismCarrier :=
   { initialComplexity   := 144
   , scaleGain           := 16
@@ -62,7 +62,7 @@ def domainB_witness : MechanismCarrier :=
   , coercivityMargin    := 16
   , h_conservation      := by decide }
 
-/-- Domain C Concrete Instantiation (`pfr`): -/
+/-- Domain C Concrete Instantiation (`oai-szemeredi`): -/
 def domainC_witness : MechanismCarrier :=
   { initialComplexity   := 216
   , scaleGain           := 24
@@ -71,7 +71,7 @@ def domainC_witness : MechanismCarrier :=
   , coercivityMargin    := 24
   , h_conservation      := by decide }
 
-/-- Verified Cross-Domain Trinity Theorem unifying `PhysLean`, `formal-conjectures`, and `pfr`: -/
+/-- Verified Cross-Domain Trinity Theorem unifying `PhysLean`, `erdos`, and `oai-szemeredi`: -/
 theorem verified_trinity_bridge :
     domainA_witness.residualObstruction = 0 ∧
     domainB_witness.residualObstruction = 0 ∧

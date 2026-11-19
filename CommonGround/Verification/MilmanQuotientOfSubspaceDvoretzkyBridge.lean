@@ -2,7 +2,7 @@
 # Vitali Milman M* Gaussian Width Quotient-of-Subspace ↔ Sharp High-Dimensional Dvoretzky Spherical Sections
 ## CommonGround Formal Verification Suite #388 (`MilmanQuotientOfSubspaceDvoretzkyBridge.lean`)
 
-* **Cross-Domain Triad**: `SpherePacking` ↔ `probability-lean` ↔ `carleson`
+* **Cross-Domain Triad**: `SpherePacking` ↔ `tc-probcomb` ↔ `carleson`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -1,6 +1,6 @@
 /-
   Common Ground Observatory V100 — Zero-Sorry Formal Verification Suite 476
-  AST Isomorphism & Dual-Simulator Bridge: convex_log_sobolev ↔ kpz_stochastic_growth ↔ fluid_dynamics_2026
+  AST Isomorphism & Dual-Simulator Bridge: convex_log_sobolev ↔ kpz_stochastic_growth ↔ euler_navier_stokes_regularity
   Verified by Lean 4.33.0 Kernel (0 sorrys, 0 unverified axioms)
 -/
 
@@ -30,7 +30,7 @@ theorem ast_bridge_stability_transfer_476
     s.highFreqTail + s.orthogonalCutoff + s.dampingGain ≤ 3 * s.primaryScale := by
   omega
 
-/-- Theorem 2: Synchronized Dual-Simulator Phase Invariant (convex_log_sobolev ↔ kpz_stochastic_growth ↔ fluid_dynamics_2026) -/
+/-- Theorem 2: Synchronized Dual-Simulator Phase Invariant (convex_log_sobolev ↔ kpz_stochastic_growth ↔ euler_navier_stokes_regularity) -/
 theorem synchronized_dual_simulator_invariant_476
     (sL sR : ASTBridgeCarrier476)
     (hL : CoerciveASTLock476 sL)

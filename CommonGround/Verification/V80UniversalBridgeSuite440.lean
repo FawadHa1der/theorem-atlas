@@ -1,12 +1,12 @@
 /-
   Common Ground Observatory V80 — Zero-Sorry Formal Verification Suite 440
-  Cross-Project Functorial Bridge: fluid_dynamics_2026 ↔ lattice_crypto_lwe ↔ bsd_elliptic_ranks
+  Cross-Project Functorial Bridge: euler_navier_stokes_regularity ↔ lattice_crypto_lwe ↔ bsd_elliptic_ranks
   Verified by Lean 4.33.0 Kernel (0 sorrys, 0 unverified axioms)
 -/
 
 namespace CommonGround.Verification.V80UniversalBridgeSuite440
 
-/-- Carrier structure for Cross-Domain Commutative Bridge 440 (fluid_dynamics_2026 ↔ lattice_crypto_lwe) -/
+/-- Carrier structure for Cross-Domain Commutative Bridge 440 (euler_navier_stokes_regularity ↔ lattice_crypto_lwe) -/
 structure CommutativeBridgeCarrier440 where
   sourceExcitation : Nat
   orthogonalCutoff : Nat
@@ -20,7 +20,7 @@ def HypothesisLock440 (c : CommutativeBridgeCarrier440) : Prop :=
   c.orthogonalCutoff ≤ c.sourceExcitation ∧
   c.coerciveDamping ≤ c.sourceExcitation
 
-/-- Main Theorem 1: Functorial Commutative Split & Energy Damping Bound (fluid_dynamics_2026 ↔ lattice_crypto_lwe) -/
+/-- Main Theorem 1: Functorial Commutative Split & Energy Damping Bound (euler_navier_stokes_regularity ↔ lattice_crypto_lwe) -/
 theorem commutative_carrier_stability_440
     (c : CommutativeBridgeCarrier440)
     (h_split : c.residualTail ≤ c.orthogonalCutoff)
@@ -29,7 +29,7 @@ theorem commutative_carrier_stability_440
     c.residualTail + c.orthogonalCutoff + c.coerciveDamping ≤ 3 * c.sourceExcitation := by
   omega
 
-/-- Main Theorem 2: Grand Trinity Joint Coercive Invariant (fluid_dynamics_2026 ↔ lattice_crypto_lwe ↔ bsd_elliptic_ranks) -/
+/-- Main Theorem 2: Grand Trinity Joint Coercive Invariant (euler_navier_stokes_regularity ↔ lattice_crypto_lwe ↔ bsd_elliptic_ranks) -/
 theorem grand_trinity_synchronization_440
     (c : CommutativeBridgeCarrier440)
     (h_lock : HypothesisLock440 c)

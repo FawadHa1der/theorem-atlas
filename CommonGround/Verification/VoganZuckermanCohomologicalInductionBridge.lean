@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #165 (`VoganZuckermanCohomologicalInductionBridge.lean`)
 
 * **Mechanism ID**: `zuckerman-cohomological-induction-derived-functor`
-* **Cross-Domain Triad**: `FLT` ↔ `category-theory-lean` ↔ `PhysLean`
+* **Cross-Domain Triad**: `FLT` ↔ `tc-reptheory` ↔ `PhysLean`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -30,7 +30,7 @@ theorem master_transfer_obstruction_vanishes (c : MechanismCarrier)
   omega
 
 /-- 3-Hop Cross-Domain Proof Chain Composition Theorem (V30 Loop 3):
-    Chaining Hop 1 (`FLT → category-theory-lean`), Hop 2 (`category-theory-lean → PhysLean`), and Hop 3 (`PhysLean → TargetD`)
+    Chaining Hop 1 (`FLT → tc-reptheory`), Hop 2 (`tc-reptheory → PhysLean`), and Hop 3 (`PhysLean → TargetD`)
     additively composes the scale gains and certifies that the terminal obstruction vanishes. -/
 theorem three_hop_chain_composition (c1 c2 c3 : MechanismCarrier)
     (h1 : c1.initialComplexity ≤ c1.activeScales * c1.scaleGain + c1.coercivityMargin)

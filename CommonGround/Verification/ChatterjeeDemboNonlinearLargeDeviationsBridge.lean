@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #236 (`ChatterjeeDemboNonlinearLargeDeviationsBridge.lean`)
 
 * **Mechanism ID**: `chatterjee-dembo-nonlinear-large-deviations-gradient`
-* **Cross-Domain Triad**: `probability-lean` ↔ `pfr` ↔ `optlib`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `oai-szemeredi` ↔ `econlib`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -19,7 +19,7 @@ structure MechanismCarrier where
   deriving Repr, DecidableEq
 
 /-- Bidirectional Duality Dictionary Structure (V35 Loop 3):
-    Certifies that translating a state from `probability-lean` to `pfr` and back preserves
+    Certifies that translating a state from `tc-probcomb` to `oai-szemeredi` and back preserves
     both the total complexity budget and the monotone scale gain. -/
 structure BidirectionalDualityPair where
   forwardState  : MechanismCarrier

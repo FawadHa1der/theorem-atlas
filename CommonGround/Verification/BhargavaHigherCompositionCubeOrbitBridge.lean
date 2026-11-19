@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #285 (`BhargavaHigherCompositionCubeOrbitBridge.lean`)
 
 * **Mechanism ID**: `bhargava-higher-composition-laws-gauss-cube-parametrization`
-* **Cross-Domain Triad**: `number-theory-lean` ↔ `FLT` ↔ `PrimeNumberTheoremAnd`
+* **Cross-Domain Triad**: `tc-numtheory` ↔ `FLT` ↔ `PrimeNumberTheoremAnd`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

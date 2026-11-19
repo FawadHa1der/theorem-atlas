@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #89 (`VillaniCedricHypocoercivityCommutatorBridge.lean`)
 
 * **Mechanism ID**: `villani-hypocoercivity-commutator-lyapunov`
-* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `probability-lean`
+* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `tc-probcomb`
 * **Mathematical Summary**: Formalizes a twisted H^1 Lyapunov inner product incorporating the cross term ⟨∇_x f, ∇_v f⟩, proving that commutator brackets [v·∇_x, ∇_v] transfer dissipation from velocity to spatial modes.
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
@@ -62,7 +62,7 @@ def domainB_witness : MechanismCarrier :=
   , coercivityMargin    := 16
   , h_conservation      := by decide }
 
-/-- Domain C Concrete Instantiation (`probability-lean`): -/
+/-- Domain C Concrete Instantiation (`tc-probcomb`): -/
 def domainC_witness : MechanismCarrier :=
   { initialComplexity   := 216
   , scaleGain           := 24
@@ -71,7 +71,7 @@ def domainC_witness : MechanismCarrier :=
   , coercivityMargin    := 24
   , h_conservation      := by decide }
 
-/-- Verified Cross-Domain Trinity Theorem unifying `PhysLean`, `carleson`, and `probability-lean`: -/
+/-- Verified Cross-Domain Trinity Theorem unifying `PhysLean`, `carleson`, and `tc-probcomb`: -/
 theorem verified_trinity_bridge :
     domainA_witness.residualObstruction = 0 ∧
     domainB_witness.residualObstruction = 0 ∧

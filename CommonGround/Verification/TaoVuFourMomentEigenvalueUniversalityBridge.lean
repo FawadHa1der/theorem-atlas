@@ -2,7 +2,7 @@
 # Tao–Vu Four-Moment Replacement Principle ↔ Wigner Random Matrix Gap Universality
 ## CommonGround Formal Verification Suite #314 (`TaoVuFourMomentEigenvalueUniversalityBridge.lean`)
 
-* **Cross-Domain Triad**: `probability-lean` ↔ `pfr` ↔ `PrimeNumberTheoremAnd`
+* **Cross-Domain Triad**: `tc-probcomb` ↔ `oai-szemeredi` ↔ `PrimeNumberTheoremAnd`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

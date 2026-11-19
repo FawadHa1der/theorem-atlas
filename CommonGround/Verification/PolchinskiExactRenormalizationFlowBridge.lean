@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #100 (`PolchinskiExactRenormalizationFlowBridge.lean`)
 
 * **Mechanism ID**: `kupiainen-virts-renormalization-group-kpz`
-* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `probability-lean`
+* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

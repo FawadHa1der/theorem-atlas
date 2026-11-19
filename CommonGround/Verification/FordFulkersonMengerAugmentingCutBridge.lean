@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #268 (`FordFulkersonMengerAugmentingCutBridge.lean`)
 
 * **Mechanism ID**: `menger-max-flow-min-cut-ford-fulkerson-submodular`
-* **Cross-Domain Triad**: `graph-theory-lean` ↔ `optlib` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `erdos` ↔ `econlib` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

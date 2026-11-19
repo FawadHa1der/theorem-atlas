@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #102 (`LiYauParabolicHarnackHeatKernelBridge.lean`)
 
 * **Mechanism ID**: `chavel-gromov-li-yau-heat-kernel-gradient`
-* **Cross-Domain Triad**: `carleson` ↔ `PhysLean` ↔ `formal-conjectures`
+* **Cross-Domain Triad**: `carleson` ↔ `PhysLean` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

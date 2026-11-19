@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite (`NazarovSodinNodalDomainBarrierBridge.lean`)
 
 * **Mechanism ID**: `nazarov-sodin-nodal-domain-percolation`
-* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `probability-lean`
+* **Cross-Domain Triad**: `PhysLean` ↔ `carleson` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

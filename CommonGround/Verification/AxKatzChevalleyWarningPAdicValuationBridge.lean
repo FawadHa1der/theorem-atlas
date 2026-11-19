@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #147 (`AxKatzChevalleyWarningPAdicValuationBridge.lean`)
 
 * **Mechanism ID**: `chevalley-warning-ax-katz-p-adic-divisibility`
-* **Cross-Domain Triad**: `number-theory-lean` ↔ `combinatorics-lean` ↔ `FLT`
+* **Cross-Domain Triad**: `tc-numtheory` ↔ `tc-probcomb` ↔ `FLT`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

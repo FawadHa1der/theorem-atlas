@@ -2,7 +2,7 @@
 # Dolgopyat–Naud Oscillatory Transfer Operator Cancellation ↔ Zeta Zero-Free Strip for Schottky Groups
 ## CommonGround Formal Verification Suite #307 (`NaudDolgopyatSchottkyTransferBridge.lean`)
 
-* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `carleson` ↔ `probability-lean`
+* **Cross-Domain Triad**: `PrimeNumberTheoremAnd` ↔ `carleson` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #117 (`BourgainKatzTaoDiscretizedSumProductBridge.lean`)
 
 * **Mechanism ID**: `bourgain-katz-tao-sum-product-discretized-ring`
-* **Cross-Domain Triad**: `pfr` ↔ `erdos-problems` ↔ `carleson`
+* **Cross-Domain Triad**: `oai-szemeredi` ↔ `erdos-problems` ↔ `carleson`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

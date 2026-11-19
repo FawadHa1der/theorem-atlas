@@ -99,6 +99,7 @@ def discover_role_compatible_insights(data):
     """
     sm = data.get("semanticMechanisms") or {}
     dp = sm.get("isoDeclPool") or []
+    dm_files = (sm.get("declMeta") or {}).get("files") or []
     imp = sm.get("isoMetaPools") or {}
     i_pn = imp.get("pnames") or []
     i_dc = imp.get("discs") or []
@@ -110,7 +111,9 @@ def discover_role_compatible_insights(data):
     for iso in isos:
         dA = iso.get("declA") or (dp[iso["_dA"]] if isinstance(iso.get("_dA"), int) and 0 <= iso["_dA"] < len(dp) else {})
         dB = iso.get("declB") or (dp[iso["_dB"]] if isinstance(iso.get("_dB"), int) and 0 <= iso["_dB"] < len(dp) else {})
-        blob = (json.dumps(iso) + " " + json.dumps(dA) + " " + json.dumps(dB)).lower()
+        fA = dA.get("file") or (dm_files[dA["_fl"]] if isinstance(dA.get("_fl"), int) and 0 <= dA["_fl"] < len(dm_files) else "")
+        fB = dB.get("file") or (dm_files[dB["_fl"]] if isinstance(dB.get("_fl"), int) and 0 <= dB["_fl"] < len(dm_files) else "")
+        blob = (json.dumps(iso) + " " + json.dumps(dA) + " " + json.dumps(dB) + " " + fA + " " + fB).lower()
         if iso.get("isChallengeSpec") or "comparatorchallenges" in blob:
             continue
         if iso.get("epistemicSymbol") == "⚠":
@@ -134,8 +137,8 @@ def discover_role_compatible_insights(data):
             "id": iso.get("id") or f"{pa}__{pb}",
             "pair": f"{pa} ↔ {pb}",
             "disciplines": f"{da} ↔ {db}",
-            "endpointA": f"{iso.get('projectA')}:{dA.get('file') or dA.get('name')}",
-            "endpointB": f"{iso.get('projectB')}:{dB.get('file') or dB.get('name')}",
+            "endpointA": f"{iso.get('projectA')}:{fA or dA.get('name')}",
+            "endpointB": f"{iso.get('projectB')}:{fB or dB.get('name')}",
             "score": score,
             "reviewedStar": bool(iso.get("epistemicSymbol") == "★"),
             "sharedOperators": sops[:6],
@@ -177,7 +180,7 @@ def run_cycle(cycle_num, start_ts, end_ts):
 
     status = {
         "status": "running" if remaining_hours > 0 else "completed",
-        "version": "V230",
+        "version": "V243",
         "daemonPid": os.getpid(),
         "cycle": cycle_num,
         "timestampUtc": now_iso,

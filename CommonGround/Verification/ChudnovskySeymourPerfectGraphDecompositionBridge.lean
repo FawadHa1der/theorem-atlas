@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #113 (`ChudnovskySeymourPerfectGraphDecompositionBridge.lean`)
 
 * **Mechanism ID**: `chudnovsky-seymour-perfect-graph-structural-split`
-* **Cross-Domain Triad**: `graph-theory-lean` ↔ `combinatorics-lean` ↔ `aks`
+* **Cross-Domain Triad**: `erdos` ↔ `tc-probcomb` ↔ `apsp3sum`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

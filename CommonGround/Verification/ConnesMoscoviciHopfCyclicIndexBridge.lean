@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #96 (`ConnesMoscoviciHopfCyclicIndexBridge.lean`)
 
 * **Mechanism ID**: `connes-moscovici-hopf-cyclic-index-pairing`
-* **Cross-Domain Triad**: `PhysLean` ↔ `category-theory-lean` ↔ `lean-liquid`
+* **Cross-Domain Triad**: `PhysLean` ↔ `tc-reptheory` ↔ `lean-liquid`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

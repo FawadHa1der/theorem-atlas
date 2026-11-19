@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite (`SchoenYauMinimalHypersurfaceMassBridge.lean`)
 
 * **Mechanism ID**: `schoen-yau-minimal-hypersurface-positive-mass`
-* **Cross-Domain Triad**: `PhysLean` ↔ `formal-conjectures` ↔ `carleson`
+* **Cross-Domain Triad**: `PhysLean` ↔ `erdos` ↔ `carleson`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

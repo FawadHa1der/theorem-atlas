@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #261 (`PeetreRieszThorinCalderonInterpolationBridge.lean`)
 
 * **Mechanism ID**: `lp-holder-riesz-thorin-marcinkiewicz-real-interpolation`
-* **Cross-Domain Triad**: `carleson` ↔ `probability-lean` ↔ `PhysLean`
+* **Cross-Domain Triad**: `carleson` ↔ `tc-probcomb` ↔ `PhysLean`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

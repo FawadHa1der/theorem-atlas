@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #234 (`CrootSisaskSandersBogolyubovConvolutionBridge.lean`)
 
 * **Mechanism ID**: `freiman-ruzsa-sanders-bogolyubov-croot-sisask-convolution`
-* **Cross-Domain Triad**: `pfr` ↔ `erdos-problems` ↔ `combinatorics-lean`
+* **Cross-Domain Triad**: `oai-szemeredi` ↔ `erdos-problems` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -19,7 +19,7 @@ structure MechanismCarrier where
   deriving Repr, DecidableEq
 
 /-- Bidirectional Duality Dictionary Structure (V35 Loop 3):
-    Certifies that translating a state from `pfr` to `erdos-problems` and back preserves
+    Certifies that translating a state from `oai-szemeredi` to `erdos-problems` and back preserves
     both the total complexity budget and the monotone scale gain. -/
 structure BidirectionalDualityPair where
   forwardState  : MechanismCarrier

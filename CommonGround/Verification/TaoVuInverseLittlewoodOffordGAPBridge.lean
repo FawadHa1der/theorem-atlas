@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #95 (`TaoVuInverseLittlewoodOffordGAPBridge.lean`)
 
 * **Mechanism ID**: `tao-vu-inverse-littlewood-offord-gap`
-* **Cross-Domain Triad**: `pfr` ↔ `erdos-problems` ↔ `probability-lean`
+* **Cross-Domain Triad**: `oai-szemeredi` ↔ `erdos-problems` ↔ `tc-probcomb`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

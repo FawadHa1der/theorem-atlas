@@ -2,7 +2,7 @@
 # Green–Tao Dual Projective Cubic Curve Group Law ↔ Exact Solution of the Sylvester–Gallai–Orchard Problem
 ## CommonGround Formal Verification Suite #385 (`GreenTaoOrchardOrdinaryLinesSylvesterBridge.lean`)
 
-* **Cross-Domain Triad**: `erdos-problems` ↔ `combinatorics-lean` ↔ `FLT`
+* **Cross-Domain Triad**: `erdos-problems` ↔ `tc-probcomb` ↔ `FLT`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

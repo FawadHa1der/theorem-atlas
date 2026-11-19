@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #139 (`KontsevichSoibelmanWallCrossingDTBridge.lean`)
 
 * **Mechanism ID**: `kontsevich-soibelman-wall-crossing-motivic-dt`
-* **Cross-Domain Triad**: `PhysLean` ↔ `lean-liquid` ↔ `category-theory-lean`
+* **Cross-Domain Triad**: `PhysLean` ↔ `lean-liquid` ↔ `tc-reptheory`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

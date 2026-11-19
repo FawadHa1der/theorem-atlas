@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite (`SpielmanTengLaplacianUltrasparsifierBridge.lean`)
 
 * **Mechanism ID**: `spielman-teng-smoothed-condition-local-clustering`
-* **Cross-Domain Triad**: `aks` ↔ `optlib` ↔ `graph-theory-lean`
+* **Cross-Domain Triad**: `apsp3sum` ↔ `econlib` ↔ `erdos`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 

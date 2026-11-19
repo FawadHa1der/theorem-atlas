@@ -3,7 +3,7 @@
 ## CommonGround Formal Verification Suite #204 (`EdmondsGallaiBlossomMatchingPolytopeBridge.lean`)
 
 * **Mechanism ID**: `edmonds-gallai-blossom-odd-cycle-shrinking`
-* **Cross-Domain Triad**: `graph-theory-lean` ↔ `combinatorics-lean` ↔ `optlib`
+* **Cross-Domain Triad**: `erdos` ↔ `tc-probcomb` ↔ `econlib`
 * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0
 -/
 
@@ -19,7 +19,7 @@ structure MechanismCarrier where
   deriving Repr, DecidableEq
 
 /-- Bidirectional Duality Dictionary Structure (V35 Loop 3):
-    Certifies that translating a state from `graph-theory-lean` to `combinatorics-lean` and back preserves
+    Certifies that translating a state from `erdos` to `tc-probcomb` and back preserves
     both the total complexity budget and the monotone scale gain. -/
 structure BidirectionalDualityPair where
   forwardState  : MechanismCarrier
