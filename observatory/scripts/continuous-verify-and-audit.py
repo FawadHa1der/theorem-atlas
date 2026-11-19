@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 """
-Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V248).
+Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V250).
 Verifies:
-1. All 772+ physical Lean 4 files (649 in CommonGround/Verification/ + 123 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
+1. All 776+ physical Lean 4 files (651 in CommonGround/Verification/ + 125 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
    tokens outside comments (with NO 25 MiB cap on `.lean` files — large `.lean` files stream via Cloudflare R2 `/api/lean/*`)
    AND compile cleanly through the real Lean 4.33.0 kernel (`compile-all-lean4.py`).
 2. Reconstructs `bundle-data.js` from the 8 tracked `<16 MiB` shards and builds `dist-cloudflare/` if absent in CI.
 3. Verifies end-to-end connection integrity & zero clutter:
    - 0 legacy `upgrade-v*.py` scripts and 0 `.pyc` / `__pycache__` artifacts;
-   - entire unsharded `bundle-data.js` is < 16.20 MiB UTF-8 bytes;
+   - entire unsharded `bundle-data.js` is < 14.00 MiB UTF-8 bytes;
    - 0 unmounted ghost repository IDs, 0 `‖c‖h‖a‖r‖` corrupted strings, 0 `127.0.0.1`/`localhost` dead links,
      and 0 `Solved Open Instance` / `Hodge Sextic` strings across `bundle-data.js`;
    - exact 1-to-1 bijection between `verifiedLeanSuites` and `CommonGround/Verification/*.lean` with ground-truth title & triad alignment;
    - 100% of `highLevelMechanisms[*].verifiedBridgeFile` and `insightPaths.connections[*].verifiedLeanFile` resolve on disk;
    - 100% of `proofPipelines` map `projectA` & `projectB` to canonical 40-project IDs, and 100% of `customIsomorphisms` (`isoMetaPools` / `_x`),
-     `highLevelMechanisms` (`fieldPools` / `_mx`), `proofPipelines` (`pipelinePools`), `grandTrinities`, `verifiedLeanSuites` (`suitePools` / `_sp`),
-     `customSearchIndex` (`csiPools` / `_cx`), and `insightPaths.connections` (`pathPools` / `_ix`) resolve valid lossless pool indices;
+     `highLevelMechanisms` (`fieldPools` / `_mx`), `proofPipelines` (`pipelinePools`), `grandTrinities`, `verifiedLeanSuites` (`suitePools` / `_sp` / `_dl`),
+     `customSearchIndex` (`csiPools` / `_cx`), `indexData` (`_pkeys` / `_cnts`), `unrelatedBridges` (`_pools` / `_ux`), and `insightPaths.connections` (`pathPools` / `_ix`) resolve valid lossless pool indices;
    - `README.md` contains 0 legacy forbidden strings and 100% resolving relative `./...` links.
 4. Confirms no legacy forked `safari-standalone.html` or `observatory/safari/` artifacts exist, and verifies all unified
    Chrome + Safari routes resolve CSS + all 8 untruncated `<25 MiB` shards + `unified-standalone.js`.
@@ -49,7 +49,7 @@ def check_end_to_end_connections_and_clutter():
     assert not pyc_files, f"Bytecode .pyc files detected (violates Zero Bytecode rule): {pyc_files[:5]}"
 
     raw_bytes = (OBS_DIR / "bundle-data.js").stat().st_size
-    assert raw_bytes < int(15.0 * 1024 * 1024), f"Expected sub-15.0 MiB bundle-data.js, got {raw_bytes / (1024*1024):.2f} MiB!"
+    assert raw_bytes < int(14.0 * 1024 * 1024), f"Expected sub-14.0 MiB bundle-data.js, got {raw_bytes / (1024*1024):.3f} MiB!"
     raw = (OBS_DIR / "bundle-data.js").read_text(encoding="utf-8")
     for bad_str in ("127.0.0.1", "localhost:", "Solved Open Instance", "Hodge Sextic", "window.V145_REAL_LEAN_SUITES ="):
         assert bad_str not in raw, f"Legacy/clutter string {bad_str!r} reintroduced into bundle-data.js!"
@@ -66,9 +66,11 @@ def check_end_to_end_connections_and_clutter():
     sm = preloaded["semanticMechanisms"]
     suites = sm.get("verifiedLeanSuites", [])
     suite_pools = sm.get("suitePools") or {}
-    assert len(suite_pools.get("blbls") or []) >= 300 and len(suite_pools.get("tns") or []) >= 250, (
-        "Lossless suitePools missing or truncated!"
-    )
+    assert (
+        len(suite_pools.get("blbls") or []) >= 300
+        and len(suite_pools.get("tns") or []) >= 250
+        and len(suite_pools.get("dkinds") or []) >= 4
+    ), "Lossless suitePools missing or truncated!"
     for sv in suites:
         if "_sp" in sv:
             sp_vec = sv["_sp"]
@@ -81,7 +83,7 @@ def check_end_to_end_connections_and_clutter():
     assert suite_files == disk_verif, (
         f"verifiedLeanSuites ({len(suite_files)}) is not in 1-to-1 bijection with CommonGround/Verification/*.lean ({len(disk_verif)})!"
     )
-    assert len(suites) >= 650, f"Expected >= 650 verifiedLeanSuites in V249+, got {len(suites)}!"
+    assert len(suites) >= 651, f"Expected >= 651 verifiedLeanSuites in V250+, got {len(suites)}!"
     assert suites and "Williams" in (suites[0].get("title") or ""), "verifiedLeanSuites[0] ground-truth title alignment broken!"
     assert (suites[0].get("projects") or [None])[0] == "apsp3sum", "verifiedLeanSuites[0] ground-truth triad alignment broken!"
     covered_suite_projs = {p for s in suites for p in (s.get("projects") or []) if p in canon_projs}
@@ -278,7 +280,12 @@ def check_end_to_end_connections_and_clutter():
             assert "transferHypothesis" not in iv and "transferBlueprint" not in iv and "_tb" not in iv, (
                 f"Contradicted optimistic transferHypothesis/transferBlueprint clutter found on ⚠ lookalike {iso.get('id')}!"
             )
-    for disc in preloaded.get("unrelatedBridges", {}).get("discoveries", []):
+    idxd = preloaded.get("indexData") or {}
+    assert len(idxd.get("_pkeys") or []) == 40, "Lossless indexData._pkeys missing or not 40 canonical projects!"
+    ub_obj = preloaded.get("unrelatedBridges") or {}
+    ub_pools = ub_obj.get("_pools") or {}
+    assert len(ub_pools.get("projs") or []) >= 35, "Lossless unrelatedBridges._pools missing or truncated!"
+    for disc in ub_obj.get("discoveries", []):
         ct = disc.get("conjectureTemplate") or ""
         assert "AllBridges.lean" not in ct, f"Generic AllBridges.lean reference found in unrelatedBridges {disc.get('id')}!"
 
@@ -290,7 +297,7 @@ def check_end_to_end_connections_and_clutter():
         assert target.exists(), f"Broken relative link {rel_link} in README.md -> {target}"
     print(
         f"  [OK] End-to-end connection bijection verified: {len(suites)} suites == {len(disk_verif)} CommonGround/Verification/*.lean, "
-        f"bundle={raw_bytes/(1024*1024):.2f} MiB (<15.0 MiB!), {len(sn_pool)} unique snippets, {len(sm.get('proofPipelines', []))} canonical pipelines, "
+        f"bundle={raw_bytes/(1024*1024):.3f} MiB (<14.0 MiB!), {len(sn_pool)} unique snippets, {len(sm.get('proofPipelines', []))} canonical pipelines, "
         f"{len(dp)} pooled decls, {len(i_sk)} iso skels, {len(part_items)} mech items, {len(ep_pool)} path endpoints, "
         f"0 ghost repo IDs, 0 127.0.0.1 links, 0 ‖c‖h‖a‖r‖ corruptions, 0 broken .lean refs, README clean."
     )
@@ -326,13 +333,13 @@ def check_unified_static_assets():
 
 
 def main():
-    print("=== Running V249 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
+    print("=== Running V250 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
     ensure_bundle_reconstructed()
     check_lean_corpus_and_kernel()
     check_end_to_end_connections_and_clutter()
     check_unified_static_assets()
     subprocess.run(["bash", str(OBS_DIR / "tests" / "run-tests.sh")], check=True)
-    print("=== ALL V248 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
+    print("=== ALL V250 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-V249 Unified Chrome & Safari Shard Builder (< 25 MiB static assets & < 15.0 MiB total corpus!)
+V250 Unified Chrome & Safari Shard Builder (< 25 MiB static assets & < 14.0 MiB total corpus!)
 & Cloudflare R2 Unrestricted-Size Lean 4 Streaming Function Generator.
 
 - Reconstructs `bundle-data.js` from `observatory/chunks/` if missing in a fresh Git clone.
@@ -25,7 +25,7 @@ LOCAL_CHUNKS_DIR = OBS_DIR / "chunks"
 CF_DIR = OBS_DIR / "dist-cloudflare"
 CF_CHUNKS_DIR = CF_DIR / "chunks"
 LIMIT_BYTES = 25 * 1024 * 1024  # Cloudflare Pages 25 MiB static asset limit (does NOT restrict .lean files in R2!)
-ASSET_VER = "249"
+ASSET_VER = "250"
 
 SHARD_NAMES = [
     "bundle-shard-1-core.js",
@@ -267,8 +267,10 @@ def build_shards_and_sync_routes():
         "if(r.sourceUrl===undefined&&typeof r._ub==='number')r.sourceUrl=(cpUb[r._ub]||'')+'/'+fl+'#L'+r.line;}}}"
         "if(sm){"
         "var snPool=sm.snippetPool||[];"
-        "var sp=sm.suitePools||{},spBl=sp.blbls||[],spCt=sp.cats||[],spSt=sp.stats||[],spTn=sp.tns||[];"
+        "var sp=sm.suitePools||{},spBl=sp.blbls||[],spCt=sp.cats||[],spSt=sp.stats||[],spTn=sp.tns||[],spDk=sp.dkinds||[],spDn=sp.dnames||[];"
         "var vls=sm.verifiedLeanSuites||[];for(var si=0;si<vls.length;si++){var sv=vls[si];if(sv){"
+        "if(sv._fd===1&&sv.folder===undefined)sv.folder='CommonGround/Verification';"
+        "if(!sv.declarations&&Array.isArray(sv._dl)){sv.declarations=sv._dl.map(function(da){var nm=typeof da[2]==='number'?(spDn[da[2]]||''):(da[2]||'');var o={line:da[0],kind:spDk[da[1]]||'theorem',name:nm};if(typeof da[3]==='number'&&da[3]>=0)o._sn=da[3];return o;});}"
         "if(Array.isArray(sv._sp)){var spv=sv._sp;"
         "if(typeof spv[0]==='number'&&spv[0]>=0&&sv.bridgeLabel===undefined)sv.bridgeLabel=spBl[spv[0]]||'';"
         "if(typeof spv[1]==='number'&&spv[1]>=0&&sv.category===undefined)sv.category=spCt[spv[1]]||'';"
@@ -318,6 +320,7 @@ def build_shards_and_sync_routes():
         "if(gt.breakthroughOpportunity===undefined&&typeof gt._bo==='number')gt.breakthroughOpportunity=trBo[gt._bo]||'';"
         "if(gt.analogy===undefined&&typeof gt._an==='number')gt.analogy=trAn[gt._an]||'';}}"
         "var mp=sm.mechPools||{},mpPart=mp.partItems||[],mpPb=mp.playbooks||[],mpPs=mp.steppers||[],mpAn=mp.analogies||[],mpId=mp.invDirs||[],mpTd=mp.transDicts||[],mpVs=mp.visSteps||[],mpAst=mp.astTypes||[],mpGr=mp.grades||[];"
+        "for(var pbi=0;pbi<mpPb.length;pbi++){var pbv=mpPb[pbi];if(Array.isArray(pbv)){var pbo={unsolvedBottleneck:pbv[0]||'',crossDomainLever:pbv[1]||'',steps:pbv[2]||[]};if(pbv.length>3&&pbv[3]!==null&&pbv[3]!==undefined)pbo.starterLeanCode=pbv[3];if(pbv.length>4&&pbv[4]!==null&&pbv[4]!==undefined)pbo.counterexampleTest=pbv[4];mpPb[pbi]=pbo;}}"
         "var mpStStr=mp.stepStrs||[];for(var sti=0;sti<mpPs.length;sti++){var stArr=mpPs[sti];if(Array.isArray(stArr)&&stArr.length&&Array.isArray(stArr[0])){mpPs[sti]=stArr.map(function(sa){return{stageNum:sa[0],stageLabel:mpStStr[sa[1]]||'',plainWhatChanges:mpStStr[sa[2]]||'',beforeAfterEq:mpStStr[sa[3]]||'',whatBreaksIfSkipped:mpStStr[sa[4]]||'',leanTacticSnippet:mpStStr[sa[5]]||''};});}}"
         "var mpTdC=mp.tdConcepts||[];for(var tdi=0;tdi<mpTd.length;tdi++){var tdArr=mpTd[tdi];if(Array.isArray(tdArr)&&tdArr.length&&Array.isArray(tdArr[0])){mpTd[tdi]=tdArr.map(function(ta){return{concept:mpTdC[ta[0]]||'',domainA:ta[1]||'',domainB:ta[2]||''};});}}"
         "var pm=mp.partMeta||{},pmPj=pm.projs||[],pmPn=pm.pnames||[],pmSh=pm.shorts||[],pmDc=pm.discs||[],pmRl=pm.roles||[],pmKd=pm.kinds||[],pmSk=pm.skels||[],pmPa=pm.archs||[],pmFl=pm.files||[],pmUb=pm.urlBases||[];"
@@ -523,7 +526,34 @@ def build_shards_and_sync_routes():
         "if(c.category===undefined&&typeof c._ct==='number')c.category=ppCt[c._ct]||'';"
         "if(c.status===undefined&&typeof c._st==='number')c.status=ppSt2[c._st]||'';}}"
         "ip.paths=cs;}"
-        "var ub=pre.unrelatedBridges;if(ub&&ub.discoveries&&!ub.bridges){ub.bridges=ub.discoveries;}}})();\n"
+        "var idxd=pre.indexData;if(idxd&&Array.isArray(idxd._pkeys)&&Array.isArray(idxd.records)){var pkArr=idxd._pkeys;for(var iri=0;iri<idxd.records.length;iri++){var ir=idxd.records[iri];if(ir){if(!ir.counts&&Array.isArray(ir._cnts)){var cm={};for(var cki=0;cki<pkArr.length;cki++)cm[pkArr[cki]]=ir._cnts[cki]||0;ir.counts=cm;}if(!ir.fileCounts&&Array.isArray(ir._fcnts)){var fcm={};for(var fki=0;fki<pkArr.length;fki++)fcm[pkArr[fki]]=ir._fcnts[fki]||0;ir.fileCounts=fcm;}}}}"
+        "var ub=pre.unrelatedBridges;if(ub){"
+        "var ubp=ub._pools||{},uPj=ubp.projs||[],uPn=ubp.pnames||[],uDc=ubp.discs||[],uKd=ubp.kinds||[],uUb=ubp.urlBases||[],uFm=ubp.fams||[],uTr=ubp.tiers||[];"
+        "var uDs=ub.discoveries||[];for(var udi=0;udi<uDs.length;udi++){var ud=uDs[udi];if(ud&&Array.isArray(ud._ux)){var ux=ud._ux;"
+        "if(ud.kind===undefined&&ux[0]>=0)ud.kind=uKd[ux[0]]||'';"
+        "if(ud.projectA===undefined&&ux[1]>=0)ud.projectA=uPj[ux[1]]||'';"
+        "if(ud.projectB===undefined&&ux[2]>=0)ud.projectB=uPj[ux[2]]||'';"
+        "if(ud.projectAName===undefined&&ux[3]>=0)ud.projectAName=uPn[ux[3]]||'';"
+        "if(ud.projectBName===undefined&&ux[4]>=0)ud.projectBName=uPn[ux[4]]||'';"
+        "if(ud.disciplineA===undefined&&ux[5]>=0)ud.disciplineA=uDc[ux[5]]||'';"
+        "if(ud.disciplineB===undefined&&ux[6]>=0)ud.disciplineB=uDc[ux[6]]||'';"
+        "if(ud.disciplineDistance===undefined)ud.disciplineDistance=ux[7]||0;"
+        "if(ud.urlA===undefined&&ux[8]>=0&&ux[9]>=0)ud.urlA=(uUb[ux[8]]||'')+'/'+(ud.fileA||'')+'#L'+ux[9];"
+        "if(ud.urlB===undefined&&ux[10]>=0&&ux[11]>=0)ud.urlB=(uUb[ux[10]]||'')+'/'+(ud.fileB||'')+'#L'+ux[11];}}"
+        "var uCh=ub.twoHopPivotChains||[];for(var uci=0;uci<uCh.length;uci++){var uc=uCh[uci];if(uc){"
+        "if(Array.isArray(uc._tx)){var tx=uc._tx;"
+        "if(uc.projectA===undefined&&tx[0]>=0)uc.projectA=uPj[tx[0]]||'';"
+        "if(uc.pivotProject===undefined&&tx[1]>=0)uc.pivotProject=uPj[tx[1]]||'';"
+        "if(uc.projectC===undefined&&tx[2]>=0)uc.projectC=uPj[tx[2]]||'';"
+        "if(uc.disciplineA===undefined&&tx[3]>=0)uc.disciplineA=uDc[tx[3]]||'';"
+        "if(uc.disciplinePivot===undefined&&tx[4]>=0)uc.disciplinePivot=uDc[tx[4]]||'';"
+        "if(uc.disciplineC===undefined&&tx[5]>=0)uc.disciplineC=uDc[tx[5]]||'';"
+        "if(uc.pivotUrl===undefined&&tx[6]>=0&&tx[7]>=0)uc.pivotUrl=(uUb[tx[6]]||'')+'/'+(uc.pivotFile||'')+'#L'+tx[7];}"
+        "var lAB=uc.lemmaAB;if(lAB&&Array.isArray(lAB._lx)){var lx1=lAB._lx,sA=lAB.sampleA||{};if(lAB.family===undefined&&lx1[0]>=0)lAB.family=uFm[lx1[0]]||'';if(lAB.signalTier===undefined&&lx1[1]>=0)lAB.signalTier=uTr[lx1[1]]||'';if(sA.line===undefined&&lx1[2]>=0)sA.line=lx1[2];if(sA.url===undefined&&lx1[3]>=0)sA.url=(uUb[lx1[3]]||'')+'/'+(sA.path||'')+'#L'+sA.line;}"
+        "var lBC=uc.lemmaBC;if(lBC&&Array.isArray(lBC._lx)){var lx2=lBC._lx,sC=lBC.sampleC||{};if(lBC.family===undefined&&lx2[0]>=0)lBC.family=uFm[lx2[0]]||'';if(lBC.signalTier===undefined&&lx2[1]>=0)lBC.signalTier=uTr[lx2[1]]||'';if(sC.line===undefined&&lx2[2]>=0)sC.line=lx2[2];if(sC.url===undefined&&lx2[3]>=0)sC.url=(uUb[lx2[3]]||'')+'/'+(sC.path||'')+'#L'+sC.line;}}}"
+        "if(ub.discoveries&&!ub.bridges)ub.bridges=ub.discoveries;}"
+        "var v36c=window.THEOREM_ATLAS_V36;if(v36c&&v36c._pools&&Array.isArray(v36c.projects)){var vp=v36c._pools,vpPv=vp.provs||[],vpDm=vp.doms||[],vpGr=vp.grades||[],vpSt=vp.statuses||[],vpKd=vp.kinds||[],vpSu=vp.srcUrls||[],vpRv=vp.revs||[],vpLk=vp.libKinds||[],vpRl=vp.relIds||[],vpNl=vp.noteLists||[],vpCc=vp.concepts||[];for(var vpi=0;vpi<v36c.projects.length;vpi++){var vpItem=v36c.projects[vpi];if(vpItem&&Array.isArray(vpItem._v)&&vpItem.provider===undefined){var vv=vpItem._v;vpItem.provider=vpPv[vv[0]]||'';vpItem.domain=vpDm[vv[1]]||'';vpItem.grade=vpGr[vv[2]]||'';vpItem.status=vpSt[vv[3]]||'';vpItem.kind=vpKd[vv[4]]||'';var vSrc={url:vpSu[vv[5]]||'',revision:vpRv[vv[6]]||''};if(typeof vv[7]==='number'&&vv[7]>=0)vSrc.line=vv[7];vpItem.source=vSrc;vpItem.counts={declarations:vv[8]||0,sourceFiles:vv[9]||0,manuscripts:vv[10]||0};vpItem.library={kind:vpLk[vv[11]]||'',familyId:vv[12]||'',releaseId:vpRl[vv[13]]||''};vpItem.notes=(vpNl[vv[14]]||[]).slice();vpItem.concepts=Array.isArray(vv[15])?vv[15].map(function(ci){return vpCc[ci]||'';}):[];}}if(!window.V34_CATALOGUE)window.V34_CATALOGUE=v36c;}"
+        "}})();\n"
     )
     write_dual_shard("bundle-shard-4b-paths.js", s4b_code)
 

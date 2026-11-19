@@ -1,17 +1,17 @@
 {
   "status": "verified",
-  "version": "V249",
+  "version": "V250",
   "daemonPid": 17,
-  "cycle": 65,
-  "timestampUtc": "2026-11-19T08:06:33.406752+00:00",
+  "cycle": 66,
+  "timestampUtc": "2026-11-19T08:33:32.376045+00:00",
   "elapsedHours": 9.9,
   "remainingHours": 14.1,
   "verificationExitCode": 0,
-  "automatedUxAndMathChecksPassed": 532,
+  "automatedUxAndMathChecksPassed": 536,
   "automatedUxAndMathChecksFailed": 0,
-  "leanFilesVerified": 650,
-  "frontierLeanFilesVerified": 124,
-  "totalZeroSorryLeanFiles": 774,
+  "leanFilesVerified": 651,
+  "frontierLeanFilesVerified": 125,
+  "totalZeroSorryLeanFiles": 776,
   "lean25MiBRestrictionRemoved": true,
   "cycleDurationSeconds": 124.0,
   "topRoleCompatibleLeads": [
@@ -125,34 +125,6 @@
         "mod /"
       ],
       "discoveryMethod": "Henselian / Adic Nilpotent Lifting Skeleton",
-      "selfCritique": "Verified non-challenge, non-synthetic author endpoints across distinct disciplines; verify premise adapter before theorem transport."
-    },
-    {
-      "id": "iso-domain-bridge-6347",
-      "pair": "Connes Rigidity & Property (T) Factors \u2194 Tau Ceti \u00b7 Elliptic Curves, Adic Spaces & Curves",
-      "disciplines": "Representation Theory, Lie & Operator Algebras \u2194 Algebraic & Complex Geometry",
-      "endpointA": "oai-connes:ConnesRigidity.lean",
-      "endpointB": "tc-alggeom:TauCeti/AlgebraicGeometry/IrreducibleOfConnectedDomainStalk.lean",
-      "score": 97.8,
-      "reviewedStar": true,
-      "sharedOperators": [
-        "\u2243 Equiv"
-      ],
-      "discoveryMethod": "Exact Sequence / Surgery Cone Duality Skeleton",
-      "selfCritique": "Verified non-challenge, non-synthetic author endpoints across distinct disciplines; verify premise adapter before theorem transport."
-    },
-    {
-      "id": "iso-domain-bridge-6371",
-      "pair": "Sphere Packing Sharp Asymptotics \u2194 Tau Ceti \u00b7 Reductive Algebraic Groups",
-      "disciplines": "Harmonic Analysis & Dispersive PDEs \u2194 Representation Theory, Lie & Operator Algebras",
-      "endpointA": "oai-sphere:SpherePacking.lean",
-      "endpointB": "tauceti:TauCeti/KnotTheory/TemperleyLieb.lean",
-      "score": 97.8,
-      "reviewedStar": true,
-      "sharedOperators": [
-        "\u2243 Equiv"
-      ],
-      "discoveryMethod": "Exact Sequence / Surgery Cone Duality Skeleton",
       "selfCritique": "Verified non-challenge, non-synthetic author endpoints across distinct disciplines; verify premise adapter before theorem transport."
     }
   ]
