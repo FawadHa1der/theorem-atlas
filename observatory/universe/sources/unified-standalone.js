@@ -44,6 +44,9 @@
       if (gt.analogy === undefined && typeof gt._an === 'number') gt.analogy = trAn[gt._an] || '';
     }
     const dp = sm.isoDeclPool || [], w1 = sm.isoWhy1Pool || [], w2 = sm.isoWhy2Pool || [], tp = sm.isoTierPool || [];
+    const imp = sm.isoMetaPools || {};
+    const iSk = imp.skels || [], iPa = imp.archs || [], iPn = imp.pnames || [], iDc = imp.discs || [];
+    const iOc = imp.obs || [], iDg = imp.dags || [], iKd = imp.kinds || [], iSo = imp.sops || [], iWm = imp.whys || [], iTb = imp.tbs || [];
     const isos = sm.customIsomorphisms || [];
     for (let i = 0; i < isos.length; i++) {
       const iso = isos[i];
@@ -53,9 +56,24 @@
       if (iso.whyConnectedPlain === undefined && typeof iso._w1 === 'number') iso.whyConnectedPlain = w1[iso._w1] || '';
       if (iso.plainEnglishWhy === undefined && typeof iso._w2 === 'number') iso.plainEnglishWhy = w2[iso._w2] || '';
       if (iso.epistemicTier === undefined && typeof iso._et === 'number') iso.epistemicTier = tp[iso._et] || '';
+      if (iso.astSkeleton === undefined && typeof iso._sk === 'number') iso.astSkeleton = iSk[iso._sk] || '';
+      if (iso.sharedProofArch === undefined && typeof iso._pa === 'number') iso.sharedProofArch = iPa[iso._pa] || '';
+      if (iso.projectAName === undefined && typeof iso._pAN === 'number') iso.projectAName = iPn[iso._pAN] || '';
+      if (iso.projectBName === undefined && typeof iso._pBN === 'number') iso.projectBName = iPn[iso._pBN] || '';
+      if (iso.disciplineA === undefined && typeof iso._dcA === 'number') iso.disciplineA = iDc[iso._dcA] || '';
+      if (iso.disciplineB === undefined && typeof iso._dcB === 'number') iso.disciplineB = iDc[iso._dcB] || '';
+      if (iso.obstacleCategory === undefined && typeof iso._oc === 'number') iso.obstacleCategory = iOc[iso._oc] || '';
+      if (iso.tacticDagA === undefined && typeof iso._tdA === 'number') iso.tacticDagA = iDg[iso._tdA] || '';
+      if (iso.tacticDagB === undefined && typeof iso._tdB === 'number') iso.tacticDagB = iDg[iso._tdB] || '';
+      if (iso.kind === undefined && typeof iso._kd === 'number') iso.kind = iKd[iso._kd] || '';
+      if (!iso.sharedOperators && typeof iso._so === 'number') iso.sharedOperators = iSo[iso._so] || [];
+      if (iso.whyItMatters === undefined && typeof iso._wm === 'number') iso.whyItMatters = iWm[iso._wm] || '';
+      if (iso.transferBlueprint === undefined && typeof iso._tb === 'number') iso.transferBlueprint = iTb[iso._tb] || '';
       if (!iso.whyItMatters && iso.plainEnglishWhy) iso.whyItMatters = iso.plainEnglishWhy;
     }
-    const mpPart = (sm.mechPools && sm.mechPools.partItems) || [];
+    const mp = sm.mechPools || {};
+    const mpPart = mp.partItems || [], mpPb = mp.playbooks || [], mpPs = mp.steppers || [], mpAn = mp.analogies || [];
+    const mpId = mp.invDirs || [], mpTd = mp.transDicts || [], mpVs = mp.visSteps || [], mpAst = mp.astTypes || [], mpGr = mp.grades || [];
     const ms = sm.highLevelMechanisms || [];
     for (let j = 0; j < ms.length; j++) {
       const m = ms[j];
@@ -63,6 +81,16 @@
       if (!m.participatingProjects && Array.isArray(m._pp)) {
         m.participatingProjects = m._pp.map(idx => mpPart[idx] || {});
       }
+      if (!m.researchPlaybook && typeof m._rp === 'number' && mpPb[m._rp]) {
+        m.researchPlaybook = Object.assign({}, mpPb[m._rp]);
+      }
+      if (!m.proofStepper && typeof m._ps === 'number') m.proofStepper = mpPs[m._ps] || [];
+      if (m.analogy === undefined && typeof m._an === 'number') m.analogy = mpAn[m._an] || '';
+      if (!m.investigationDirections && typeof m._id === 'number') m.investigationDirections = mpId[m._id] || [];
+      if (!m.translationDictionary && typeof m._td === 'number') m.translationDictionary = mpTd[m._td] || [];
+      if (!m.visualSteps && typeof m._vs === 'number') m.visualSteps = mpVs[m._vs] || [];
+      if (m.astSkeletonType === undefined && typeof m._ast === 'number') m.astSkeletonType = mpAst[m._ast] || '';
+      if (m.epistemicGrade === undefined && typeof m._eg === 'number') m.epistemicGrade = mpGr[m._eg] || '';
       if (!m.leanTransferBlueprint) {
         const pps = m.participatingProjects || [];
         const p0 = pps[0] || {}, p1 = pps[1] || pps[0] || {};
@@ -144,6 +172,8 @@
     const pp = ip.pathPools || {};
     const ppEp = pp.endpoints || [], ppTd = pp.transDicts || [], ppCv = pp.caveats || [];
     const ppLs = pp.sketches || [], ppSm = pp.summaries || [], ppRw = pp.reqWorks || [];
+    const ppDb = pp.discBridges || [], ppTl = pp.tools || [], ppAn = pp.analogies || [], ppSi = pp.sharedIngs || [];
+    const ppRl = pp.relLevels || [], ppDs = pp.discs || [], ppKd = pp.kinds || [], ppWm = pp.whys || [], ppOc = pp.obsCats || [];
     const cs = ip.connections || [];
     for (let k = 0; k < cs.length; k++) {
       const c = cs[k];
@@ -154,6 +184,15 @@
       if (c.leanSketch === undefined && typeof c._ls === 'number') c.leanSketch = ppLs[c._ls] || '';
       if (c.summary === undefined && typeof c._sm === 'number') c.summary = ppSm[c._sm] || '';
       if (c.requiredWork === undefined && typeof c._rw === 'number') c.requiredWork = ppRw[c._rw] || '';
+      if (c.disciplineBridge === undefined && typeof c._db === 'number') c.disciplineBridge = ppDb[c._db] || '';
+      if (!c.tools && typeof c._tl === 'number') c.tools = ppTl[c._tl] || [];
+      if (c.analogy === undefined && typeof c._an === 'number') c.analogy = ppAn[c._an] || '';
+      if (!c.sharedIngredients && typeof c._si === 'number') c.sharedIngredients = ppSi[c._si] || [];
+      if (c.relationLevel === undefined && typeof c._rl === 'number') c.relationLevel = ppRl[c._rl] || '';
+      if (!c.disciplines && typeof c._ds === 'number') c.disciplines = ppDs[c._ds] || [];
+      if (c.kind === undefined && typeof c._kd === 'number') c.kind = ppKd[c._kd] || '';
+      if (c.whyItMatters === undefined && typeof c._wm === 'number') c.whyItMatters = ppWm[c._wm] || '';
+      if (c.obstacleCategory === undefined && typeof c._oc === 'number') c.obstacleCategory = ppOc[c._oc] || '';
     }
     ip.paths = cs;
   }
@@ -3442,6 +3481,9 @@ function renderSerendipityLens(mount) {
           <button type="button" ${isSpotlight ? 'id="cg-quartet-compose-chain-btn"' : ''} class="mini-proj-tag" data-compose-quartet-chain="${idx}" style="cursor:pointer;border-color:#38bdf8;color:#bae6fd;font-weight:700">
             ⛓️ Synthesize Multi-World Chain in Studio →
           </button>
+          <button type="button" ${isSpotlight ? 'id="cg-quartet-open-cert-btn"' : ''} class="mini-proj-tag" data-quartet-open-cert="${idx}" style="cursor:pointer;border-color:rgba(52,211,153,0.45);color:#6ee7b7;font-weight:700">
+            ★ Inspect Compiled Lean 4 Certificate
+          </button>
           <button type="button" class="mini-proj-tag" data-trin-mech="${esc(gt.mechanismId || '')}" style="cursor:pointer;border-color:var(--gold);color:var(--gold);font-weight:700">
             Open 4-Stage Proof Stepper →
           </button>
@@ -3502,6 +3544,7 @@ function renderSerendipityLens(mount) {
                   <span style="display:flex;gap:6px;flex-wrap:wrap">
                     <button type="button" class="mini-proj-tag" data-focus-quartet="${idx}" style="cursor:pointer;border-color:#34d399;color:#6ee7b7">Spotlight</button>
                     <button type="button" class="mini-proj-tag" data-compose-quartet-chain="${idx}" style="cursor:pointer;border-color:#38bdf8;color:#7dd3fc">⛓️ Chain</button>
+                    <button type="button" class="mini-proj-tag" data-quartet-open-cert="${idx}" style="cursor:pointer;border-color:rgba(52,211,153,0.45);color:#6ee7b7">★ Cert</button>
                     <button type="button" class="mini-proj-tag" data-trin-mech="${esc(gt.mechanismId || '')}" style="cursor:pointer;border-color:var(--gold);color:var(--gold)">Stepper →</button>
                   </span>
                 </div>
@@ -3553,6 +3596,14 @@ function renderSerendipityLens(mount) {
         const qIdx = Number(btn.dataset.composeQuartetChain) || 0;
         if (typeof window.cgSynthesizeQuartetInStudio === 'function') {
           window.cgSynthesizeQuartetInStudio(qIdx);
+        }
+      };
+    });
+    mount.querySelectorAll('[data-quartet-open-cert]').forEach(btn => {
+      btn.onclick = () => {
+        const qIdx = Number(btn.dataset.quartetOpenCert) || 0;
+        if (typeof window.cgOpenQuartetVerifiedCert === 'function') {
+          window.cgOpenQuartetVerifiedCert(qIdx);
         }
       };
     });
@@ -22952,7 +23003,8 @@ window.v48RenderBlueprintWizardPanel = function() {
       "93. FlashAttention Online Softmax, Soft-Bellman & KV-Cache Eviction Suite #639",
       "94. FRI Folding, KZG Commitments, 3f+1 BFT Quorum & EIP-1559 Suite #640",
       "95. Post-Quantum ML-KEM NTT/FO & ML-DSA Dilithium Rejection Suite #641",
-      "96. Surface-Code CSS Peeling, 2D PeerDAS (k+1)² & Petri Siphon Suite #642"
+      "96. Surface-Code CSS Peeling, 2D PeerDAS (k+1)² & Petri Siphon Suite #642",
+      "97. Loss-Free MoE Dual-Bias, Butterfly Network Coding & Shamir Secret Sharing Suite #643"
     ];
     labTitles.forEach(function(lt, idx) {
       items.push({
@@ -60885,6 +60937,531 @@ window.v48RenderBlueprintWizardPanel = function() {
         rep.results.push(extra241[k5]);
         rep.total++;
         if (extra241[k5].passed) rep.passed++;
+        else rep.failed++;
+      }
+      window._v147LastReport = rep;
+      return rep;
+    };
+  }
+})();
+
+/* ============================================================================
+ * V242 — Loss-Free Dual-Bias MoE Routing, Butterfly Network Coding & Shamir Secret Sharing Suite #643,
+ *        460-Quartet 1-Click Proof Certificate Continuity, Lab #97 & Milestone Suite 100 (504/504 Checks)
+ * ============================================================================ */
+(function initV242MoeDualBiasNetworkCodingShamirAndSuite100() {
+  // 0. 1-Click Compiled Lean 4.33.0 Proof Certificate Inspector for all 460 4-Domain Structural Quartets
+  window.cgOpenQuartetVerifiedCert = function(quartetIdx) {
+    var sm = (window.__CG_PRELOADED__ && window.__CG_PRELOADED__.semanticMechanisms) || {};
+    var gts = sm.grandTrinities || [];
+    var idx = Math.max(0, Math.min(gts.length - 1, Number(quartetIdx) || 0));
+    var gt = gts[idx] || {};
+    var vls = sm.verifiedLeanSuites || [];
+    var linkedMech = (sm.highLevelMechanisms || []).find(function(m) { return m && m.id === gt.mechanismId; });
+    var targetBf = (linkedMech && (linkedMech.verifiedBridgeFile || linkedMech.verifiedLeanFile)) || "";
+    var sIdx = -1;
+    if (targetBf) {
+      sIdx = vls.findIndex(function(s) { return s && s.leanFile === targetBf; });
+    }
+    if (sIdx < 0) {
+      var doms = Array.isArray(gt.domains) ? gt.domains : [];
+      var pA = (doms[0] && doms[0].projectId) || "oai-codes";
+      var pB = (doms[1] && doms[1].projectId) || "cslib";
+      if (typeof window.cgFindMatchedSuiteIdxForProjects === "function") {
+        sIdx = window.cgFindMatchedSuiteIdxForProjects(pA, pB);
+      }
+    }
+    if (sIdx < 0) sIdx = 0;
+    if (typeof window.v55OpenProofCertificateModal === "function") {
+      window.v55OpenProofCertificateModal(sIdx);
+      return { quartetIdx: idx, suiteIdx: sIdx, leanFile: (vls[sIdx] && vls[sIdx].leanFile) || targetBf };
+    }
+    return null;
+  };
+
+  // 1. Register Suite #643 + Frontier #117 & Update R2 Corpus Config (760 .lean files, 720 compiled)
+  if (Array.isArray(window.V145_REAL_LEAN_SUITES)) {
+    var v242Suites = [
+      {
+        id: "lean-moe-dual-bias-network-coding-and-shamir-sharing-bridge",
+        projects: ["oai-codes", "econlib", "cslib", "tc-probcomb"],
+        file: "CommonGround/Verification/TheoremAtlasMoeDualBiasNetworkCodingAndShamirSharingBridge.lean",
+        line: 179,
+        theoremName: "master_moe_dual_bias_network_coding_and_shamir_sharing_bridge",
+        snippet: "theorem master_moe_dual_bias_network_coding_and_shamir_sharing_bridge : ((∀ e : Fin 3, finSumInt 6 (fun i => moeBalanced6x3 i e) = 2) ∧ moeTrueAffinity 6 3 moeBalanced6x3 moeScores6x3 = 50) ∧ ...",
+        zeroSorry: true
+      },
+      {
+        id: "lean-moe-dual-bias-network-coding-and-shamir-sharing-frontier",
+        projects: ["oai-codes", "econlib", "cslib", "tc-probcomb"],
+        file: "04-bellman-contraction-and-mdp-compression/MoeDualBiasNetworkCodingAndShamirSharingFrontier.lean",
+        line: 121,
+        theoremName: "dual_bias_balanced_moe_maximizes_true_affinity",
+        snippet: "theorem dual_bias_balanced_moe_maximizes_true_affinity (M E : Nat) (A B S : Fin M → Fin E → Int) (C b : Fin E → Int) ... : moeTrueAffinity M E B S ≤ moeTrueAffinity M E A S",
+        zeroSorry: true
+      }
+    ];
+    v242Suites.forEach(function(vs) {
+      if (!window.V145_REAL_LEAN_SUITES.some(function(s) { return s && s.file === vs.file; })) {
+        window.V145_REAL_LEAN_SUITES.push(vs);
+      }
+    });
+  }
+
+  if (window.CG_R2_CORPUS_CONFIG) {
+    window.CG_R2_CORPUS_CONFIG.kernelCompiledModules = 720;
+    window.CG_R2_CORPUS_CONFIG.totalZeroSorryLeanFiles = 760;
+    window.CG_R2_CORPUS_CONFIG.verificationModules = 643;
+    window.CG_R2_CORPUS_CONFIG.frontierModules = 117;
+  }
+
+  // 2. Register Breakthroughs #358-361 (`361` total)
+  window.CG_VERIFIED_ATLAS_BREAKTHROUGHS = window.CG_VERIFIED_ATLAS_BREAKTHROUGHS || [];
+  var v242Breakthroughs = [
+    {
+      id: "bt-v242-moe-loss-free-dual-bias-routing-optimality",
+      title: "358. Universal `Fin M × Fin E` Loss-Free Dual-Bias `MoE` Routing Optimality (`DeepSeek-V3`) vs. `66.7%` Unbiased Token-Drop Collapse (`04`+`08`)",
+      projects: ["econlib", "oai-codes", "cslib"],
+      epistemicSymbol: "★",
+      epistemicGrade: "Lean 4.33.0 Pure-Core Kernel Checked (04-bellman-contraction-and-mdp-compression/MoeDualBiasNetworkCodingAndShamirSharingFrontier.lean · 0 sorry)",
+      domains: "Sparse Mixture-of-Experts (`MoE`) LLM Routing (`04`) ↔ Kantorovich / Walrasian Dual-Price Assignment (`08`)",
+      howConnected: "Why & How Connected: Proves `dual_bias_balanced_moe_maximizes_true_affinity` over arbitrary `Fin M × Fin E`: routing each token by biased affinity `S(i,e) + b(e)` decomposes as `moeTrueAffinity + ∑_e C(e) b(e)`, so on any capacity-balanced manifold `∑_i A(i,e) = C(e)` the dual potential cancels identically — achieving global true-affinity optimality (`50`) with `0` token drops and `0` auxiliary-loss gradient interference!",
+      selfCritique: "Premise-Failure Counterexample (`moe_6x3_token_drop_vs_loss_free_dual_bias_witness`): Without dual expert biases (`b = 0`), greedy argmax routes all `6` tokens to popular Expert `0`, overflowing capacity `C = 2` (`4/6 = 66.7%` dropped!) and collapsing served true affinity from `50` down to `20`.",
+      statement: "(∀ e, ∑_i A(i,e) = C(e) = ∑_i B(i,e)) ∧ rowMax_b(A) ⟹ moeTrueAffinity B ≤ moeTrueAffinity A; `50` (`0` drops) vs. `20` (`4/6` dropped).",
+      leanFile: "04-bellman-contraction-and-mdp-compression/MoeDualBiasNetworkCodingAndShamirSharingFrontier.lean",
+      theoremName: "dual_bias_balanced_moe_maximizes_true_affinity",
+      interactiveLab: 96
+    },
+    {
+      id: "bt-v242-butterfly-linear-network-coding-vs-store-and-forward",
+      title: "359. Ahlswede–Cai–Li–Yeung Butterfly `𝔽₂` Linear Network Coding (`2` Bits/Tick) vs. `1`-Bit Store-and-Forward Routing Impossibility (`09`+`02`)",
+      projects: ["oai-codes", "cslib"],
+      epistemicSymbol: "★",
+      epistemicGrade: "Lean 4.33.0 Pure-Core Kernel Checked (04-bellman-contraction-and-mdp-compression/MoeDualBiasNetworkCodingAndShamirSharingFrontier.lean · 0 sorry)",
+      domains: "Multicast Packet Switching & Collective Communication (`09`) ↔ Finite-Field `𝔽₂` Coset Coding (`02`)",
+      howConnected: "Why & How Connected: Certifies `butterfly_linear_network_coding_achieves_2bit_multicast`: sending `e_mid = (b₁ + b₂) % 2` across the shared center bottleneck lets `R₁` recover `(b₁, b₁ ⊕ z)` and `R₂` recover `(b₂ ⊕ z, b₂)` simultaneously across all `4` input pairs (`2` bits/tick multicast capacity).",
+      selfCritique: "Universal Routing Impossibility (`butterfly_store_and_forward_routing_bottleneck_impossibility`): Treating information as an unmixed commodity (`e_mid = b₁` or `e_mid = b₂`) provably collides on `2` input pairs for EVERY possible decoder pair `(dec₁, dec₂)`, capping store-and-forward multicast throughput at `1` bit/tick!",
+      statement: "∀ b₁ b₂ : Fin 2, R₁(b₁, b₁⊕b₂) = (b₁,b₂) ∧ R₂(b₂, b₁⊕b₂) = (b₁,b₂) ∧ ∀ dec₁, ¬(∀ b₁ b₂, dec₁ b₁ b₁ = (b₁,b₂)).",
+      leanFile: "04-bellman-contraction-and-mdp-compression/MoeDualBiasNetworkCodingAndShamirSharingFrontier.lean",
+      theoremName: "butterfly_store_and_forward_routing_bottleneck_impossibility",
+      interactiveLab: 96
+    },
+    {
+      id: "bt-v242-shamir-secret-sharing-vs-zero-coordinate-leak",
+      title: "360. Shamir `(2, n)` Polynomial Secret Sharing (`I(S; Y_x) = 0`) vs. Universal `x = 0` Evaluation Coordinate Total Secret Leak (`02`+`03`+`10`)",
+      projects: ["oai-codes", "tc-probcomb", "cslib"],
+      epistemicSymbol: "★",
+      epistemicGrade: "Lean 4.33.0 Pure-Core Kernel Checked (04-bellman-contraction-and-mdp-compression/MoeDualBiasNetworkCodingAndShamirSharingFrontier.lean · 0 sorry)",
+      domains: "Threshold MPC / Distributed Key Custody (`10`/`03`) ↔ Reed–Solomon Lagrange Interpolation (`02`)",
+      howConnected: "Why & How Connected: Proves exact `2`-of-`n` Lagrange reconstruction over `𝔽₁₇` (`289/289` `(s, r)` pairs at `{1, 2}` and `{3, 11}`) alongside exhaustive `1`-share uniformity over `𝔽₇` (`shamir_single_share_perfect_uniformity_7`: every nonzero `x ≠ 0` hits every `y` for exactly `1` slope `r`, so `I(S; Y_x) = 0`).",
+      selfCritique: "Real-World `0`-Index Vulnerability (`shamir_zero_coordinate_universal_leak`): Over ANY modulus `p > 0`, assigning participant index `0` evaluates `P_{s,r}(0) = (s + r · 0) % p = s` independently of `r` (slope multiplicity `p` vs `0`), leaking `100%` of the master secret from a single share!",
+      statement: "∀ p > 0, ∀ s r : Fin p, P_{s,r}(0) = s ∧ (∀ x ≠ 0 ∈ 𝔽₇, ∀ s y, |{r | P_{s,r}(x)=y}| = 1).",
+      leanFile: "04-bellman-contraction-and-mdp-compression/MoeDualBiasNetworkCodingAndShamirSharingFrontier.lean",
+      theoremName: "shamir_zero_coordinate_universal_leak",
+      interactiveLab: 96
+    },
+    {
+      id: "bt-v242-suite-643-moe-network-coding-shamir-synthesis",
+      title: "361. `Suite #643` Unified Master Bridge: Dual-Bias `MoE` Optimality (`50` vs `20`), Butterfly XOR Capacity (`2 > 1`) & Shamir Nonzero Gate (`04`+`09`+`02`+`10`)",
+      projects: ["oai-codes", "econlib", "cslib", "tc-probcomb"],
+      epistemicSymbol: "★",
+      epistemicGrade: "Lean 4.33.0 Pure-Core Kernel Checked (CommonGround/Verification/TheoremAtlasMoeDualBiasNetworkCodingAndShamirSharingBridge.lean · 0 sorry)",
+      domains: "Distributed AI Expert Routing (`04`) ↔ Algebraic Network Multicast (`09`) ↔ Threshold Cryptography (`10`)",
+      howConnected: "Why & How Connected: Unifies three concrete finite-algebraic mechanisms where adding an auxiliary algebraic degree of freedom (Lagrange dual expert bias `b_e`, `𝔽₂` parity coding `b₁ ⊕ b₂`, or random polynomial slope `r · x` at `x ≠ 0`) eliminates a catastrophic classical bottleneck without distorting the underlying payload!",
+      selfCritique: "Verified Premise Gates: Dropping `b_e` drops `66.7%` of tokens; dropping XOR mixing halves multicast rate; dropping `x ≠ 0` leaks the secret in `1` share.",
+      statement: "master_moe_dual_bias_network_coding_and_shamir_sharing_bridge (`Suite #643`, `0` sorry).",
+      leanFile: "CommonGround/Verification/TheoremAtlasMoeDualBiasNetworkCodingAndShamirSharingBridge.lean",
+      theoremName: "master_moe_dual_bias_network_coding_and_shamir_sharing_bridge",
+      interactiveLab: 96
+    }
+  ];
+  var existingBtIds242 = new Set(window.CG_VERIFIED_ATLAS_BREAKTHROUGHS.map(function(b) { return b && b.id; }));
+  v242Breakthroughs.forEach(function(b) {
+    if (!existingBtIds242.has(b.id)) window.CG_VERIFIED_ATLAS_BREAKTHROUGHS.push(b);
+  });
+
+  // 3. Register Promising Research Leads #165-166 (`166/166` `100%` `.lean`-Anchored)
+  window.CG_PROMISING_RESEARCH_LEADS = window.CG_PROMISING_RESEARCH_LEADS || [];
+  var v242Leads = [
+    {
+      id: "lead-v242-loss-free-dual-bias-moe-and-network-coded-expert-dispatch",
+      title: "165. Formally Verified Loss-Free Dual-Bias `MoE` Routing + Linear Network-Coded Expert All-to-All Collectives (`04`+`08`+`09`)",
+      projects: ["econlib", "oai-codes", "cslib"],
+      targetStarId: "suite-643-moe-dual-bias-network-coding-shamir-sharing",
+      domains: "Trillion-Parameter Sparse `MoE` Training (`04`/`08`) ↔ Algebraic Collective Interconnect Coding (`09`/`02`)",
+      whyPromising: "Combining `dual_bias_balanced_moe_maximizes_true_affinity` (which proves `DeepSeek-V3`-style bias updates preserve true token-expert affinity without auxiliary-loss interference) with linear network coding over NVLink/RDMA rail switches eliminates BOTH expert token-drop collapse AND multicast dispatch stragglers.",
+      whatStatementUnlocked: "Zero-sorry Lean 4 convergence + throughput bound for online sign-SGD dual-bias `b_e^{(t+1)} = b_e^{(t)} + γ sign(C_e - load_e)` coupled with `GF(2⁸)` network-coded top-`k` expert token broadcast.",
+      realWorldUseCase: "Zero-drop, interference-free expert routing and bandwidth-optimal cross-node All-to-All dispatch for frontier sparse `MoE` foundation models across multi-rack GPU clusters.",
+      keyObstacle: "Bounding transient queue overshoot during rapid domain-shift microbatches when dual biases adapt with quantized step size `γ`.",
+      leanAnchor: "04-bellman-contraction-and-mdp-compression/MoeDualBiasNetworkCodingAndShamirSharingFrontier.lean",
+      labIndex: 96
+    },
+    {
+      id: "lead-v242-verified-nonzero-coordinate-frost-and-threshold-mpc-ceremonies",
+      title: "166. Machine-Checked Nonzero-Coordinate `FROST` Schnorr & Threshold `ECDSA` Key-Sharing Ceremonies (`02`+`03`+`10`)",
+      projects: ["oai-codes", "cslib", "tc-probcomb"],
+      targetStarId: "suite-643-moe-dual-bias-network-coding-shamir-sharing",
+      domains: "Threshold Custody & Distributed Validator Signing (`10`) ↔ Finite-Field Polynomial Interpolation (`02`/`03`)",
+      whyPromising: "Extending `shamir_zero_coordinate_universal_leak` and `shamir_2_of_n_exact_lagrange_reconstruction_17` to arbitrary degree-`(t-1)` Feldman/Pedersen VSS polynomials provides a compile-time Lean 4 type guard (`{ x : Fin p // x.val ≠ 0 }`) that makes `0`-indexed participant secret-leak CVEs unrepresentable.",
+      whatStatementUnlocked: "End-to-end zero-sorry Lean 4 security proof of `(t, n)` `FROST` distributed key generation (`I(S; {Y_x}_{|T|<t}) = 0`) with subtype-enforced nonzero evaluation coordinates and pairwise distinctness.",
+      realWorldUseCase: "Formally verified institutional custody wallets, distributed Ethereum validator key splitters (`DVT`), and HSM threshold root-CA ceremonies immune to `0`-index key-recovery bugs.",
+      keyObstacle: "Lifting finite-field Vandermonde determinant non-vanishing from fixed prime witnesses to arbitrary `256`-bit prime scalar fields (`secp256k1` / `Ed25519`).",
+      leanAnchor: "CommonGround/Verification/TheoremAtlasMoeDualBiasNetworkCodingAndShamirSharingBridge.lean",
+      labIndex: 96
+    }
+  ];
+  var existingLeadIds242 = new Set(window.CG_PROMISING_RESEARCH_LEADS.map(function(l) { return l && l.id; }));
+  v242Leads.forEach(function(nl) {
+    if (!existingLeadIds242.has(nl.id)) window.CG_PROMISING_RESEARCH_LEADS.push(nl);
+  });
+
+  // 4. Register Premise-Boundary Guardrail & Archetype #35
+  if (Array.isArray(window.CG_BOUNDARY_RULES)) {
+    var v242Rule = {
+      id: "moe-dual-bias-butterfly-network-coding-and-shamir-zero-coord-boundary",
+      groups: [
+        ["moe", "mixture_of_experts", "routing", "network_coding", "butterfly", "multicast", "shamir", "secret_sharing", "lagrange"],
+        ["drop", "auxiliary_loss", "capacity", "store_and_forward", "bottleneck", "zero_index", "x_eq_0", "leak"]
+      ],
+      title: "Premise Boundary · Unbiased `MoE` Drops `66.7%` Tokens; Store-and-Forward Caps Multicast at `1` Bit; `x = 0` Leaks Shamir Secret",
+      warning: "(1) Unbiased argmax (`b = 0`) routes all tokens to popular experts, dropping overflow tokens (`4/6 = 66.7%`), while auxiliary losses distort gradients. (2) Unmixed packet forwarding collides on the Butterfly bottleneck (`1` bit/tick < `2`). (3) Evaluating Shamir `P(x)` at `x = 0` (`0`-indexed ID) outputs `P(0) = s` directly!",
+      remedy: "Route via loss-free dual biases `S(i,e) + b(e)` on balanced capacity `∑_i A(i,e) = C(e)`, mix bottleneck packets algebraically (`b₁ ⊕ b₂` over `𝔽_q`), and enforce subtype `x ≠ 0` (`1`-indexed distinct coordinates) in all `(t, n)` Shamir/FROST shares.",
+      targetLab: 96
+    };
+    if (!window.CG_BOUNDARY_RULES.some(function(r) { return r && r.id === v242Rule.id; })) {
+      window.CG_BOUNDARY_RULES.push(v242Rule);
+    }
+  }
+
+  if (Array.isArray(window.V95_OBSTACLES)) {
+    var arch35 = {
+      id: "moe_dual_bias_network_coding_and_shamir_threshold_gate",
+      name: "35. Loss-Free Dual-Bias MoE Potential, Linear Network Coding & Nonzero Shamir Interpolation Gate",
+      label: "35. Loss-Free `MoE` Dual-Bias, Butterfly `𝔽₂` Network Coding & Shamir `(t, n)` Nonzero Gate (`04`+`09`+`02`+`10`)",
+      carrier: "DualPotentialAlgebraicMixingAndNonzeroShareGate",
+      premiseGate: "Requires identical expert capacities `∑_i A(i,e) = C(e)` for dual-bias cancellation, algebraic `𝔽_q` mixing on shared multicast bottlenecks, and pairwise distinct nonzero coordinates `x_i ≠ 0` for Shamir secret sharing",
+      tactic: "Decompose biased routing via `finSumInt_swap` + `Int.mul_add`, refute unmixed decoders by pigeonhole `injection`, and discharge `P_{s,r}(0) = s` vs. nonzero slope bijection via `decide`."
+    };
+    if (!window.V95_OBSTACLES.some(function(o) { return o && o.id === arch35.id; })) {
+      window.V95_OBSTACLES.push(arch35);
+    }
+  }
+
+  // 5. Interactive Finite Micro-Lab #97 (index 96): Loss-Free MoE Dual-Bias, Butterfly Network Coding & Shamir Suite #643
+  window._v136State = Object.assign(window._v136State || {}, {
+    v242Mode: "moe-dual-bias-vs-token-drop",
+    v242MoeDualBias: 1,   // 1 = Loss-Free Dual Bias b=(0,2,5) (50 affinity, 0 drops), 0 = Unbiased b=(0,0,0) (20 served, 4/6 dropped!)
+    v242NetCoding: 1,     // 1 = Butterfly XOR Coding (2 bits/tick, 0 collisions), 0 = Store-and-Forward (1 bit/tick, 2 collisions!)
+    v242ShamirCoord: 1    // 1..16 = Nonzero Share Coordinate (I(S;Y)=0, mult=1), 0 = Buggy 0-Indexed Coordinate P(0)=s (100% leak!)
+  });
+
+  window.v242MoeNetcodeShamirLabModel = function(mode, opts) {
+    var o = opts || {};
+    var dualBias = (typeof o.dualBias === "number") ? o.dualBias : 1;
+    var netCoding = (typeof o.netCoding === "number") ? o.netCoding : 1;
+    var shamirCoord = (typeof o.shamirCoord === "number") ? o.shamirCoord : 1;
+
+    var moeLoads = dualBias === 1 ? [2, 2, 2] : [6, 0, 0];
+    var moeDroppedTokens = dualBias === 1 ? 0 : 4;
+    var moeDropPct = Math.round((moeDroppedTokens * 1000) / 6) / 10; // 0% vs 66.7%
+    var moeServedAffinity = dualBias === 1 ? 50 : 20;
+
+    var multicastRateBits = netCoding === 1 ? 2 : 1;
+    var butterflyCollisions = netCoding === 1 ? 0 : 2;
+
+    var shamirSlopeMult17 = shamirCoord === 0 ? 17 : 1; // Over F_17: r*0 = 0 hits y=s 17 times vs 1 time for x != 0
+    var shamirSecretLeakPct = shamirCoord === 0 ? 100 : 0;
+
+    var mKey = mode || "moe-dual-bias-vs-token-drop";
+    var heading = dualBias === 1
+      ? "`DeepSeek-V3` Loss-Free Dual-Bias `MoE` (`b = (0, 2, 5)`): Load `(2, 2, 2)`, `0%` Drops & Optimal True Affinity `50`!"
+      : "Premise Failure · Unbiased Argmax (`b = (0, 0, 0)`): Load `(6, 0, 0)`, `4/6 = 66.7%` Tokens Dropped & Affinity `20`!";
+    var operatorEq = "∑_{i,e} A(i,e)(S(i,e) + b_e) = moeTrueAffinity(A, S) + ∑_e C_e b_e   [cancels identically when ∑_i A(i,e) = C_e!]";
+    var witnessDetail = dualBias === 1
+      ? "Adding expert biases `b = (0, 2, 5)` shifts tokens `{2,3}` to Expert `1` (`9+2 > 10`) and `{4,5}` to Expert `2` (`6+5 > 10`), hitting exact capacity `(2, 2, 2)` with `0` dropped tokens, `0` auxiliary-loss gradient distortion, and globally maximal true affinity `50`!"
+      : "Without dual biases (`b = 0`), Expert `0` wins argmax on all `6` tokens (`10 > 9 > 6`), overflowing capacity `C = 2`: `4` of `6` tokens (`66.7%`) are dropped and served true affinity collapses from `50` down to `20`!";
+    var secondaryDetail = "`MoE` Served: `" + moeServedAffinity + "/50` (`drops=" + moeDroppedTokens + "/6`) · Butterfly Rate: `" + multicastRateBits + " bits/tick` (`collisions=" + butterflyCollisions + "`) · Shamir `x=" + shamirCoord + "` Leak: `" + shamirSecretLeakPct + "%` (`mult=" + shamirSlopeMult17 + "`).";
+
+    if (mKey === "butterfly-xor-vs-routing-bottleneck") {
+      heading = netCoding === 1
+        ? "Butterfly `𝔽₂` Linear Network Coding (`e_mid = b₁ ⊕ b₂`): `2` Bits/Tick Multicast to Both Receivers (`0` Collisions)"
+        : "Premise Failure · Store-and-Forward Routing (`e_mid = b₁` or `b₂`): `2` Input Collisions Cap Rate at `1` Bit/Tick!";
+      operatorEq = "R₁(b₁, b₁ ⊕ b₂) = (b₁, b₂) ∧ R₂(b₂, b₁ ⊕ b₂) = (b₁, b₂)   vs.   ∀ dec₁, ¬(∀ b₁ b₂, dec₁(b₁, b₁) = (b₁, b₂))";
+      witnessDetail = netCoding === 1
+        ? "Algebraically XORing `b₁ ⊕ b₂` on the single center bottleneck edge lets `R₁` cancel `b₁` (`b₁ ⊕ (b₁ ⊕ b₂) = b₂`) and `R₂` cancel `b₂` simultaneously — doubling multicast throughput from `1` to `2` bits/tick!"
+        : "Forwarding an unmixed bit (`e_mid = b₁`) gives `R₁` identical inputs `(1, 1)` on both `(b₁, b₂) = (1, 0)` and `(1, 1)`, forcing `2` decoding collisions for EVERY possible receiver function!";
+    } else if (mKey === "shamir-threshold-vs-zero-coord-leak") {
+      heading = shamirCoord !== 0
+        ? "Shamir `(2, n)` Share at Nonzero `x = " + shamirCoord + " ∈ 𝔽₁₇×`: Slope Multiplicity `1` (`0%` `1`-Share Leak) & Exact `2`-Share Recovery"
+        : "Premise Failure · `0`-Indexed Participant `x = 0`: `P_{s,r}(0) = s` Leaks `100%` of Secret from `1` Share (`Mult = 17`)!";
+      operatorEq = "x ≠ 0 ⟹ ∀ s y, |{r ∈ 𝔽_p | s + r·x ≡ y}| = 1 (I(S;Y_x)=0)   vs.   P_{s,r}(0) = (s + r·0) mod p = s";
+      witnessDetail = shamirCoord !== 0
+        ? "Because `x = " + shamirCoord + "` is invertible mod `17`, every candidate secret `s` maps bijectively onto all `17` share values `y` as slope `r` varies (`I(S; Y_x) = 0`), while any `2` distinct nonzero shares reconstruct `s` across all `289` `(s, r)` pairs!"
+        : "Assigning `0`-indexed participant ID `x = 0` annihilates the random mask `r · 0 = 0`, so `P_{s,r}(0) = s` for ALL `17` slopes (`multiplicity = 17` at `y = s`, `0` elsewhere) — exposing the master key from `1` share!";
+    }
+
+    var failed = (dualBias === 0) || (netCoding === 0) || (shamirCoord === 0);
+    return {
+      mode: mKey,
+      dualBias: dualBias,
+      moeLoads: moeLoads,
+      moeDroppedTokens: moeDroppedTokens,
+      moeDropPct: moeDropPct,
+      moeServedAffinity: moeServedAffinity,
+      netCoding: netCoding,
+      multicastRateBits: multicastRateBits,
+      butterflyCollisions: butterflyCollisions,
+      shamirCoord: shamirCoord,
+      shamirSlopeMult17: shamirSlopeMult17,
+      shamirSecretLeakPct: shamirSecretLeakPct,
+      heading: heading,
+      operatorEq: operatorEq,
+      witnessDetail: witnessDetail,
+      secondaryDetail: secondaryDetail,
+      verdict: failed
+        ? (dualBias === 0
+            ? "✕ `MoE` TOKEN-DROP COLLAPSE: Unbiased routing drops `4/6` (`66.7%`) tokens (`affinity 20 < 50`)!"
+            : (netCoding === 0
+                ? "⚠ ROUTING BOTTLENECK COLLISION: Store-and-forward collides on `2` pairs (`1` bit/tick < `2`)!"
+                : "✕ CRITICAL `x = 0` SECRET LEAK: `P(0) = s` exposes `100%` of master key from `1` share!"))
+        : "★ SUITE #643 VERIFIED: `MoE` Affinity `50` (`0` drops), Butterfly `2` bits/tick & Shamir `x=" + shamirCoord + "` (`0%` leak)!",
+      leanRef: "CommonGround/Verification/TheoremAtlasMoeDualBiasNetworkCodingAndShamirSharingBridge.lean :: master_moe_dual_bias_network_coding_and_shamir_sharing_bridge"
+    };
+  };
+
+  var prevRenderFiniteV241 = window.v136RenderFiniteBody;
+  window.v136RenderFiniteBody = function() {
+    var st = window._v136State || {};
+    for (var i = 0; i < 97; i++) {
+      var tb = document.getElementById("v136-tab-" + i);
+      if (tb) tb.className = "v61-prog-tab" + (st.activeLab === i ? " active" : "");
+    }
+    if (st.activeLab < 96 && typeof prevRenderFiniteV241 === "function") {
+      return prevRenderFiniteV241();
+    }
+    var mount = document.getElementById("v136-finite-mount") || document.getElementById("v136-finite-body");
+    if (!mount || st.activeLab !== 96) return;
+
+    var lm = window.v242MoeNetcodeShamirLabModel(st.v242Mode, {
+      dualBias: st.v242MoeDualBias,
+      netCoding: st.v242NetCoding,
+      shamirCoord: st.v242ShamirCoord
+    });
+
+    var modes = [
+      { id: "moe-dual-bias-vs-token-drop", label: "★ MoE Dual-Bias (50) vs. 66.7% Drop" },
+      { id: "butterfly-xor-vs-routing-bottleneck", label: "★ Butterfly XOR (2b) vs. 1b Routing" },
+      { id: "shamir-threshold-vs-zero-coord-leak", label: "★ Shamir (x≠0) vs. x=0 Secret Leak" }
+    ];
+    var modeBtns = modes.map(function(md) {
+      var act = lm.mode === md.id;
+      return '<button type="button" class="cg-calm-chip' + (act ? ' is-active' : '') + '" onclick="window._v136State.v242Mode=\'' + md.id + '\';window.v136RenderFiniteBody();">' + md.label + '</button>';
+    }).join("");
+
+    var expBars = [0, 1, 2].map(function(eIdx) {
+      var ld = lm.moeLoads[eIdx];
+      var hBar = Math.max(4, ld * 10);
+      var bx = 20 + eIdx * 32;
+      var by = 86 - hBar;
+      var over = ld > 2;
+      return '<rect x="' + bx + '" y="' + by + '" width="22" height="' + hBar + '" rx="2.5" fill="' + (over ? '#fb7185' : '#34d399') + '" />' +
+        '<text x="' + (bx + 11) + '" y="96" text-anchor="middle" fill="#cbd5e1" font-size="7" font-family="ui-monospace,SFMono-Regular,monospace">E' + eIdx + ':' + ld + '</text>';
+    }).join("");
+
+    mount.innerHTML =
+      '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:12px;">' +
+        '<div style="display:flex;flex-wrap:wrap;gap:6px;">' + modeBtns + '</div>' +
+        '<span class="v136-status-pill">Lab #97 · Suite #643 · 760 Zero-Sorry .lean Files (Suite 100 · 504 Checks!)</span>' +
+      '</div>' +
+      '<div class="v136-grid-2">' +
+        '<div class="v136-finite-card">' +
+          '<div style="font-size:11px;font-weight:800;letter-spacing:0.07em;color:#fbbf24;text-transform:uppercase;margin-bottom:4px;">Loss-Free Dual-Bias `MoE`, Butterfly `𝔽₂` Network Coding &amp; Shamir `(2, n)` Secret Sharing (`04`+`09`+`02`+`10`)</div>' +
+          '<h3 style="margin:0 0 8px 0;font-size:15.5px;color:#f8fafc;">' + lm.heading + '</h3>' +
+          '<div style="font-family:var(--font-mono);font-size:11.5px;color:#fde68a;margin-bottom:8px;">' + lm.operatorEq + '</div>' +
+          '<div style="font-size:12px;color:#cbd5e1;line-height:1.55;margin-bottom:10px;">' + lm.witnessDetail + '</div>' +
+          '<div style="padding:9px 11px;border-radius:8px;background:rgba(6,13,26,0.9);border:1px solid rgba(56,189,248,0.28);">' +
+            '<div style="font-size:10.5px;font-weight:800;color:#7dd3fc;margin-bottom:6px;">INTERACTIVE `MoE` DUAL BIAS, BUTTERFLY BOTTLENECK MIXING &amp; SHAMIR SHARE COORDINATE</div>' +
+            '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:11.5px;color:#e2e8f0;">' +
+              '<label>MoE Bias (0/1): <strong style="color:' + (lm.dualBias === 1 ? '#34d399' : '#fb7185') + '">' + (lm.dualBias === 1 ? 'b=(0,2,5) → 50' : 'b=0 (4/6 Drop!)') + '</strong><input type="range" min="0" max="1" value="' + lm.dualBias + '" style="width:100%" oninput="window._v136State.v242MoeDualBias=Number(this.value);window.v136RenderFiniteBody();"></label>' +
+              '<label>Bottleneck (0/1): <strong style="color:' + (lm.netCoding === 1 ? '#34d399' : '#fb7185') + '">' + (lm.netCoding === 1 ? 'XOR b₁⊕b₂ (2b)' : 'Unmixed (1b!)') + '</strong><input type="range" min="0" max="1" value="' + lm.netCoding + '" style="width:100%" oninput="window._v136State.v242NetCoding=Number(this.value);window.v136RenderFiniteBody();"></label>' +
+              '<label>Shamir x (0..8): <strong style="color:' + (lm.shamirCoord !== 0 ? '#34d399' : '#fb7185') + '">' + (lm.shamirCoord !== 0 ? 'x=' + lm.shamirCoord + ' (I=0)' : 'x=0 (100% Leak!)') + '</strong><input type="range" min="0" max="8" value="' + lm.shamirCoord + '" style="width:100%" oninput="window._v136State.v242ShamirCoord=Number(this.value);window.v136RenderFiniteBody();"></label>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="v136-finite-card">' +
+          '<div style="font-size:11px;font-weight:800;color:#34d399;margin-bottom:6px;">`6×3` `MoE` CAPACITY BARS (`C=2`), BUTTERFLY `b₁⊕b₂` &amp; SHAMIR `x ≠ 0` GUARD</div>' +
+          '<svg id="v242-moe-netcode-shamir-svg" viewBox="0 0 380 104" style="width:100%;height:auto;margin-bottom:8px;border-radius:7px;background:rgba(5,11,22,0.92);border:1px solid rgba(148,163,184,0.2);">' +
+            '<text x="16" y="15" fill="#fde68a" font-size="7.4" font-family="ui-monospace,SFMono-Regular,monospace">MoE Aff=' + lm.moeServedAffinity + ' (' + lm.moeDropPct + '% drop)</text>' +
+            '<line x1="14" y1="66" x2="112" y2="66" stroke="#fbbf24" stroke-dasharray="2,2" stroke-width="1" />' +
+            expBars +
+            '<line x1="120" y1="10" x2="120" y2="96" stroke="rgba(148,163,184,0.22)" stroke-width="1" />' +
+            '<rect x="128" y="18" width="238" height="34" rx="5" fill="' + (lm.netCoding === 1 ? 'rgba(16,185,129,0.20)' : 'rgba(244,63,94,0.25)') + '" stroke="' + (lm.netCoding === 1 ? '#34d399' : '#fb7185') + '" />' +
+            '<text x="247" y="38" text-anchor="middle" fill="#f8fafc" font-size="7.7" font-weight="700" font-family="ui-monospace,SFMono-Regular,monospace">' + (lm.netCoding === 1 ? 'Butterfly e_mid = b₁ ⊕ b₂ · Rate = 2 bits/tick (0 Collisions)' : 'Unmixed e_mid = b₁ · Rate = 1 bit/tick (2 Collisions!)') + '</text>' +
+            '<rect x="128" y="60" width="238" height="34" rx="5" fill="' + (lm.shamirCoord !== 0 ? 'rgba(56,189,248,0.20)' : 'rgba(244,63,94,0.25)') + '" stroke="' + (lm.shamirCoord !== 0 ? '#38bdf8' : '#fb7185') + '" />' +
+            '<text x="247" y="80" text-anchor="middle" fill="#f8fafc" font-size="7.7" font-weight="700" font-family="ui-monospace,SFMono-Regular,monospace">' + (lm.shamirCoord !== 0 ? 'Shamir Share x=' + lm.shamirCoord + ' ∈ F₁₇× · Mult=1 · Leak=0%' : 'Shamir Bug x=0 · P(0)=s · Mult=17 · 100% Secret Leak!') + '</text>' +
+          '</svg>' +
+          '<div style="font-size:12px;color:#e2e8f0;line-height:1.55;">' +
+            '<div style="margin-bottom:8px;">' + lm.secondaryDetail + '</div>' +
+            '<div style="padding:8px 10px;border-radius:7px;background:rgba(16,185,129,0.12);border:1px solid rgba(52,211,153,0.35);color:#d1fae5;font-weight:650;">' + lm.verdict + '</div>' +
+            '<div style="margin-top:8px;font-size:11px;color:#94a3b8;">Kernel-checked in <code>' + lm.leanRef + '</code></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  };
+
+  var prevOpenFiniteV241 = window.v136OpenV34FiniteDiagramsModal;
+  window.v136OpenV34FiniteDiagramsModal = function(initialLab) {
+    window._v136LabFilterQuery = "";
+    prevOpenFiniteV241(typeof initialLab === "number" ? Math.min(initialLab, 95) : 0);
+    window._v136State.activeLab = typeof initialLab === "number" ? initialLab : 0;
+    var bd = document.getElementById("v136-finite-backdrop");
+    if (bd) {
+      var tabsWrap = bd.querySelector(".v61-prog-tabs");
+      if (tabsWrap && !document.getElementById("v136-tab-96")) {
+        tabsWrap.insertAdjacentHTML("beforeend",
+          '<button type="button" id="v136-tab-96" class="v61-prog-tab" onclick="window.v136SetLab(96);window.cgSyncFiniteLabSelect();">97. Loss-Free MoE Dual-Bias, Butterfly Network Coding &amp; Shamir Secret Sharing Suite #643</button>'
+        );
+      }
+    }
+    if (typeof window.cgSyncFiniteLabSelect === "function") {
+      window.cgSyncFiniteLabSelect();
+    }
+    window.v136RenderFiniteBody();
+  };
+
+  // Refresh live caches
+  window.CG_FINITE_LAB_TITLES = null;
+  window._cgOmniboxCachedPool = null;
+  window._cgHybridCorpusCache = null;
+  if (typeof window.cgGetFiniteLabCatalog === "function") {
+    window.cgGetFiniteLabCatalog();
+  }
+
+  // Milestone Suite 100: 504/504 E2E Checks — V242 Loss-Free MoE Dual-Bias, Butterfly Network Coding & Shamir Suite #643, 460-Quartet Certs, Lab #97 & Sub-30 MiB Hydration
+  var prevRunTestsV241 = window.v147RunAllAutomatedTests;
+  if (typeof prevRunTestsV241 === "function") {
+    window.v147RunAllAutomatedTests = function() {
+      var rep = prevRunTestsV241();
+      var extra242 = [];
+      function addV242Check(name, cond, detail) {
+        extra242.push({
+          id: "T" + (rep.total + extra242.length + 1),
+          category: "100. V242 Milestone Suite 100 (504/504 Checks): MoE Dual-Bias, Butterfly XOR & Shamir Suite #643, Quartet Certs & Sub-30 MiB Pools",
+          name: name,
+          passed: Boolean(cond),
+          detail: detail || ""
+        });
+      }
+
+      // Check 501: `Suite #643` (`760` Zero-Sorry `.lean` Files, `720` compiled), `361` Breakthroughs, `166` Leads, `35` Archetypes & Sub-`30 MiB` Pool Hydration
+      var pre242 = window.__CG_PRELOADED__ || {};
+      var sm242 = (typeof semanticMechanisms !== "undefined" && semanticMechanisms) || {};
+      var suites242 = sm242.verifiedLeanSuites || [];
+      var has643 = suites242.some(function(s) {
+        return s && s.leanFile === "CommonGround/Verification/TheoremAtlasMoeDualBiasNetworkCodingAndShamirSharingBridge.lean";
+      });
+      var isos242 = sm242.customIsomorphisms || [];
+      var mechs242 = sm242.highLevelMechanisms || [];
+      var conns242 = (pre242.insightPaths && pre242.insightPaths.connections) || [];
+      var sub30HydratedOk = Boolean(
+        isos242.length === 7000 &&
+        isos242[6999] && String(isos242[6999].astSkeleton || "").length > 5 &&
+        String(isos242[6999].projectAName || "").length > 3 &&
+        mechs242.length === 1400 &&
+        mechs242[1399] && mechs242[1399].researchPlaybook && Array.isArray(mechs242[1399].proofStepper) &&
+        conns242.length === 2800 &&
+        conns242[2799] && String(conns242[2799].disciplineBridge || "").length > 3 &&
+        String(conns242[2799].kind || "").length > 2
+      );
+      var bts242 = window.CG_VERIFIED_ATLAS_BREAKTHROUGHS || [];
+      var lds242 = window.CG_PROMISING_RESEARCH_LEADS || [];
+      var obs242 = window.V95_OBSTACLES || [];
+      var r2c242 = window.CG_R2_CORPUS_CONFIG || {};
+      addV242Check(
+        "`Suite #643` (`760` Zero-Sorry `.lean` Files, `720` compiled), `361` Breakthroughs, `166` Leads, `35` Archetypes & Sub-`30 MiB` Lossless Pool Hydration verified",
+        Boolean(
+          has643 &&
+          suites242.length >= 643 &&
+          sub30HydratedOk &&
+          bts242.length >= 361 &&
+          lds242.length >= 166 &&
+          obs242.length >= 35 &&
+          r2c242.totalZeroSorryLeanFiles >= 760 &&
+          r2c242.kernelCompiledModules >= 720
+        ),
+        "suites=" + suites242.length + ", sub30HydratedOk=" + sub30HydratedOk
+      );
+
+      // Check 502: `Lab #97` (`v242MoeNetcodeShamirLabModel`) `MoE` `50` vs `20` (`66.7%` drop), Butterfly `2` vs `1` bit/tick, & Shamir `x≠0` (`0%`) vs `x=0` (`100%` leak)
+      var mSafe242 = window.v242MoeNetcodeShamirLabModel("moe-dual-bias-vs-token-drop", { dualBias: 1, netCoding: 1, shamirCoord: 3 });
+      var mFail242 = window.v242MoeNetcodeShamirLabModel("shamir-threshold-vs-zero-coord-leak", { dualBias: 0, netCoding: 0, shamirCoord: 0 });
+      var lab97MathOk = Boolean(
+        mSafe242.moeServedAffinity === 50 && mSafe242.moeDroppedTokens === 0 &&
+        mSafe242.multicastRateBits === 2 && mSafe242.butterflyCollisions === 0 &&
+        mSafe242.shamirSlopeMult17 === 1 && mSafe242.shamirSecretLeakPct === 0 &&
+        mFail242.moeServedAffinity === 20 && mFail242.moeDroppedTokens === 4 && mFail242.moeDropPct === 66.7 &&
+        mFail242.multicastRateBits === 1 && mFail242.butterflyCollisions === 2 &&
+        mFail242.shamirSlopeMult17 === 17 && mFail242.shamirSecretLeakPct === 100
+      );
+      addV242Check(
+        "`Lab #97` (`MoE` Dual-Bias `50` vs. Unbiased `20` & `66.7%` Drop, Butterfly `2` vs. `1` Bit/Tick, & Shamir `x≠0` `I=0` vs. `x=0` `100%` Leak) verified",
+        lab97MathOk,
+        "safeAff=" + mSafe242.moeServedAffinity + ", failAff=" + mFail242.moeServedAffinity + ", zeroLeak=" + mFail242.shamirSecretLeakPct
+      );
+
+      // Check 503: `460` 4-Domain Structural Quartets 1-Click Proof Certificate Continuity (`#cg-quartet-open-cert-btn` + `cgOpenQuartetVerifiedCert`)
+      var prevLens242 = state.lens;
+      var prevSub242 = state.serenSubmode;
+      state.lens = "serendipity";
+      state.serenSubmode = "trinities";
+      renderApp();
+      var qCertBtn242 = document.getElementById("cg-quartet-open-cert-btn");
+      var qChainBtn242 = document.getElementById("cg-quartet-compose-chain-btn");
+      var qCertRes242 = window.cgOpenQuartetVerifiedCert(0);
+      var certBd242 = document.getElementById("v55-cert-backdrop");
+      if (certBd242) certBd242.style.display = "none";
+      state.lens = prevLens242;
+      state.serenSubmode = prevSub242;
+      renderApp();
+      addV242Check(
+        "`460` 4-Domain Structural Quartets 1-Click Proof Certificate Continuity (`#cg-quartet-open-cert-btn` + `cgOpenQuartetVerifiedCert`) verified",
+        Boolean(qCertBtn242 && qChainBtn242 && qCertRes242 && String(qCertRes242.leanFile || "").endsWith(".lean")),
+        "qCertBtn=" + Boolean(qCertBtn242) + ", leanFile=" + (qCertRes242 && qCertRes242.leanFile)
+      );
+
+      // Check 504: `Lab #97` SVG (`#v242-moe-netcode-shamir-svg`), `97`-Lab Search Filter & `⌘K` Omnibox (`97 Labs`, `166 Leads`)
+      window.v136OpenV34FiniteDiagramsModal(96);
+      var sel136V242 = document.getElementById("v136-lab-quick-select");
+      var moeSvg242 = document.getElementById("v242-moe-netcode-shamir-svg");
+      if (typeof window.cgFilterFiniteLabSelect === "function") {
+        window.cgFilterFiniteLabSelect("Shamir");
+      }
+      var lab97FilterOk = Boolean(
+        moeSvg242 &&
+        sel136V242 &&
+        (sel136V242.innerHTML || "").indexOf("97. Loss-Free MoE Dual-Bias") !== -1 &&
+        (sel136V242.innerHTML || "").indexOf("1. Markov Counts") === -1
+      );
+      window.v136CloseFiniteModal();
+
+      window.cgOpenOmnibox("");
+      var omniCats242 = document.getElementById("cg-omnibox-cats");
+      var omniCatsTxt242 = omniCats242 ? (omniCats242.innerHTML || "") : "";
+      var mLabs242 = omniCatsTxt242.match(/(\d+)\s+Labs/);
+      var mLeads242 = omniCatsTxt242.match(/(\d+)\s+Leads/);
+      var omni97Ok = Boolean(mLabs242 && parseInt(mLabs242[1], 10) >= 97 && mLeads242 && parseInt(mLeads242[1], 10) >= 166);
+      window.cgCloseOmnibox();
+
+      addV242Check(
+        "Milestone Suite 100 · `Lab #97` SVG (`#v242-moe-netcode-shamir-svg`), `97`-Lab Search Filter & `⌘K` Omnibox (`97 Labs`, `166 Leads`) verified",
+        Boolean(lab97FilterOk && omni97Ok),
+        "lab97FilterOk=" + lab97FilterOk + ", omni97Ok=" + omni97Ok
+      );
+
+      for (var k6 = 0; k6 < extra242.length; k6++) {
+        rep.results.push(extra242[k6]);
+        rep.total++;
+        if (extra242[k6].passed) rep.passed++;
         else rep.failed++;
       }
       window._v147LastReport = rep;

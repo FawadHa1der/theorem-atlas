@@ -98,29 +98,37 @@ def discover_role_compatible_insights(data):
     - Surface AST lookalikes downgraded to ⚠ are excluded from top leads
     """
     sm = data.get("semanticMechanisms") or {}
+    dp = sm.get("isoDeclPool") or []
+    imp = sm.get("isoMetaPools") or {}
+    i_pn = imp.get("pnames") or []
+    i_dc = imp.get("discs") or []
+    i_so = imp.get("sops") or []
+    i_sk = imp.get("skels") or []
     isos = sm.get("customIsomorphisms") or data.get("crossDomainIsomorphisms") or []
     seen_pairs = set()
     ranked = []
     for iso in isos:
-        blob = json.dumps(iso).lower()
+        dA = iso.get("declA") or (dp[iso["_dA"]] if isinstance(iso.get("_dA"), int) and 0 <= iso["_dA"] < len(dp) else {})
+        dB = iso.get("declB") or (dp[iso["_dB"]] if isinstance(iso.get("_dB"), int) and 0 <= iso["_dB"] < len(dp) else {})
+        blob = (json.dumps(iso) + " " + json.dumps(dA) + " " + json.dumps(dB)).lower()
         if iso.get("isChallengeSpec") or "comparatorchallenges" in blob:
             continue
         if iso.get("epistemicSymbol") == "⚠":
             continue
         if any(tok in blob for tok in SYNTHETIC_TEMPLATE_TOKENS):
             continue
-        da = iso.get("disciplineA") or iso.get("domainA") or ""
-        db = iso.get("disciplineB") or iso.get("domainB") or ""
-        pa = iso.get("projectAName") or iso.get("projectA") or da
-        pb = iso.get("projectBName") or iso.get("projectB") or db
+        da = iso.get("disciplineA") or (i_dc[iso["_dcA"]] if isinstance(iso.get("_dcA"), int) and 0 <= iso["_dcA"] < len(i_dc) else "") or iso.get("domainA") or ""
+        db = iso.get("disciplineB") or (i_dc[iso["_dcB"]] if isinstance(iso.get("_dcB"), int) and 0 <= iso["_dcB"] < len(i_dc) else "") or iso.get("domainB") or ""
+        pa = iso.get("projectAName") or (i_pn[iso["_pAN"]] if isinstance(iso.get("_pAN"), int) and 0 <= iso["_pAN"] < len(i_pn) else "") or iso.get("projectA") or da
+        pb = iso.get("projectBName") or (i_pn[iso["_pBN"]] if isinstance(iso.get("_pBN"), int) and 0 <= iso["_pBN"] < len(i_pn) else "") or iso.get("projectB") or db
         if not da or not db or da == db:
             continue
-        dA = iso.get("declA") or {}
-        dB = iso.get("declB") or {}
         ep_key = (dA.get("name") or pa, dB.get("name") or pb)
         if ep_key in seen_pairs:
             continue
         seen_pairs.add(ep_key)
+        sops = iso.get("sharedOperators") or (i_so[iso["_so"]] if isinstance(iso.get("_so"), int) and 0 <= iso["_so"] < len(i_so) else [])
+        skel = iso.get("astSkeleton") or (i_sk[iso["_sk"]] if isinstance(iso.get("_sk"), int) and 0 <= iso["_sk"] < len(i_sk) else "")
         score = compute_composite_score(iso)
         ranked.append({
             "id": iso.get("id") or f"{pa}__{pb}",
@@ -130,8 +138,8 @@ def discover_role_compatible_insights(data):
             "endpointB": f"{iso.get('projectB')}:{dB.get('file') or dB.get('name')}",
             "score": score,
             "reviewedStar": bool(iso.get("epistemicSymbol") == "★"),
-            "sharedOperators": (iso.get("sharedOperators") or [])[:6],
-            "discoveryMethod": iso.get("astSkeleton") or "AST Role-Weighted IDF + Witness Verification",
+            "sharedOperators": sops[:6],
+            "discoveryMethod": skel or "AST Role-Weighted IDF + Witness Verification",
             "selfCritique": "Verified non-challenge, non-synthetic author endpoints across distinct disciplines; verify premise adapter before theorem transport.",
         })
     ranked.sort(key=lambda x: (1 if x.get("reviewedStar") else 0, x["score"]), reverse=True)

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V241).
+Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V242).
 Verifies:
-1. All 758+ physical Lean 4 files (642 in CommonGround/Verification/ + 116 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
+1. All 760+ physical Lean 4 files (643 in CommonGround/Verification/ + 117 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
    tokens outside comments (with NO 25 MiB cap on `.lean` files — large `.lean` files stream via Cloudflare R2 `/api/lean/*`)
    AND compile cleanly through the real Lean 4.33.0 kernel (`compile-all-lean4.py`).
 2. Reconstructs `bundle-data.js` from the 8 tracked `<16 MiB` shards and builds `dist-cloudflare/` if absent in CI.
@@ -46,6 +46,7 @@ def check_end_to_end_connections_and_clutter():
     assert not pyc_files, f"Bytecode .pyc files detected (violates Zero Bytecode rule): {pyc_files[:5]}"
 
     raw = (OBS_DIR / "bundle-data.js").read_text(encoding="utf-8")
+    assert len(raw) < 30 * 1024 * 1024, f"Expected sub-30 MiB bundle-data.js, got {len(raw) / (1024*1024):.2f} MiB!"
     assert not re.search(r"‖[^‖\s]‖[^‖\s]‖", raw), "Character-corrupted ‖c‖h‖a‖r‖ string reintroduced into bundle-data.js!"
     ghost_rx = re.compile(
         r"\b(?:probability-lean|aks|optlib|category-theory-lean|pfr|group-theory-lean|"
@@ -77,7 +78,8 @@ def check_end_to_end_connections_and_clutter():
 
     mech_pools = sm.get("mechPools") or {}
     part_items = mech_pools.get("partItems") or []
-    assert len(part_items) > 3500, "Lossless mechPools.partItems missing or truncated!"
+    mech_pbs = mech_pools.get("playbooks") or []
+    assert len(part_items) > 3500 and len(mech_pbs) >= 150, "Lossless mechPools missing or truncated!"
     dead_mech_keys = (
         "tacticStepper",
         "openConjectureAttackTree",
@@ -97,6 +99,8 @@ def check_end_to_end_connections_and_clutter():
             assert (REPO_ROOT / bf).exists(), f"Broken highLevelMechanisms.verifiedBridgeFile: {bf}"
         if "_pp" in m:
             assert all(0 <= idx < len(part_items) for idx in m["_pp"]), f"Out-of-bounds _pp index on {m.get('id')}"
+        if "_rp" in m:
+            assert 0 <= m["_rp"] < len(mech_pbs), f"Out-of-bounds _rp index on {m.get('id')}"
         for dead_k in dead_mech_keys:
             assert dead_k not in m, f"Stale ghost-project or synthetic field {dead_k!r} reintroduced on mechanism {m.get('id')}!"
     for pp in sm.get("proofPipelines", []):
@@ -105,13 +109,16 @@ def check_end_to_end_connections_and_clutter():
         )
     path_pools = preloaded.get("insightPaths", {}).get("pathPools") or {}
     ep_pool = path_pools.get("endpoints") or []
-    assert len(ep_pool) > 3500, "Lossless pathPools.endpoints missing or truncated!"
+    db_pool = path_pools.get("discBridges") or []
+    assert len(ep_pool) > 3500 and len(db_pool) >= 100, "Lossless pathPools missing or truncated!"
     for c in preloaded.get("insightPaths", {}).get("connections", []):
         vf = c.get("verifiedLeanFile")
         if vf:
             assert (REPO_ROOT / vf).exists(), f"Broken insightPaths.connections.verifiedLeanFile: {vf}"
         if "_ep" in c:
             assert all(0 <= idx < len(ep_pool) for idx in c["_ep"]), f"Out-of-bounds _ep index on {c.get('id')}"
+        if "_db" in c:
+            assert 0 <= c["_db"] < len(db_pool), f"Out-of-bounds _db index on {c.get('id')}"
         for dead_ck in ("sourceAstBefore", "conjecture", "intuitionAnalogy", "headline", "targetProject"):
             assert dead_ck not in c, f"Unreferenced duplicate field {dead_ck!r} reintroduced into insightPaths.connections!"
     assert "verificationSuiteBridges" not in sm, "Unreferenced verificationSuiteBridges clutter reintroduced!"
@@ -119,7 +126,12 @@ def check_end_to_end_connections_and_clutter():
     w1 = sm.get("isoWhy1Pool") or []
     w2 = sm.get("isoWhy2Pool") or []
     tp = sm.get("isoTierPool") or []
-    assert len(dp) > 3000 and len(w1) > 200 and len(w2) > 700 and len(tp) > 200, "Lossless isomorphism pools missing or truncated!"
+    imp = sm.get("isoMetaPools") or {}
+    i_sk = imp.get("skels") or []
+    i_pn = imp.get("pnames") or []
+    assert len(dp) > 3000 and len(w1) > 200 and len(w2) > 700 and len(tp) > 200 and len(i_sk) >= 20 and len(i_pn) == 40, (
+        "Lossless isomorphism pools missing or truncated!"
+    )
     for iso in sm.get("customIsomorphisms", []):
         assert "targetProject" not in iso, f"Dead unreferenced targetProject reintroduced on {iso.get('id')}!"
         assert "declA" in iso or (isinstance(iso.get("_dA"), int) and 0 <= iso["_dA"] < len(dp)), f"Invalid _dA on {iso.get('id')}"
@@ -130,8 +142,10 @@ def check_end_to_end_connections_and_clutter():
             assert 0 <= iso["_w2"] < len(w2), f"Invalid _w2 on {iso.get('id')}"
         if "_et" in iso:
             assert 0 <= iso["_et"] < len(tp), f"Invalid _et on {iso.get('id')}"
+        if "_sk" in iso:
+            assert 0 <= iso["_sk"] < len(i_sk), f"Invalid _sk on {iso.get('id')}"
         if iso.get("epistemicSymbol") == "⚠":
-            assert "transferHypothesis" not in iso and "transferBlueprint" not in iso, (
+            assert "transferHypothesis" not in iso and "transferBlueprint" not in iso and "_tb" not in iso, (
                 f"Contradicted optimistic transferHypothesis/transferBlueprint clutter found on ⚠ lookalike {iso.get('id')}!"
             )
     for disc in preloaded.get("unrelatedBridges", {}).get("discoveries", []):
@@ -146,8 +160,8 @@ def check_end_to_end_connections_and_clutter():
         assert target.exists(), f"Broken relative link {rel_link} in README.md -> {target}"
     print(
         f"  [OK] End-to-end connection bijection verified: {len(suites)} suites == {len(disk_verif)} CommonGround/Verification/*.lean, "
-        f"{len(sm.get('proofPipelines', []))} canonical pipelines, {len(dp)} pooled decls, {len(part_items)} mech items, "
-        f"{len(ep_pool)} path endpoints, {len(csi_pools.get('files', []))} search files, {len(tr_pools.get('domains', []))} trinity domains, "
+        f"bundle={len(raw)/(1024*1024):.2f} MiB (<30 MiB!), {len(sm.get('proofPipelines', []))} canonical pipelines, "
+        f"{len(dp)} pooled decls, {len(i_sk)} iso skels, {len(part_items)} mech items, {len(ep_pool)} path endpoints, "
         f"0 ghost repo IDs, 0 ‖c‖h‖a‖r‖ corruptions, 0 broken .lean refs, README clean."
     )
 
@@ -182,13 +196,13 @@ def check_unified_static_assets():
 
 
 def main():
-    print("=== Running V241 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
+    print("=== Running V242 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
     ensure_bundle_reconstructed()
     check_lean_corpus_and_kernel()
     check_end_to_end_connections_and_clutter()
     check_unified_static_assets()
     subprocess.run(["bash", str(OBS_DIR / "tests" / "run-tests.sh")], check=True)
-    print("=== ALL V241 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
+    print("=== ALL V242 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
 
 
 if __name__ == "__main__":
