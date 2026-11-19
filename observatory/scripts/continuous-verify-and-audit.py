@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V238).
+Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V239).
 Verifies:
-1. All 752+ physical Lean 4 files (639 in CommonGround/Verification/ + 113 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
+1. All 754+ physical Lean 4 files (640 in CommonGround/Verification/ + 114 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
    tokens outside comments (with NO 25 MiB cap on `.lean` files — large `.lean` files stream via Cloudflare R2 `/api/lean/*`)
    AND compile cleanly through the real Lean 4.33.0 kernel (`compile-all-lean4.py`).
 2. Reconstructs `bundle-data.js` from the 8 tracked `<16 MiB` shards and builds `dist-cloudflare/` if absent in CI.
@@ -10,7 +10,9 @@ Verifies:
    - 0 legacy `upgrade-v*.py` scripts and 0 `.pyc` / `__pycache__` artifacts;
    - exact 1-to-1 bijection between `verifiedLeanSuites` and `CommonGround/Verification/*.lean`;
    - 100% of `highLevelMechanisms[*].verifiedBridgeFile` and `insightPaths.connections[*].verifiedLeanFile` resolve on disk;
-   - 100% of `proofPipelines` map `projectA` & `projectB` to canonical 40-project IDs, and 0 `‖c‖h‖a‖r‖` corrupted strings exist;
+   - 100% of `proofPipelines` map `projectA` & `projectB` to canonical 40-project IDs, 0 `‖c‖h‖a‖r‖` corrupted strings exist,
+     100% of `customIsomorphisms` resolve valid lossless pool indices (`isoDeclPool`, `isoWhy1Pool`, `isoWhy2Pool`, `isoTierPool`),
+     and 0 `unrelatedBridges.discoveries` reference generic `AllBridges.lean`;
    - `README.md` contains 0 legacy forbidden strings and 100% resolving relative `./...` links.
 4. Confirms no legacy forked `safari-standalone.html` or `observatory/safari/` artifacts exist, and verifies all unified
    Chrome + Safari routes resolve CSS + all 8 untruncated `<25 MiB` shards + `unified-standalone.js`.
@@ -86,11 +88,27 @@ def check_end_to_end_connections_and_clutter():
         for dead_ck in ("sourceAstBefore", "conjecture", "intuitionAnalogy", "headline"):
             assert dead_ck not in c, f"Unreferenced duplicate field {dead_ck!r} reintroduced into insightPaths.connections!"
     assert "verificationSuiteBridges" not in sm, "Unreferenced verificationSuiteBridges clutter reintroduced!"
+    dp = sm.get("isoDeclPool") or []
+    w1 = sm.get("isoWhy1Pool") or []
+    w2 = sm.get("isoWhy2Pool") or []
+    tp = sm.get("isoTierPool") or []
+    assert len(dp) > 3000 and len(w1) > 200 and len(w2) > 700 and len(tp) > 200, "Lossless isomorphism pools missing or truncated!"
     for iso in sm.get("customIsomorphisms", []):
+        assert "declA" in iso or (isinstance(iso.get("_dA"), int) and 0 <= iso["_dA"] < len(dp)), f"Invalid _dA on {iso.get('id')}"
+        assert "declB" in iso or (isinstance(iso.get("_dB"), int) and 0 <= iso["_dB"] < len(dp)), f"Invalid _dB on {iso.get('id')}"
+        if "_w1" in iso:
+            assert 0 <= iso["_w1"] < len(w1), f"Invalid _w1 on {iso.get('id')}"
+        if "_w2" in iso:
+            assert 0 <= iso["_w2"] < len(w2), f"Invalid _w2 on {iso.get('id')}"
+        if "_et" in iso:
+            assert 0 <= iso["_et"] < len(tp), f"Invalid _et on {iso.get('id')}"
         if iso.get("epistemicSymbol") == "⚠":
             assert "transferHypothesis" not in iso and "transferBlueprint" not in iso, (
                 f"Contradicted optimistic transferHypothesis/transferBlueprint clutter found on ⚠ lookalike {iso.get('id')}!"
             )
+    for disc in preloaded.get("unrelatedBridges", {}).get("discoveries", []):
+        ct = disc.get("conjectureTemplate") or ""
+        assert "AllBridges.lean" not in ct, f"Generic AllBridges.lean reference found in unrelatedBridges {disc.get('id')}!"
 
     readme_txt = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
     for forbidden in ("hodge.computer", "hodge-computer", "arXiv:2603.29157", "sextics"):
@@ -100,7 +118,7 @@ def check_end_to_end_connections_and_clutter():
         assert target.exists(), f"Broken relative link {rel_link} in README.md -> {target}"
     print(
         f"  [OK] End-to-end connection bijection verified: {len(suites)} suites == {len(disk_verif)} CommonGround/Verification/*.lean, "
-        f"{len(sm.get('proofPipelines', []))} canonical pipelines, 0 ‖c‖h‖a‖r‖ corruptions, 0 broken .lean refs, 0 dead fields, README clean."
+        f"{len(sm.get('proofPipelines', []))} canonical pipelines, {len(dp)} pooled decls, 0 ‖c‖h‖a‖r‖ corruptions, 0 broken .lean refs, README clean."
     )
 
 
@@ -134,13 +152,13 @@ def check_unified_static_assets():
 
 
 def main():
-    print("=== Running V238 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
+    print("=== Running V239 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
     ensure_bundle_reconstructed()
     check_lean_corpus_and_kernel()
     check_end_to_end_connections_and_clutter()
     check_unified_static_assets()
     subprocess.run(["bash", str(OBS_DIR / "tests" / "run-tests.sh")], check=True)
-    print("=== ALL V238 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
+    print("=== ALL V239 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-V238 Unified Chrome & Safari Shard Builder (< 25 MiB static assets)
+V239 Unified Chrome & Safari Shard Builder (< 25 MiB static assets)
 & Cloudflare R2 Unrestricted-Size Lean 4 Streaming Function Generator.
 
 - Reconstructs `bundle-data.js` from `observatory/chunks/` if missing in a fresh Git clone.
@@ -25,7 +25,7 @@ LOCAL_CHUNKS_DIR = OBS_DIR / "chunks"
 CF_DIR = OBS_DIR / "dist-cloudflare"
 CF_CHUNKS_DIR = CF_DIR / "chunks"
 LIMIT_BYTES = 25 * 1024 * 1024  # Cloudflare Pages 25 MiB static asset limit (does NOT restrict .lean files in R2!)
-ASSET_VER = "238"
+ASSET_VER = "239"
 
 SHARD_NAMES = [
     "bundle-shard-1-core.js",
@@ -243,7 +243,14 @@ def build_shards_and_sync_routes():
         "if(!m.physicalAnalogy&&m.analogy)m.physicalAnalogy=m.analogy;"
         "if(!m.intuitionAnalogy&&m.analogy)m.intuitionAnalogy=m.analogy;"
         "if(!m.name&&m.title)m.name=m.title;}}"
-        "var is=sm.customIsomorphisms||[];for(var j=0;j<is.length;j++){var iso=is[j];if(iso&&!iso.whyItMatters&&iso.plainEnglishWhy)iso.whyItMatters=iso.plainEnglishWhy;}"
+        "var dp=sm.isoDeclPool||[],w1=sm.isoWhy1Pool||[],w2=sm.isoWhy2Pool||[],tp=sm.isoTierPool||[];"
+        "var is=sm.customIsomorphisms||[];for(var j=0;j<is.length;j++){var iso=is[j];if(iso){"
+        "if(!iso.declA&&typeof iso._dA==='number')iso.declA=dp[iso._dA]||{};"
+        "if(!iso.declB&&typeof iso._dB==='number')iso.declB=dp[iso._dB]||{};"
+        "if(iso.whyConnectedPlain===undefined&&typeof iso._w1==='number')iso.whyConnectedPlain=w1[iso._w1]||'';"
+        "if(iso.plainEnglishWhy===undefined&&typeof iso._w2==='number')iso.plainEnglishWhy=w2[iso._w2]||'';"
+        "if(iso.epistemicTier===undefined&&typeof iso._et==='number')iso.epistemicTier=tp[iso._et]||'';"
+        "if(!iso.whyItMatters&&iso.plainEnglishWhy)iso.whyItMatters=iso.plainEnglishWhy;}}"
         "sm.mechanisms=ms;sm.astIsomorphisms=is;"
         "sm.verifiedLean4BridgeModules=sm.verifiedLeanSuites;sm.verifiedLeanBridges=sm.verifiedLeanSuites;}"
         "var ip=pre.insightPaths;if(ip){ip.paths=ip.connections;}"
