@@ -136,8 +136,16 @@ def discover_role_compatible_insights(data):
             for ki, kk in enumerate(iso_keys):
                 if ki < len(xv) and isinstance(xv[ki], int) and xv[ki] >= 0:
                     iso[kk] = xv[ki]
-        dA = dict(iso.get("declA") or (dp[iso["_dA"]] if isinstance(iso.get("_dA"), int) and 0 <= iso["_dA"] < len(dp) else {}))
-        dB = dict(iso.get("declB") or (dp[iso["_dB"]] if isinstance(iso.get("_dB"), int) and 0 <= iso["_dB"] < len(dp) else {}))
+        def _unpack_decl(raw_d):
+            if isinstance(raw_d, list):
+                out_d = {"n": raw_d[0] if len(raw_d) > 0 else "", "_d": raw_d[1] if len(raw_d) > 1 else []}
+                if len(raw_d) > 2 and raw_d[2] is not None:
+                    out_d["signature"] = raw_d[2]
+                return out_d
+            return dict(raw_d or {})
+
+        dA = _unpack_decl(iso.get("declA") or (dp[iso["_dA"]] if isinstance(iso.get("_dA"), int) and 0 <= iso["_dA"] < len(dp) else {}))
+        dB = _unpack_decl(iso.get("declB") or (dp[iso["_dB"]] if isinstance(iso.get("_dB"), int) and 0 <= iso["_dB"] < len(dp) else {}))
         for dx in (dA, dB):
             if "name" not in dx and "n" in dx:
                 dx["name"] = dx["n"]
@@ -216,7 +224,7 @@ def run_cycle(cycle_num, start_ts, end_ts):
 
     status = {
         "status": "running" if remaining_hours > 0 else "completed",
-        "version": "V251",
+        "version": "V252",
         "daemonPid": os.getpid(),
         "cycle": cycle_num,
         "timestampUtc": now_iso,
@@ -240,7 +248,7 @@ def run_cycle(cycle_num, start_ts, end_ts):
     with RUNS_JSONL.open("a", encoding="utf-8") as f:
         f.write(json.dumps({
             "cycle": cycle_num,
-            "version": "V251",
+            "version": "V252",
             "timestampUtc": now_iso,
             "exitCode": proc.returncode,
             "passed": passed_checks,

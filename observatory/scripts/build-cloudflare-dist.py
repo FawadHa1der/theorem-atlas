@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-V251 Unified Chrome & Safari Shard Builder (< 25 MiB static assets & < 13.0 MiB total corpus!)
+V252 Unified Chrome & Safari Shard Builder (< 25 MiB static assets & < 11.0 MiB total corpus!)
 & Cloudflare R2 Unrestricted-Size Lean 4 Streaming Function Generator.
 
 - Reconstructs `bundle-data.js` from `observatory/chunks/` if missing in a fresh Git clone.
@@ -25,7 +25,7 @@ LOCAL_CHUNKS_DIR = OBS_DIR / "chunks"
 CF_DIR = OBS_DIR / "dist-cloudflare"
 CF_CHUNKS_DIR = CF_DIR / "chunks"
 LIMIT_BYTES = 25 * 1024 * 1024  # Cloudflare Pages 25 MiB static asset limit (does NOT restrict .lean files in R2!)
-ASSET_VER = "251"
+ASSET_VER = "252"
 
 SHARD_NAMES = [
     "bundle-shard-1-core.js",
@@ -190,6 +190,8 @@ def build_shards_and_sync_routes():
     }
     if "csiPools" in preloaded:
         core_payload["csiPools"] = preloaded["csiPools"]
+    if "_phr" in preloaded:
+        core_payload["_phr"] = preloaded["_phr"]
 
     s1_code = "window.__CG_PRELOADED__ = " + json.dumps(core_payload, ensure_ascii=False, separators=(",", ":")) + ";\n"
     if tail_js:
@@ -252,6 +254,9 @@ def build_shards_and_sync_routes():
     s4b_code += (
         "(function(){if(typeof window!=='undefined'&&window.__CG_PRELOADED__){"
         "var pre=window.__CG_PRELOADED__,sm=pre.semanticMechanisms;"
+        "var phr=pre._phr||[],phrRx=phr.length?/[\\uE000-\\uE03F]/g:null;"
+        "var unp=phrRx?function(s){return typeof s==='string'?s.replace(phrRx,function(c){return phr[c.charCodeAt(0)-57344]||'';}):s;}:function(s){return s;};"
+        "function unpArr(a){if(Array.isArray(a)&&phrRx){for(var z=0;z<a.length;z++)if(typeof a[z]==='string')a[z]=unp(a[z]);}return a;}"
         "var cp=pre.csiPools||{},cpKd=cp.kinds||[],cpFm=cp.fams||[],cpPj=cp.projs||[],cpFl=cp.files||[],cpUb=cp.urlBases||[],cpEv=cp.evidences||[],cpSu=cp.sourceUrls||[],cpFn=cp.fns||[];"
         "var csiKeys=['_fl','_ev','_fm','_pj','_su','_k','_ub'];"
         "var csi=pre.customSearchIndex||[];for(var q=0;q<csi.length;q++){var r=csi[q];if(r){"
@@ -267,6 +272,7 @@ def build_shards_and_sync_routes():
         "r.familyId=cpFm[r._fm]||'';r.projectId=cpPj[r._pj]||'';r.file=fl;"
         "if(r.sourceUrl===undefined&&typeof r._ub==='number')r.sourceUrl=(cpUb[r._ub]||'')+'/'+fl+'#L'+r.line;}}}"
         "if(sm){"
+        "var bm0=pre.bridgeMatrix;if(bm0){if(!bm0.mechanismMatrix)bm0.mechanismMatrix=sm.mechanismMatrix;if(!bm0.astIsomorphismMatrix)bm0.astIsomorphismMatrix=sm.astIsomorphismMatrix;if(!bm0.projectMechanisms)bm0.projectMechanisms=sm.projectMechanisms;}"
         "var snPool=sm.snippetPool||[];"
         "var sp=sm.suitePools||{},spBl=sp.blbls||[],spCt=sp.cats||[],spSt=sp.stats||[],spTn=sp.tns||[],spDk=sp.dkinds||[],spDn=sp.dnames||[];"
         "var vls=sm.verifiedLeanSuites||[];for(var si=0;si<vls.length;si++){var sv=vls[si];if(sv){"
@@ -277,6 +283,7 @@ def build_shards_and_sync_routes():
         "if(typeof spv[1]==='number'&&spv[1]>=0&&sv.category===undefined)sv.category=spCt[spv[1]]||'';"
         "if(typeof spv[2]==='number'&&spv[2]>=0&&sv.status===undefined)sv.status=spSt[spv[2]]||'';"
         "if(typeof spv[3]==='number'&&spv[3]>=0&&sv.theoremName===undefined)sv.theoremName=spTn[spv[3]]||'';}"
+        "if(sv._vs===1&&typeof sv.summary==='string'){sv.summary+=' * **Verification Status**: 100% Zero-`sorry`, Zero-Axiom Machine-Checked in Lean 4.33.0';sv._vs=2;}"
         "if(!sv.module&&sv.leanFile)sv.module=sv.leanFile;"
         "if(sv.plainSummary===undefined&&sv.summary!==undefined)sv.plainSummary=sv.summary;"
         "if(sv.snippet===undefined&&typeof sv._sn==='number')sv.snippet=snPool[sv._sn]||'';"
@@ -286,8 +293,9 @@ def build_shards_and_sync_routes():
         "window.V145_REAL_LEAN_SUITES=vls.map(function(sv){var d0=(sv&&Array.isArray(sv.declarations)&&sv.declarations[0])||{},lf=(sv&&sv.leanFile)||'';"
         "return{id:(sv&&sv.id)||'',projects:(sv&&Array.isArray(sv.projects))?sv.projects.slice():[],file:lf,moduleName:lf.replace(/\\.lean$/,'').replace(/\\//g,'.'),title:(sv&&sv.title)||'',theoremName:(sv&&sv.theoremName)||d0.name||lf.replace(/^.*\\//,'').replace(/\\.lean$/,''),line:d0.line||1,snippet:(sv&&(sv.snippet||sv.summary))||d0.snippet||d0.signature||('-- '+lf),zeroSorry:true};});}"
         "var dm=sm.declMeta||{},dmKd=dm.kinds||[],dmSk=dm.skels||[],dmPa=dm.archs||[],dmFl=dm.files||[],dmUb=dm.urlBases||[],dmDu=dm.durls||[];"
-        "var dp=sm.isoDeclPool||[],w1=sm.isoWhy1Pool||[],w2=sm.isoWhy2Pool||[],tp=sm.isoTierPool||[];"
+        "var dp=sm.isoDeclPool||[],w1=unpArr(sm.isoWhy1Pool||[]),w2=unpArr(sm.isoWhy2Pool||[]),tp=sm.isoTierPool||[];"
         "for(var di3=0;di3<dp.length;di3++){var d=dp[di3];if(d){"
+        "if(Array.isArray(d)){var nd={n:d[0]||'',_d:d[1]||[]};if(d.length>2&&d[2]!==undefined)nd.signature=d[2];dp[di3]=nd;d=nd;}"
         "if(d.name===undefined&&d.n!==undefined)d.name=d.n;"
         "if(Array.isArray(d._d)){var dv=d._d;"
         "if(typeof dv[0]==='number'&&dv[0]>=0&&d.line===undefined)d.line=dv[0];"
@@ -306,9 +314,10 @@ def build_shards_and_sync_routes():
         "if(d.proofArch===undefined&&typeof d._pa==='number')d.proofArch=dmPa[d._pa]||'';"
         "if(d.signature===undefined&&d._sg===1)d.signature=d.file||'';"
         "if(d.url===undefined&&typeof d._ub==='number')d.url=(dmUb[d._ub]||'')+'/'+(d.file||'')+'#L'+d.line;}}"
-        "var trp=sm.trinityPools||{},trDm=trp.domains||[],trPs=trp.summaries||[],trBo=trp.opportunities||[],trAn=trp.analogies||[];"
+        "var trp=sm.trinityPools||{},trDm=trp.domains||[],trPs=unpArr(trp.summaries||[]),trBo=unpArr(trp.opportunities||[]),trAn=trp.analogies||[];"
         "var tdm=trp.dmMeta||{},tdSl=tdm.slots||[],tdPj=tdm.projs||[],tdPn=tdm.pnames||[],tdDc=tdm.discs||[],tdRl=tdm.roles||[];"
         "for(var ti=0;ti<trDm.length;ti++){var td=trDm[ti];if(td){"
+        "if(Array.isArray(td)){var ntd={n:td[0]||'',_t:td[1]||[]};trDm[ti]=ntd;td=ntd;}"
         "if(td.declName===undefined&&td.n!==undefined)td.declName=td.n;"
         "if(Array.isArray(td._t)){var tv=td._t;"
         "if(typeof tv[0]==='number'&&tv[0]>=0&&td.slot===undefined)td.slot=tdSl[tv[0]]||'';"
@@ -323,9 +332,12 @@ def build_shards_and_sync_routes():
         "if(gt.breakthroughOpportunity===undefined&&typeof gt._bo==='number')gt.breakthroughOpportunity=trBo[gt._bo]||'';"
         "if(gt.analogy===undefined&&typeof gt._an==='number')gt.analogy=trAn[gt._an]||'';}}"
         "var mp=sm.mechPools||{},mpPart=mp.partItems||[],mpPb=mp.playbooks||[],mpPs=mp.steppers||[],mpAn=mp.analogies||[],mpId=mp.invDirs||[],mpTd=mp.transDicts||[],mpVs=mp.visSteps||[],mpAst=mp.astTypes||[],mpGr=mp.grades||[];"
-        "for(var pbi=0;pbi<mpPb.length;pbi++){var pbv=mpPb[pbi];if(Array.isArray(pbv)){var pbo={unsolvedBottleneck:pbv[0]||'',crossDomainLever:pbv[1]||'',steps:pbv[2]||[]};if(pbv.length>3&&pbv[3]!==null&&pbv[3]!==undefined)pbo.starterLeanCode=pbv[3];if(pbv.length>4&&pbv[4]!==null&&pbv[4]!==undefined)pbo.counterexampleTest=pbv[4];mpPb[pbi]=pbo;}}"
+        "var mpPbStr=unpArr(mp.pbStrs||[]);for(var pbi=0;pbi<mpPb.length;pbi++){var pbv=mpPb[pbi];if(Array.isArray(pbv)){var rSteps=pbv[2]||[];if(rSteps.length&&Array.isArray(rSteps[0])){rSteps=rSteps.map(function(st){return{stepTitle:mpPbStr[st[0]]||'',targetFile:mpPbStr[st[1]]||'',intermediateLemma:mpPbStr[st[2]]||'',expectedGain:mpPbStr[st[3]]||''};});}var pbo={unsolvedBottleneck:pbv[0]||'',crossDomainLever:pbv[1]||'',steps:rSteps};if(pbv.length>3&&pbv[3]!==null&&pbv[3]!==undefined)pbo.starterLeanCode=pbv[3];if(pbv.length>4&&pbv[4]!==null&&pbv[4]!==undefined)pbo.counterexampleTest=pbv[4];mpPb[pbi]=pbo;}}"
+        "var mpIdStr=unpArr(mp.idStrs||[]),mpVsStr=mp.vsStrs||[],mpTdDom=unpArr(mp.tdDomStrs||[]);"
+        "for(var idi=0;idi<mpId.length;idi++){if(Array.isArray(mpId[idi])&&mpId[idi].length&&typeof mpId[idi][0]==='number')mpId[idi]=mpId[idi].map(function(x){return mpIdStr[x]||'';});}"
+        "for(var vsi=0;vsi<mpVs.length;vsi++){if(Array.isArray(mpVs[vsi])&&mpVs[vsi].length&&typeof mpVs[vsi][0]==='number')mpVs[vsi]=mpVs[vsi].map(function(x){return mpVsStr[x]||'';});}"
         "var mpStStr=mp.stepStrs||[];for(var sti=0;sti<mpPs.length;sti++){var stArr=mpPs[sti];if(Array.isArray(stArr)&&stArr.length&&Array.isArray(stArr[0])){mpPs[sti]=stArr.map(function(sa){return{stageNum:sa[0],stageLabel:mpStStr[sa[1]]||'',plainWhatChanges:mpStStr[sa[2]]||'',beforeAfterEq:mpStStr[sa[3]]||'',whatBreaksIfSkipped:mpStStr[sa[4]]||'',leanTacticSnippet:mpStStr[sa[5]]||''};});}}"
-        "var mpTdC=mp.tdConcepts||[];for(var tdi=0;tdi<mpTd.length;tdi++){var tdArr=mpTd[tdi];if(Array.isArray(tdArr)&&tdArr.length&&Array.isArray(tdArr[0])){mpTd[tdi]=tdArr.map(function(ta){return{concept:mpTdC[ta[0]]||'',domainA:ta[1]||'',domainB:ta[2]||''};});}}"
+        "var mpTdC=mp.tdConcepts||[];for(var tdi=0;tdi<mpTd.length;tdi++){var tdArr=mpTd[tdi];if(Array.isArray(tdArr)&&tdArr.length&&Array.isArray(tdArr[0])){mpTd[tdi]=tdArr.map(function(ta){return{concept:mpTdC[ta[0]]||'',domainA:typeof ta[1]==='number'?(mpTdDom[ta[1]]||''):(ta[1]||''),domainB:typeof ta[2]==='number'?(mpTdDom[ta[2]]||''):(ta[2]||'')};});}}"
         "var pm=mp.partMeta||{},pmPj=pm.projs||[],pmPn=pm.pnames||[],pmSh=pm.shorts||[],pmDc=pm.discs||[],pmRl=pm.roles||[],pmKd=pm.kinds||[],pmSk=pm.skels||[],pmPa=pm.archs||[],pmFl=pm.files||[],pmUb=pm.urlBases||[],pmDu=pm.durls||[],pmCa=pm.cabs||[];"
         "for(var pi=0;pi<mpPart.length;pi++){var pt=mpPart[pi];if(pt){"
         "if(Array.isArray(pt)){var npt={n:pt[0]||'',_q:pt[1]||[]};if(pt.length>2&&pt[2]!==undefined)npt.s=pt[2];mpPart[pi]=npt;pt=npt;}"
@@ -362,7 +374,7 @@ def build_shards_and_sync_routes():
         "if(cd.signature===undefined&&cd._sg===1)cd.signature=cd.file||'';"
         "if(cd.url===undefined&&typeof cd._ub==='number')cd.url=(pmUb[cd._ub]||'')+'/'+(cd.file||'')+'#L'+cd.line;}"
         "if(pt.customAbstraction===undefined&&Array.isArray(pt._q)&&typeof pt._q[14]==='number'){if(pt._q[14]===-2&&cd){var bf=(cd.file||'').split('/').pop();pt.customAbstraction=(cd.kind||'')+' '+(pt.n||'')+' ('+bf+')';}else if(pt._q[14]>=0){pt.customAbstraction=pmCa[pt._q[14]]||'';}}}}"
-        "var mfp=mp.fieldPools||{},mfDf=mfp.diffs||[],mfCt=mfp.cats||[],mfVl=mfp.vleans||[],mfVb=mfp.vbridges||[],mfTg=mfp.tags||[],mfNh=mfp.hyps||[],mfLt=mfp.ltbs||[],mfOc=mfp.obs||[],mfCs=mfp.skels||[],mfDa=mfp.archs||[],mfPj=mfp.projs||[],mfNm=mfp.names||[],mfPi=mfp.pints||[],mfOt=mfp.otags||[],mfSl=mfp.slabels||[],mfWh=mfp.whys||[],mfSs=mfp.sstructs||[],mfOb=mfp.obls||[];"
+        "var mfp=mp.fieldPools||{},mfDf=unpArr(mfp.diffs||[]),mfCt=mfp.cats||[],mfVl=mfp.vleans||[],mfVb=mfp.vbridges||[],mfTg=mfp.tags||[],mfNh=mfp.hyps||[],mfLt=mfp.ltbs||[],mfOc=mfp.obs||[],mfCs=mfp.skels||[],mfDa=mfp.archs||[],mfPj=mfp.projs||[],mfNm=mfp.names||[],mfPi=mfp.pints||[],mfOt=mfp.otags||[],mfSl=mfp.slabels||[],mfWh=unpArr(mfp.whys||[]),mfSs=unpArr(mfp.sstructs||[]),mfOb=unpArr(mfp.obls||[]);"
         "var mechKeys=['_rp','_ps','_an','_id','_td','_vs','_ast','_eg','_df','_ct','_vl','_vb','_tg','_nh','_lt','_oc','_cs','_da'];"
         "var ms=sm.highLevelMechanisms||[];for(var i=0;i<ms.length;i++){var m=ms[i];if(m){"
         "if(Array.isArray(m)){var nm2={id:m[0],title:m[1],plainHeadline:m[2],mechanismScore:m[3],projectCount:m[4],_mx:m[5],_pp:m[6]};if(typeof m[7]==='number'&&m[7]>=0)nm2.declarationCount=m[7];if(typeof m[8]==='number'&&m[8]>=0)nm2.disciplineCount=m[8];if(typeof m[9]==='string'&&m[9])nm2.intuitionAnalogy=m[9];ms[i]=nm2;m=nm2;}"
@@ -485,8 +497,10 @@ def build_shards_and_sync_routes():
         "sm.mechanisms=ms;sm.astIsomorphisms=is;"
         "sm.verifiedLean4BridgeModules=sm.verifiedLeanSuites;sm.verifiedLeanBridges=sm.verifiedLeanSuites;}"
         "var ip=pre.insightPaths;if(ip){"
-        "var pp=ip.pathPools||{},ppEp=pp.endpoints||[],ppTd=pp.transDicts||[],ppCv=pp.caveats||[],ppLs=pp.sketches||[],ppSm=pp.summaries||[],ppRw=pp.reqWorks||[];"
-        "var ppTdC=pp.tdConcepts||[];for(var ptdi=0;ptdi<ppTd.length;ptdi++){var ptdArr=ppTd[ptdi];if(Array.isArray(ptdArr)&&ptdArr.length&&Array.isArray(ptdArr[0])){ppTd[ptdi]=ptdArr.map(function(ta){return{concept:ppTdC[ta[0]]||'',domainA:ta[1]||'',domainB:ta[2]||''};});}}"
+        "var pp=ip.pathPools||{},ppEp=pp.endpoints||[],ppTd=pp.transDicts||[],ppCv=unpArr(pp.caveats||[]),ppLs=pp.sketches||[],ppSm=unpArr(pp.summaries||[]),ppRw=pp.reqWorks||[];"
+        "var ppTdC=pp.tdConcepts||[],ppTdDom=unpArr(pp.tdDomStrs||[]),ppRwStr=unpArr(pp.rwStrs||[]);"
+        "for(var ptdi=0;ptdi<ppTd.length;ptdi++){var ptdArr=ppTd[ptdi];if(Array.isArray(ptdArr)&&ptdArr.length&&Array.isArray(ptdArr[0])){ppTd[ptdi]=ptdArr.map(function(ta){return{concept:ppTdC[ta[0]]||'',domainA:typeof ta[1]==='number'?(ppTdDom[ta[1]]||''):(ta[1]||''),domainB:typeof ta[2]==='number'?(ppTdDom[ta[2]]||''):(ta[2]||'')};});}}"
+        "for(var rwi=0;rwi<ppRw.length;rwi++){if(Array.isArray(ppRw[rwi])&&ppRw[rwi].length&&typeof ppRw[rwi][0]==='number')ppRw[rwi]=ppRw[rwi].map(function(x){return ppRwStr[x]||'';});}"
         "var ppDb=pp.discBridges||[],ppTl=pp.tools||[],ppAn=pp.analogies||[],ppSi=pp.sharedIngs||[],ppRl=pp.relLevels||[],ppDs=pp.discs||[],ppKd=pp.kinds||[],ppWm=pp.whys||[],ppOc=pp.obsCats||[];"
         "var ppPjs=pp.projsList||[],ppVl2=pp.vleans||[],ppHr=pp.hrefs||[],ppFms=pp.famsList||[],ppCt=pp.cats||[],ppSt2=pp.statuses||[],ppMi=pp.mids||[];"
         "var connKeys=['_td','_cv','_ls','_sm','_rw','_db','_tl','_an','_si','_rl','_ds','_kd','_wm','_oc','_pjs','_vl','_hr','_fms','_ct','_st'];"
@@ -520,7 +534,7 @@ def build_shards_and_sync_routes():
         "if(c.caveat===undefined&&typeof c._cv==='number')c.caveat=ppCv[c._cv]||'';"
         "if(c.leanSketch===undefined&&typeof c._ls==='number')c.leanSketch=ppLs[c._ls]||'';"
         "if(c.summary===undefined&&typeof c._sm==='number')c.summary=ppSm[c._sm]||'';"
-        "if(c.requiredWork===undefined&&typeof c._rw==='number')c.requiredWork=ppRw[c._rw]||'';"
+        "if(c.requiredWork===undefined&&typeof c._rw==='number')c.requiredWork=ppRw[c._rw]||[];"
         "if(c.disciplineBridge===undefined&&typeof c._db==='number')c.disciplineBridge=ppDb[c._db]||'';"
         "if(!c.tools&&typeof c._tl==='number')c.tools=ppTl[c._tl]||[];"
         "if(c.analogy===undefined&&typeof c._an==='number')c.analogy=ppAn[c._an]||'';"
@@ -537,10 +551,15 @@ def build_shards_and_sync_routes():
         "if(c.category===undefined&&typeof c._ct==='number')c.category=ppCt[c._ct]||'';"
         "if(c.status===undefined&&typeof c._st==='number')c.status=ppSt2[c._st]||'';}}"
         "ip.paths=cs;}"
+        "var cc0=pre.constellationCatalog;if(cc0&&cc0._fpools&&Array.isArray(cc0.families)){var fp=cc0._fpools,fpOg=fp.orgs||[],fpDs=fp.discs||[],fpPj=fp.projs||[],fpRl=fp.rels||[];for(var fi=0;fi<cc0.families.length;fi++){var fm=cc0.families[fi];if(Array.isArray(fm)){var fv=fm[4]||[],nfm={id:fm[0]||'',title:fm[1]||'',summary:fm[2]||''};if(typeof fm[3]==='string')nfm.sourceUrl=fm[3].indexOf('=g:')===0?('https://github.com/'+fm[3].slice(3)):fm[3];if(fv[0]>=0)nfm.organization=fpOg[fv[0]]||'';if(fv[1]>=0)nfm.disciplineId=fpDs[fv[1]]||'';if(fv[2]>=0)nfm.projectId=fpPj[fv[2]]||'';if(fv[3]>=0)nfm.releaseId=fpRl[fv[3]]||'';if(fv[4]>=0)nfm.declarationCount=fv[4];if(fv[5]>=0)nfm.manuscriptCount=fv[5];if(fv[6]>=0)nfm.sourceCount=fv[6];if(fv[7]>=0)nfm.unresolvedCount=fv[7];if(fv[8]>=0)nfm.sourceLine=fv[8];if(fm[5]&&typeof fm[5]==='object')Object.assign(nfm,fm[5]);cc0.families[fi]=nfm;}}}"
         "var idxd=pre.indexData;if(idxd&&Array.isArray(idxd._pkeys)&&Array.isArray(idxd.records)){var pkArr=idxd._pkeys;for(var iri=0;iri<idxd.records.length;iri++){var ir=idxd.records[iri];if(ir){if(!ir.counts&&Array.isArray(ir._cnts)){var cm={};for(var cki=0;cki<pkArr.length;cki++)cm[pkArr[cki]]=ir._cnts[cki]||0;ir.counts=cm;}if(!ir.fileCounts&&Array.isArray(ir._fcnts)){var fcm={};for(var fki=0;fki<pkArr.length;fki++)fcm[pkArr[fki]]=ir._fcnts[fki]||0;ir.fileCounts=fcm;}}}}"
         "var ub=pre.unrelatedBridges;if(ub){"
-        "var ubp=ub._pools||{},uPj=ubp.projs||[],uPn=ubp.pnames||[],uDc=ubp.discs||[],uKd=ubp.kinds||[],uUb=ubp.urlBases||[],uFm=ubp.fams||[],uTr=ubp.tiers||[];"
-        "var uDs=ub.discoveries||[];for(var udi=0;udi<uDs.length;udi++){var ud=uDs[udi];if(ud&&Array.isArray(ud._ux)){var ux=ud._ux;"
+        "var ubp=ub._pools||{},uPj=ubp.projs||[],uPn=ubp.pnames||[],uDc=ubp.discs||[],uKd=ubp.kinds||[],uUb=ubp.urlBases||[],uFm=ubp.fams||[],uTr=ubp.tiers||[],uMc=ubp.mechs||[],uMt=ubp.motifs||[];"
+        "var uDs=ub.discoveries||[];for(var udi=0;udi<uDs.length;udi++){var ud=uDs[udi];if(ud){"
+        "if(ud.mechanism===undefined&&typeof ud._mc==='number')ud.mechanism=uMc[ud._mc]||'';"
+        "if(ud.whyUnrelated===undefined&&ud.mechanism!==undefined)ud.whyUnrelated=ud.mechanism;"
+        "if(!ud.sharedMotif&&Array.isArray(ud._sm))ud.sharedMotif=ud._sm.map(function(mi){var mv=uMt[mi]||[];return{id:mv[0]||'',name:mv[1]||'',idf:mv[2]||0,projectCount:mv[3]||0,label:mv[4]||'',family:mv[5]||''};});"
+        "if(Array.isArray(ud._ux)){var ux=ud._ux;"
         "if(ud.kind===undefined&&ux[0]>=0)ud.kind=uKd[ux[0]]||'';"
         "if(ud.projectA===undefined&&ux[1]>=0)ud.projectA=uPj[ux[1]]||'';"
         "if(ud.projectB===undefined&&ux[2]>=0)ud.projectB=uPj[ux[2]]||'';"
@@ -549,8 +568,8 @@ def build_shards_and_sync_routes():
         "if(ud.disciplineA===undefined&&ux[5]>=0)ud.disciplineA=uDc[ux[5]]||'';"
         "if(ud.disciplineB===undefined&&ux[6]>=0)ud.disciplineB=uDc[ux[6]]||'';"
         "if(ud.disciplineDistance===undefined)ud.disciplineDistance=ux[7]||0;"
-        "if(ud.urlA===undefined&&ux[8]>=0&&ux[9]>=0)ud.urlA=(uUb[ux[8]]||'')+'/'+(ud.fileA||'')+'#L'+ux[9];"
-        "if(ud.urlB===undefined&&ux[10]>=0&&ux[11]>=0)ud.urlB=(uUb[ux[10]]||'')+'/'+(ud.fileB||'')+'#L'+ux[11];}}"
+        "if(ud.urlA===undefined&&ux[8]>=0){if(ux[9]>=0)ud.urlA=(uUb[ux[8]]||'')+'/'+(ud.fileA||'')+'#L'+ux[9];else if(ux[9]===-2)ud.urlA=(uUb[ux[8]]||'')+'/'+(ud.fileA||'');}"
+        "if(ud.urlB===undefined&&ux[10]>=0){if(ux[11]>=0)ud.urlB=(uUb[ux[10]]||'')+'/'+(ud.fileB||'')+'#L'+ux[11];else if(ux[11]===-2)ud.urlB=(uUb[ux[10]]||'')+'/'+(ud.fileB||'');}}}}"
         "var uCh=ub.twoHopPivotChains||[];for(var uci=0;uci<uCh.length;uci++){var uc=uCh[uci];if(uc){"
         "if(Array.isArray(uc._tx)){var tx=uc._tx;"
         "if(uc.projectA===undefined&&tx[0]>=0)uc.projectA=uPj[tx[0]]||'';"
@@ -563,7 +582,7 @@ def build_shards_and_sync_routes():
         "var lAB=uc.lemmaAB;if(lAB&&Array.isArray(lAB._lx)){var lx1=lAB._lx,sA=lAB.sampleA||{};if(lAB.family===undefined&&lx1[0]>=0)lAB.family=uFm[lx1[0]]||'';if(lAB.signalTier===undefined&&lx1[1]>=0)lAB.signalTier=uTr[lx1[1]]||'';if(sA.line===undefined&&lx1[2]>=0)sA.line=lx1[2];if(sA.url===undefined&&lx1[3]>=0)sA.url=(uUb[lx1[3]]||'')+'/'+(sA.path||'')+'#L'+sA.line;}"
         "var lBC=uc.lemmaBC;if(lBC&&Array.isArray(lBC._lx)){var lx2=lBC._lx,sC=lBC.sampleC||{};if(lBC.family===undefined&&lx2[0]>=0)lBC.family=uFm[lx2[0]]||'';if(lBC.signalTier===undefined&&lx2[1]>=0)lBC.signalTier=uTr[lx2[1]]||'';if(sC.line===undefined&&lx2[2]>=0)sC.line=lx2[2];if(sC.url===undefined&&lx2[3]>=0)sC.url=(uUb[lx2[3]]||'')+'/'+(sC.path||'')+'#L'+sC.line;}}}"
         "if(ub.discoveries&&!ub.bridges)ub.bridges=ub.discoveries;}"
-        "var v36c=window.THEOREM_ATLAS_V36;if(v36c&&v36c._pools&&Array.isArray(v36c.projects)){var vp=v36c._pools,vpPv=vp.provs||[],vpDm=vp.doms||[],vpGr=vp.grades||[],vpSt=vp.statuses||[],vpKd=vp.kinds||[],vpSu=vp.srcUrls||[],vpRv=vp.revs||[],vpLk=vp.libKinds||[],vpRl=vp.relIds||[],vpNl=vp.noteLists||[],vpCc=vp.concepts||[];for(var vpi=0;vpi<v36c.projects.length;vpi++){var vpItem=v36c.projects[vpi];if(vpItem&&Array.isArray(vpItem._v)&&vpItem.provider===undefined){var vv=vpItem._v;vpItem.provider=vpPv[vv[0]]||'';vpItem.domain=vpDm[vv[1]]||'';vpItem.grade=vpGr[vv[2]]||'';vpItem.status=vpSt[vv[3]]||'';vpItem.kind=vpKd[vv[4]]||'';var vSrc={url:vpSu[vv[5]]||'',revision:vpRv[vv[6]]||''};if(typeof vv[7]==='number'&&vv[7]>=0)vSrc.line=vv[7];vpItem.source=vSrc;vpItem.counts={declarations:vv[8]||0,sourceFiles:vv[9]||0,manuscripts:vv[10]||0};vpItem.library={kind:vpLk[vv[11]]||'',familyId:vv[12]||'',releaseId:vpRl[vv[13]]||''};vpItem.notes=(vpNl[vv[14]]||[]).slice();vpItem.concepts=Array.isArray(vv[15])?vv[15].map(function(ci){return vpCc[ci]||'';}):[];}}if(!window.V34_CATALOGUE)window.V34_CATALOGUE=v36c;}"
+        "var v36c=window.THEOREM_ATLAS_V36;if(v36c&&v36c._pools&&Array.isArray(v36c.projects)){var vp=v36c._pools,vpPv=vp.provs||[],vpDm=vp.doms||[],vpGr=vp.grades||[],vpSt=vp.statuses||[],vpKd=vp.kinds||[],vpSu=vp.srcUrls||[],vpRv=vp.revs||[],vpLk=vp.libKinds||[],vpRl=vp.relIds||[],vpNl=vp.noteLists||[],vpCc=vp.concepts||[],vpEk=vp.evEk||[],vpEg=vp.evGr||[],vpEp=vp.evPj||[],vpEr=vp.evRv||[],vpEa=vp.evPa||[],vpEs=vp.evSh||[],vpEu=vp.evUb||[];for(var vpi=0;vpi<v36c.projects.length;vpi++){var vpItem=v36c.projects[vpi];if(vpItem&&Array.isArray(vpItem._v)&&vpItem.provider===undefined){var vv=vpItem._v;vpItem.provider=vpPv[vv[0]]||'';vpItem.domain=vpDm[vv[1]]||'';vpItem.grade=vpGr[vv[2]]||'';vpItem.status=vpSt[vv[3]]||'';vpItem.kind=vpKd[vv[4]]||'';var vSrc={url:vpSu[vv[5]]||'',revision:vpRv[vv[6]]||''};if(typeof vv[7]==='number'&&vv[7]>=0)vSrc.line=vv[7];vpItem.source=vSrc;vpItem.counts={declarations:vv[8]||0,sourceFiles:vv[9]||0,manuscripts:vv[10]||0};vpItem.library={kind:vpLk[vv[11]]||'',familyId:vpItem._v[12]||'',releaseId:vpRl[vv[13]]||''};vpItem.notes=(vpNl[vv[14]]||[]).slice();vpItem.concepts=Array.isArray(vv[15])?vv[15].map(function(ci){return vpCc[ci]||'';}):[];}}var v36L=[v36c.connections||[],v36c.mechanismNotes||[]];for(var li=0;li<2;li++){var vArr=v36L[li];for(var vi=0;vi<vArr.length;vi++){var vIt=vArr[vi];if(vIt){var evs=vIt.evidence||[];for(var evi=0;evi<evs.length;evi++){var evObj=evs[evi];if(evObj&&Array.isArray(evObj._ev)){var ex=evObj._ev;if(ex[0]>=0&&evObj.excerptKind===undefined)evObj.excerptKind=vpEk[ex[0]]||'';if(ex[1]>=0&&evObj.grade===undefined)evObj.grade=vpEg[ex[1]]||'';if(ex[2]>=0&&evObj.projectId===undefined)evObj.projectId=vpEp[ex[2]]||'';if(ex[3]>=0&&evObj.sourceRevision===undefined)evObj.sourceRevision=vpEr[ex[3]]||'';if(ex[4]>=0&&evObj.path===undefined)evObj.path=vpEa[ex[4]]||'';if(ex[5]>=0&&evObj.sha256===undefined)evObj.sha256=vpEs[ex[5]]||'';if(ex[6]===1&&evObj.url===undefined&&evObj.path)evObj.url='../data/library/'+evObj.path.replace('research/sources/','retained/')+'#L'+evObj.line;if(ex[7]>=0&&evObj.upstreamUrl===undefined)evObj.upstreamUrl=(vpEu[ex[7]]||'')+'/'+(evObj._ut||'')+'#L'+evObj.line;}}if(vIt.signature&&vIt.signature._rs===1&&vIt.signature.reviewStatus===undefined)vIt.signature.reviewStatus='Independently source-reviewed retrieval annotation; original note grade unchanged';}}}if(!window.V34_CATALOGUE)window.V34_CATALOGUE=v36c;}"
         "}})();\n"
     )
     write_dual_shard("bundle-shard-4b-paths.js", s4b_code)
