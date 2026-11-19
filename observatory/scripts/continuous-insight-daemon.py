@@ -80,7 +80,7 @@ def extract_dataset():
 
 
 def compute_composite_score(iso):
-    raw = iso.get("isomorphismScore") or iso.get("bridgeScore") or iso.get("idf")
+    raw = iso.get("isomorphismScore") if iso.get("isomorphismScore") is not None else (iso.get("_sc") or iso.get("bridgeScore") or iso.get("idf"))
     if raw is not None and float(raw) > 0:
         return round(float(raw), 2)
     ops = len(iso.get("sharedOperators") or [])
@@ -105,6 +105,8 @@ def discover_role_compatible_insights(data):
     i_dc = imp.get("discs") or []
     i_so = imp.get("sops") or []
     i_sk = imp.get("skels") or []
+    i_pj = imp.get("projs") or []
+    i_es = imp.get("syms") or []
     isos = sm.get("customIsomorphisms") or data.get("crossDomainIsomorphisms") or []
     seen_pairs = set()
     ranked = []
@@ -113,17 +115,20 @@ def discover_role_compatible_insights(data):
         dB = iso.get("declB") or (dp[iso["_dB"]] if isinstance(iso.get("_dB"), int) and 0 <= iso["_dB"] < len(dp) else {})
         fA = dA.get("file") or (dm_files[dA["_fl"]] if isinstance(dA.get("_fl"), int) and 0 <= dA["_fl"] < len(dm_files) else "")
         fB = dB.get("file") or (dm_files[dB["_fl"]] if isinstance(dB.get("_fl"), int) and 0 <= dB["_fl"] < len(dm_files) else "")
+        es_sym = iso.get("epistemicSymbol") or (i_es[iso["_es"]] if isinstance(iso.get("_es"), int) and 0 <= iso["_es"] < len(i_es) else "")
+        p_id_a = iso.get("projectA") or (i_pj[iso["_pA"]] if isinstance(iso.get("_pA"), int) and 0 <= iso["_pA"] < len(i_pj) else "")
+        p_id_b = iso.get("projectB") or (i_pj[iso["_pB"]] if isinstance(iso.get("_pB"), int) and 0 <= iso["_pB"] < len(i_pj) else "")
         blob = (json.dumps(iso) + " " + json.dumps(dA) + " " + json.dumps(dB) + " " + fA + " " + fB).lower()
-        if iso.get("isChallengeSpec") or "comparatorchallenges" in blob:
+        if iso.get("isChallengeSpec") or iso.get("_cs") or "comparatorchallenges" in blob:
             continue
-        if iso.get("epistemicSymbol") == "⚠":
+        if es_sym == "⚠":
             continue
         if any(tok in blob for tok in SYNTHETIC_TEMPLATE_TOKENS):
             continue
         da = iso.get("disciplineA") or (i_dc[iso["_dcA"]] if isinstance(iso.get("_dcA"), int) and 0 <= iso["_dcA"] < len(i_dc) else "") or iso.get("domainA") or ""
         db = iso.get("disciplineB") or (i_dc[iso["_dcB"]] if isinstance(iso.get("_dcB"), int) and 0 <= iso["_dcB"] < len(i_dc) else "") or iso.get("domainB") or ""
-        pa = iso.get("projectAName") or (i_pn[iso["_pAN"]] if isinstance(iso.get("_pAN"), int) and 0 <= iso["_pAN"] < len(i_pn) else "") or iso.get("projectA") or da
-        pb = iso.get("projectBName") or (i_pn[iso["_pBN"]] if isinstance(iso.get("_pBN"), int) and 0 <= iso["_pBN"] < len(i_pn) else "") or iso.get("projectB") or db
+        pa = iso.get("projectAName") or (i_pn[iso["_pAN"]] if isinstance(iso.get("_pAN"), int) and 0 <= iso["_pAN"] < len(i_pn) else "") or p_id_a or da
+        pb = iso.get("projectBName") or (i_pn[iso["_pBN"]] if isinstance(iso.get("_pBN"), int) and 0 <= iso["_pBN"] < len(i_pn) else "") or p_id_b or db
         if not da or not db or da == db:
             continue
         ep_key = (dA.get("name") or pa, dB.get("name") or pb)
@@ -137,10 +142,10 @@ def discover_role_compatible_insights(data):
             "id": iso.get("id") or f"{pa}__{pb}",
             "pair": f"{pa} ↔ {pb}",
             "disciplines": f"{da} ↔ {db}",
-            "endpointA": f"{iso.get('projectA')}:{fA or dA.get('name')}",
-            "endpointB": f"{iso.get('projectB')}:{fB or dB.get('name')}",
+            "endpointA": f"{p_id_a}:{fA or dA.get('name')}",
+            "endpointB": f"{p_id_b}:{fB or dB.get('name')}",
             "score": score,
-            "reviewedStar": bool(iso.get("epistemicSymbol") == "★"),
+            "reviewedStar": bool(es_sym == "★"),
             "sharedOperators": sops[:6],
             "discoveryMethod": skel or "AST Role-Weighted IDF + Witness Verification",
             "selfCritique": "Verified non-challenge, non-synthetic author endpoints across distinct disciplines; verify premise adapter before theorem transport.",
@@ -180,7 +185,7 @@ def run_cycle(cycle_num, start_ts, end_ts):
 
     status = {
         "status": "running" if remaining_hours > 0 else "completed",
-        "version": "V246",
+        "version": "V247",
         "daemonPid": os.getpid(),
         "cycle": cycle_num,
         "timestampUtc": now_iso,
@@ -204,7 +209,7 @@ def run_cycle(cycle_num, start_ts, end_ts):
     with RUNS_JSONL.open("a", encoding="utf-8") as f:
         f.write(json.dumps({
             "cycle": cycle_num,
-            "version": "V246",
+            "version": "V247",
             "timestampUtc": now_iso,
             "exitCode": proc.returncode,
             "passed": passed_checks,

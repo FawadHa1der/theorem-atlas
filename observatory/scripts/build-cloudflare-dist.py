@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-V246 Unified Chrome & Safari Shard Builder (< 25 MiB static assets & < 18.8 MiB total corpus!)
+V247 Unified Chrome & Safari Shard Builder (< 25 MiB static assets & < 17.6 MiB total corpus!)
 & Cloudflare R2 Unrestricted-Size Lean 4 Streaming Function Generator.
 
 - Reconstructs `bundle-data.js` from `observatory/chunks/` if missing in a fresh Git clone.
@@ -25,7 +25,7 @@ LOCAL_CHUNKS_DIR = OBS_DIR / "chunks"
 CF_DIR = OBS_DIR / "dist-cloudflare"
 CF_CHUNKS_DIR = CF_DIR / "chunks"
 LIMIT_BYTES = 25 * 1024 * 1024  # Cloudflare Pages 25 MiB static asset limit (does NOT restrict .lean files in R2!)
-ASSET_VER = "246"
+ASSET_VER = "247"
 
 SHARD_NAMES = [
     "bundle-shard-1-core.js",
@@ -369,8 +369,17 @@ def build_shards_and_sync_routes():
         "if(pr.obstacleCategory===undefined&&typeof pr._oc==='number')pr.obstacleCategory=ppOb[pr._oc]||'';"
         "if(!pr.sourceProject&&pr.projectA)pr.sourceProject=pr.projectA;"
         "if(!pr.targetProject&&pr.projectB)pr.targetProject=pr.projectB;}}"
-        "var imp=sm.isoMetaPools||{},iSk=imp.skels||[],iPa=imp.archs||[],iPn=imp.pnames||[],iDc=imp.discs||[],iOc=imp.obs||[],iDg=imp.dags||[],iKd=imp.kinds||[],iSo=imp.sops||[],iWm=imp.whys||[],iTb=imp.tbs||[];"
+        "var imp=sm.isoMetaPools||{},iSk=imp.skels||[],iPa=imp.archs||[],iPn=imp.pnames||[],iDc=imp.discs||[],iOc=imp.obs||[],iDg=imp.dags||[],iKd=imp.kinds||[],iSo=imp.sops||[],iWm=imp.whys||[],iTb=imp.tbs||[],iPj=imp.projs||[],iEs=imp.syms||[],iMi=imp.mids||[];"
         "var is=sm.customIsomorphisms||[];for(var j=0;j<is.length;j++){var iso=is[j];if(iso){"
+        "if(iso.projectA===undefined&&typeof iso._pA==='number')iso.projectA=iPj[iso._pA]||'';"
+        "if(iso.projectB===undefined&&typeof iso._pB==='number')iso.projectB=iPj[iso._pB]||'';"
+        "if(iso.epistemicSymbol===undefined&&typeof iso._es==='number')iso.epistemicSymbol=iEs[iso._es]||'';"
+        "if(iso.mechanismId===undefined&&typeof iso._mi==='number')iso.mechanismId=iMi[iso._mi]||'';"
+        "if(iso.isomorphismScore===undefined&&typeof iso._sc==='number')iso.isomorphismScore=iso._sc;"
+        "if(iso.endpointMultiplicityA===undefined&&typeof iso._mA==='number')iso.endpointMultiplicityA=iso._mA;"
+        "if(iso.endpointMultiplicityB===undefined&&typeof iso._mB==='number')iso.endpointMultiplicityB=iso._mB;"
+        "if(iso.isChallengeSpec===undefined)iso.isChallengeSpec=Boolean(iso._cs);"
+        "if(iso.sameDiscipline===undefined)iso.sameDiscipline=Boolean(iso._sd);"
         "if(!iso.declA&&typeof iso._dA==='number')iso.declA=dp[iso._dA]||{};"
         "if(!iso.declB&&typeof iso._dB==='number')iso.declB=dp[iso._dB]||{};"
         "if(iso.whyConnectedPlain===undefined&&typeof iso._w1==='number')iso.whyConnectedPlain=w1[iso._w1]||'';"
