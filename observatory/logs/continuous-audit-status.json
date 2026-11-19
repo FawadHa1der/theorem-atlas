@@ -1,19 +1,19 @@
 {
   "status": "verified",
-  "version": "V248",
+  "version": "V249",
   "daemonPid": 17,
-  "cycle": 64,
-  "timestampUtc": "2026-11-19T07:32:50.028567+00:00",
-  "elapsedHours": 9.4,
-  "remainingHours": 14.6,
+  "cycle": 65,
+  "timestampUtc": "2026-11-19T08:06:33.406752+00:00",
+  "elapsedHours": 9.9,
+  "remainingHours": 14.1,
   "verificationExitCode": 0,
-  "automatedUxAndMathChecksPassed": 528,
+  "automatedUxAndMathChecksPassed": 532,
   "automatedUxAndMathChecksFailed": 0,
-  "leanFilesVerified": 649,
-  "frontierLeanFilesVerified": 123,
-  "totalZeroSorryLeanFiles": 772,
+  "leanFilesVerified": 650,
+  "frontierLeanFilesVerified": 124,
+  "totalZeroSorryLeanFiles": 774,
   "lean25MiBRestrictionRemoved": true,
-  "cycleDurationSeconds": 131.0,
+  "cycleDurationSeconds": 124.0,
   "topRoleCompatibleLeads": [
     {
       "id": "iso-tc-probcomb-zeta23-18",
@@ -125,6 +125,34 @@
         "mod /"
       ],
       "discoveryMethod": "Henselian / Adic Nilpotent Lifting Skeleton",
+      "selfCritique": "Verified non-challenge, non-synthetic author endpoints across distinct disciplines; verify premise adapter before theorem transport."
+    },
+    {
+      "id": "iso-domain-bridge-6347",
+      "pair": "Connes Rigidity & Property (T) Factors \u2194 Tau Ceti \u00b7 Elliptic Curves, Adic Spaces & Curves",
+      "disciplines": "Representation Theory, Lie & Operator Algebras \u2194 Algebraic & Complex Geometry",
+      "endpointA": "oai-connes:ConnesRigidity.lean",
+      "endpointB": "tc-alggeom:TauCeti/AlgebraicGeometry/IrreducibleOfConnectedDomainStalk.lean",
+      "score": 97.8,
+      "reviewedStar": true,
+      "sharedOperators": [
+        "\u2243 Equiv"
+      ],
+      "discoveryMethod": "Exact Sequence / Surgery Cone Duality Skeleton",
+      "selfCritique": "Verified non-challenge, non-synthetic author endpoints across distinct disciplines; verify premise adapter before theorem transport."
+    },
+    {
+      "id": "iso-domain-bridge-6371",
+      "pair": "Sphere Packing Sharp Asymptotics \u2194 Tau Ceti \u00b7 Reductive Algebraic Groups",
+      "disciplines": "Harmonic Analysis & Dispersive PDEs \u2194 Representation Theory, Lie & Operator Algebras",
+      "endpointA": "oai-sphere:SpherePacking.lean",
+      "endpointB": "tauceti:TauCeti/KnotTheory/TemperleyLieb.lean",
+      "score": 97.8,
+      "reviewedStar": true,
+      "sharedOperators": [
+        "\u2243 Equiv"
+      ],
+      "discoveryMethod": "Exact Sequence / Surgery Cone Duality Skeleton",
       "selfCritique": "Verified non-challenge, non-synthetic author endpoints across distinct disciplines; verify premise adapter before theorem transport."
     }
   ]

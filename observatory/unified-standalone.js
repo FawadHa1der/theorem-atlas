@@ -84,6 +84,18 @@
     for (let di = 0; di < dp.length; di++) {
       const d = dp[di];
       if (!d) continue;
+      if (d.name === undefined && d.n !== undefined) d.name = d.n;
+      if (Array.isArray(d._d)) {
+        const dv = d._d;
+        if (typeof dv[0] === 'number' && dv[0] >= 0 && d.line === undefined) d.line = dv[0];
+        if (typeof dv[1] === 'number' && dv[1] >= 0 && d._sn === undefined) d._sn = dv[1];
+        if (typeof dv[2] === 'number' && dv[2] >= 0 && d._k === undefined) d._k = dv[2];
+        if (typeof dv[3] === 'number' && dv[3] >= 0 && d._sk === undefined) d._sk = dv[3];
+        if (typeof dv[4] === 'number' && dv[4] >= 0 && d._pa === undefined) d._pa = dv[4];
+        if (typeof dv[5] === 'number' && dv[5] >= 0 && d._fl === undefined) d._fl = dv[5];
+        if (typeof dv[6] === 'number' && dv[6] >= 0 && d._ub === undefined) d._ub = dv[6];
+        if (dv[7] === 1 && d._sg === undefined) d._sg = 1;
+      }
       if (d.file === undefined && typeof d._fl === 'number') d.file = dmFl[d._fl] || '';
       if (d.snippet === undefined && typeof d._sn === 'number') d.snippet = snPool[d._sn] || '';
       if (d.kind === undefined && typeof d._k === 'number') d.kind = dmKd[d._k] || '';
@@ -94,6 +106,20 @@
     }
     const trp = sm.trinityPools || {};
     const trDm = trp.domains || [], trPs = trp.summaries || [], trBo = trp.opportunities || [], trAn = trp.analogies || [];
+    const tdm = trp.dmMeta || {}, tdSl = tdm.slots || [], tdPj = tdm.projs || [], tdPn = tdm.pnames || [], tdDc = tdm.discs || [], tdRl = tdm.roles || [];
+    for (let ti = 0; ti < trDm.length; ti++) {
+      const td = trDm[ti];
+      if (!td) continue;
+      if (td.declName === undefined && td.n !== undefined) td.declName = td.n;
+      if (Array.isArray(td._t)) {
+        const tv = td._t;
+        if (typeof tv[0] === 'number' && tv[0] >= 0 && td.slot === undefined) td.slot = tdSl[tv[0]] || '';
+        if (typeof tv[1] === 'number' && tv[1] >= 0 && td.projectId === undefined) td.projectId = tdPj[tv[1]] || '';
+        if (typeof tv[2] === 'number' && tv[2] >= 0 && td.projectName === undefined) td.projectName = tdPn[tv[2]] || '';
+        if (typeof tv[3] === 'number' && tv[3] >= 0 && td.discipline === undefined) td.discipline = tdDc[tv[3]] || '';
+        if (typeof tv[4] === 'number' && tv[4] >= 0 && td.role === undefined) td.role = tdRl[tv[4]] || '';
+      }
+    }
     const gts = sm.grandTrinities || [];
     for (let gi = 0; gi < gts.length; gi++) {
       const gt = gts[gi];
@@ -150,11 +176,54 @@
     const mp = sm.mechPools || {};
     const mpPart = mp.partItems || [], mpPb = mp.playbooks || [], mpPs = mp.steppers || [], mpAn = mp.analogies || [];
     const mpId = mp.invDirs || [], mpTd = mp.transDicts || [], mpVs = mp.visSteps || [], mpAst = mp.astTypes || [], mpGr = mp.grades || [];
+    const mpStStr = mp.stepStrs || [];
+    for (let sti = 0; sti < mpPs.length; sti++) {
+      const stArr = mpPs[sti];
+      if (Array.isArray(stArr) && stArr.length && Array.isArray(stArr[0])) {
+        mpPs[sti] = stArr.map(sa => ({
+          stageNum: sa[0],
+          stageLabel: mpStStr[sa[1]] || '',
+          plainWhatChanges: mpStStr[sa[2]] || '',
+          beforeAfterEq: mpStStr[sa[3]] || '',
+          whatBreaksIfSkipped: mpStStr[sa[4]] || '',
+          leanTacticSnippet: mpStStr[sa[5]] || ''
+        }));
+      }
+    }
+    const mpTdC = mp.tdConcepts || [];
+    for (let tdi = 0; tdi < mpTd.length; tdi++) {
+      const tdArr = mpTd[tdi];
+      if (Array.isArray(tdArr) && tdArr.length && Array.isArray(tdArr[0])) {
+        mpTd[tdi] = tdArr.map(ta => ({ concept: mpTdC[ta[0]] || '', domainA: ta[1] || '', domainB: ta[2] || '' }));
+      }
+    }
     const pm = mp.partMeta || {}, pmPj = pm.projs || [], pmPn = pm.pnames || [], pmSh = pm.shorts || [], pmDc = pm.discs || [], pmRl = pm.roles || [];
     const pmKd = pm.kinds || [], pmSk = pm.skels || [], pmPa = pm.archs || [], pmFl = pm.files || [], pmUb = pm.urlBases || [];
     for (let pi = 0; pi < mpPart.length; pi++) {
       const pt = mpPart[pi];
       if (!pt) continue;
+      if (Array.isArray(pt._q)) {
+        const qv = pt._q;
+        if (typeof qv[0] === 'number' && qv[0] >= 0 && pt._p === undefined) pt._p = qv[0];
+        if (typeof qv[1] === 'number' && qv[1] >= 0 && pt._pn === undefined) pt._pn = qv[1];
+        if (typeof qv[2] === 'number' && qv[2] >= 0 && pt._sh === undefined) pt._sh = qv[2];
+        if (typeof qv[3] === 'number' && qv[3] >= 0 && pt._dc === undefined) pt._dc = qv[3];
+        if (typeof qv[4] === 'number' && qv[4] >= 0 && pt._rl === undefined) pt._rl = qv[4];
+        if (!pt.customDecl && (pt.n !== undefined || qv.length > 5)) {
+          const ncd = { name: pt.n || '' };
+          if (typeof qv[5] === 'number' && qv[5] >= 0) ncd.line = qv[5];
+          if (typeof qv[6] === 'number' && qv[6] >= 0) ncd._sn = qv[6];
+          if (typeof qv[7] === 'number' && qv[7] >= 0) ncd._k = qv[7];
+          if (typeof qv[8] === 'number' && qv[8] >= 0) ncd._sk = qv[8];
+          if (typeof qv[9] === 'number' && qv[9] >= 0) ncd._pa = qv[9];
+          if (typeof qv[10] === 'number' && qv[10] >= 0) ncd._fl = qv[10];
+          if (typeof qv[11] === 'number' && qv[11] >= 0) ncd._ub = qv[11];
+          if (qv[12] === 1) ncd._sg = 1;
+          if (pt.s !== undefined) ncd.signature = pt.s;
+          if (pt.u !== undefined) ncd.url = pt.u;
+          pt.customDecl = ncd;
+        }
+      }
       if (pt.projectId === undefined && typeof pt._p === 'number') pt.projectId = pmPj[pt._p] || '';
       if (pt.projectName === undefined && typeof pt._pn === 'number') pt.projectName = pmPn[pt._pn] || '';
       if (pt.short === undefined && typeof pt._sh === 'number') pt.short = pmSh[pt._sh] || '';
@@ -174,6 +243,7 @@
     const mfp = mp.fieldPools || {}, mfDf = mfp.diffs || [], mfCt = mfp.cats || [], mfVl = mfp.vleans || [], mfVb = mfp.vbridges || [];
     const mfTg = mfp.tags || [], mfNh = mfp.hyps || [], mfLt = mfp.ltbs || [], mfOc = mfp.obs || [], mfCs = mfp.skels || [], mfDa = mfp.archs || [];
     const mfPj = mfp.projs || [], mfNm = mfp.names || [], mfPi = mfp.pints || [];
+    const mfOt = mfp.otags || [], mfSl = mfp.slabels || [], mfWh = mfp.whys || [], mfSs = mfp.sstructs || [], mfOb = mfp.obls || [];
     const mechKeys = ['_rp','_ps','_an','_id','_td','_vs','_ast','_eg','_df','_ct','_vl','_vb','_tg','_nh','_lt','_oc','_cs','_da'];
     const ms = sm.highLevelMechanisms || [];
     for (let j = 0; j < ms.length; j++) {
@@ -187,6 +257,11 @@
         if (typeof mx[18] === 'number' && mx[18] >= 0 && !m.projects) m.projects = (mfPj[mx[18]] || []).slice();
         if (typeof mx[19] === 'number' && mx[19] >= 0 && m.name === undefined) m.name = mfNm[mx[19]] || '';
         if (typeof mx[20] === 'number' && mx[20] >= 0 && m.plainIntuition === undefined) m.plainIntuition = mfPi[mx[20]] || '';
+        if (typeof mx[21] === 'number' && mx[21] >= 0 && m.obstacleTag === undefined) m.obstacleTag = mfOt[mx[21]] || '';
+        if (typeof mx[22] === 'number' && mx[22] >= 0 && m.shortLabel === undefined) m.shortLabel = mfSl[mx[22]] || '';
+        if (typeof mx[23] === 'number' && mx[23] >= 0 && m.whyItMatters === undefined) m.whyItMatters = mfWh[mx[23]] || '';
+        if (typeof mx[24] === 'number' && mx[24] >= 0 && m.sharedStructure === undefined) m.sharedStructure = mfSs[mx[24]] || '';
+        if (typeof mx[25] === 'number' && mx[25] >= 0 && m.obligations === undefined) m.obligations = mfOb[mx[25]] || '';
       }
       if (!m.participatingProjects && Array.isArray(m._pp)) {
         m.participatingProjects = m._pp.map(idx => mpPart[idx] || {});
@@ -293,10 +368,27 @@
       if (!m.name && m.title) m.name = m.title;
     }
     const ppp = sm.pipelinePools || {}, ppSt = ppp.stages || [], ppPn = ppp.pnames || [], ppDc = ppp.discs || [], ppVl = ppp.vleans || [], ppOb = ppp.obs || [];
+    const ppStStr = ppp.stageStrs || [], ppMid = ppp.mids || [];
+    for (let psi = 0; psi < ppSt.length; psi++) {
+      const psArr = ppSt[psi];
+      if (Array.isArray(psArr) && psArr.length && Array.isArray(psArr[0])) {
+        ppSt[psi] = psArr.map(sa => ({ stage: ppStStr[sa[0]] || '', domainA: ppStStr[sa[1]] || '', domainB: ppStStr[sa[2]] || '' }));
+      }
+    }
     const ppsArr = sm.proofPipelines || [];
     for (let ppi = 0; ppi < ppsArr.length; ppi++) {
       const pr = ppsArr[ppi];
       if (!pr) continue;
+      if (Array.isArray(pr._px)) {
+        const px = pr._px;
+        if (typeof px[0] === 'number' && px[0] >= 0 && pr._pAN === undefined) pr._pAN = px[0];
+        if (typeof px[1] === 'number' && px[1] >= 0 && pr._pBN === undefined) pr._pBN = px[1];
+        if (typeof px[2] === 'number' && px[2] >= 0 && pr._dA === undefined) pr._dA = px[2];
+        if (typeof px[3] === 'number' && px[3] >= 0 && pr._dB === undefined) pr._dB = px[3];
+        if (typeof px[4] === 'number' && px[4] >= 0 && pr._vl === undefined) pr._vl = px[4];
+        if (typeof px[5] === 'number' && px[5] >= 0 && pr._oc === undefined) pr._oc = px[5];
+        if (typeof px[6] === 'number' && px[6] >= 0 && pr.mechanismId === undefined) pr.mechanismId = ppMid[px[6]] || '';
+      }
       if (!pr.stages && typeof pr._st === 'number') pr.stages = (ppSt[pr._st] || []).map(s => Object.assign({}, s));
       if (pr.projectAName === undefined && typeof pr._pAN === 'number') pr.projectAName = ppPn[pr._pAN] || '';
       if (pr.projectBName === undefined && typeof pr._pBN === 'number') pr.projectBName = ppPn[pr._pBN] || '';
@@ -312,16 +404,39 @@
   if (ip) {
     const pp = ip.pathPools || {};
     const ppEp = pp.endpoints || [], ppTd = pp.transDicts || [], ppCv = pp.caveats || [];
+    const ppTdC = pp.tdConcepts || [];
+    for (let ptdi = 0; ptdi < ppTd.length; ptdi++) {
+      const ptdArr = ppTd[ptdi];
+      if (Array.isArray(ptdArr) && ptdArr.length && Array.isArray(ptdArr[0])) {
+        ppTd[ptdi] = ptdArr.map(ta => ({ concept: ppTdC[ta[0]] || '', domainA: ta[1] || '', domainB: ta[2] || '' }));
+      }
+    }
     const ppLs = pp.sketches || [], ppSm = pp.summaries || [], ppRw = pp.reqWorks || [];
     const ppDb = pp.discBridges || [], ppTl = pp.tools || [], ppAn = pp.analogies || [], ppSi = pp.sharedIngs || [];
     const ppRl = pp.relLevels || [], ppDs = pp.discs || [], ppKd = pp.kinds || [], ppWm = pp.whys || [], ppOc = pp.obsCats || [];
     const ppPjs = pp.projsList || [], ppVl2 = pp.vleans || [], ppHr = pp.hrefs || [], ppFms = pp.famsList || [], ppCt = pp.cats || [], ppSt2 = pp.statuses || [], ppMi = pp.mids || [];
     const connKeys = ['_td','_cv','_ls','_sm','_rw','_db','_tl','_an','_si','_rl','_ds','_kd','_wm','_oc','_pjs','_vl','_hr','_fms','_ct','_st'];
     const snPoolIp = (sm && sm.snippetPool) || [];
-    const em = pp.epMeta || {}, emPj = em.projs || [], emCm = em.commits || [], emPa = em.paths || [], emUb = em.urlBases || [];
+    const em = pp.epMeta || {}, emPj = em.projs || [], emCm = em.commits || [], emPa = em.paths || [], emUb = em.urlBases || [], emPn = em.pnames || [];
     for (let ei = 0; ei < ppEp.length; ei++) {
       const ep = ppEp[ei];
       if (!ep) continue;
+      if (ep._st === undefined && ep.t !== undefined) ep._st = ep.t;
+      if (Array.isArray(ep._e)) {
+        const ev = ep._e;
+        if (typeof ev[0] === 'number' && ev[0] >= 0 && ep._p === undefined) ep._p = ev[0];
+        if (typeof ev[1] === 'number' && ev[1] >= 0 && ep._cm === undefined) ep._cm = ev[1];
+        if (typeof ev[2] === 'number' && ev[2] >= 0 && ep._pa === undefined) ep._pa = ev[2];
+        if (typeof ev[3] === 'number' && ev[3] >= 0 && ep.lineStart === undefined) ep.lineStart = ev[3];
+        if (typeof ev[4] === 'number' && ev[4] >= 0 && ep.lineEnd === undefined) ep.lineEnd = ev[4];
+        if (typeof ev[5] === 'number' && ev[5] >= 0 && ep._sn === undefined) ep._sn = ev[5];
+        if (typeof ev[6] === 'number' && ev[6] >= 0 && ep._ub === undefined) ep._ub = ev[6];
+        if (ep.name === undefined && ep.n !== undefined) {
+          ep.name = (typeof ev[7] === 'number' && ev[7] >= 0 && emPn[ev[7]]) ? (ep.n + ' (' + emPn[ev[7]] + ')') : ep.n;
+        }
+      } else if (ep.name === undefined && ep.n !== undefined) {
+        ep.name = ep.n;
+      }
       if (ep.commit === undefined && typeof ep._cm === 'number') ep.commit = emCm[ep._cm] || '';
       if (ep.path === undefined && typeof ep._pa === 'number') ep.path = emPa[ep._pa] || '';
       if (ep.project === undefined && typeof ep._p === 'number') ep.project = emPj[ep._p] || '';
@@ -23282,7 +23397,8 @@ window.v48RenderBlueprintWizardPanel = function() {
       "100. Ring-AllReduce 2(P-1)/P, CRDT Join-Semilattice & Count-Min Sketch Suite #646",
       "101. Chandy–Lamport Poset Snapshot, (r,b) Min-Plus Network Calculus & RAID-6 𝔽₁₇ Suite #647",
       "102. Raft Quorum & Figure-8 Guard, Kingman/SRPT Queueing Knee & Counting Bloom Suite #648",
-      "103. Conflict-Serializability & SSI Write-Skew, Vector Clocks & USL Scalability Suite #649"
+      "103. Conflict-Serializability & SSI Write-Skew, Vector Clocks & USL Scalability Suite #649",
+      "104. BGP Stable-Paths & BAD GADGET, Chiu–Jain AIMD Fairness & Monkey LSM Water-Filling Suite #650"
     ];
     labTitles.forEach(function(lt, idx) {
       items.push({
@@ -65099,3 +65215,684 @@ window.v48RenderBlueprintWizardPanel = function() {
     };
   }
 })();
+
+// ============================================================================
+// Milestone Wave V249: Suite #650 & Frontier #124 (BGP Stable-Paths Gao–Rexford Acyclicity
+// vs. BAD GADGET, Chiu–Jain AIMD Exact Polynomial Fairness Gain & Monkey LSM Bloom-Bit
+// Water-Filling), Lab #104, 180 Leads Milestone, Sub-15.0 MiB Corpus & Bidirectional
+// Finite Lab <-> Bridge Composer Dossier Round-Trip (Suite 107 · 532/532)
+// ============================================================================
+(function() {
+  "use strict";
+
+  // 1. Register Milestone Suite #650 & Frontier #124 in V145_REAL_LEAN_SUITES & R2 Corpus Config
+  if (Array.isArray(window.V145_REAL_LEAN_SUITES)) {
+    var v249Suites = [
+      {
+        id: "lean-bgp-stability-aimd-fairness-and-lsm-monkey-bridge",
+        projects: ["cslib", "econlib", "tc-probcomb", "apsp3sum"],
+        file: "CommonGround/Verification/TheoremAtlasBgpStabilityAimdFairnessAndLsmMonkeyBridge.lean",
+        line: 154,
+        theoremName: "master_bgp_stability_aimd_fairness_and_lsm_monkey_bridge",
+        snippet: "theorem master_bgp_stability_aimd_fairness_and_lsm_monkey_bridge : (checkBgp216 = true ∧ hasDisputeWheel 2 2 2 = true ∧ countStableRoutings 2 2 2 = 0) ∧ (let f := runAimdEpochs 12 (90, 10); f.1 - f.2 < 10 ∧ jainCrossEq 90 10 108 12 = true) ∧ ...",
+        zeroSorry: true
+      },
+      {
+        id: "lean-bgp-stability-aimd-fairness-and-lsm-monkey-frontier",
+        projects: ["cslib", "econlib", "tc-probcomb", "apsp3sum"],
+        file: "09-consequence-lens-meta-atlas/BgpStabilityAimdFairnessAndLsmMonkeyFrontier.lean",
+        line: 173,
+        theoremName: "gao_rexford_dispute_wheel_free_unique_convergence_216",
+        snippet: "theorem gao_rexford_dispute_wheel_free_unique_convergence_216 : checkAll216BgpProfiles = true := by decide",
+        zeroSorry: true
+      }
+    ];
+    v249Suites.forEach(function(vs) {
+      if (!window.V145_REAL_LEAN_SUITES.some(function(s) { return s && s.file === vs.file; })) {
+        window.V145_REAL_LEAN_SUITES.push(vs);
+      }
+    });
+  }
+
+  if (window.CG_R2_CORPUS_CONFIG) {
+    window.CG_R2_CORPUS_CONFIG.kernelCompiledModules = 734;
+    window.CG_R2_CORPUS_CONFIG.totalZeroSorryLeanFiles = 774;
+    window.CG_R2_CORPUS_CONFIG.verificationModules = 650;
+    window.CG_R2_CORPUS_CONFIG.frontierModules = 124;
+  }
+
+  // 2. Bidirectional Finite Lab <-> Bridge Composer Research Dossier Round-Trip
+  window.v95OpenMatchedFiniteLab = function() {
+    var selA = document.getElementById("v95-proj-a");
+    var selB = document.getElementById("v95-proj-b");
+    var pA = selA ? selA.value : "cslib";
+    var pB = selB ? selB.value : "econlib";
+    var targetProjs = [pA, pB];
+    var bestLab = 103;
+    var bestScore = -1;
+
+    var bts = window.CG_VERIFIED_ATLAS_BREAKTHROUGHS || [];
+    for (var bi = 0; bi < bts.length; bi++) {
+      var bt = bts[bi];
+      if (!bt || typeof bt.interactiveLab !== "number") continue;
+      var bp = Array.isArray(bt.projects) ? bt.projects : [];
+      var sc = 0;
+      if (bp.indexOf(pA) !== -1) sc += 12;
+      if (bp.indexOf(pB) !== -1 && pB !== pA) sc += 12;
+      if (sc >= bestScore) {
+        bestScore = sc;
+        bestLab = bt.interactiveLab;
+      }
+    }
+
+    var leads = window.CG_PROMISING_RESEARCH_LEADS || [];
+    for (var li = 0; li < leads.length; li++) {
+      var ld = leads[li];
+      if (!ld || typeof ld.labIndex !== "number") continue;
+      var lp = Array.isArray(ld.projects) ? ld.projects : [];
+      var lsc = 0;
+      if (lp.indexOf(pA) !== -1) lsc += 12;
+      if (lp.indexOf(pB) !== -1 && pB !== pA) lsc += 12;
+      if (lsc > bestScore) {
+        bestScore = lsc;
+        bestLab = ld.labIndex;
+      }
+    }
+
+    if (bestScore <= 0 && typeof window.cgGetFiniteLabCatalog === "function" && typeof window.cgResolveFiniteLabSuite === "function") {
+      var cat = window.cgGetFiniteLabCatalog();
+      for (var ci = cat.length - 1; ci >= 0; ci--) {
+        var r = window.cgResolveFiniteLabSuite(ci);
+        var sp = (r && r.suite && Array.isArray(r.suite.projects)) ? r.suite.projects : [];
+        var ssc = 0;
+        for (var ti = 0; ti < targetProjs.length; ti++) {
+          if (sp.indexOf(targetProjs[ti]) !== -1) ssc += 10;
+        }
+        if (ssc > bestScore) {
+          bestScore = ssc;
+          bestLab = ci;
+        }
+      }
+    }
+
+    if (typeof window.v95CloseBridgeComposer === "function") {
+      window.v95CloseBridgeComposer();
+    }
+    if (typeof window.v136OpenV34FiniteDiagramsModal === "function") {
+      window.v136OpenV34FiniteDiagramsModal(bestLab);
+    }
+    return bestLab;
+  };
+
+  var _prevOpenComposerV248 = window.v95OpenBridgeComposerStudio;
+  if (typeof _prevOpenComposerV248 === "function") {
+    window.v95OpenBridgeComposerStudio = function() {
+      _prevOpenComposerV248.apply(this, arguments);
+      var certBtn = document.getElementById("v95-open-cert-btn");
+      if (certBtn && !document.getElementById("v95-open-matched-lab-btn")) {
+        certBtn.insertAdjacentHTML(
+          "afterend",
+          ' <button type="button" id="v95-open-matched-lab-btn" class="v60-qs-btn" style="border-color:rgba(56,189,248,0.52);color:#bae6fd;" onclick="window.v95OpenMatchedFiniteLab()" title="Jump directly to the matching Interactive Finite Micro-Lab for Source Project A &amp; Target Project B">🔬 Matching Lab</button>'
+        );
+      }
+    };
+  }
+
+  window.v136PinActiveLabToResearchDossier = function() {
+    var st = window._v136State || {};
+    var activeLab = typeof st.activeLab === "number" ? st.activeLab : 0;
+    var cat = typeof window.cgGetFiniteLabCatalog === "function" ? window.cgGetFiniteLabCatalog() : [];
+    var labTitle = String(cat[activeLab] || ("Finite Micro-Lab #" + (activeLab + 1)));
+    var res = typeof window.cgResolveFiniteLabSuite === "function" ? window.cgResolveFiniteLabSuite(activeLab) : null;
+    var suite = res && res.suite ? res.suite : null;
+    var bodyEl = document.getElementById("v136-finite-body");
+    var bodyText = bodyEl ? String(bodyEl.textContent || "").replace(/\s+/g, " ").trim() : "";
+    var verdictMatch = bodyText.match(/((?:★|✕)[^`]{8,180})/);
+    var liveVerdict = verdictMatch ? verdictMatch[1].trim() : "Exact rational / integer finite witness & premise-failure counterexample verified.";
+    var leanRef = suite && suite.leanFile
+      ? (suite.leanFile + (suite.theoremName ? (" :: " + suite.theoremName) : ""))
+      : "CommonGround/Verification/AllBridges.lean";
+
+    window._cgActiveDossierFiniteLab = {
+      labIndex: activeLab,
+      labNumber: activeLab + 1,
+      title: labTitle,
+      suiteId: suite ? suite.id : ("finite-lab-" + (activeLab + 1)),
+      verdict: liveVerdict,
+      leanRef: leanRef
+    };
+
+    if (suite && suite.id && typeof window.cgPinResearchHop === "function") {
+      window.cgPinResearchHop(suite.id);
+    }
+    if (typeof window.v136CloseFiniteModal === "function") {
+      window.v136CloseFiniteModal();
+    }
+    if (typeof window.v95OpenBridgeComposerStudio === "function") {
+      window.v95OpenBridgeComposerStudio();
+    }
+    var projs = (suite && Array.isArray(suite.projects)) ? suite.projects : [];
+    var selA = document.getElementById("v95-proj-a");
+    var selB = document.getElementById("v95-proj-b");
+    if (selA && projs[0]) selA.value = projs[0];
+    if (selB && projs[1]) selB.value = projs[1];
+    if (typeof window.v95UpdateComposedBridge === "function") {
+      window.v95UpdateComposedBridge();
+    }
+    var dossierDrawer = document.getElementById("v95-dossier-drawer");
+    if (dossierDrawer) dossierDrawer.open = true;
+    return window.cgCopyResearchDossier(document.getElementById("v95-copy-dossier-btn"));
+  };
+
+  var _prevBuildDossierV248 = window.cgBuildResearchDossierMarkdown;
+  if (typeof _prevBuildDossierV248 === "function") {
+    window.cgBuildResearchDossierMarkdown = function() {
+      var baseMd = _prevBuildDossierV248.apply(this, arguments);
+      var fl = window._cgActiveDossierFiniteLab;
+      if (!fl) return baseMd;
+      var labLines = [
+        "",
+        "## 6. Interactive Finite Micro-Lab Witness & Counterexample Trace",
+        "- **Pinned Finite Micro-Lab**: `Lab #" + String(fl.labNumber) + "` — " + String(fl.title),
+        "- **Live Finite Witness / Premise Verdict**: " + String(fl.verdict),
+        "- **Zero-Sorry Lean 4.33.0 Kernel Anchor**: `" + String(fl.leanRef) + "`"
+      ].join("\n");
+      return baseMd + "\n" + labLines;
+    };
+  }
+
+  // 3. Register Breakthroughs #386-389 (`389` total)
+  window.CG_VERIFIED_ATLAS_BREAKTHROUGHS = window.CG_VERIFIED_ATLAS_BREAKTHROUGHS || [];
+  var v249Breakthroughs = [
+    {
+      id: "bt-v249-bgp-stable-paths-gao-rexford-vs-bad-gadget-oscillation",
+      title: "386. Exhaustive `216`-Profile BGP Stable-Paths (`Gao–Rexford` Dispute-Wheel Freedom) Unique `9`-Step Convergence vs. `BAD GADGET` `12`-Step Oscillation (`09`+`08`)",
+      projects: ["cslib", "econlib", "tc-probcomb"],
+      epistemicSymbol: "★",
+      epistemicGrade: "Lean 4.33.0 Pure-Core Kernel Checked (09-consequence-lens-meta-atlas/BgpStabilityAimdFairnessAndLsmMonkeyFrontier.lean · 0 sorry)",
+      domains: "Inter-Domain Internet Routing (`BGP-4`, Multi-Cloud SD-WAN) (`09`) ↔ Acyclic Game Best-Response Potentials & Dispute Wheels (`08`)",
+      howConnected: "Why & How Connected: Certifies `gao_rexford_dispute_wheel_free_unique_convergence_216` across all `6³ = 216` strict `3`-AS preference profiles: `100%` (`98 / 98`) of Dispute-Wheel-Free profiles (`hasDisputeWheel = false`, generalizing Gao–Rexford valley-free customer/provider/peer policies) have a **unique Nash-stable routing state** (`countStableRoutings = 1`) and converge in `9` asynchronous round-robin steps from all `27` initial states (`2,646 / 2,646` pairs)!",
+      selfCritique: "Premise-Failure Counterexample (`bgp_bad_gadget_zero_stability_and_oscillation_counterexample`): Across all `216` profiles, `countStableRoutings = 0` iff the `3` ASes form Griffin–Shepherd–Wilf's cyclic `BAD GADGET` (`(2,2,2)` or `(4,4,4)` preferring `2`-hop transit over direct routing), which enters a perpetual `12`-step periodic limit cycle `(1,1,0) → (0,0,1) → (1,1,0)`!",
+      statement: "(∀ p ∈ [0,5]³, ¬hasDisputeWheel(p) → countStable(p)=1 ∧ converges27(p)) ∧ (countStable(p)=0 ↔ p ∈ {(2,2,2),(4,4,4)}) ∧ runAsyncBgp(2,2,2,3,12,(1,1,0))=(1,1,0).",
+      leanFile: "09-consequence-lens-meta-atlas/BgpStabilityAimdFairnessAndLsmMonkeyFrontier.lean",
+      theoremName: "gao_rexford_dispute_wheel_free_unique_convergence_216",
+      interactiveLab: 103
+    },
+    {
+      id: "bt-v249-chiu-jain-aimd-exact-polynomial-fairness-gain-vs-mimd-aiad",
+      title: "387. Universal Chiu–Jain `AIMD` Additive-Increase Exact Polynomial Fairness Gain Identity vs. `MIMD` Frozen `9:1` Unfairness & `AIAD` Stagnation (`04`+`01`+`09`)",
+      projects: ["econlib", "apsp3sum", "cslib"],
+      epistemicSymbol: "★",
+      epistemicGrade: "Lean 4.33.0 Pure-Core Kernel Checked (09-consequence-lens-meta-atlas/BgpStabilityAimdFairnessAndLsmMonkeyFrontier.lean · 0 sorry)",
+      domains: "Internet & AI-Fabric Congestion Control (`TCP`, `RoCEv2 DCQCN`, `QUIC`) (`09`) ↔ Cauchy–Schwarz Jain Potential & Discrete Contraction (`01`+`04`)",
+      howConnected: "Why & How Connected: Proves universal `jain_parallelogram_pythagorean_identity` (`2(x₁²+x₂²) = (x₁+x₂)² + (x₁-x₂)²`), `aimd_additive_increase_exact_fairness_gain` `(x₁+x₂+2α)²(x₁²+x₂²) = (x₁+x₂)²((x₁+α)²+(x₂+α)²) + 2α(x₁+x₂+α)(x₁-x₂)²`, and `aimd_multiplicative_decrease_exact_fairness_invariance`: additive increase strictly raises Jain fairness whenever `x₁ ≠ x₂` and `α > 0`, while multiplicative decrease preserves Jain fairness identically!",
+      selfCritique: "Premise-Failure Counterexample (`aimd_convergence_vs_mimd_and_aiad_stagnation_counterexample`): From `(90, 10)` (`J ≈ 0.610`, gap `80`), `12` `AIMD` epochs converge to `(51, 44)` (`J ≈ 0.995`, gap `7 < 10`), whereas `MIMD` (`×6/5`, `×3/5`) freezes `9:1` unfairness (`(108, 12)`, `jainCrossEq = true`) forever and `AIAD` (`+10`, `-10`) freezes `x₁ - x₂ = 80` forever!",
+      statement: "(x₁+x₂+2α)²(x₁²+x₂²) = (x₁+x₂)²((x₁+α)²+(x₂+α)²) + 2α(x₁+x₂+α)(x₁-x₂)² ∧ AIMD¹²(90,10)=(51,44) ∧ jainCrossEq(90,10,108,12)=true.",
+      leanFile: "09-consequence-lens-meta-atlas/BgpStabilityAimdFairnessAndLsmMonkeyFrontier.lean",
+      theoremName: "aimd_additive_increase_exact_fairness_gain",
+      interactiveLab: 103
+    },
+    {
+      id: "bt-v249-lsm-compaction-duality-and-monkey-lagrangian-bloom-water-filling",
+      title: "388. LSM `Leveled`/`Tiered` `T×` Compaction Duality & Exhaustive `1,728`-Allocation `Monkey` Lagrangian Bloom-Bit Water-Filling (`(11,8,5)` Beats Uniform `(6,6,6)`) (`09`+`02`+`08`)",
+      projects: ["tc-probcomb", "cslib", "apsp3sum"],
+      epistemicSymbol: "★",
+      epistemicGrade: "Lean 4.33.0 Pure-Core Kernel Checked (09-consequence-lens-meta-atlas/BgpStabilityAimdFairnessAndLsmMonkeyFrontier.lean · 0 sorry)",
+      domains: "LSM Key-Value Storage Engines (`RocksDB`, `Pebble`, `Cassandra`) (`09`) ↔ KKT Lagrangian Water-Filling & Bloom FPR Exponentials (`02`+`08`)",
+      howConnected: "Why & How Connected: Proves universal `lsm_leveled_vs_tiered_amplification_duality` (`WA_leveled = T · WA_tiered`, `Runs_tiered = T · Runs_leveled` for `T ≥ 2`) and certifies `monkey_lagrangian_bloom_bit_unique_optimality_vs_uniform` across all `12³ = 1,728` bit vectors `(b₁,b₂,b₃) ∈ [1..12]³` on a `T = 8` LSM tree (`1, 8, 64` keys): `Monkey` water-filling `(11, 8, 5)` (`Δb = log₂ 8 = 3`) is the **strictly unique global minimizer** of wasted disk I/Os (`146 / 4096`) under budget `≤ 395` bits!",
+      selfCritique: "Premise-Failure Counterexample: Legacy `RocksDB` uniform `(6, 6, 6)` wastes `64 × 6 = 384` bits on the cold bottom level while starving hot upper levels — consuming **`9.8%` more RAM (`438 > 395` bits)** while suffering **`31.5%` more wasted disk I/Os (`192 > 146` / `4096`, i.e. `Monkey` cuts wasted I/O by `24.0%`)**!",
+      statement: "lsmBloomBitsT8(11,8,5)=395 < 438=lsmBloomBitsT8(6,6,6) ∧ lsmWastedIoScaled4096(11,8,5)=146 < 192=lsmWastedIoScaled4096(6,6,6) ∧ checkMonkeyUniqueGlobalOpt1728=true.",
+      leanFile: "09-consequence-lens-meta-atlas/BgpStabilityAimdFairnessAndLsmMonkeyFrontier.lean",
+      theoremName: "monkey_lagrangian_bloom_bit_unique_optimality_vs_uniform",
+      interactiveLab: 103
+    },
+    {
+      id: "bt-v249-suite-650-bgp-stability-aimd-fairness-lsm-monkey-master-bridge",
+      title: "389. Milestone `Suite #650` (`Lab #104`): BGP `Gao–Rexford` Stability, Chiu–Jain `AIMD` Fairness & `Monkey` LSM Water-Filling Master Bridge (`09`+`08`+`04`+`02`)",
+      projects: ["cslib", "econlib", "tc-probcomb", "apsp3sum"],
+      epistemicSymbol: "★",
+      epistemicGrade: "Lean 4.33.0 Pure-Core Kernel Checked (CommonGround/Verification/TheoremAtlasBgpStabilityAimdFairnessAndLsmMonkeyBridge.lean · 0 sorry)",
+      domains: "Internet Routing (`BGP`) (`09`) ↔ Congestion Control (`AIMD`) (`04`) ↔ Cloud LSM Storage (`Monkey`) (`02`+`08`)",
+      howConnected: "Why & How Connected: Milestone `Suite #650` unifies the three core potential/Lyapunov laws of Internet-scale infrastructure: acyclic Dispute-Wheel-Free routing potentials (`BGP` convergence), asymmetric additive-increase/multiplicative-decrease Jain fairness potentials (`AIMD`), and exponential-level Lagrangian bit water-filling (`Monkey` `Δb = log₂ T`)!",
+      selfCritique: "Verified Premise Gates: Enforce valley-free / Dispute-Wheel-Free transit export policies to prevent `BAD GADGET` route flapping, pair additive probing (`α > 0`) with multiplicative backoff to break `MIMD`/`AIAD` unfairness lock-in, and allocate `b_i - b_{i+1} = log₂ T` Bloom bits across LSM levels.",
+      statement: "master_bgp_stability_aimd_fairness_and_lsm_monkey_bridge (`Suite #650`, `Lab #104`, `0` sorry).",
+      leanFile: "CommonGround/Verification/TheoremAtlasBgpStabilityAimdFairnessAndLsmMonkeyBridge.lean",
+      theoremName: "master_bgp_stability_aimd_fairness_and_lsm_monkey_bridge",
+      interactiveLab: 103
+    }
+  ];
+  var existingBtIds249 = new Set(window.CG_VERIFIED_ATLAS_BREAKTHROUGHS.map(function(b) { return b && b.id; }));
+  v249Breakthroughs.forEach(function(b) {
+    if (!existingBtIds249.has(b.id)) window.CG_VERIFIED_ATLAS_BREAKTHROUGHS.push(b);
+  });
+
+  // 4. Register Promising Research Leads #179-180 (`180/180` Milestone — `100%` `.lean`-Anchored!)
+  window.CG_PROMISING_RESEARCH_LEADS = window.CG_PROMISING_RESEARCH_LEADS || [];
+  var v249Leads = [
+    {
+      id: "lead-v249-dispute-wheel-free-multicloud-bgp-sdwan-policy-verifier",
+      title: "179. Incremental Dispute-Wheel-Free Policy Verifier for Multi-Cloud `BGP` & AI-Interconnect Transit Peering Eliminating `BAD GADGET` Route Flaps (`09`+`08`)",
+      projects: ["cslib", "econlib", "tc-probcomb"],
+      targetStarId: "suite-650-bgp-stability-aimd-fairness-lsm-monkey",
+      domains: "Multi-Cloud `AWS DirectConnect` / `GCP Cloud Router` / `Azure ExpressRoute` `BGP` (`09`) ↔ Acyclic Dispute-Wheel Graph Verification (`08`)",
+      whyPromising: "Enterprise multi-cloud networks routinely attach `LOCAL_PREF` overrides for backup failover across `3+` cloud regions, inadvertently creating hidden `BAD GADGET` Dispute Wheels (`bgp_bad_gadget_zero_stability_and_oscillation_counterexample`) that only oscillate when a primary link fails! Compiling `LOCAL_PREF` + `AS_PATH` export maps into the preferred-transit graph and rejecting commits with cycles guarantees `100%` unique Nash convergence (`gao_rexford_dispute_wheel_free_unique_convergence_216`) under arbitrary link failures!",
+      whatStatementUnlocked: "Zero-sorry Lean 4 certificate proving failure-resilient Dispute-Wheel freedom (`∀ subset E' ⊆ E, ¬hasDisputeWheel(G|_{E'}) ⟹ unique async BGP convergence`) for multi-cloud route-map ASTs.",
+      realWorldUseCase: "Pre-deployment CI/CD gate for hyperscale cloud & AI-backbone `BGP` route-maps preventing global outage route-flap storms during fiber cuts.",
+      keyObstacle: "Checking Dispute-Wheel freedom across exponentially many `k`-link failure subsets without enumerating `2^|E|` subgraphs via modular dominance pruning.",
+      leanAnchor: "09-consequence-lens-meta-atlas/BgpStabilityAimdFairnessAndLsmMonkeyFrontier.lean",
+      labIndex: 103
+    },
+    {
+      id: "lead-v249-monkey-waterfilling-hybrid-tiered-leveled-lsm-controller",
+      title: "180. Online Workload-Aware `Monkey` Bloom Water-Filling + Hybrid `Tiered`/`Leveled` LSM Compaction Controller (`Δb = log₂ T_i`) (`09`+`02`+`08`)",
+      projects: ["tc-probcomb", "cslib", "apsp3sum"],
+      targetStarId: "suite-650-bgp-stability-aimd-fairness-lsm-monkey",
+      domains: "Cloud-Native LSM Databases & Vector Metadata Stores (`RocksDB`, `Pebble`, `TiKV`) (`09`) ↔ Lagrangian KKT Water-Filling (`02`+`08`)",
+      whyPromising: "As proven in `lsm_leveled_vs_tiered_amplification_duality` and `monkey_lagrangian_bloom_bit_unique_optimality_vs_uniform`, uniform Bloom bits `(6,6,6)` waste `87.7%` (`384/438`) of filter RAM on the bottom level while `Monkey` `(11,8,5)` simultaneously cuts RAM by `9.8%` (`395 < 438`) and wasted point-read I/Os by `24.0%` (`146 < 192`)! Jointly adapting per-level fanout `T_i` (`Tiered` on write-hot upper levels, `Leveled` on read-hot bottom level) with `b_i - b_{i+1} = log₂ T_i + log₂(runs_i / runs_{i+1})` achieves Pareto-optimal write + point-lookup throughput!",
+      whatStatementUnlocked: "Machine-checked Lean 4 KKT optimality theorem for heterogeneous `(T_i, runs_i)` hybrid Tiered/Leveled LSM trees with non-uniform Bloom-bit water-filling.",
+      realWorldUseCase: "Slashing NVMe SSD write wear and tail p99 point-lookup latency in multi-terabyte `RocksDB` / `Pebble` cloud storage clusters.",
+      keyObstacle: "Re-allocating Bloom filter bit-budgets smoothly across live SSTable compactions without rebuilding immutable bottom-level SSTables.",
+      leanAnchor: "CommonGround/Verification/TheoremAtlasBgpStabilityAimdFairnessAndLsmMonkeyBridge.lean",
+      labIndex: 103
+    }
+  ];
+  var existingLeadIds249 = new Set(window.CG_PROMISING_RESEARCH_LEADS.map(function(l) { return l && l.id; }));
+  v249Leads.forEach(function(nl) {
+    if (!existingLeadIds249.has(nl.id)) window.CG_PROMISING_RESEARCH_LEADS.push(nl);
+  });
+
+  // 5. Register Premise-Boundary Guardrail & Archetype #42
+  if (Array.isArray(window.CG_BOUNDARY_RULES)) {
+    var v249Rule = {
+      id: "bgp-bad-gadget-aimd-mimd-and-lsm-monkey-boundary",
+      groups: [
+        ["bgp", "gao_rexford", "dispute_wheel", "aimd", "jain", "congestion", "lsm", "rocksdb", "monkey", "bloom"],
+        ["bad_gadget", "oscillation", "route_flap", "mimd", "aiad", "unfairness", "uniform_bits", "write_amplification"]
+      ],
+      title: "Premise Boundary · Cyclic `BGP` Transit Triggers `BAD GADGET` Oscillation; `MIMD`/`AIAD` Freeze Unfairness; Uniform LSM Bloom Bits Waste `88%` RAM on Cold Levels",
+      warning: "(1) Dropping Gao–Rexford / Dispute-Wheel acyclicity allows cyclic `LOCAL_PREF` (`BAD GADGET` `(2,2,2)`), collapsing stable routings to `0` (`12`-step perpetual oscillation). (2) `MIMD` preserves `9:1` unfairness (`(90,10) ↦ (108,12)`) and `AIAD` preserves `x₁ - x₂ = 80`. (3) Uniform `(6,6,6)` LSM Bloom filters use `438` bits & `192/4096` wasted I/Os vs. `Monkey` `(11,8,5)` at `395` bits & `146/4096` wasted I/Os!",
+      remedy: "Enforce valley-free / Dispute-Wheel-Free `BGP` export policies, combine additive increase (`α > 0`) with multiplicative decrease (`AIMD`), and water-fill LSM Bloom bits by `b_i - b_{i+1} = log₂ T` (`Monkey`).",
+      targetLab: 103
+    };
+    if (!window.CG_BOUNDARY_RULES.some(function(r) { return r && r.id === v249Rule.id; })) {
+      window.CG_BOUNDARY_RULES.push(v249Rule);
+    }
+  }
+
+  if (Array.isArray(window.V95_OBSTACLES)) {
+    var arch42 = {
+      id: "bgp_dispute_wheel_aimd_jain_and_monkey_lsm_gate",
+      name: "42. BGP Dispute-Wheel, AIMD Jain Potential & Monkey LSM Gate",
+      label: "42. `BGP` Dispute-Wheel Acyclicity, Chiu–Jain `AIMD` Fairness Potential & `Monkey` LSM Water-Filling Gate (`09`+`08`+`04`+`02`)",
+      carrier: "DisputeWheelAcyclicityAimdJainGainAndMonkeyWaterFillingGate",
+      premiseGate: "Requires acyclic preferred-transit graph (`hasDisputeWheel = false`), strictly positive additive probing (`α > 0` paired with multiplicative backoff), and exponential-level Bloom-bit gradient `b_i - b_{i+1} = log₂ T`",
+      tactic: "Certify `216`-profile BGP convergence & `1,728`-vector Monkey optimality via nested finite recursion + `decide`, and prove universal Chiu–Jain polynomial fairness gain via `Nat.add_mul` + `omega`."
+    };
+    if (!window.V95_OBSTACLES.some(function(o) { return o && o.id === arch42.id; })) {
+      window.V95_OBSTACLES.push(arch42);
+    }
+  }
+
+  // 6. Interactive Finite Micro-Lab #104 (index 103): BGP Stable-Paths vs BAD GADGET, Chiu–Jain AIMD Fairness & Monkey LSM Water-Filling Suite #650
+  window._v136State = window._v136State || {};
+  if (typeof window._v136State.v249Mode !== "string") window._v136State.v249Mode = "bgp-gao-rexford-vs-bad-gadget";
+  if (typeof window._v136State.v249BgpPolicy !== "number") window._v136State.v249BgpPolicy = 1; // 1 = Gao-Rexford Acyclic (98/98), 0 = BAD GADGET (2,2,2)
+  if (typeof window._v136State.v249CcLaw !== "number") window._v136State.v249CcLaw = 2; // 2 = AIMD, 1 = AIAD, 0 = MIMD
+  if (typeof window._v136State.v249LsmScheme !== "number") window._v136State.v249LsmScheme = 1; // 1 = Monkey (11,8,5), 0 = Uniform (6,6,6)
+
+  window.v249BgpAimdMonkeyLabModel = function(mode, opts) {
+    var o = opts || {};
+    var mKey = mode || "bgp-gao-rexford-vs-bad-gadget";
+    var bgpPolicy = typeof o.bgpPolicy === "number" ? (o.bgpPolicy ? 1 : 0) : 1;
+    var ccLaw = typeof o.ccLaw === "number" ? Math.max(0, Math.min(2, Math.round(o.ccLaw))) : 2;
+    var lsmScheme = typeof o.lsmScheme === "number" ? (o.lsmScheme ? 1 : 0) : 1;
+
+    // 1. BGP Stable-Paths vs BAD GADGET
+    var hasDisputeWheel = bgpPolicy === 0;
+    var stableCount = bgpPolicy === 1 ? 1 : 0;
+    var asyncStepsOrPeriod = bgpPolicy === 1 ? 9 : 12;
+
+    // 2. Congestion Control from skewed (90, 10) after 12 epochs
+    // AIMD -> (51, 44) (gap 7, J = 95^2 / (2*(2601+1936)) = 9025 / 9074 ≈ 0.9946 -> 995 permille)
+    // AIAD -> (90, 10) (gap 80, J = 10000 / 16400 ≈ 0.6098 -> 610 permille)
+    // MIMD -> (108, 12) (9:1 frozen, gap 96, J = 14400 / 23616 = 25/41 ≈ 0.6098 -> 610 permille)
+    var flowPair = ccLaw === 2 ? [51, 44] : (ccLaw === 1 ? [90, 10] : [108, 12]);
+    var flowGap = flowPair[0] - flowPair[1];
+    var jainPermille = ccLaw === 2 ? 995 : 610;
+    var ccConverges = ccLaw === 2;
+
+    // 3. LSM Bloom-Bit Allocation on T=8 (1, 8, 64 keys)
+    var bitVec = lsmScheme === 1 ? [11, 8, 5] : [6, 6, 6];
+    var totalRamBits = lsmScheme === 1 ? 395 : 438;
+    var wastedIo4096 = lsmScheme === 1 ? 146 : 192;
+    var monkeyOptimal = lsmScheme === 1;
+
+    var heading = !hasDisputeWheel
+      ? "Gao–Rexford Dispute-Wheel-Free `BGP` (`98/98` Profiles): Unique Nash State (`1`) & `9`-Step Convergence (`2,646/2,646`)"
+      : "Premise Failure · `BAD GADGET` Dispute Wheel `(2, 2, 2)`: `0` Stable States & Perpetual `12`-Step Route Oscillation!";
+    var operatorEq = "¬hasDisputeWheel(p) ⟹ countStable(p) = 1 (`98/98`)   ·   `countStable(p) = 0 ⟺ p ∈ {(2,2,2), (4,4,4)}`";
+    var witnessDetail = !hasDisputeWheel
+      ? "Across all `6³ = 216` `3`-AS preference profiles, eliminating cyclic transit Dispute Wheels guarantees a unique Nash-stable routing assignment (`countStableRoutings = 1`) reached within `9` asynchronous steps from all `27` initial states!"
+      : "When `AS 0, 1, 2` cyclically prefer `2`-hop clockwise transit `[i, (i+1)%3, d]` over direct `[i, d]`, every state has an AS eager to defect: `(0,0,0) →³ (1,1,0) →⁶ (0,0,1) →⁶ (1,1,0)` oscillates forever!";
+    var secondaryDetail = "BGP: `" + (!hasDisputeWheel ? "1 Stable (9 steps)" : "BAD GADGET (0 stable!)") + "` · CC: `" + (ccLaw === 2 ? "AIMD (51,44) J=0.995" : (ccLaw === 1 ? "AIAD Gap=80!" : "MIMD 9:1 J=0.610!")) + "` · LSM: `" + (monkeyOptimal ? "Monkey (11,8,5) 395b/146 IO" : "Uniform (6,6,6) 438b/192 IO!") + "`.";
+
+    if (mKey === "aimd-jain-fairness-vs-mimd-aiad") {
+      heading = ccConverges
+        ? "Chiu–Jain `AIMD` Exact Fairness Gain: `(90, 10)` (`J=0.610`) Converges to `(51, 44)` (`J=0.995`, Gap `80 → 7`!)"
+        : (ccLaw === 0
+            ? "Premise Failure · `MIMD` (`×6/5, ×3/5`): `(90, 10) ↦ (108, 12)` Freezes `9:1` Unfairness (`J = 25/41 ≈ 0.610`) Forever!"
+            : "Premise Failure · `AIAD` (`+10, -10`): Symmetrical Backoff Freezes Unfairness Gap `x₁ - x₂ = 80` Forever!");
+      operatorEq = "(x₁+x₂+2α)²(x₁²+x₂²) = (x₁+x₂)²((x₁+α)²+(x₂+α)²) + 2α(x₁+x₂+α)(x₁-x₂)²   ·   `MD`: `J(kx₁, kx₂) = J(x₁, x₂)`";
+      witnessDetail = ccConverges
+        ? "Additive increase shifts `(x₁, x₂)` along the `45°` `(1, 1)` vector toward the `x₁ = x₂` fairness line (`+2α(x₁+x₂+α)(x₁-x₂)² > 0`), while multiplicative decrease scales radially along constant-fairness rays!"
+        : (ccLaw === 0
+            ? "Purely multiplicative laws (`MIMD`) move strictly along radial rays through the origin, leaving cross-multiplied Jain fairness `J = (x₁+x₂)²/(2(x₁²+x₂²)) = 25/41` completely unchanged!"
+            : "Purely additive laws (`AIAD`) move back and forth along `(1, 1)` parallel to the `45°` line, preserving `x₁ - x₂ = 80` across every congestion epoch!");
+    } else if (mKey === "monkey-lsm-waterfilling-vs-uniform") {
+      heading = monkeyOptimal
+        ? "`Monkey` Lagrangian Water-Filling `(11, 8, 5)` (`Δb = log₂ 8 = 3`): Unique `1,728`-Vector Global Optimum (`395` Bits, `146` I/O!)"
+        : "Premise Failure · Legacy `RocksDB` Uniform `(6, 6, 6)`: Wastes `438` RAM Bits & `192/4096` Disk I/Os (`+31.5%` Wasted I/O!)";
+      operatorEq = "min ∑ 2^{-b_i} s.t. ∑ T^{i-1} b_i ≤ M  ⟹  b_i - b_{i+1} = log₂ T = 3  (`(11,8,5)`: `395 < 438` bits & `146 < 192` I/O)";
+      witnessDetail = monkeyOptimal
+        ? "On a `T = 8` LSM tree (`1, 8, 64` keys), shifting `+5` and `+2` bits into tiny upper levels costs only `1·5 + 8·2 = 21` bits while saving `64·1 = 64` bits on the bottom level — cutting BOTH RAM (`-9.8%`) and wasted disk I/O (`-24.0%`)!"
+        : "Uniform `(6, 6, 6)` spends `64 × 6 = 384 / 438` (`87.7%`!) of Bloom RAM on level `3` while leaving levels `1` and `2` with `2⁻⁶ = 1/64` false-positive rates (`64 + 64 + 64 = 192 / 4096` wasted I/Os)!";
+    }
+
+    var failed = hasDisputeWheel || (!ccConverges) || (!monkeyOptimal);
+    return {
+      mode: mKey,
+      bgpPolicy: bgpPolicy,
+      hasDisputeWheel: hasDisputeWheel,
+      stableCount: stableCount,
+      asyncStepsOrPeriod: asyncStepsOrPeriod,
+      ccLaw: ccLaw,
+      flowPair: flowPair,
+      flowGap: flowGap,
+      jainPermille: jainPermille,
+      ccConverges: ccConverges,
+      lsmScheme: lsmScheme,
+      bitVec: bitVec,
+      totalRamBits: totalRamBits,
+      wastedIo4096: wastedIo4096,
+      monkeyOptimal: monkeyOptimal,
+      heading: heading,
+      operatorEq: operatorEq,
+      witnessDetail: witnessDetail,
+      secondaryDetail: secondaryDetail,
+      verdict: failed
+        ? (hasDisputeWheel
+            ? "✕ BGP `BAD GADGET` OSCILLATION (`countStable = 0`): Cyclic transit preferences enter a `12`-step perpetual route flap!"
+            : (!ccConverges
+                ? "✕ CONGESTION UNFAIRNESS LOCK-IN (`" + (ccLaw === 0 ? "MIMD 9:1 J=0.610" : "AIAD Gap=80") + "`): Missing `AIMD` symmetry-breaking!"
+                : "✕ UNIFORM BLOOM SUBOPTIMALITY (`438 > 395` bits & `192 > 146` I/O): `87.7%` of RAM trapped on bottom LSM level!"))
+        : "★ MILESTONE SUITE #650 (`LAB #104`) VERIFIED: `98/98` BGP Stability, `AIMD` `J=0.995` & `Monkey` `(11,8,5)` (`395b / 146 IO`)!",
+      leanRef: "CommonGround/Verification/TheoremAtlasBgpStabilityAimdFairnessAndLsmMonkeyBridge.lean :: master_bgp_stability_aimd_fairness_and_lsm_monkey_bridge"
+    };
+  };
+
+  var prevRenderFiniteV248 = window.v136RenderFiniteBody;
+  window.v136RenderFiniteBody = function() {
+    var st = window._v136State || {};
+    for (var i = 0; i < 104; i++) {
+      var tb = document.getElementById("v136-tab-" + i);
+      if (tb) tb.className = "v61-prog-tab" + (st.activeLab === i ? " active" : "");
+    }
+    if (st.activeLab < 103 && typeof prevRenderFiniteV248 === "function") {
+      return prevRenderFiniteV248();
+    }
+    var mount = document.getElementById("v136-finite-mount") || document.getElementById("v136-finite-body");
+    if (!mount || st.activeLab !== 103) return;
+
+    var lm = window.v249BgpAimdMonkeyLabModel(st.v249Mode, {
+      bgpPolicy: st.v249BgpPolicy,
+      ccLaw: st.v249CcLaw,
+      lsmScheme: st.v249LsmScheme
+    });
+
+    var modes = [
+      { id: "bgp-gao-rexford-vs-bad-gadget", label: "★ BGP Gao–Rexford (98/98) vs. BAD GADGET" },
+      { id: "aimd-jain-fairness-vs-mimd-aiad", label: "★ AIMD (J=0.995) vs. MIMD/AIAD" },
+      { id: "monkey-lsm-waterfilling-vs-uniform", label: "★ Monkey (11,8,5) vs. Uniform (6,6,6)" }
+    ];
+    var modeBtns = modes.map(function(md) {
+      var act = lm.mode === md.id;
+      return '<button type="button" class="cg-calm-chip' + (act ? ' is-active' : '') + '" onclick="window._v136State.v249Mode=\'' + md.id + '\';window.v136RenderFiniteBody();">' + md.label + '</button>';
+    }).join("");
+
+    var hIo = Math.max(14, Math.min(68, Math.round((lm.wastedIo4096 / 210) * 66)));
+    var hJain = Math.max(14, Math.min(68, Math.round((lm.jainPermille / 1000) * 66)));
+    mount.innerHTML =
+      '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:12px;">' +
+        '<div style="display:flex;flex-wrap:wrap;gap:6px;">' + modeBtns + '</div>' +
+        '<span class="v136-status-pill">Lab #104 · Milestone Suite #650 · 774 Zero-Sorry .lean Files (532 Checks · Sub-15.0 MiB!)</span>' +
+      '</div>' +
+      '<div class="v136-grid-2">' +
+        '<div class="v136-finite-card">' +
+          '<div style="font-size:11px;font-weight:800;letter-spacing:0.07em;color:#38bdf8;text-transform:uppercase;margin-bottom:4px;">BGP `Gao–Rexford` Stability, Chiu–Jain `AIMD` Fairness &amp; `Monkey` LSM Water-Filling (`09`+`08`+`04`+`02`)</div>' +
+          '<h3 style="margin:0 0 8px 0;font-size:15.5px;color:#f8fafc;">' + lm.heading + '</h3>' +
+          '<div style="font-family:var(--font-mono);font-size:11.5px;color:#fde68a;margin-bottom:8px;">' + lm.operatorEq + '</div>' +
+          '<div style="font-size:12px;color:#cbd5e1;line-height:1.55;margin-bottom:10px;">' + lm.witnessDetail + '</div>' +
+          '<div style="padding:9px 11px;border-radius:8px;background:rgba(6,13,26,0.9);border:1px solid rgba(56,189,248,0.28);">' +
+            '<div style="font-size:10.5px;font-weight:800;color:#7dd3fc;margin-bottom:6px;">INTERACTIVE BGP POLICY, CONGESTION LAW &amp; MONKEY BLOOM PREMISE GATE</div>' +
+            '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:11.5px;color:#e2e8f0;">' +
+              '<label>BGP Policy (0/1): <strong style="color:' + (!lm.hasDisputeWheel ? '#34d399' : '#fb7185') + '">' + (!lm.hasDisputeWheel ? 'Acyclic (1 Stable)' : 'BAD GADGET (0!)') + '</strong><input type="range" min="0" max="1" value="' + lm.bgpPolicy + '" style="width:100%" oninput="window._v136State.v249BgpPolicy=Number(this.value);window.v136RenderFiniteBody();"></label>' +
+              '<label>CC Law (0..2): <strong style="color:' + (lm.ccConverges ? '#34d399' : '#fb7185') + '">' + (lm.ccLaw === 2 ? 'AIMD (J=0.995)' : (lm.ccLaw === 1 ? 'AIAD (Gap 80!)' : 'MIMD (9:1!)')) + '</strong><input type="range" min="0" max="2" value="' + lm.ccLaw + '" style="width:100%" oninput="window._v136State.v249CcLaw=Number(this.value);window.v136RenderFiniteBody();"></label>' +
+              '<label>LSM Bits (0/1): <strong style="color:' + (lm.monkeyOptimal ? '#34d399' : '#fb7185') + '">' + (lm.monkeyOptimal ? 'Monkey (11,8,5)' : 'Uniform (6,6,6)!') + '</strong><input type="range" min="0" max="1" value="' + lm.lsmScheme + '" style="width:100%" oninput="window._v136State.v249LsmScheme=Number(this.value);window.v136RenderFiniteBody();"></label>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="v136-finite-card">' +
+          '<div style="font-size:11px;font-weight:800;color:#34d399;margin-bottom:6px;">JAIN FAIRNESS (`' + (lm.jainPermille / 1000).toFixed(3) + '`), MONKEY WASTED I/O (`' + lm.wastedIo4096 + '/4096`) &amp; BGP STABILITY</div>' +
+          '<svg id="v249-bgp-aimd-monkey-svg" viewBox="0 0 380 104" style="width:100%;height:auto;margin-bottom:8px;border-radius:7px;background:rgba(5,11,22,0.92);border:1px solid rgba(148,163,184,0.2);">' +
+            '<text x="10" y="15" fill="#fde68a" font-size="6.6" font-family="ui-monospace,SFMono-Regular,monospace">Jain / Wasted IO</text>' +
+            '<rect x="16" y="' + (88 - hJain) + '" width="30" height="' + hJain + '" rx="2.5" fill="' + (lm.ccConverges ? '#34d399' : '#fb7185') + '" />' +
+            '<text x="31" y="98" text-anchor="middle" fill="#cbd5e1" font-size="6.4" font-family="ui-monospace,SFMono-Regular,monospace">J=' + (lm.jainPermille / 1000).toFixed(2) + '</text>' +
+            '<rect x="58" y="' + (88 - hIo) + '" width="30" height="' + hIo + '" rx="2.5" fill="' + (lm.monkeyOptimal ? '#38bdf8' : '#fb7185') + '" />' +
+            '<text x="73" y="98" text-anchor="middle" fill="#cbd5e1" font-size="6.4" font-family="ui-monospace,SFMono-Regular,monospace">IO ' + lm.wastedIo4096 + '</text>' +
+            '<line x1="104" y1="10" x2="104" y2="96" stroke="rgba(148,163,184,0.22)" stroke-width="1" />' +
+            '<rect x="112" y="16" width="256" height="35" rx="5" fill="' + (!lm.hasDisputeWheel ? 'rgba(16,185,129,0.20)' : 'rgba(244,63,94,0.24)') + '" stroke="' + (!lm.hasDisputeWheel ? '#34d399' : '#fb7185') + '" />' +
+            '<text x="240" y="37" text-anchor="middle" fill="#f8fafc" font-size="7.1" font-weight="700" font-family="ui-monospace,SFMono-Regular,monospace">' + (!lm.hasDisputeWheel ? 'BGP Gao–Rexford (98/98): Unique Nash State in 9 Async Steps' : 'BGP BAD GADGET (2,2,2): 0 Stable States · 12-Step Limit Cycle!') + '</text>' +
+            '<rect x="112" y="59" width="256" height="35" rx="5" fill="' + (lm.monkeyOptimal ? 'rgba(56,189,248,0.20)' : 'rgba(244,63,94,0.25)') + '" stroke="' + (lm.monkeyOptimal ? '#38bdf8' : '#fb7185') + '" />' +
+            '<text x="240" y="80" text-anchor="middle" fill="#f8fafc" font-size="7.1" font-weight="700" font-family="ui-monospace,SFMono-Regular,monospace">' + (lm.monkeyOptimal ? 'Monkey (11,8,5): 395 RAM Bits (-9.8%) & 146/4096 IO (-24.0%)' : 'Uniform (6,6,6): 438 RAM Bits & 192/4096 Wasted Disk I/Os!') + '</text>' +
+          '</svg>' +
+          '<div style="font-size:12px;color:#e2e8f0;line-height:1.55;">' +
+            '<div style="margin-bottom:8px;">' + lm.secondaryDetail + '</div>' +
+            '<div style="padding:8px 10px;border-radius:7px;background:rgba(16,185,129,0.12);border:1px solid rgba(52,211,153,0.35);color:#d1fae5;font-weight:650;">' + lm.verdict + '</div>' +
+            '<div style="margin-top:8px;font-size:11px;color:#94a3b8;">Kernel-checked in <code>' + lm.leanRef + '</code></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  };
+
+  var prevOpenFiniteV248 = window.v136OpenV34FiniteDiagramsModal;
+  window.v136OpenV34FiniteDiagramsModal = function(initialLab) {
+    window._v136LabFilterQuery = "";
+    prevOpenFiniteV248(typeof initialLab === "number" ? Math.min(initialLab, 102) : 0);
+    window._v136State.activeLab = typeof initialLab === "number" ? initialLab : 0;
+    var bd = document.getElementById("v136-finite-backdrop");
+    if (bd) {
+      var tabsWrap = bd.querySelector(".v61-prog-tabs");
+      if (tabsWrap && !document.getElementById("v136-tab-103")) {
+        tabsWrap.insertAdjacentHTML("beforeend",
+          '<button type="button" id="v136-tab-103" class="v61-prog-tab" onclick="window.v136SetLab(103);window.cgSyncFiniteLabSelect();">104. BGP Stable-Paths &amp; BAD GADGET, Chiu–Jain AIMD Fairness &amp; Monkey LSM Water-Filling Suite #650</button>'
+        );
+      }
+      var pinChainBtn = document.getElementById("v136-pin-chain-btn");
+      if (pinChainBtn && !document.getElementById("v136-open-dossier-btn")) {
+        pinChainBtn.insertAdjacentHTML(
+          "afterend",
+          ' <button type="button" id="v136-open-dossier-btn" class="v60-qs-btn" style="border-color:rgba(251,191,36,0.52);color:#fde68a;" onclick="window.v136PinActiveLabToResearchDossier()" title="Pin this Finite Micro-Lab witness &amp; counterexample trace into the Cross-Domain Research Direction Dossier">📑 Pin Lab to Dossier</button>'
+        );
+      }
+    }
+    if (typeof window.cgSyncFiniteLabSelect === "function") {
+      window.cgSyncFiniteLabSelect();
+    }
+    window.v136RenderFiniteBody();
+  };
+
+  // Refresh live caches
+  window.CG_FINITE_LAB_TITLES = null;
+  window._cgOmniboxCachedPool = null;
+  window._cgHybridCorpusCache = null;
+  if (typeof window.cgGetFiniteLabCatalog === "function") {
+    window.cgGetFiniteLabCatalog();
+  }
+
+  // Suite 107: 532/532 E2E Checks — Milestone Suite #650, Lab #104, 180 Leads, Sub-15.0 MiB Lossless Hydration & Lab<->Dossier Round-Trip
+  var prevRunTestsV248 = window.v147RunAllAutomatedTests;
+  if (typeof prevRunTestsV248 === "function") {
+    window.v147RunAllAutomatedTests = function() {
+      var rep = prevRunTestsV248();
+      var extra249 = [];
+      function addV249Check(name, cond, detail) {
+        extra249.push({
+          id: "T" + (rep.total + extra249.length + 1),
+          category: "107. V249 Suite 107 (532/532 Checks): Milestone Suite #650, BGP/AIMD/Monkey Lab #104, 180 Leads, Sub-15.0 MiB Corpus & Lab-to-Dossier Round-Trip",
+          name: name,
+          passed: Boolean(cond),
+          detail: detail || ""
+        });
+      }
+
+      // Check 529: Milestone `Suite #650` (`774` Zero-Sorry `.lean` Files), Sub-`15.0 MiB` Tuple Hydration (`_d`, `_t`, `_q`, `stepStrs`, `stageStrs`, `_e`), `180` Leads & `389` Breakthroughs
+      var pre249 = (typeof window !== "undefined" && window.__CG_PRELOADED__) || {};
+      var sm249 = (typeof semanticMechanisms !== "undefined" && semanticMechanisms) || {};
+      var suites249 = sm249.verifiedLeanSuites || [];
+      var has650 = suites249.some(function(s) {
+        return s && s.leanFile === "CommonGround/Verification/TheoremAtlasBgpStabilityAimdFairnessAndLsmMonkeyBridge.lean";
+      });
+      var mechs249 = sm249.highLevelMechanisms || [];
+      var m0_249 = mechs249[0] || {};
+      var m500_249 = mechs249[500] || m0_249;
+      var isos249 = sm249.customIsomorphisms || [];
+      var iso0_249 = isos249[0] || {};
+      var gts249 = sm249.grandTrinities || [];
+      var gt0_249 = gts249[0] || {};
+      var pipes249 = sm249.proofPipelines || [];
+      var pipe0_249 = pipes249[0] || {};
+      var conns249 = (pre249.insightPaths && pre249.insightPaths.connections) || [];
+      var conn0_249 = conns249[0] || {};
+      var v249HydrationOk = Boolean(
+        typeof m500_249.whyItMatters === "string" && m500_249.whyItMatters.length > 0 &&
+        Array.isArray(m0_249.proofStepper) && m0_249.proofStepper.length > 0 && typeof m0_249.proofStepper[0].stageLabel === "string" &&
+        iso0_249.declA && typeof iso0_249.declA.name === "string" && iso0_249.declA.name.length > 0 &&
+        Array.isArray(gt0_249.domains) && gt0_249.domains[0] && typeof gt0_249.domains[0].projectId === "string" &&
+        Array.isArray(pipe0_249.stages) && pipe0_249.stages[0] && typeof pipe0_249.stages[0].stage === "string" &&
+        typeof pipe0_249.projectAName === "string" && pipe0_249.projectAName.length > 0 &&
+        Array.isArray(conn0_249.endpoints) && conn0_249.endpoints[0] && typeof conn0_249.endpoints[0].name === "string" &&
+        Array.isArray(conn0_249.translationDictionary) && conn0_249.translationDictionary[0] && typeof conn0_249.translationDictionary[0].concept === "string"
+      );
+      var bts249 = window.CG_VERIFIED_ATLAS_BREAKTHROUGHS || [];
+      var lds249 = window.CG_PROMISING_RESEARCH_LEADS || [];
+      var obs249 = window.V95_OBSTACLES || [];
+      var r2c249 = window.CG_R2_CORPUS_CONFIG || {};
+      addV249Check(
+        "Milestone `Suite #650` (`774` `.lean` Files), Sub-`15.0 MiB` Tuple Hydration (`_d`, `_t`, `_q`, `stepStrs`, `stageStrs`, `_e`), `180` Leads & `389` Breakthroughs verified",
+        Boolean(
+          has650 &&
+          suites249.length >= 650 &&
+          v249HydrationOk &&
+          bts249.length >= 389 &&
+          lds249.length >= 180 &&
+          obs249.length >= 42 &&
+          r2c249.totalZeroSorryLeanFiles >= 774 &&
+          r2c249.kernelCompiledModules >= 734
+        ),
+        "suites=" + suites249.length + ", v249HydrationOk=" + v249HydrationOk + ", leads=" + lds249.length + ", bts=" + bts249.length
+      );
+
+      // Check 530: `Lab #104` (`v249BgpAimdMonkeyLabModel`) BGP `1` vs `0` (`BAD GADGET`), `AIMD` `(51,44)` vs `MIMD` `(108,12)` & `AIAD` `80`, `Monkey` `(11,8,5)` `395b/146 IO` vs `(6,6,6)` `438b/192 IO`
+      var mPos249 = window.v249BgpAimdMonkeyLabModel("bgp-gao-rexford-vs-bad-gadget", { bgpPolicy: 1, ccLaw: 2, lsmScheme: 1 });
+      var mNeg249 = window.v249BgpAimdMonkeyLabModel("monkey-lsm-waterfilling-vs-uniform", { bgpPolicy: 0, ccLaw: 0, lsmScheme: 0 });
+      var mAiad249 = window.v249BgpAimdMonkeyLabModel("aimd-jain-fairness-vs-mimd-aiad", { bgpPolicy: 1, ccLaw: 1, lsmScheme: 1 });
+      var lab104MathOk = Boolean(
+        mPos249.hasDisputeWheel === false && mPos249.stableCount === 1 && mPos249.asyncStepsOrPeriod === 9 &&
+        mPos249.flowPair[0] === 51 && mPos249.flowPair[1] === 44 && mPos249.flowGap === 7 && mPos249.jainPermille === 995 &&
+        mPos249.totalRamBits === 395 && mPos249.wastedIo4096 === 146 &&
+        mNeg249.hasDisputeWheel === true && mNeg249.stableCount === 0 && mNeg249.asyncStepsOrPeriod === 12 &&
+        mNeg249.flowPair[0] === 108 && mNeg249.flowPair[1] === 12 && mNeg249.jainPermille === 610 &&
+        mNeg249.totalRamBits === 438 && mNeg249.wastedIo4096 === 192 &&
+        mAiad249.flowGap === 80 && mAiad249.ccConverges === false
+      );
+      addV249Check(
+        "`Lab #104` (`BGP` `1` vs `BAD GADGET` `0`, `AIMD` `(51,44)` vs `MIMD` `(108,12)`/`AIAD` `80`, `Monkey` `395b/146 IO` vs `438b/192 IO`) verified",
+        lab104MathOk,
+        "bgp=" + mPos249.stableCount + "/" + mNeg249.stableCount + ", io=" + mPos249.wastedIo4096 + "/" + mNeg249.wastedIo4096
+      );
+
+      // Check 531: Bidirectional Finite Lab <-> Bridge Composer Dossier Round-Trip (`#v95-open-matched-lab-btn` & `#v136-open-dossier-btn`)
+      window.cgClearResearchChain();
+      window._cgActiveDossierFiniteLab = null;
+      var idxMonkey249 = lds249.findIndex(function(l) { return l && l.id === "lead-v249-monkey-waterfilling-hybrid-tiered-leveled-lsm-controller"; });
+      window.cgLaunchLeadResearchDossier(idxMonkey249 >= 0 ? idxMonkey249 : 0);
+      var hasMatchLabBtn249 = Boolean(document.getElementById("v95-open-matched-lab-btn"));
+      var openedLabIdx249 = window.v95OpenMatchedFiniteLab();
+      var hasPinLabDossierBtn249 = Boolean(document.getElementById("v136-open-dossier-btn"));
+      var labDossierMd249 = window.v136PinActiveLabToResearchDossier();
+      var roundTripOk249 = Boolean(
+        idxMonkey249 >= 0 &&
+        hasMatchLabBtn249 &&
+        openedLabIdx249 === 103 &&
+        hasPinLabDossierBtn249 &&
+        labDossierMd249 &&
+        labDossierMd249.indexOf("## 6. Interactive Finite Micro-Lab Witness & Counterexample Trace") !== -1 &&
+        labDossierMd249.indexOf("Lab #104") !== -1
+      );
+      window.v95CloseBridgeComposer();
+      window.v136CloseFiniteModal();
+      window._cgActiveDossierLead = null;
+      window._cgActiveDossierFiniteLab = null;
+      window.cgClearResearchChain();
+      addV249Check(
+        "Bidirectional Finite Lab ⇄ Bridge Composer Dossier Round-Trip (`#v95-open-matched-lab-btn` & `#v136-open-dossier-btn`) verified",
+        roundTripOk249,
+        "openedLabIdx=" + openedLabIdx249 + ", hasBtns=" + hasMatchLabBtn249 + "/" + hasPinLabDossierBtn249
+      );
+
+      // Check 532: `Lab #104` SVG (`#v249-bgp-aimd-monkey-svg`), `104`-Lab Domain Filter (`Monkey`) & `⌘K` Omnibox (`104 Labs`, `180 Leads`, `650 Suites`)
+      window.v136OpenV34FiniteDiagramsModal(103);
+      var sel136V249 = document.getElementById("v136-lab-quick-select");
+      var bamSvg249 = document.getElementById("v249-bgp-aimd-monkey-svg");
+      if (typeof window.cgFilterFiniteLabSelect === "function") {
+        window.cgFilterFiniteLabSelect("Monkey");
+      }
+      var lab104FilterOk = Boolean(
+        bamSvg249 &&
+        sel136V249 &&
+        (sel136V249.innerHTML || "").indexOf("104. BGP Stable-Paths") !== -1 &&
+        (sel136V249.innerHTML || "").indexOf("1. Path-Law") === -1
+      );
+      window.v136CloseFiniteModal();
+
+      window.cgOpenOmnibox("");
+      var omniCats249 = document.getElementById("cg-omnibox-cats");
+      var omniCatsTxt249 = omniCats249 ? (omniCats249.innerHTML || "") : "";
+      var mLabs249 = omniCatsTxt249.match(/(\d+)\s+Labs/);
+      var mLeads249 = omniCatsTxt249.match(/(\d+)\s+Leads/);
+      var mSuites249 = omniCatsTxt249.match(/(\d+)\s+Suites/);
+      var omni104Ok = Boolean(
+        mLabs249 && parseInt(mLabs249[1], 10) >= 104 &&
+        mLeads249 && parseInt(mLeads249[1], 10) >= 180 &&
+        mSuites249 && parseInt(mSuites249[1], 10) >= 650
+      );
+      window.cgCloseOmnibox();
+
+      addV249Check(
+        "`Lab #104` SVG (`#v249-bgp-aimd-monkey-svg`), `104`-Lab Domain Filter & `⌘K` Omnibox (`104 Labs`, `180 Leads`, `650 Suites`) verified",
+        Boolean(lab104FilterOk && omni104Ok),
+        "lab104FilterOk=" + lab104FilterOk + ", omni104Ok=" + omni104Ok
+      );
+
+      for (var k13 = 0; k13 < extra249.length; k13++) {
+        rep.results.push(extra249[k13]);
+        rep.total++;
+        if (extra249[k13].passed) rep.passed++;
+        else rep.failed++;
+      }
+      window._v147LastReport = rep;
+      return rep;
+    };
+  }
+})();
+

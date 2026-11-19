@@ -49,7 +49,7 @@ def check_end_to_end_connections_and_clutter():
     assert not pyc_files, f"Bytecode .pyc files detected (violates Zero Bytecode rule): {pyc_files[:5]}"
 
     raw_bytes = (OBS_DIR / "bundle-data.js").stat().st_size
-    assert raw_bytes < int(16.2 * 1024 * 1024), f"Expected sub-16.2 MiB bundle-data.js, got {raw_bytes / (1024*1024):.2f} MiB!"
+    assert raw_bytes < int(15.0 * 1024 * 1024), f"Expected sub-15.0 MiB bundle-data.js, got {raw_bytes / (1024*1024):.2f} MiB!"
     raw = (OBS_DIR / "bundle-data.js").read_text(encoding="utf-8")
     for bad_str in ("127.0.0.1", "localhost:", "Solved Open Instance", "Hodge Sextic", "window.V145_REAL_LEAN_SUITES ="):
         assert bad_str not in raw, f"Legacy/clutter string {bad_str!r} reintroduced into bundle-data.js!"
@@ -81,6 +81,7 @@ def check_end_to_end_connections_and_clutter():
     assert suite_files == disk_verif, (
         f"verifiedLeanSuites ({len(suite_files)}) is not in 1-to-1 bijection with CommonGround/Verification/*.lean ({len(disk_verif)})!"
     )
+    assert len(suites) >= 650, f"Expected >= 650 verifiedLeanSuites in V249+, got {len(suites)}!"
     assert suites and "Williams" in (suites[0].get("title") or ""), "verifiedLeanSuites[0] ground-truth title alignment broken!"
     assert (suites[0].get("projects") or [None])[0] == "apsp3sum", "verifiedLeanSuites[0] ground-truth triad alignment broken!"
     covered_suite_projs = {p for s in suites for p in (s.get("projects") or []) if p in canon_projs}
@@ -99,7 +100,10 @@ def check_end_to_end_connections_and_clutter():
         if "_cx" in r and len(r["_cx"]) > 0 and r["_cx"][0] >= 0:
             assert 0 <= r["_cx"][0] < len(csi_fns), f"Out-of-bounds _cx[0] (fns) on {r.get('name')}"
     tr_pools = sm.get("trinityPools") or {}
-    assert len(tr_pools.get("domains") or []) > 900, "Lossless trinityPools.domains missing or truncated!"
+    tr_dm_meta = tr_pools.get("dmMeta") or {}
+    assert len(tr_pools.get("domains") or []) > 900 and len(tr_dm_meta.get("projs") or []) >= 35, (
+        "Lossless trinityPools.domains / dmMeta missing or truncated!"
+    )
     for gt in sm.get("grandTrinities", []):
         assert "unifyingEquation" not in gt, f"Unreferenced dead key unifyingEquation reintroduced on {gt.get('id')}!"
     for fam in preloaded.get("constellationCatalog", {}).get("families", []):
@@ -117,10 +121,16 @@ def check_end_to_end_connections_and_clutter():
     mf_projs = mech_fp.get("projs") or []
     mf_names = mech_fp.get("names") or []
     mf_pints = mech_fp.get("pints") or []
+    mf_otags = mech_fp.get("otags") or []
+    mf_slabels = mech_fp.get("slabels") or []
+    mf_whys = mech_fp.get("whys") or []
+    mf_sstructs = mech_fp.get("sstructs") or []
+    mf_obls = mech_fp.get("obls") or []
     assert (
         len(part_items) > 3500 and len(mech_pbs) >= 150 and len(part_meta.get("files") or []) >= 400
         and len(vbridges_pool) >= 300 and len(mf_projs) >= 100
-    ), "Lossless mechPools / fieldPools missing or truncated!"
+        and len(mech_pools.get("stepStrs") or []) >= 400
+    ), "Lossless mechPools / fieldPools / stepStrs missing or truncated!"
     dead_mech_keys = (
         "tacticStepper",
         "openConjectureAttackTree",
@@ -152,6 +162,16 @@ def check_end_to_end_connections_and_clutter():
                 assert 0 <= mx[19] < len(mf_names), f"Out-of-bounds _mx[19] (names) on {m.get('id')}"
             if len(mx) > 20 and mx[20] >= 0:
                 assert 0 <= mx[20] < len(mf_pints), f"Out-of-bounds _mx[20] (pints) on {m.get('id')}"
+            if len(mx) > 21 and mx[21] >= 0:
+                assert 0 <= mx[21] < len(mf_otags), f"Out-of-bounds _mx[21] (otags) on {m.get('id')}"
+            if len(mx) > 22 and mx[22] >= 0:
+                assert 0 <= mx[22] < len(mf_slabels), f"Out-of-bounds _mx[22] (slabels) on {m.get('id')}"
+            if len(mx) > 23 and mx[23] >= 0:
+                assert 0 <= mx[23] < len(mf_whys), f"Out-of-bounds _mx[23] (whys) on {m.get('id')}"
+            if len(mx) > 24 and mx[24] >= 0:
+                assert 0 <= mx[24] < len(mf_sstructs), f"Out-of-bounds _mx[24] (sstructs) on {m.get('id')}"
+            if len(mx) > 25 and mx[25] >= 0:
+                assert 0 <= mx[25] < len(mf_obls), f"Out-of-bounds _mx[25] (obls) on {m.get('id')}"
         bf = mv.get("verifiedBridgeFile") or (vbridges_pool[mv["_vb"]] if isinstance(mv.get("_vb"), int) else None)
         if bf:
             assert (REPO_ROOT / bf).exists(), f"Broken highLevelMechanisms.verifiedBridgeFile: {bf}"
@@ -163,7 +183,9 @@ def check_end_to_end_connections_and_clutter():
             assert dead_k not in m, f"Stale ghost-project or synthetic field {dead_k!r} reintroduced on mechanism {m.get('id')}!"
     pipe_pools = sm.get("pipelinePools") or {}
     pipe_stages = pipe_pools.get("stages") or []
-    assert len(pipe_stages) >= 200, "Lossless pipelinePools.stages missing or truncated!"
+    assert len(pipe_stages) >= 200 and len(pipe_pools.get("stageStrs") or []) >= 200, (
+        "Lossless pipelinePools.stages / stageStrs missing or truncated!"
+    )
     for pp in sm.get("proofPipelines", []):
         assert pp.get("projectA") in canon_projs and pp.get("projectB") in canon_projs, (
             f"Broken or non-canonical proofPipeline projects on {pp.get('id')}: {pp.get('projectA')} <-> {pp.get('projectB')}"
@@ -268,7 +290,7 @@ def check_end_to_end_connections_and_clutter():
         assert target.exists(), f"Broken relative link {rel_link} in README.md -> {target}"
     print(
         f"  [OK] End-to-end connection bijection verified: {len(suites)} suites == {len(disk_verif)} CommonGround/Verification/*.lean, "
-        f"bundle={raw_bytes/(1024*1024):.2f} MiB (<16.2 MiB!), {len(sn_pool)} unique snippets, {len(sm.get('proofPipelines', []))} canonical pipelines, "
+        f"bundle={raw_bytes/(1024*1024):.2f} MiB (<15.0 MiB!), {len(sn_pool)} unique snippets, {len(sm.get('proofPipelines', []))} canonical pipelines, "
         f"{len(dp)} pooled decls, {len(i_sk)} iso skels, {len(part_items)} mech items, {len(ep_pool)} path endpoints, "
         f"0 ghost repo IDs, 0 127.0.0.1 links, 0 ‖c‖h‖a‖r‖ corruptions, 0 broken .lean refs, README clean."
     )
@@ -304,7 +326,7 @@ def check_unified_static_assets():
 
 
 def main():
-    print("=== Running V248 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
+    print("=== Running V249 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
     ensure_bundle_reconstructed()
     check_lean_corpus_and_kernel()
     check_end_to_end_connections_and_clutter()

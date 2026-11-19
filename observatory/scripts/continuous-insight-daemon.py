@@ -122,8 +122,14 @@ def discover_role_compatible_insights(data):
             for ki, kk in enumerate(iso_keys):
                 if ki < len(xv) and isinstance(xv[ki], int) and xv[ki] >= 0:
                     iso[kk] = xv[ki]
-        dA = iso.get("declA") or (dp[iso["_dA"]] if isinstance(iso.get("_dA"), int) and 0 <= iso["_dA"] < len(dp) else {})
-        dB = iso.get("declB") or (dp[iso["_dB"]] if isinstance(iso.get("_dB"), int) and 0 <= iso["_dB"] < len(dp) else {})
+        dA = dict(iso.get("declA") or (dp[iso["_dA"]] if isinstance(iso.get("_dA"), int) and 0 <= iso["_dA"] < len(dp) else {}))
+        dB = dict(iso.get("declB") or (dp[iso["_dB"]] if isinstance(iso.get("_dB"), int) and 0 <= iso["_dB"] < len(dp) else {}))
+        for dx in (dA, dB):
+            if "name" not in dx and "n" in dx:
+                dx["name"] = dx["n"]
+            dv = dx.get("_d")
+            if isinstance(dv, list) and len(dv) > 5 and isinstance(dv[5], int) and dv[5] >= 0 and "_fl" not in dx:
+                dx["_fl"] = dv[5]
         fA = dA.get("file") or (dm_files[dA["_fl"]] if isinstance(dA.get("_fl"), int) and 0 <= dA["_fl"] < len(dm_files) else "")
         fB = dB.get("file") or (dm_files[dB["_fl"]] if isinstance(dB.get("_fl"), int) and 0 <= dB["_fl"] < len(dm_files) else "")
         es_sym = iso.get("epistemicSymbol") or (i_es[iso["_es"]] if isinstance(iso.get("_es"), int) and 0 <= iso["_es"] < len(i_es) else "")
@@ -196,7 +202,7 @@ def run_cycle(cycle_num, start_ts, end_ts):
 
     status = {
         "status": "running" if remaining_hours > 0 else "completed",
-        "version": "V248",
+        "version": "V249",
         "daemonPid": os.getpid(),
         "cycle": cycle_num,
         "timestampUtc": now_iso,
