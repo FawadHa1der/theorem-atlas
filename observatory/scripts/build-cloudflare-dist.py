@@ -25,7 +25,7 @@ LOCAL_CHUNKS_DIR = OBS_DIR / "chunks"
 CF_DIR = OBS_DIR / "dist-cloudflare"
 CF_CHUNKS_DIR = CF_DIR / "chunks"
 LIMIT_BYTES = 25 * 1024 * 1024  # Cloudflare Pages 25 MiB static asset limit (does NOT restrict .lean files in R2!)
-ASSET_VER = "263"
+ASSET_VER = "264"
 
 SHARD_NAMES = [
     "bundle-shard-1-core.js",
@@ -254,7 +254,7 @@ def build_shards_and_sync_routes():
     s4b_code += (
         "(function(){if(typeof window!=='undefined'&&window.__CG_PRELOADED__){"
         "var pre=window.__CG_PRELOADED__,sm=pre.semanticMechanisms;"
-        "var phr=pre._phr||[],phrRx=phr.length?/[\\uE000-\\uE9FF]/g:null;"
+        "var phr=pre._phr||[],phrRx=phr.length?/[\\uE000-\\uF8FF]/g:null;"
         "var unp=phrRx?function(s){return typeof s==='string'?s.replace(phrRx,function(c){return phr[c.charCodeAt(0)-57344]||'';}):s;}:function(s){return s;};"
         "function unpArr(a){if(Array.isArray(a)&&phrRx){for(var z=0;z<a.length;z++)if(typeof a[z]==='string')a[z]=unp(a[z]);}return a;}"
         "var cp=pre.csiPools||{},cpKd=cp.kinds||[],cpFm=cp.fams||[],cpPj=cp.projs||[],cpFl=cp.files||[],cpUb=cp.urlBases||[],cpEv=unpArr(cp.evidences||[]),cpSu=cp.sourceUrls||[],cpFn=unpArr(cp.fns||[]);"
