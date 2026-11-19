@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V240).
+Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V241).
 Verifies:
-1. All 756+ physical Lean 4 files (641 in CommonGround/Verification/ + 115 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
+1. All 758+ physical Lean 4 files (642 in CommonGround/Verification/ + 116 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
    tokens outside comments (with NO 25 MiB cap on `.lean` files — large `.lean` files stream via Cloudflare R2 `/api/lean/*`)
    AND compile cleanly through the real Lean 4.33.0 kernel (`compile-all-lean4.py`).
 2. Reconstructs `bundle-data.js` from the 8 tracked `<16 MiB` shards and builds `dist-cloudflare/` if absent in CI.
@@ -12,7 +12,7 @@ Verifies:
    - exact 1-to-1 bijection between `verifiedLeanSuites` and `CommonGround/Verification/*.lean`;
    - 100% of `highLevelMechanisms[*].verifiedBridgeFile` and `insightPaths.connections[*].verifiedLeanFile` resolve on disk;
    - 100% of `proofPipelines` map `projectA` & `projectB` to canonical 40-project IDs, and 100% of `customIsomorphisms`,
-     `highLevelMechanisms`, and `insightPaths.connections` resolve valid lossless pool indices (`isoDeclPool`, `mechPools`, `pathPools`);
+     `highLevelMechanisms`, `grandTrinities`, `customSearchIndex`, and `insightPaths.connections` resolve valid lossless pool indices;
    - `README.md` contains 0 legacy forbidden strings and 100% resolving relative `./...` links.
 4. Confirms no legacy forked `safari-standalone.html` or `observatory/safari/` artifacts exist, and verifies all unified
    Chrome + Safari routes resolve CSS + all 8 untruncated `<25 MiB` shards + `unified-standalone.js`.
@@ -63,6 +63,17 @@ def check_end_to_end_connections_and_clutter():
     assert suite_files == disk_verif, (
         f"verifiedLeanSuites ({len(suite_files)}) is not in 1-to-1 bijection with CommonGround/Verification/*.lean ({len(disk_verif)})!"
     )
+
+    csi_pools = preloaded.get("csiPools") or {}
+    assert len(csi_pools.get("files") or []) > 900, "Lossless csiPools.files missing or truncated!"
+    tr_pools = sm.get("trinityPools") or {}
+    assert len(tr_pools.get("domains") or []) > 900, "Lossless trinityPools.domains missing or truncated!"
+    for gt in sm.get("grandTrinities", []):
+        assert "unifyingEquation" not in gt, f"Unreferenced dead key unifyingEquation reintroduced on {gt.get('id')}!"
+    for fam in preloaded.get("constellationCatalog", {}).get("families", []):
+        assert "scopeNotes" not in fam and "comparatorConfigurations" not in fam, (
+            f"Unreferenced dead constellationCatalog.families keys reintroduced on {fam.get('id')}!"
+        )
 
     mech_pools = sm.get("mechPools") or {}
     part_items = mech_pools.get("partItems") or []
@@ -136,7 +147,8 @@ def check_end_to_end_connections_and_clutter():
     print(
         f"  [OK] End-to-end connection bijection verified: {len(suites)} suites == {len(disk_verif)} CommonGround/Verification/*.lean, "
         f"{len(sm.get('proofPipelines', []))} canonical pipelines, {len(dp)} pooled decls, {len(part_items)} mech items, "
-        f"{len(ep_pool)} path endpoints, 0 ghost repo IDs, 0 ‖c‖h‖a‖r‖ corruptions, 0 broken .lean refs, README clean."
+        f"{len(ep_pool)} path endpoints, {len(csi_pools.get('files', []))} search files, {len(tr_pools.get('domains', []))} trinity domains, "
+        f"0 ghost repo IDs, 0 ‖c‖h‖a‖r‖ corruptions, 0 broken .lean refs, README clean."
     )
 
 
@@ -170,13 +182,13 @@ def check_unified_static_assets():
 
 
 def main():
-    print("=== Running V240 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
+    print("=== Running V241 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
     ensure_bundle_reconstructed()
     check_lean_corpus_and_kernel()
     check_end_to_end_connections_and_clutter()
     check_unified_static_assets()
     subprocess.run(["bash", str(OBS_DIR / "tests" / "run-tests.sh")], check=True)
-    print("=== ALL V240 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
+    print("=== ALL V241 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
 
 
 if __name__ == "__main__":

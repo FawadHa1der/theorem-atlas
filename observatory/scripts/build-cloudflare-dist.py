@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-V240 Unified Chrome & Safari Shard Builder (< 25 MiB static assets)
+V241 Unified Chrome & Safari Shard Builder (< 25 MiB static assets)
 & Cloudflare R2 Unrestricted-Size Lean 4 Streaming Function Generator.
 
 - Reconstructs `bundle-data.js` from `observatory/chunks/` if missing in a fresh Git clone.
@@ -25,7 +25,7 @@ LOCAL_CHUNKS_DIR = OBS_DIR / "chunks"
 CF_DIR = OBS_DIR / "dist-cloudflare"
 CF_CHUNKS_DIR = CF_DIR / "chunks"
 LIMIT_BYTES = 25 * 1024 * 1024  # Cloudflare Pages 25 MiB static asset limit (does NOT restrict .lean files in R2!)
-ASSET_VER = "240"
+ASSET_VER = "241"
 
 SHARD_NAMES = [
     "bundle-shard-1-core.js",
@@ -188,6 +188,8 @@ def build_shards_and_sync_routes():
         "semanticMechanisms": core_sm,
         "insightPaths": core_ip,
     }
+    if "csiPools" in preloaded:
+        core_payload["csiPools"] = preloaded["csiPools"]
 
     s1_code = "window.__CG_PRELOADED__ = " + json.dumps(core_payload, ensure_ascii=False, separators=(",", ":")) + ";\n"
     if tail_js:
@@ -250,7 +252,21 @@ def build_shards_and_sync_routes():
     s4b_code += (
         "(function(){if(typeof window!=='undefined'&&window.__CG_PRELOADED__){"
         "var pre=window.__CG_PRELOADED__,sm=pre.semanticMechanisms;"
+        "var cp=pre.csiPools||{},cpKd=cp.kinds||[],cpFm=cp.fams||[],cpPj=cp.projs||[],cpFl=cp.files||[],cpUb=cp.urlBases||[];"
+        "var csi=pre.customSearchIndex||[];for(var q=0;q<csi.length;q++){var r=csi[q];if(r&&typeof r._fl==='number'){"
+        "var fl=cpFl[r._fl]||'',fn=r.fullName||'';r.kind=cpKd[r._k]||'';"
+        "if(r.name===undefined){var di=fn.lastIndexOf('.');r.name=di>=0?fn.slice(di+1):fn;}"
+        "r.familyId=cpFm[r._fm]||'';r.projectId=cpPj[r._pj]||'';r.file=fl;"
+        "if(r.sourceUrl===undefined&&typeof r._ub==='number')r.sourceUrl=(cpUb[r._ub]||'')+'/'+fl+'#L'+r.line;}}"
         "if(sm){"
+        "var vls=sm.verifiedLeanSuites||[];for(var si=0;si<vls.length;si++){var sv=vls[si];if(sv&&sv.leanFile&&Array.isArray(sv.declarations)){"
+        "for(var di2=0;di2<sv.declarations.length;di2++){var dc=sv.declarations[di2];if(dc&&!dc.file)dc.file=sv.leanFile;}}}"
+        "var trp=sm.trinityPools||{},trDm=trp.domains||[],trPs=trp.summaries||[],trBo=trp.opportunities||[],trAn=trp.analogies||[];"
+        "var gts=sm.grandTrinities||[];for(var gi=0;gi<gts.length;gi++){var gt=gts[gi];if(gt){"
+        "if(!gt.domains&&Array.isArray(gt._dm))gt.domains=gt._dm.map(function(x){return trDm[x]||{};});"
+        "if(gt.plainSummary===undefined&&typeof gt._ps==='number')gt.plainSummary=trPs[gt._ps]||'';"
+        "if(gt.breakthroughOpportunity===undefined&&typeof gt._bo==='number')gt.breakthroughOpportunity=trBo[gt._bo]||'';"
+        "if(gt.analogy===undefined&&typeof gt._an==='number')gt.analogy=trAn[gt._an]||'';}}"
         "var mpPart=(sm.mechPools&&sm.mechPools.partItems)||[];"
         "var ms=sm.highLevelMechanisms||[];for(var i=0;i<ms.length;i++){var m=ms[i];if(m){"
         "if(!m.participatingProjects&&Array.isArray(m._pp)){m.participatingProjects=m._pp.map(function(x){return mpPart[x]||{};});}"
