@@ -3,11 +3,20 @@
   const pre = window.__CG_PRELOADED__;
   const cp = pre.csiPools || {};
   const cpKd = cp.kinds || [], cpFm = cp.fams || [], cpPj = cp.projs || [], cpFl = cp.files || [], cpUb = cp.urlBases || [];
-  const cpEv = cp.evidences || [], cpSu = cp.sourceUrls || [];
+  const cpEv = cp.evidences || [], cpSu = cp.sourceUrls || [], cpFn = cp.fns || [];
+  const csiKeys = ['_fl', '_ev', '_fm', '_pj', '_su', '_k', '_ub'];
   const csi = pre.customSearchIndex || [];
   for (let q = 0; q < csi.length; q++) {
     const r = csi[q];
     if (!r) continue;
+    if (Array.isArray(r._cx)) {
+      const cx = r._cx;
+      if (typeof cx[0] === 'number' && cx[0] >= 0 && r.fullName === undefined) r.fullName = cpFn[cx[0]] || '';
+      for (let ck = 0; ck < 7; ck++) {
+        if (typeof cx[ck + 1] === 'number' && cx[ck + 1] >= 0 && r[csiKeys[ck]] === undefined) r[csiKeys[ck]] = cx[ck + 1];
+      }
+      if (typeof cx[8] === 'number' && cx[8] >= 0 && r.line === undefined) r.line = cx[8];
+    }
     if (r.evidence === undefined && typeof r._ev === 'number') r.evidence = cpEv[r._ev] || '';
     if (r.sourceUrl === undefined && typeof r._su === 'number') r.sourceUrl = cpSu[r._su] || '';
     if (typeof r._fl !== 'number') continue;
@@ -28,10 +37,18 @@
   const sm = pre.semanticMechanisms;
   if (sm) {
     const snPool = sm.snippetPool || [];
+    const sp = sm.suitePools || {}, spBl = sp.blbls || [], spCt = sp.cats || [], spSt = sp.stats || [], spTn = sp.tns || [];
     const vls = sm.verifiedLeanSuites || [];
     for (let si = 0; si < vls.length; si++) {
       const sv = vls[si];
       if (!sv) continue;
+      if (Array.isArray(sv._sp)) {
+        const spv = sv._sp;
+        if (typeof spv[0] === 'number' && spv[0] >= 0 && sv.bridgeLabel === undefined) sv.bridgeLabel = spBl[spv[0]] || '';
+        if (typeof spv[1] === 'number' && spv[1] >= 0 && sv.category === undefined) sv.category = spCt[spv[1]] || '';
+        if (typeof spv[2] === 'number' && spv[2] >= 0 && sv.status === undefined) sv.status = spSt[spv[2]] || '';
+        if (typeof spv[3] === 'number' && spv[3] >= 0 && sv.theoremName === undefined) sv.theoremName = spTn[spv[3]] || '';
+      }
       if (!sv.module && sv.leanFile) sv.module = sv.leanFile;
       if (sv.plainSummary === undefined && sv.summary !== undefined) sv.plainSummary = sv.summary;
       if (sv.snippet === undefined && typeof sv._sn === 'number') sv.snippet = snPool[sv._sn] || '';
@@ -90,10 +107,17 @@
     const iSk = imp.skels || [], iPa = imp.archs || [], iPn = imp.pnames || [], iDc = imp.discs || [];
     const iOc = imp.obs || [], iDg = imp.dags || [], iKd = imp.kinds || [], iSo = imp.sops || [], iWm = imp.whys || [], iTb = imp.tbs || [];
     const iPj = imp.projs || [], iEs = imp.syms || [], iMi = imp.mids || [];
+    const isoKeys = ['_pA','_pB','_es','_mi','_dA','_dB','_w1','_w2','_et','_sk','_pa','_pAN','_pBN','_dcA','_dcB','_oc','_tdA','_tdB','_kd','_so','_wm','_tb','_mA','_mB'];
     const isos = sm.customIsomorphisms || [];
     for (let i = 0; i < isos.length; i++) {
       const iso = isos[i];
       if (!iso) continue;
+      if (Array.isArray(iso._x)) {
+        const ix = iso._x;
+        for (let xk = 0; xk < ix.length && xk < 24; xk++) {
+          if (typeof ix[xk] === 'number' && ix[xk] >= 0 && iso[isoKeys[xk]] === undefined) iso[isoKeys[xk]] = ix[xk];
+        }
+      }
       if (iso.projectA === undefined && typeof iso._pA === 'number') iso.projectA = iPj[iso._pA] || '';
       if (iso.projectB === undefined && typeof iso._pB === 'number') iso.projectB = iPj[iso._pB] || '';
       if (iso.epistemicSymbol === undefined && typeof iso._es === 'number') iso.epistemicSymbol = iEs[iso._es] || '';
@@ -149,12 +173,26 @@
     }
     const mfp = mp.fieldPools || {}, mfDf = mfp.diffs || [], mfCt = mfp.cats || [], mfVl = mfp.vleans || [], mfVb = mfp.vbridges || [];
     const mfTg = mfp.tags || [], mfNh = mfp.hyps || [], mfLt = mfp.ltbs || [], mfOc = mfp.obs || [], mfCs = mfp.skels || [], mfDa = mfp.archs || [];
+    const mfPj = mfp.projs || [], mfNm = mfp.names || [], mfPi = mfp.pints || [];
+    const mechKeys = ['_rp','_ps','_an','_id','_td','_vs','_ast','_eg','_df','_ct','_vl','_vb','_tg','_nh','_lt','_oc','_cs','_da'];
     const ms = sm.highLevelMechanisms || [];
     for (let j = 0; j < ms.length; j++) {
       const m = ms[j];
       if (!m) continue;
+      if (Array.isArray(m._mx)) {
+        const mx = m._mx;
+        for (let mk = 0; mk < 18 && mk < mx.length; mk++) {
+          if (typeof mx[mk] === 'number' && mx[mk] >= 0 && m[mechKeys[mk]] === undefined) m[mechKeys[mk]] = mx[mk];
+        }
+        if (typeof mx[18] === 'number' && mx[18] >= 0 && !m.projects) m.projects = (mfPj[mx[18]] || []).slice();
+        if (typeof mx[19] === 'number' && mx[19] >= 0 && m.name === undefined) m.name = mfNm[mx[19]] || '';
+        if (typeof mx[20] === 'number' && mx[20] >= 0 && m.plainIntuition === undefined) m.plainIntuition = mfPi[mx[20]] || '';
+      }
       if (!m.participatingProjects && Array.isArray(m._pp)) {
         m.participatingProjects = m._pp.map(idx => mpPart[idx] || {});
+      }
+      if (!m.projects && Array.isArray(m.participatingProjects)) {
+        m.projects = m.participatingProjects.map(p => p && p.projectId).filter(Boolean);
       }
       if (!m.researchPlaybook && typeof m._rp === 'number' && mpPb[m._rp]) {
         m.researchPlaybook = Object.assign({}, mpPb[m._rp]);
@@ -249,7 +287,10 @@
       if (m.researchPlaybook && !m.researchPlaybook.starterLeanCode) {
         m.researchPlaybook.starterLeanCode = m.leanTransferBlueprint;
       }
+      if (!m.plainIntuition && m.whyItMatters) m.plainIntuition = m.whyItMatters;
+      if (!m.physicalAnalogy && m.analogy) m.physicalAnalogy = m.analogy;
       if (!m.intuitionAnalogy && m.analogy) m.intuitionAnalogy = m.analogy;
+      if (!m.name && m.title) m.name = m.title;
     }
     const ppp = sm.pipelinePools || {}, ppSt = ppp.stages || [], ppPn = ppp.pnames || [], ppDc = ppp.discs || [], ppVl = ppp.vleans || [], ppOb = ppp.obs || [];
     const ppsArr = sm.proofPipelines || [];
@@ -274,7 +315,8 @@
     const ppLs = pp.sketches || [], ppSm = pp.summaries || [], ppRw = pp.reqWorks || [];
     const ppDb = pp.discBridges || [], ppTl = pp.tools || [], ppAn = pp.analogies || [], ppSi = pp.sharedIngs || [];
     const ppRl = pp.relLevels || [], ppDs = pp.discs || [], ppKd = pp.kinds || [], ppWm = pp.whys || [], ppOc = pp.obsCats || [];
-    const ppPjs = pp.projsList || [], ppVl2 = pp.vleans || [], ppHr = pp.hrefs || [], ppFms = pp.famsList || [], ppCt = pp.cats || [], ppSt2 = pp.statuses || [];
+    const ppPjs = pp.projsList || [], ppVl2 = pp.vleans || [], ppHr = pp.hrefs || [], ppFms = pp.famsList || [], ppCt = pp.cats || [], ppSt2 = pp.statuses || [], ppMi = pp.mids || [];
+    const connKeys = ['_td','_cv','_ls','_sm','_rw','_db','_tl','_an','_si','_rl','_ds','_kd','_wm','_oc','_pjs','_vl','_hr','_fms','_ct','_st'];
     const snPoolIp = (sm && sm.snippetPool) || [];
     const em = pp.epMeta || {}, emPj = em.projs || [], emCm = em.commits || [], emPa = em.paths || [], emUb = em.urlBases || [];
     for (let ei = 0; ei < ppEp.length; ei++) {
@@ -291,6 +333,13 @@
     for (let k = 0; k < cs.length; k++) {
       const c = cs[k];
       if (!c) continue;
+      if (Array.isArray(c._ix)) {
+        const cix = c._ix;
+        for (let ck2 = 0; ck2 < 20 && ck2 < cix.length; ck2++) {
+          if (typeof cix[ck2] === 'number' && cix[ck2] >= 0 && c[connKeys[ck2]] === undefined) c[connKeys[ck2]] = cix[ck2];
+        }
+        if (typeof cix[20] === 'number' && cix[20] >= 0 && c.mechanismId === undefined) c.mechanismId = ppMi[cix[20]] || '';
+      }
       if (!c.endpoints && Array.isArray(c._ep)) c.endpoints = c._ep.map(idx => ppEp[idx] || {});
       if (!c.translationDictionary && typeof c._td === 'number') c.translationDictionary = ppTd[c._td] || [];
       if (c.caveat === undefined && typeof c._cv === 'number') c.caveat = ppCv[c._cv] || '';
@@ -23232,7 +23281,8 @@ window.v48RenderBlueprintWizardPanel = function() {
       "99. Consistent Hashing 1/K, Power-of-Two-Choices p² & RFC 6962 Merkle Audit Suite #645",
       "100. Ring-AllReduce 2(P-1)/P, CRDT Join-Semilattice & Count-Min Sketch Suite #646",
       "101. Chandy–Lamport Poset Snapshot, (r,b) Min-Plus Network Calculus & RAID-6 𝔽₁₇ Suite #647",
-      "102. Raft Quorum & Figure-8 Guard, Kingman/SRPT Queueing Knee & Counting Bloom Suite #648"
+      "102. Raft Quorum & Figure-8 Guard, Kingman/SRPT Queueing Knee & Counting Bloom Suite #648",
+      "103. Conflict-Serializability & SSI Write-Skew, Vector Clocks & USL Scalability Suite #649"
     ];
     labTitles.forEach(function(lt, idx) {
       items.push({
@@ -29914,7 +29964,10 @@ window.v48RenderBlueprintWizardPanel = function() {
             '<span style="color:#cbd5e1;">' + cur.whyPromising + '</span>' +
           '</div>' +
           '<div class="cg-lead-insight-block" style="border-color:rgba(251,191,36,0.24);">' +
-            '<strong style="color:#fde68a;">Premise Gate to Discharge</strong>' +
+            '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:2px;">' +
+              '<strong style="color:#fde68a;margin:0;">Premise Gate to Discharge</strong>' +
+              '<button type="button" id="cg-lead-stress-test-btn" class="cg-calm-chip" style="padding:1px 6px;font-size:10px;border-color:rgba(244,63,94,0.55);color:#fda4af;" onclick="window.cgStressTestLeadPremiseGate(' + activeIdx + ')" title="Open Break-the-Hypothesis Counterexample Sandbox on this lead\'s domain pair">💥 Stress-Test Premise ↗</button>' +
+            '</div>' +
             '<span style="color:#fef3c7;">' + cur.keyObstacle + '</span>' +
           '</div>' +
         '</div>' +
@@ -64372,7 +64425,8 @@ window.v48RenderBlueprintWizardPanel = function() {
       var certPinBtn247 = document.getElementById("v55-pin-cert-dossier-btn");
       var hasCertPinBtn247 = Boolean(certPinBtn247);
       var certDossierMd247 = window.v55PinCertToResearchChain("suite-648-raft-quorum-kingman-queue-bloom-filter", "cslib", "tc-probcomb");
-      var leadDossierMd247 = window.cgLaunchLeadResearchDossier(lds247.length - 1);
+      var idxSrpt247 = lds247.findIndex(function(l) { return l && l.id === "lead-v247-srpt-output-length-aware-llm-kv-cache-serving-scheduler"; });
+      var leadDossierMd247 = window.cgLaunchLeadResearchDossier(idxSrpt247 >= 0 ? idxSrpt247 : (lds247.length - 1));
       var leadCertDossierOk = Boolean(
         leadCompassHtml247.indexOf("cg-lead-dossier-btn") !== -1 &&
         hasCertPinBtn247 &&
@@ -64427,6 +64481,617 @@ window.v48RenderBlueprintWizardPanel = function() {
         rep.results.push(extra247[k11]);
         rep.total++;
         if (extra247[k11].passed) rep.passed++;
+        else rep.failed++;
+      }
+      window._v147LastReport = rep;
+      return rep;
+    };
+  }
+})();
+
+// ============================================================================
+// Wave V248: Suite #649 & Frontier #123 (Conflict-Serializability DSG & SI Write-Skew vs. SSI,
+// Lamport vs. Fidge–Mattern Vector Clocks & Amdahl vs. Gunther USL Retrograde Collapse),
+// Lab #103, Sub-16.0 MiB Tuple Packing & Closed-Loop Sandbox-to-Dossier Workflow (528/528)
+// ============================================================================
+(function() {
+  "use strict";
+
+  // 1. Register Suite #649 & Frontier #123 in V145_REAL_LEAN_SUITES & R2 Corpus Config
+  if (Array.isArray(window.V145_REAL_LEAN_SUITES)) {
+    var v248Suites = [
+      {
+        id: "lean-serializability-vector-clock-and-usl-scalability-bridge",
+        projects: ["cslib", "tc-probcomb", "econlib", "apsp3sum"],
+        file: "CommonGround/Verification/TheoremAtlasSerializabilityVectorClockAndUSLScalabilityBridge.lean",
+        line: 123,
+        theoremName: "master_serializability_vector_clock_and_usl_scalability_bridge",
+        snippet: "theorem master_serializability_vector_clock_and_usl_scalability_bridge : ((allMasks 6 fun g => (hasCycle3 g == false) == existsTopoOrder3 g) = true ∧ siAllowsBothCommit 0b01 0b10 = true ∧ ssiAbortsConcurrentPair 0b11 0b01 0b11 0b10 = true) ∧ ...",
+        zeroSorry: true
+      },
+      {
+        id: "lean-serializability-vector-clock-and-usl-scalability-frontier",
+        projects: ["cslib", "tc-probcomb", "econlib", "apsp3sum"],
+        file: "09-consequence-lens-meta-atlas/SerializabilityVectorClockAndUSLScalabilityFrontier.lean",
+        line: 112,
+        theoremName: "dsg_acyclicity_iff_topological_serial_order_universal",
+        snippet: "theorem dsg_acyclicity_iff_topological_serial_order_universal : (allMasks 6 fun g => (hasCycle3 g == false) == existsTopoOrder3 g) = true := by decide",
+        zeroSorry: true
+      }
+    ];
+    v248Suites.forEach(function(vs) {
+      if (!window.V145_REAL_LEAN_SUITES.some(function(s) { return s && s.file === vs.file; })) {
+        window.V145_REAL_LEAN_SUITES.push(vs);
+      }
+    });
+  }
+
+  if (window.CG_R2_CORPUS_CONFIG) {
+    window.CG_R2_CORPUS_CONFIG.kernelCompiledModules = 732;
+    window.CG_R2_CORPUS_CONFIG.totalZeroSorryLeanFiles = 772;
+    window.CG_R2_CORPUS_CONFIG.verificationModules = 649;
+    window.CG_R2_CORPUS_CONFIG.frontierModules = 123;
+  }
+
+  // 2. Closed-Loop Scientific Method UX: Lead Premise Stress-Test (`#cg-lead-stress-test-btn`) & Break-the-Hypothesis Sandbox-to-Dossier (`#v70-pin-sandbox-dossier-btn`)
+  var _prevOpenSandboxV247 = window.v70OpenBreakHypothesisSandbox;
+  if (typeof _prevOpenSandboxV247 === "function") {
+    window.v70OpenBreakHypothesisSandbox = function(mechIdx) {
+      _prevOpenSandboxV247(mechIdx);
+      var openCertBtn = document.getElementById("v70-open-cert-btn");
+      if (openCertBtn && !document.getElementById("v70-pin-sandbox-dossier-btn")) {
+        openCertBtn.insertAdjacentHTML(
+          "afterend",
+          ' <button type="button" id="v70-pin-sandbox-dossier-btn" class="v60-qs-btn" style="border-color:rgba(251,191,36,0.58);color:#fde68a;" onclick="window.v70PinSandboxToResearchDossier()" title="Pin this mechanism &amp; its stress-tested premise-failure counterexample obligation into the Cross-Domain Research Dossier">📋 Pin &amp; Dossier</button>'
+        );
+      }
+    };
+  }
+
+  var _prevBuildDossierV247 = window.cgBuildResearchDossierMarkdown;
+  if (typeof _prevBuildDossierV247 === "function") {
+    window.cgBuildResearchDossierMarkdown = function() {
+      var baseMd = _prevBuildDossierV247.apply(this, arguments);
+      var sb = window._cgActiveStressTestedSandbox;
+      if (!sb) return baseMd;
+      var gateLines = [
+        "",
+        "## 5. Stress-Tested Premise-Failure Counterexample Gate",
+        "- **Sandbox Mechanism**: `" + String(sb.mechId || ("Mechanism #" + ((sb.mechIdx || 0) + 1))) + "` — " + String(sb.title || "Functorial Transfer Mechanism"),
+        "- **Dropped / Violated Hypotheses**: " + String(sb.brokenSummary || "`h1` (Orthogonal Split / Boundary Positivity Dropped)"),
+        "- **Observed Failure Mode**: " + String(sb.diagSummary || "Dropping the structural premise triggers an explicit finite counterexample and leaves an unprovable Lean 4 goal state."),
+        "- **Formalization Obligation**: Prove both the positive transfer witness (`0` `sorry`) and the explicit negated-premise counterexample theorem (`∃ w, ¬Premise w ∧ ¬Conclusion w`) in Lean 4.33.0."
+      ].join("\n");
+      return baseMd + "\n" + gateLines;
+    };
+  }
+
+  window.cgStressTestLeadPremiseGate = function(leadIdx) {
+    var leads = window.CG_PROMISING_RESEARCH_LEADS || [];
+    var idx = (typeof leadIdx === "number" && leadIdx >= 0 && leadIdx < leads.length)
+      ? leadIdx
+      : (typeof window._cgActiveLeadIdx === "number" ? window._cgActiveLeadIdx : (leads.length - 1));
+    var cur = leads[idx] || leads[leads.length - 1];
+    if (!cur) return -1;
+    window._cgActiveLeadIdx = idx;
+    window._cgActiveDossierLead = cur;
+
+    var mechs = (typeof semanticMechanisms !== "undefined" && semanticMechanisms && semanticMechanisms.highLevelMechanisms) || [];
+    var lProjs = Array.isArray(cur.projects) ? cur.projects : [];
+    var bestIdx = 0;
+    var bestScore = -1;
+    for (var i = 0; i < mechs.length; i++) {
+      var m = mechs[i];
+      if (!m) continue;
+      var mProjs = Array.isArray(m.projects) ? m.projects : (Array.isArray(m.participatingProjects) ? m.participatingProjects.map(function(p) { return p && p.projectId; }) : []);
+      var overlap = 0;
+      for (var p = 0; p < lProjs.length; p++) {
+        if (mProjs.indexOf(lProjs[p]) !== -1) overlap += 10;
+      }
+      if (overlap > bestScore) {
+        bestScore = overlap;
+        bestIdx = i;
+      }
+    }
+    if (typeof window.v70OpenBreakHypothesisSandbox === "function") {
+      window.v70OpenBreakHypothesisSandbox(bestIdx);
+    }
+    return bestIdx;
+  };
+
+  window.v70PinSandboxToResearchDossier = function() {
+    var idx = typeof window._v70ActiveIdx === "number" ? window._v70ActiveIdx : 0;
+    var mechs = (typeof semanticMechanisms !== "undefined" && semanticMechanisms && semanticMechanisms.highLevelMechanisms) || [];
+    var m = mechs[idx] || {};
+    var meta = window.cgResolveMechDisplayMeta ? window.cgResolveMechDisplayMeta(idx) : { idx: idx, title: m.title || "Mechanism" };
+    var hs = window._v70HypState || { h1: false, h2: true, h3: true };
+    var broken = [];
+    if (!hs.h1) broken.push("`H1: Orthogonal Split (h_split)`");
+    if (!hs.h2) broken.push("`H2: Coercive Gap (h_coercive)`");
+    if (!hs.h3) broken.push("`H3: Mod-Parity Lock (h_parity)`");
+    var diagEl = document.getElementById("v70-ce-diag");
+    var diagTxt = diagEl ? String(diagEl.textContent || "").trim().slice(0, 220) : "";
+
+    window._cgActiveStressTestedSandbox = {
+      mechIdx: idx,
+      mechId: m.id || ("mech-" + (idx + 1)),
+      title: meta.title || m.title || "Functorial Mechanism",
+      brokenSummary: broken.length ? broken.join(", ") : "All hypotheses active (verified baseline); drop H1/H2/H3 to generate counterexample witness",
+      diagSummary: diagTxt || "Counterexample blowup inspected in Break-the-Hypothesis Sandbox."
+    };
+
+    if (typeof window.v70CloseSandboxModal === "function") {
+      window.v70CloseSandboxModal();
+    }
+    if (m.id && typeof window.cgPinResearchHop === "function") {
+      window.cgPinResearchHop(m.id);
+    }
+    if (typeof window.v95OpenBridgeComposerStudio === "function") {
+      window.v95OpenBridgeComposerStudio();
+    }
+    var mProjs = Array.isArray(m.projects) ? m.projects : (Array.isArray(m.participatingProjects) ? m.participatingProjects.map(function(p) { return p && p.projectId; }) : []);
+    var selA = document.getElementById("v95-proj-a");
+    var selB = document.getElementById("v95-proj-b");
+    if (selA && mProjs[0]) selA.value = mProjs[0];
+    if (selB && mProjs[1]) selB.value = mProjs[1];
+    if (typeof window.v95UpdateComposedBridge === "function") {
+      window.v95UpdateComposedBridge();
+    }
+    return window.cgCopyResearchDossier(document.getElementById("v95-copy-dossier-btn"));
+  };
+
+  // 3. Register Breakthroughs #382-385 (`385` total)
+  window.CG_VERIFIED_ATLAS_BREAKTHROUGHS = window.CG_VERIFIED_ATLAS_BREAKTHROUGHS || [];
+  var v248Breakthroughs = [
+    {
+      id: "bt-v248-dsg-conflict-serializability-and-si-write-skew-vs-ssi",
+      title: "382. Exhaustive `64`-Graph `DSG` Conflict-Serializability & `216`-Schedule Equivalence vs. `SI` Write-Skew & `SSI` Guard (`09`+`08`)",
+      projects: ["cslib", "tc-probcomb", "econlib"],
+      epistemicSymbol: "★",
+      epistemicGrade: "Lean 4.33.0 Pure-Core Kernel Checked (09-consequence-lens-meta-atlas/SerializabilityVectorClockAndUSLScalabilityFrontier.lean · 0 sorry)",
+      domains: "Transactional Databases (`PostgreSQL SSI`, `CockroachDB`, `Oracle SI`) (`09`) ↔ Directed Graph Topological Sort & Antidependency Cycles (`08`)",
+      howConnected: "Why & How Connected: Proves `dsg_acyclicity_iff_topological_serial_order_universal` (`64/64` `3`-txn `DSG`s) and `conflict_serializability_schedule_equivalence_216` (`216/216` interleaved multi-key schedules): a schedule has an equivalent serial execution iff its `WR`/`RW`/`WW` Direct Serialization Graph is acyclic!",
+      selfCritique: "Premise-Failure Counterexample (`snapshot_isolation_write_skew_vs_ssi_guard_counterexample`): Snapshot Isolation (`SI`) enforces `W₁ ∩ W₂ = ∅` (blocking `WW` Lost Updates), yet under `x + y ≥ 100` from `(100, 100)`, `T₁` (`R={x,y}, W={x:=0}`) and `T₂` (`R={x,y}, W={y:=0}`) have disjoint write sets (`0b01 &&& 0b10 = 0`) and BOTH commit under `SI` → `(0, 0)` (`0 < 100` breach)! `SSI` detects `T₁ ↔_rw T₂` (`true`) and aborts.",
+      statement: "(∀ g ∈ DSG₃, ¬hasCycle3(g) ↔ existsTopoOrder3(g)) ∧ (siAllows(0b01, 0b10) = true ∧ 0 + 0 < 100) ∧ (ssiAborts(0b11, 0b01, 0b11, 0b10) = true).",
+      leanFile: "09-consequence-lens-meta-atlas/SerializabilityVectorClockAndUSLScalabilityFrontier.lean",
+      theoremName: "dsg_acyclicity_iff_topological_serial_order_universal",
+      interactiveLab: 102
+    },
+    {
+      id: "bt-v248-lamport-forward-vs-fidge-mattern-vector-clock-exact-poset-isomorphism",
+      title: "383. Exhaustive `576`-Pair Lamport Monotonicity & Fidge–Mattern Vector Clock Exact Poset Isomorphism (`a →⁺ b ⟺ V(a) < V(b)`) (`09`+`08`)",
+      projects: ["cslib", "tc-probcomb"],
+      epistemicSymbol: "★",
+      epistemicGrade: "Lean 4.33.0 Pure-Core Kernel Checked (09-consequence-lens-meta-atlas/SerializabilityVectorClockAndUSLScalabilityFrontier.lean · 0 sorry)",
+      domains: "Distributed Causal Storage & Tracing (`Dynamo`, `Riak`, `CRDTs`) (`09`) ↔ Poset Order-Dimension Embedding (`08`)",
+      howConnected: "Why & How Connected: Certifies `lamport_forward_and_vector_clock_exact_iff_576` across all `16` `3`-process message topologies × `36` event pairs (`576` pairs): scalar Lamport clocks preserve `a →⁺ b ⟹ L(a) < L(b)`, while `3`-slot Fidge–Mattern Vector Clocks achieve an **exact poset isomorphism** `a →⁺ b ⟺ V(a) < V(b)` (`576/576`)!",
+      selfCritique: "Premise-Failure Counterexample (`lamport_converse_failure_vs_vector_concurrency_detection`): Scalar `L(0) = 1 < 2 = L(5)` holds even when `0 ↛⁺ 5` and `5 ↛⁺ 0` (`0 ∥ 5`), causing scalar Last-Writer-Wins (`LWW`) registers to silently discard concurrent write `e₀`; Vector Clocks report `V(0)=(1,0,0) ∥ (0,0,2)=V(5)` (`vecConcurrent = true`).",
+      statement: "(∀ m ∈ [0,15], ∀ a b, (a →⁺_m b → L(a) < L(b)) ∧ (a →⁺_m b ↔ V(a) < V(b))) ∧ (L₁(0)=1 < 2=L₁(5) ∧ 0 ∥₁ 5 ∧ vecConcurrent((1,0,0),(0,0,2))).",
+      leanFile: "09-consequence-lens-meta-atlas/SerializabilityVectorClockAndUSLScalabilityFrontier.lean",
+      theoremName: "lamport_forward_and_vector_clock_exact_iff_576",
+      interactiveLab: 102
+    },
+    {
+      id: "bt-v248-amdahl-monotonic-ceiling-vs-gunther-usl-retrograde-collapse",
+      title: "384. Universal Amdahl (`β = 0`) Monotonic Ceiling vs. Gunther `USL` (`β > 0`) `N* = 19` Peak & `100`-Node Retrograde Collapse (`01`+`09`)",
+      projects: ["apsp3sum", "econlib", "cslib"],
+      epistemicSymbol: "★",
+      epistemicGrade: "Lean 4.33.0 Pure-Core Kernel Checked (09-consequence-lens-meta-atlas/SerializabilityVectorClockAndUSLScalabilityFrontier.lean · 0 sorry)",
+      domains: "Multi-GPU `AllReduce` & Multi-Core Lock/Cache Scaling (`09`) ↔ Rational AM–GM Extremal Optimization (`01`)",
+      howConnected: "Why & How Connected: Proves universal `amdahl_ceiling_cross_mul` (`C(N) ≤ 1/α`) and `amdahl_step_monotonic_cross_mul` (`C(N) ≤ C(N+1)` for all `α ≤ 1, N ≥ 1`) when coherency `β = 0`, and shows `USL` reduces algebraically to Amdahl at `β = 0` (`N / (1 + α(N-1)) = 1 / (α + (1-α)/N)`).",
+      selfCritique: "Premise-Failure Counterexample (`usl_retrograde_throughput_collapse_counterexample`): With contention `α = 10%` and pairwise coherency `β = 0.25%`, throughput peaks uniquely at `N* = √((1 - α + β)/β) = 19` (`5.198×`) and then **runs slower as nodes are added**: `64` nodes (`3.682×`) trail `6` nodes (`3.809×`), and `100` nodes (`2.805×`) trail `4` nodes (`3.007×` vs. Amdahl's false `9.174×`)!",
+      statement: "(β = 0 ⟹ C(n+1) ≤ C(n+2) ≤ 1/α) ∧ (USL(10%,0.25%,19) = 5.198× > USL(64) = 3.682× < USL(6) = 3.809×) ∧ (USL(100) = 2.805× < USL(4) = 3.007×).",
+      leanFile: "09-consequence-lens-meta-atlas/SerializabilityVectorClockAndUSLScalabilityFrontier.lean",
+      theoremName: "usl_retrograde_throughput_collapse_counterexample",
+      interactiveLab: 102
+    },
+    {
+      id: "bt-v248-suite-649-serializability-vector-clock-usl-master-synthesis",
+      title: "385. `Suite #649` (`Lab #103`): Conflict-Serializability & `SSI`, Fidge–Mattern Vector Clocks & Gunther `USL` Master Bridge (`09`+`08`+`01`)",
+      projects: ["cslib", "tc-probcomb", "econlib", "apsp3sum"],
+      epistemicSymbol: "★",
+      epistemicGrade: "Lean 4.33.0 Pure-Core Kernel Checked (CommonGround/Verification/TheoremAtlasSerializabilityVectorClockAndUSLScalabilityBridge.lean · 0 sorry)",
+      domains: "Distributed SQL Isolation (`SSI`) (`09`) ↔ Causal Vector Posets (`08`) ↔ `USL` Coherency Scaling (`01`)",
+      howConnected: "Why & How Connected: Unifies the three hidden quadratic/cycle barriers of distributed databases: `RW`-antidependency cycles (`Write Skew` escaping `SI` without `SSI`), `N`-dimensional causal concurrency (`LWW` data loss without Vector Clocks), and `β N(N-1)` coordination cross-talk (`USL` retrograde throughput collapse past `N* = √((1-α+β)/β)`)!",
+      selfCritique: "Verified Premise Gates: Track `SIREAD` `rw`-edges (or promote predicate reads) to prevent Write Skew, carry `N`-component causal vectors (or Dotted Version Vectors) whenever concurrent writes can occur, and bound shard/quorum fan-out `N ≤ N*` whenever `β > 0`.",
+      statement: "master_serializability_vector_clock_and_usl_scalability_bridge (`Suite #649`, `Lab #103`, `0` sorry).",
+      leanFile: "CommonGround/Verification/TheoremAtlasSerializabilityVectorClockAndUSLScalabilityBridge.lean",
+      theoremName: "master_serializability_vector_clock_and_usl_scalability_bridge",
+      interactiveLab: 102
+    }
+  ];
+  var existingBtIds248 = new Set(window.CG_VERIFIED_ATLAS_BREAKTHROUGHS.map(function(b) { return b && b.id; }));
+  v248Breakthroughs.forEach(function(b) {
+    if (!existingBtIds248.has(b.id)) window.CG_VERIFIED_ATLAS_BREAKTHROUGHS.push(b);
+  });
+
+  // 4. Register Promising Research Leads #177-178 (`178/178` `100%` `.lean`-Anchored)
+  window.CG_PROMISING_RESEARCH_LEADS = window.CG_PROMISING_RESEARCH_LEADS || [];
+  var v248Leads = [
+    {
+      id: "lead-v248-hybrid-ssi-deterministic-epoch-batching-zero-false-abort",
+      title: "177. Precision-Guided Hybrid `SSI` + Deterministic Epoch Ordering Eliminating `SIREAD` False-Positive Aborts on Hot Rows (`09`+`08`)",
+      projects: ["cslib", "tc-probcomb", "econlib"],
+      targetStarId: "suite-649-serializability-vector-clock-usl-scalability",
+      domains: "High-Throughput Distributed OLTP (`PostgreSQL SSI`, `CockroachDB`, `Calvin`/`Aria`) (`09`) ↔ `DSG` `rw`-Cycle Structure (`08`)",
+      whyPromising: "In `snapshot_isolation_write_skew_vs_ssi_guard_counterexample`, `SSI` aborts any `2`-consecutive `rw`-edge (`T_in -rw-> T_pivot -rw-> T_out`) even when `T_out →* T_in` never closes a true `DSG` cycle (causing false-positive aborts on hot counters). Routing hot-key transactions into deterministic `Aria`/`Calvin` micro-epochs while keeping cold transactions on lock-free `SSI` preserves `100%` `DSG` acyclicity with near-zero aborts!",
+      whatStatementUnlocked: "Zero-sorry Lean 4 theorem proving exact `DSG` acyclicity (`¬hasCycle`) and abort-rate upper bounds for partitioned `SSI` + deterministic epoch schedules.",
+      realWorldUseCase: "Eliminating retry storms on hot financial ledger / inventory keys in cloud-native SQL databases without sacrificing `SERIALIZABLE` isolation.",
+      keyObstacle: "Preventing cross-tier `rw` edges between `SSI` readers and deterministic-epoch writers from forming an unmonitored `3`-cycle.",
+      leanAnchor: "09-consequence-lens-meta-atlas/SerializabilityVectorClockAndUSLScalabilityFrontier.lean",
+      labIndex: 102
+    },
+    {
+      id: "lead-v248-usl-aware-elastic-gpu-and-consensus-shard-autoscaler",
+      title: "178. `USL`-Guided `(α, β)` Online Telemetry Auto-Scaler Preventing Retrograde Collapse (`N ≤ N* = √((1-α+β)/β)`) in GPU & SQL Clusters (`01`+`09`)",
+      projects: ["apsp3sum", "cslib", "econlib"],
+      targetStarId: "suite-649-serializability-vector-clock-usl-scalability",
+      domains: "Elastic Cloud Auto-Scaling & Multi-GPU `AllReduce` Training (`09`) ↔ Gunther `USL` Rational Optimization (`01`)",
+      whyPromising: "Standard Kubernetes/cloud auto-scalers assume monotone throughput (`β = 0`), so when latency spikes past `N* = 19` (`usl_retrograde_throughput_collapse_counterexample`), adding nodes (`19 → 64 → 100`) **decreases** throughput (`5.198× → 3.682× → 2.805×`) in a positive-feedback death spiral! Fitting `(α, β)` online via `3`-point rational regression caps `N` at `N*` and triggers shard-splitting (`β → β/K²`) instead of blind scale-out!",
+      whatStatementUnlocked: "Machine-checked Lean 4 stability proof for `(α, β)`-estimated `USL` admission & shard-partitioning controllers avoiding retrograde equilibria.",
+      realWorldUseCase: "Preventing multi-million-dollar cloud auto-scaling runaway cascades and sizing synchronous `AllReduce` data-parallel GPU rings at exact peak throughput `N*`.",
+      keyObstacle: "Separating transient Pollaczek–Khinchine burst variance (`C_s²`) from true quadratic coherency cross-talk (`β N(N-1)`) during noisy traffic ramps.",
+      leanAnchor: "CommonGround/Verification/TheoremAtlasSerializabilityVectorClockAndUSLScalabilityBridge.lean",
+      labIndex: 102
+    }
+  ];
+  var existingLeadIds248 = new Set(window.CG_PROMISING_RESEARCH_LEADS.map(function(l) { return l && l.id; }));
+  v248Leads.forEach(function(nl) {
+    if (!existingLeadIds248.has(nl.id)) window.CG_PROMISING_RESEARCH_LEADS.push(nl);
+  });
+
+  // 5. Register Premise-Boundary Guardrail & Archetype #41
+  if (Array.isArray(window.CG_BOUNDARY_RULES)) {
+    var v248Rule = {
+      id: "si-write-skew-lamport-lww-and-usl-retrograde-boundary",
+      groups: [
+        ["snapshot_isolation", "serializable", "lamport", "vector_clock", "lww", "amdahl", "usl", "scalability"],
+        ["write_skew", "rw_cycle", "concurrent", "data_loss", "coherency", "retrograde", "allreduce"]
+      ],
+      title: "Premise Boundary · `SI` Misses Write-Skew `RW`-Cycles; Scalar `LWW` Drops Concurrent Writes; `β > 0` Coherency Causes Retrograde Scale-Out Collapse",
+      warning: "(1) Snapshot Isolation (`W₁ ∩ W₂ = ∅`) lets disjoint-write transactions commit `(0, 0)` and break `x + y ≥ 100` (`Write Skew`). (2) Scalar Lamport `L(a) < L(b)` holds on concurrent events (`1 < 2` with `a ∥ b`), causing `LWW` data loss. (3) With `β = 0.25%` coherency cross-talk, scaling from `N* = 19` (`5.198×`) to `100` nodes collapses throughput to `2.805×` (`< 4` nodes at `3.007×`)!",
+      remedy: "Enable `SSI` `2`-consecutive `rw`-antidependency detection, use Fidge–Mattern Vector Clocks / Dotted Version Vectors for causal merge, and cap cluster/ring size at `N* = √((1-α+β)/β)` (or shard state to slash `β`).",
+      targetLab: 102
+    };
+    if (!window.CG_BOUNDARY_RULES.some(function(r) { return r && r.id === v248Rule.id; })) {
+      window.CG_BOUNDARY_RULES.push(v248Rule);
+    }
+  }
+
+  if (Array.isArray(window.V95_OBSTACLES)) {
+    var arch41 = {
+      id: "ssi_rw_cycle_vector_clock_poset_and_usl_coherency_gate",
+      name: "41. SSI RW-Cycle, Vector-Clock Poset & USL Coherency Gate",
+      label: "41. `SSI` `RW`-Antidependency Guard, Fidge–Mattern Vector Poset & `USL` `N*` Coherency Gate (`09`+`08`+`01`)",
+      carrier: "DSGAcyclicityVectorClockIsomorphismAndUSLPeakGate",
+      premiseGate: "Requires `SSI` `rw`-cycle detection (`¬(T₁ ↔_rw T₂)` beyond `W₁ ∩ W₂ = ∅`), `N`-component vector timestamps (`a →⁺ b ⟺ V(a) < V(b)`), and bounded coherency cross-talk `β = 0` (or `N ≤ N* = √((1-α+β)/β)`)",
+      tactic: "Prove `64`-graph `DSG` & `576`-pair Vector Clock poset equivalence via `allMasks` `decide`, universal Amdahl monotonicity via `Nat.mul_succ` + `omega`, and `USL` `N*=19` global optimum via finite horizon check."
+    };
+    if (!window.V95_OBSTACLES.some(function(o) { return o && o.id === arch41.id; })) {
+      window.V95_OBSTACLES.push(arch41);
+    }
+  }
+
+  // 6. Interactive Finite Micro-Lab #103 (index 102): SSI Write-Skew, Vector Clocks & USL Scalability Suite #649
+  window._v136State = Object.assign(window._v136State || {}, {
+    v248Mode: "ssi-write-skew-vs-si",
+    v248IsolationMode: 1, // 1 = PostgreSQL SSI (aborts RW 2-cycle, x+y=100 >= 100 SAFE!), 0 = Snapshot Isolation SI (W1∩W2=∅ commits (0,0), x+y=0 < 100 WRITE SKEW!)
+    v248ClockMode: 1,     // 1 = Fidge–Mattern Vector Clock ((1,0,0) ∥ (0,0,2) concurrent preserved!), 0 = Scalar Lamport LWW (L(0)=1 < L(5)=2 overwrites e0!)
+    v248NodeChoice: 2     // 2 = USL Peak N*=19 (5.198x!), 1 = Small N=4 (3.007x), 0 = Over-Scaled N=100 (2.805x < 4 nodes RETROGRADE COLLAPSE!)
+  });
+
+  window.v248SsiVecClockUslLabModel = function(mode, opts) {
+    var o = opts || {};
+    var isoMode = (typeof o.isolationMode === "number") ? o.isolationMode : 1;
+    var clkMode = (typeof o.clockMode === "number") ? o.clockMode : 1;
+    var nodeChoice = (typeof o.nodeChoice === "number") ? o.nodeChoice : 2;
+
+    var finalSum = isoMode === 1 ? 100 : 0;
+    var invariantHolds = finalSum >= 100;
+
+    var concurrencyDetected = clkMode === 1;
+    var silentDataLoss = !concurrencyDetected;
+
+    var nodesN = nodeChoice === 2 ? 19 : (nodeChoice === 1 ? 4 : 100);
+    var uslMilli = nodeChoice === 2 ? 5198 : (nodeChoice === 1 ? 3007 : 2805);
+    var amdahlMilli = nodeChoice === 2 ? 6785 : (nodeChoice === 1 ? 3076 : 9174);
+    var retrogradeCollapse = (nodeChoice === 0);
+
+    var mKey = mode || "ssi-write-skew-vs-si";
+    var heading = invariantHolds
+      ? "Serializable Snapshot Isolation (`SSI` + `64/64` `DSG`): Detects `T₁ ↔_rw T₂` Cycle & Preserves `x + y = 100 ≥ 100`"
+      : "Premise Failure · Snapshot Isolation (`SI`, `W₁ ∩ W₂ = ∅`): Write Skew Commits `(0, 0)` → `x + y = 0 < 100`!";
+    var operatorEq = "¬hasCycle3(DSG) ⟺ ∃ Serial π   ·   SI: `0b01 & 0b10 = 0` (Commits `(0,0)`!)   ·   SSI: `rw(T₁,T₂) ∧ rw(T₂,T₁)` → Abort";
+    var witnessDetail = invariantHolds
+      ? "Across all `64` `3`-txn `DSG`s and `216` schedules, acyclicity equals conflict-serializability. On `x + y ≥ 100` from `(100, 100)`, `SSI` spots `T₁ -rw(y)-> T₂` and `T₂ -rw(x)-> T₁`, aborting `T₂` so `(0, 100)` satisfies `100 ≥ 100`!"
+      : "`T₁` reads `(100,100)` & writes `x:=0` (`W₁={x}`); `T₂` reads `(100,100)` & writes `y:=0` (`W₂={y}`). Because `W₁ ∩ W₂ = ∅`, `SI`'s First-Committer-Wins lets BOTH commit, violating `x + y ≥ 100` without any `WW` conflict!";
+    var secondaryDetail = "Isolation: `" + (invariantHolds ? "SSI SAFE (100≥100)" : "SI WRITE SKEW (0<100!)") + "` · Clock: `" + (concurrencyDetected ? "V(0)∥V(5) Merged" : "LWW Drops e₀!") + "` · `USL(N=" + nodesN + ")`: `" + (uslMilli / 1000).toFixed(3) + "×` (Amdahl `" + (amdahlMilli / 1000).toFixed(2) + "×`).";
+
+    if (mKey === "vector-clock-vs-lamport-lww") {
+      heading = concurrencyDetected
+        ? "Fidge–Mattern Vector Clocks (`576/576` Exact `⟺`): Detects `(1,0,0) ∥ (0,0,2)` & Preserves Both Siblings"
+        : "Premise Failure · Scalar Lamport `LWW` (`L(0)=1 < 2=L(5)` with `0 ∥ 5`): Silently Overwrites Concurrent Write `e₀`!";
+      operatorEq = "∀ m,a,b: a →⁺ b ⟺ V(a) < V(b) (`576/576`)   ·   Lamport Trap: `L(0)=1 < 2=L(5)` despite `0 ↛⁺ 5 ∧ 5 ↛⁺ 0`!";
+      witnessDetail = concurrencyDetected
+        ? "Across all `16` message topologies × `36` event pairs (`576` total), `3`-slot Vector Clocks embed the causal poset isomorphically: `(1,0,0)` and `(0,0,2)` are incomparable (`vecConcurrent = true`), triggering safe `CRDT` merge!"
+        : "Scalar clocks map a partial order into total `ℕ`: independent write `e₅` on `P₂` (`L=2`) has a higher timestamp than concurrent `e₀` on `P₀` (`L=1`), so `LWW` silently deletes `e₀`!";
+    } else if (mKey === "usl-retrograde-vs-amdahl") {
+      heading = !retrogradeCollapse
+        ? (nodesN === 19
+            ? "Gunther `USL` (`α=10%, β=0.25%`) Global Optimum at `N* = √361 = 19` Nodes (`5.198×` Peak Throughput!)"
+            : "Small Cluster `N = 4` (`3.007×`): Coherency Cross-Talk `β N(N-1)` Minimal — Beats `100` Over-Scaled Nodes (`2.805×`)!")
+        : "Premise Failure · Over-Scaled `N = 100` Under `β = 0.25%`: Collapses to `2.805×` — Slower Than `4` Nodes (`3.007×`)!";
+      operatorEq = "C(N) = N / (1 + α(N-1) + βN(N-1))   ·   Peak `N* = 19` (`5.198×`)   ·   `C(100) = 2.805× < C(4) = 3.007×` (Amdahl `9.174×`!)";
+      witnessDetail = !retrogradeCollapse
+        ? "When `β = 0`, `USL` equals Amdahl's Law (`C(N) ≤ C(N+1) ≤ 1/α`). Under `β = 0.25%` cache/quorum cross-talk, AM–GM uniquely maximizes `C(N)` over `N ∈ [1, 128]` at `N* = 19` (`5.198×`, vs `5.194×` at `N=18, 20`)!"
+        : "Scaling to `N = 100` triggers `N(N-1) = 9,900` coherency interactions: real throughput plunges to `2.805×` (slower than `4` nodes at `3.007×`!), while naive Amdahl (`β=0`) predicts `9.174×`!";
+    }
+
+    var failed = (!invariantHolds) || silentDataLoss || retrogradeCollapse;
+    return {
+      mode: mKey,
+      isolationMode: isoMode,
+      finalSum: finalSum,
+      invariantHolds: invariantHolds,
+      clockMode: clkMode,
+      concurrencyDetected: concurrencyDetected,
+      silentDataLoss: silentDataLoss,
+      nodeChoice: nodeChoice,
+      nodesN: nodesN,
+      uslMilli: uslMilli,
+      amdahlMilli: amdahlMilli,
+      retrogradeCollapse: retrogradeCollapse,
+      heading: heading,
+      operatorEq: operatorEq,
+      witnessDetail: witnessDetail,
+      secondaryDetail: secondaryDetail,
+      verdict: failed
+        ? (!invariantHolds
+            ? "✕ SI WRITE-SKEW BREACH (`(0, 0)` → `x + y = 0 < 100`): Disjoint write sets bypassed `W₁ ∩ W₂ = ∅`!"
+            : (silentDataLoss
+                ? "✕ SCALAR LWW DATA LOSS (`L(0)=1 < 2=L(5)` on `0 ∥ 5`): Concurrent write `e₀` silently overwritten!"
+                : "✕ USL RETROGRADE COLLAPSE (`C(100) = 2.805× < C(4) = 3.007×`): Quadratic `βN(N-1)` cross-talk crushed cluster!"))
+        : "★ SUITE #649 (`LAB #103`) VERIFIED: `64/64` `DSG` + `SSI`, `576/576` Vector Poset & `USL` `N*=19` (`5.198×`)!",
+      leanRef: "CommonGround/Verification/TheoremAtlasSerializabilityVectorClockAndUSLScalabilityBridge.lean :: master_serializability_vector_clock_and_usl_scalability_bridge"
+    };
+  };
+
+  var prevRenderFiniteV247 = window.v136RenderFiniteBody;
+  window.v136RenderFiniteBody = function() {
+    var st = window._v136State || {};
+    for (var i = 0; i < 103; i++) {
+      var tb = document.getElementById("v136-tab-" + i);
+      if (tb) tb.className = "v61-prog-tab" + (st.activeLab === i ? " active" : "");
+    }
+    if (st.activeLab < 102 && typeof prevRenderFiniteV247 === "function") {
+      return prevRenderFiniteV247();
+    }
+    var mount = document.getElementById("v136-finite-mount") || document.getElementById("v136-finite-body");
+    if (!mount || st.activeLab !== 102) return;
+
+    var lm = window.v248SsiVecClockUslLabModel(st.v248Mode, {
+      isolationMode: st.v248IsolationMode,
+      clockMode: st.v248ClockMode,
+      nodeChoice: st.v248NodeChoice
+    });
+
+    var modes = [
+      { id: "ssi-write-skew-vs-si", label: "★ SSI vs. SI Write-Skew (100 vs 0)" },
+      { id: "vector-clock-vs-lamport-lww", label: "★ Vector Poset (576/576) vs. LWW" },
+      { id: "usl-retrograde-vs-amdahl", label: "★ USL Peak N*=19 vs. N=100 Collapse" }
+    ];
+    var modeBtns = modes.map(function(md) {
+      var act = lm.mode === md.id;
+      return '<button type="button" class="cg-calm-chip' + (act ? ' is-active' : '') + '" onclick="window._v136State.v248Mode=\'' + md.id + '\';window.v136RenderFiniteBody();">' + md.label + '</button>';
+    }).join("");
+
+    var hUsl = Math.max(10, Math.min(68, Math.round((lm.uslMilli / 9500) * 66)));
+    var hAmd = Math.max(10, Math.min(68, Math.round((lm.amdahlMilli / 9500) * 66)));
+    mount.innerHTML =
+      '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:12px;">' +
+        '<div style="display:flex;flex-wrap:wrap;gap:6px;">' + modeBtns + '</div>' +
+        '<span class="v136-status-pill">Lab #103 · Suite #649 · 772 Zero-Sorry .lean Files (528 Checks · Sub-16.0 MiB Corpus!)</span>' +
+      '</div>' +
+      '<div class="v136-grid-2">' +
+        '<div class="v136-finite-card">' +
+          '<div style="font-size:11px;font-weight:800;letter-spacing:0.07em;color:#a78bfa;text-transform:uppercase;margin-bottom:4px;">`DSG` Serializability &amp; `SSI`, Fidge–Mattern Vector Clocks &amp; Gunther `USL` (`09`+`08`+`01`)</div>' +
+          '<h3 style="margin:0 0 8px 0;font-size:15.5px;color:#f8fafc;">' + lm.heading + '</h3>' +
+          '<div style="font-family:var(--font-mono);font-size:11.5px;color:#fde68a;margin-bottom:8px;">' + lm.operatorEq + '</div>' +
+          '<div style="font-size:12px;color:#cbd5e1;line-height:1.55;margin-bottom:10px;">' + lm.witnessDetail + '</div>' +
+          '<div style="padding:9px 11px;border-radius:8px;background:rgba(6,13,26,0.9);border:1px solid rgba(56,189,248,0.28);">' +
+            '<div style="font-size:10.5px;font-weight:800;color:#7dd3fc;margin-bottom:6px;">INTERACTIVE ISOLATION, CAUSAL CLOCK &amp; USL SCALING PREMISE GATE</div>' +
+            '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:11.5px;color:#e2e8f0;">' +
+              '<label>Isolation (0/1): <strong style="color:' + (lm.invariantHolds ? '#34d399' : '#fb7185') + '">' + (lm.invariantHolds ? 'SSI (x+y=100)' : 'SI Skew (0!)') + '</strong><input type="range" min="0" max="1" value="' + lm.isolationMode + '" style="width:100%" oninput="window._v136State.v248IsolationMode=Number(this.value);window.v136RenderFiniteBody();"></label>' +
+              '<label>Clock (0/1): <strong style="color:' + (lm.concurrencyDetected ? '#34d399' : '#fb7185') + '">' + (lm.concurrencyDetected ? 'Vector (∥ OK)' : 'Lamport LWW!') + '</strong><input type="range" min="0" max="1" value="' + lm.clockMode + '" style="width:100%" oninput="window._v136State.v248ClockMode=Number(this.value);window.v136RenderFiniteBody();"></label>' +
+              '<label>Cluster N (0..2): <strong style="color:' + (!lm.retrogradeCollapse ? '#34d399' : '#fb7185') + '">N=' + lm.nodesN + ' (' + (lm.uslMilli / 1000).toFixed(2) + '×)</strong><input type="range" min="0" max="2" value="' + lm.nodeChoice + '" style="width:100%" oninput="window._v136State.v248NodeChoice=Number(this.value);window.v136RenderFiniteBody();"></label>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="v136-finite-card">' +
+          '<div style="font-size:11px;font-weight:800;color:#34d399;margin-bottom:6px;">USL (`' + (lm.uslMilli / 1000).toFixed(3) + '×`) vs. AMDAHL (`' + (lm.amdahlMilli / 1000).toFixed(2) + '×`), SSI &amp; VECTOR CLOCKS</div>' +
+          '<svg id="v248-ssi-vecclock-usl-svg" viewBox="0 0 380 104" style="width:100%;height:auto;margin-bottom:8px;border-radius:7px;background:rgba(5,11,22,0.92);border:1px solid rgba(148,163,184,0.2);">' +
+            '<text x="10" y="15" fill="#fde68a" font-size="6.8" font-family="ui-monospace,SFMono-Regular,monospace">USL vs Amdahl</text>' +
+            '<rect x="16" y="' + (88 - hUsl) + '" width="30" height="' + hUsl + '" rx="2.5" fill="' + (!lm.retrogradeCollapse ? '#34d399' : '#fb7185') + '" />' +
+            '<text x="31" y="98" text-anchor="middle" fill="#cbd5e1" font-size="6.6" font-family="ui-monospace,SFMono-Regular,monospace">USL ' + (lm.uslMilli / 1000).toFixed(1) + 'x</text>' +
+            '<rect x="58" y="' + (88 - hAmd) + '" width="30" height="' + hAmd + '" rx="2.5" fill="rgba(148,163,184,0.45)" />' +
+            '<text x="73" y="98" text-anchor="middle" fill="#94a3b8" font-size="6.6" font-family="ui-monospace,SFMono-Regular,monospace">Amd ' + (lm.amdahlMilli / 1000).toFixed(1) + 'x</text>' +
+            '<line x1="104" y1="10" x2="104" y2="96" stroke="rgba(148,163,184,0.22)" stroke-width="1" />' +
+            '<rect x="112" y="16" width="256" height="35" rx="5" fill="' + (lm.invariantHolds ? 'rgba(16,185,129,0.20)' : 'rgba(244,63,94,0.24)') + '" stroke="' + (lm.invariantHolds ? '#34d399' : '#fb7185') + '" />' +
+            '<text x="240" y="37" text-anchor="middle" fill="#f8fafc" font-size="7.2" font-weight="700" font-family="ui-monospace,SFMono-Regular,monospace">' + (lm.invariantHolds ? 'SSI Dangerous-Structure Guard: T₁ ↔_rw T₂ Aborted (x+y=100 ≥ 100)' : 'SI First-Committer-Wins: W₁∩W₂=∅ Commits (0,0) → Write Skew!') + '</text>' +
+            '<rect x="112" y="59" width="256" height="35" rx="5" fill="' + (lm.concurrencyDetected ? 'rgba(56,189,248,0.20)' : 'rgba(244,63,94,0.25)') + '" stroke="' + (lm.concurrencyDetected ? '#38bdf8' : '#fb7185') + '" />' +
+            '<text x="240" y="80" text-anchor="middle" fill="#f8fafc" font-size="7.2" font-weight="700" font-family="ui-monospace,SFMono-Regular,monospace">' + (lm.concurrencyDetected ? 'Vector Clock (576/576 ⟺): (1,0,0) ∥ (0,0,2) Sibling Preserved' : 'Scalar Lamport LWW: L(0)=1 < L(5)=2 Silently Drops Concurrent e₀!') + '</text>' +
+          '</svg>' +
+          '<div style="font-size:12px;color:#e2e8f0;line-height:1.55;">' +
+            '<div style="margin-bottom:8px;">' + lm.secondaryDetail + '</div>' +
+            '<div style="padding:8px 10px;border-radius:7px;background:rgba(16,185,129,0.12);border:1px solid rgba(52,211,153,0.35);color:#d1fae5;font-weight:650;">' + lm.verdict + '</div>' +
+            '<div style="margin-top:8px;font-size:11px;color:#94a3b8;">Kernel-checked in <code>' + lm.leanRef + '</code></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  };
+
+  var prevOpenFiniteV247 = window.v136OpenV34FiniteDiagramsModal;
+  window.v136OpenV34FiniteDiagramsModal = function(initialLab) {
+    window._v136LabFilterQuery = "";
+    prevOpenFiniteV247(typeof initialLab === "number" ? Math.min(initialLab, 101) : 0);
+    window._v136State.activeLab = typeof initialLab === "number" ? initialLab : 0;
+    var bd = document.getElementById("v136-finite-backdrop");
+    if (bd) {
+      var tabsWrap = bd.querySelector(".v61-prog-tabs");
+      if (tabsWrap && !document.getElementById("v136-tab-102")) {
+        tabsWrap.insertAdjacentHTML("beforeend",
+          '<button type="button" id="v136-tab-102" class="v61-prog-tab" onclick="window.v136SetLab(102);window.cgSyncFiniteLabSelect();">103. Conflict-Serializability &amp; SSI Write-Skew, Vector Clocks &amp; USL Scalability Suite #649</button>'
+        );
+      }
+    }
+    if (typeof window.cgSyncFiniteLabSelect === "function") {
+      window.cgSyncFiniteLabSelect();
+    }
+    window.v136RenderFiniteBody();
+  };
+
+  // Refresh live caches
+  window.CG_FINITE_LAB_TITLES = null;
+  window._cgOmniboxCachedPool = null;
+  window._cgHybridCorpusCache = null;
+  if (typeof window.cgGetFiniteLabCatalog === "function") {
+    window.cgGetFiniteLabCatalog();
+  }
+
+  // Suite 106: 528/528 E2E Checks — V248 Suite #649, Lab #103, Sub-16.0 MiB Tuple Packing & Closed-Loop Sandbox-to-Dossier Workflow
+  var prevRunTestsV247 = window.v147RunAllAutomatedTests;
+  if (typeof prevRunTestsV247 === "function") {
+    window.v147RunAllAutomatedTests = function() {
+      var rep = prevRunTestsV247();
+      var extra248 = [];
+      function addV248Check(name, cond, detail) {
+        extra248.push({
+          id: "T" + (rep.total + extra248.length + 1),
+          category: "106. V248 Suite 106 (528/528 Checks): Serializability & SSI, Vector Clocks & USL Suite #649, Sub-16.0 MiB Tuple Packing & Sandbox-to-Dossier",
+          name: name,
+          passed: Boolean(cond),
+          detail: detail || ""
+        });
+      }
+
+      // Check 525: `Suite #649` (`772` Zero-Sorry `.lean` Files), Sub-`16.0 MiB` Tuple Hydration (`_x`, `_ix`, `_cx`, `_mx`) & `385` Breakthroughs
+      var pre248 = (typeof window !== "undefined" && window.__CG_PRELOADED__) || {};
+      var sm248 = (typeof semanticMechanisms !== "undefined" && semanticMechanisms) || {};
+      var suites248 = sm248.verifiedLeanSuites || [];
+      var has649 = suites248.some(function(s) {
+        return s && s.leanFile === "CommonGround/Verification/TheoremAtlasSerializabilityVectorClockAndUSLScalabilityBridge.lean";
+      });
+      var mechs248 = sm248.highLevelMechanisms || [];
+      var m0_248 = mechs248[0] || {};
+      var csi248 = pre248.customSearchIndex || [];
+      var csi0_248 = csi248[0] || {};
+      var conns248 = (pre248.insightPaths && pre248.insightPaths.connections) || [];
+      var conn0_248 = conns248[0] || {};
+      var tuplesHydratedOk = Boolean(
+        Array.isArray(m0_248.projects) && m0_248.projects.length > 0 &&
+        typeof m0_248.name === "string" && m0_248.name.length > 0 &&
+        typeof csi0_248.fullName === "string" && csi0_248.fullName.length > 0 &&
+        typeof csi0_248.line === "number" &&
+        typeof conn0_248.summary === "string" && conn0_248.summary.length > 0 &&
+        Array.isArray(conn0_248.projects) && conn0_248.projects.length > 0
+      );
+      var bts248 = window.CG_VERIFIED_ATLAS_BREAKTHROUGHS || [];
+      var lds248 = window.CG_PROMISING_RESEARCH_LEADS || [];
+      var obs248 = window.V95_OBSTACLES || [];
+      var r2c248 = window.CG_R2_CORPUS_CONFIG || {};
+      addV248Check(
+        "`Suite #649` (`772` Zero-Sorry `.lean` Files), Sub-`16.0 MiB` Tuple Hydration (`_x`, `_ix`, `_cx`, `_mx`) & `385` Breakthroughs verified",
+        Boolean(
+          has649 &&
+          suites248.length >= 649 &&
+          tuplesHydratedOk &&
+          bts248.length >= 385 &&
+          lds248.length >= 178 &&
+          obs248.length >= 41 &&
+          r2c248.totalZeroSorryLeanFiles >= 772 &&
+          r2c248.kernelCompiledModules >= 732
+        ),
+        "suites=" + suites248.length + ", tuplesHydratedOk=" + tuplesHydratedOk + ", bts=" + bts248.length
+      );
+
+      // Check 526: `Lab #103` (`v248SsiVecClockUslLabModel`) `SSI` `100` vs `SI` `0`, Vector `∥` vs `LWW`, `USL` `N*=19` (`5,198`) vs `N=100` (`2,805 < 3,007`)
+      var mSafe248 = window.v248SsiVecClockUslLabModel("ssi-write-skew-vs-si", { isolationMode: 1, clockMode: 1, nodeChoice: 2 });
+      var mFail248 = window.v248SsiVecClockUslLabModel("usl-retrograde-vs-amdahl", { isolationMode: 0, clockMode: 0, nodeChoice: 0 });
+      var mN4_248 = window.v248SsiVecClockUslLabModel("vector-clock-vs-lamport-lww", { isolationMode: 1, clockMode: 0, nodeChoice: 1 });
+      var lab103MathOk = Boolean(
+        mSafe248.invariantHolds === true && mSafe248.finalSum === 100 && mSafe248.concurrencyDetected === true && mSafe248.nodesN === 19 && mSafe248.uslMilli === 5198 &&
+        mFail248.invariantHolds === false && mFail248.finalSum === 0 && mFail248.silentDataLoss === true && mFail248.nodesN === 100 && mFail248.uslMilli === 2805 && mFail248.amdahlMilli === 9174 &&
+        mN4_248.nodesN === 4 && mN4_248.uslMilli === 3007 && mFail248.uslMilli < mN4_248.uslMilli
+      );
+      addV248Check(
+        "`Lab #103` (`SSI` `100` vs `SI` Write-Skew `0`, Vector Clock `∥` vs `LWW` Loss, `USL` `N*=19` `5.198×` vs `N=100` `2.805× < C(4)`) verified",
+        lab103MathOk,
+        "sum=" + mSafe248.finalSum + "/" + mFail248.finalSum + ", usl=" + mSafe248.uslMilli + "/" + mFail248.uslMilli
+      );
+
+      // Check 527: Closed-Loop Lead Premise Stress-Test (`#cg-lead-stress-test-btn`) → Break-the-Hypothesis Sandbox → Dossier (`#v70-pin-sandbox-dossier-btn`)
+      window.cgClearResearchChain();
+      var leadCompassHtml248 = typeof window.cgRenderPromisingLeadsOverviewHtml === "function" ? window.cgRenderPromisingLeadsOverviewHtml() : "";
+      var idxUsl248 = lds248.findIndex(function(l) { return l && l.id === "lead-v248-usl-aware-elastic-gpu-and-consensus-shard-autoscaler"; });
+      var matchedMechIdx248 = window.cgStressTestLeadPremiseGate(idxUsl248 >= 0 ? idxUsl248 : (lds248.length - 1));
+      var pinSbBtn248 = document.getElementById("v70-pin-sandbox-dossier-btn");
+      var hasPinSbBtn248 = Boolean(pinSbBtn248);
+      var sbDossierMd248 = window.v70PinSandboxToResearchDossier();
+      var sandboxDossierLoopOk = Boolean(
+        leadCompassHtml248.indexOf("cg-lead-stress-test-btn") !== -1 &&
+        matchedMechIdx248 >= 0 &&
+        hasPinSbBtn248 &&
+        sbDossierMd248.indexOf("## 4. Target Open Conjecture & High-Impact Real-World Use Case") !== -1 &&
+        sbDossierMd248.indexOf("## 5. Stress-Tested Premise-Failure Counterexample Gate") !== -1
+      );
+      window.v95CloseBridgeComposer();
+      window._cgActiveDossierLead = null;
+      window._cgActiveStressTestedSandbox = null;
+      window.cgClearResearchChain();
+      addV248Check(
+        "Closed-Loop Lead Stress-Test (`#cg-lead-stress-test-btn`) → Break-the-Hypothesis Sandbox → Dossier (`#v70-pin-sandbox-dossier-btn`) verified",
+        sandboxDossierLoopOk,
+        "matchedMechIdx=" + matchedMechIdx248 + ", hasPinSbBtn=" + hasPinSbBtn248 + ", mdLen=" + (sbDossierMd248 ? sbDossierMd248.length : 0)
+      );
+
+      // Check 528: `Lab #103` SVG (`#v248-ssi-vecclock-usl-svg`), `103`-Lab Domain Filter (`Serializability`) & `⌘K` Omnibox (`103 Labs`, `178 Leads`, `649 Suites`)
+      window.v136OpenV34FiniteDiagramsModal(102);
+      var sel136V248 = document.getElementById("v136-lab-quick-select");
+      var svSvg248 = document.getElementById("v248-ssi-vecclock-usl-svg");
+      if (typeof window.cgFilterFiniteLabSelect === "function") {
+        window.cgFilterFiniteLabSelect("Serializability");
+      }
+      var lab103FilterOk = Boolean(
+        svSvg248 &&
+        sel136V248 &&
+        (sel136V248.innerHTML || "").indexOf("103. Conflict-Serializability") !== -1 &&
+        (sel136V248.innerHTML || "").indexOf("1. Path-Law") === -1
+      );
+      window.v136CloseFiniteModal();
+
+      window.cgOpenOmnibox("");
+      var omniCats248 = document.getElementById("cg-omnibox-cats");
+      var omniCatsTxt248 = omniCats248 ? (omniCats248.innerHTML || "") : "";
+      var mLabs248 = omniCatsTxt248.match(/(\d+)\s+Labs/);
+      var mLeads248 = omniCatsTxt248.match(/(\d+)\s+Leads/);
+      var mSuites248 = omniCatsTxt248.match(/(\d+)\s+Suites/);
+      var omni103Ok = Boolean(
+        mLabs248 && parseInt(mLabs248[1], 10) >= 103 &&
+        mLeads248 && parseInt(mLeads248[1], 10) >= 178 &&
+        mSuites248 && parseInt(mSuites248[1], 10) >= 649
+      );
+      window.cgCloseOmnibox();
+
+      addV248Check(
+        "`Lab #103` SVG (`#v248-ssi-vecclock-usl-svg`), `103`-Lab Domain Filter & `⌘K` Omnibox (`103 Labs`, `178 Leads`, `649 Suites`) verified",
+        Boolean(lab103FilterOk && omni103Ok),
+        "lab103FilterOk=" + lab103FilterOk + ", omni103Ok=" + omni103Ok
+      );
+
+      for (var k12 = 0; k12 < extra248.length; k12++) {
+        rep.results.push(extra248[k12]);
+        rep.total++;
+        if (extra248[k12].passed) rep.passed++;
         else rep.failed++;
       }
       window._v147LastReport = rep;

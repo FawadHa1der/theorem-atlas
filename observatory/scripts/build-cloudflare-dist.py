@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-V247 Unified Chrome & Safari Shard Builder (< 25 MiB static assets & < 17.6 MiB total corpus!)
+V248 Unified Chrome & Safari Shard Builder (< 25 MiB static assets & < 16.0 MiB total corpus!)
 & Cloudflare R2 Unrestricted-Size Lean 4 Streaming Function Generator.
 
 - Reconstructs `bundle-data.js` from `observatory/chunks/` if missing in a fresh Git clone.
@@ -25,7 +25,7 @@ LOCAL_CHUNKS_DIR = OBS_DIR / "chunks"
 CF_DIR = OBS_DIR / "dist-cloudflare"
 CF_CHUNKS_DIR = CF_DIR / "chunks"
 LIMIT_BYTES = 25 * 1024 * 1024  # Cloudflare Pages 25 MiB static asset limit (does NOT restrict .lean files in R2!)
-ASSET_VER = "247"
+ASSET_VER = "248"
 
 SHARD_NAMES = [
     "bundle-shard-1-core.js",
@@ -252,8 +252,12 @@ def build_shards_and_sync_routes():
     s4b_code += (
         "(function(){if(typeof window!=='undefined'&&window.__CG_PRELOADED__){"
         "var pre=window.__CG_PRELOADED__,sm=pre.semanticMechanisms;"
-        "var cp=pre.csiPools||{},cpKd=cp.kinds||[],cpFm=cp.fams||[],cpPj=cp.projs||[],cpFl=cp.files||[],cpUb=cp.urlBases||[],cpEv=cp.evidences||[],cpSu=cp.sourceUrls||[];"
+        "var cp=pre.csiPools||{},cpKd=cp.kinds||[],cpFm=cp.fams||[],cpPj=cp.projs||[],cpFl=cp.files||[],cpUb=cp.urlBases||[],cpEv=cp.evidences||[],cpSu=cp.sourceUrls||[],cpFn=cp.fns||[];"
+        "var csiKeys=['_fl','_ev','_fm','_pj','_su','_k','_ub'];"
         "var csi=pre.customSearchIndex||[];for(var q=0;q<csi.length;q++){var r=csi[q];if(r){"
+        "if(Array.isArray(r._cx)){var cx=r._cx;if(typeof cx[0]==='number'&&cx[0]>=0&&r.fullName===undefined)r.fullName=cpFn[cx[0]]||'';"
+        "for(var ck=0;ck<7;ck++){if(typeof cx[ck+1]==='number'&&cx[ck+1]>=0&&r[csiKeys[ck]]===undefined)r[csiKeys[ck]]=cx[ck+1];}"
+        "if(typeof cx[8]==='number'&&cx[8]>=0&&r.line===undefined)r.line=cx[8];}"
         "if(r.evidence===undefined&&typeof r._ev==='number')r.evidence=cpEv[r._ev]||'';"
         "if(r.sourceUrl===undefined&&typeof r._su==='number')r.sourceUrl=cpSu[r._su]||'';"
         "if(typeof r._fl==='number'){"
@@ -263,7 +267,13 @@ def build_shards_and_sync_routes():
         "if(r.sourceUrl===undefined&&typeof r._ub==='number')r.sourceUrl=(cpUb[r._ub]||'')+'/'+fl+'#L'+r.line;}}}"
         "if(sm){"
         "var snPool=sm.snippetPool||[];"
+        "var sp=sm.suitePools||{},spBl=sp.blbls||[],spCt=sp.cats||[],spSt=sp.stats||[],spTn=sp.tns||[];"
         "var vls=sm.verifiedLeanSuites||[];for(var si=0;si<vls.length;si++){var sv=vls[si];if(sv){"
+        "if(Array.isArray(sv._sp)){var spv=sv._sp;"
+        "if(typeof spv[0]==='number'&&spv[0]>=0&&sv.bridgeLabel===undefined)sv.bridgeLabel=spBl[spv[0]]||'';"
+        "if(typeof spv[1]==='number'&&spv[1]>=0&&sv.category===undefined)sv.category=spCt[spv[1]]||'';"
+        "if(typeof spv[2]==='number'&&spv[2]>=0&&sv.status===undefined)sv.status=spSt[spv[2]]||'';"
+        "if(typeof spv[3]==='number'&&spv[3]>=0&&sv.theoremName===undefined)sv.theoremName=spTn[spv[3]]||'';}"
         "if(!sv.module&&sv.leanFile)sv.module=sv.leanFile;"
         "if(sv.plainSummary===undefined&&sv.summary!==undefined)sv.plainSummary=sv.summary;"
         "if(sv.snippet===undefined&&typeof sv._sn==='number')sv.snippet=snPool[sv._sn]||'';"
@@ -304,9 +314,15 @@ def build_shards_and_sync_routes():
         "if(cd.proofArch===undefined&&typeof cd._pa==='number')cd.proofArch=pmPa[cd._pa]||'';"
         "if(cd.signature===undefined&&cd._sg===1)cd.signature=cd.file||'';"
         "if(cd.url===undefined&&typeof cd._ub==='number')cd.url=(pmUb[cd._ub]||'')+'/'+(cd.file||'')+'#L'+cd.line;}}}"
-        "var mfp=mp.fieldPools||{},mfDf=mfp.diffs||[],mfCt=mfp.cats||[],mfVl=mfp.vleans||[],mfVb=mfp.vbridges||[],mfTg=mfp.tags||[],mfNh=mfp.hyps||[],mfLt=mfp.ltbs||[],mfOc=mfp.obs||[],mfCs=mfp.skels||[],mfDa=mfp.archs||[];"
+        "var mfp=mp.fieldPools||{},mfDf=mfp.diffs||[],mfCt=mfp.cats||[],mfVl=mfp.vleans||[],mfVb=mfp.vbridges||[],mfTg=mfp.tags||[],mfNh=mfp.hyps||[],mfLt=mfp.ltbs||[],mfOc=mfp.obs||[],mfCs=mfp.skels||[],mfDa=mfp.archs||[],mfPj=mfp.projs||[],mfNm=mfp.names||[],mfPi=mfp.pints||[];"
+        "var mechKeys=['_rp','_ps','_an','_id','_td','_vs','_ast','_eg','_df','_ct','_vl','_vb','_tg','_nh','_lt','_oc','_cs','_da'];"
         "var ms=sm.highLevelMechanisms||[];for(var i=0;i<ms.length;i++){var m=ms[i];if(m){"
+        "if(Array.isArray(m._mx)){var mx=m._mx;for(var mk=0;mk<18&&mk<mx.length;mk++){if(typeof mx[mk]==='number'&&mx[mk]>=0&&m[mechKeys[mk]]===undefined)m[mechKeys[mk]]=mx[mk];}"
+        "if(typeof mx[18]==='number'&&mx[18]>=0&&!m.projects)m.projects=(mfPj[mx[18]]||[]).slice();"
+        "if(typeof mx[19]==='number'&&mx[19]>=0&&m.name===undefined)m.name=mfNm[mx[19]]||'';"
+        "if(typeof mx[20]==='number'&&mx[20]>=0&&m.plainIntuition===undefined)m.plainIntuition=mfPi[mx[20]]||'';}"
         "if(!m.participatingProjects&&Array.isArray(m._pp)){m.participatingProjects=m._pp.map(function(x){return mpPart[x]||{};});}"
+        "if(!m.projects&&Array.isArray(m.participatingProjects))m.projects=m.participatingProjects.map(function(p){return p&&p.projectId;}).filter(Boolean);"
         "if(!m.researchPlaybook&&typeof m._rp==='number'&&mpPb[m._rp])m.researchPlaybook=Object.assign({},mpPb[m._rp]);"
         "if(!m.proofStepper&&typeof m._ps==='number')m.proofStepper=mpPs[m._ps]||[];"
         "if(m.analogy===undefined&&typeof m._an==='number')m.analogy=mpAn[m._an]||'';"
@@ -370,7 +386,9 @@ def build_shards_and_sync_routes():
         "if(!pr.sourceProject&&pr.projectA)pr.sourceProject=pr.projectA;"
         "if(!pr.targetProject&&pr.projectB)pr.targetProject=pr.projectB;}}"
         "var imp=sm.isoMetaPools||{},iSk=imp.skels||[],iPa=imp.archs||[],iPn=imp.pnames||[],iDc=imp.discs||[],iOc=imp.obs||[],iDg=imp.dags||[],iKd=imp.kinds||[],iSo=imp.sops||[],iWm=imp.whys||[],iTb=imp.tbs||[],iPj=imp.projs||[],iEs=imp.syms||[],iMi=imp.mids||[];"
+        "var isoKeys=['_pA','_pB','_es','_mi','_dA','_dB','_w1','_w2','_et','_sk','_pa','_pAN','_pBN','_dcA','_dcB','_oc','_tdA','_tdB','_kd','_so','_wm','_tb','_mA','_mB'];"
         "var is=sm.customIsomorphisms||[];for(var j=0;j<is.length;j++){var iso=is[j];if(iso){"
+        "if(Array.isArray(iso._x)){var ix=iso._x;for(var xk=0;xk<ix.length&&xk<24;xk++){if(typeof ix[xk]==='number'&&ix[xk]>=0&&iso[isoKeys[xk]]===undefined)iso[isoKeys[xk]]=ix[xk];}}"
         "if(iso.projectA===undefined&&typeof iso._pA==='number')iso.projectA=iPj[iso._pA]||'';"
         "if(iso.projectB===undefined&&typeof iso._pB==='number')iso.projectB=iPj[iso._pB]||'';"
         "if(iso.epistemicSymbol===undefined&&typeof iso._es==='number')iso.epistemicSymbol=iEs[iso._es]||'';"
@@ -404,7 +422,8 @@ def build_shards_and_sync_routes():
         "var ip=pre.insightPaths;if(ip){"
         "var pp=ip.pathPools||{},ppEp=pp.endpoints||[],ppTd=pp.transDicts||[],ppCv=pp.caveats||[],ppLs=pp.sketches||[],ppSm=pp.summaries||[],ppRw=pp.reqWorks||[];"
         "var ppDb=pp.discBridges||[],ppTl=pp.tools||[],ppAn=pp.analogies||[],ppSi=pp.sharedIngs||[],ppRl=pp.relLevels||[],ppDs=pp.discs||[],ppKd=pp.kinds||[],ppWm=pp.whys||[],ppOc=pp.obsCats||[];"
-        "var ppPjs=pp.projsList||[],ppVl2=pp.vleans||[],ppHr=pp.hrefs||[],ppFms=pp.famsList||[],ppCt=pp.cats||[],ppSt2=pp.statuses||[];"
+        "var ppPjs=pp.projsList||[],ppVl2=pp.vleans||[],ppHr=pp.hrefs||[],ppFms=pp.famsList||[],ppCt=pp.cats||[],ppSt2=pp.statuses||[],ppMi=pp.mids||[];"
+        "var connKeys=['_td','_cv','_ls','_sm','_rw','_db','_tl','_an','_si','_rl','_ds','_kd','_wm','_oc','_pjs','_vl','_hr','_fms','_ct','_st'];"
         "var snPoolIp=(sm&&sm.snippetPool)||[];"
         "var em=pp.epMeta||{},emPj=em.projs||[],emCm=em.commits||[],emPa=em.paths||[],emUb=em.urlBases||[];"
         "for(var ei=0;ei<ppEp.length;ei++){var ep=ppEp[ei];if(ep){"
@@ -415,6 +434,8 @@ def build_shards_and_sync_routes():
         "if(ep.sourceUrl===undefined&&typeof ep._ub==='number')ep.sourceUrl=(emUb[ep._ub]||'')+'/'+(ep.path||'')+'#L'+ep.lineStart;"
         "if(ep.sourceSha256===undefined&&typeof ep._st==='string')ep.sourceSha256=(ep.commit||'')+ep._st;}}"
         "var cs=ip.connections||[];for(var k=0;k<cs.length;k++){var c=cs[k];if(c){"
+        "if(Array.isArray(c._ix)){var cix=c._ix;for(var ck2=0;ck2<20&&ck2<cix.length;ck2++){if(typeof cix[ck2]==='number'&&cix[ck2]>=0&&c[connKeys[ck2]]===undefined)c[connKeys[ck2]]=cix[ck2];}"
+        "if(typeof cix[20]==='number'&&cix[20]>=0&&c.mechanismId===undefined)c.mechanismId=ppMi[cix[20]]||'';}"
         "if(!c.endpoints&&Array.isArray(c._ep))c.endpoints=c._ep.map(function(x){return ppEp[x]||{};});"
         "if(!c.translationDictionary&&typeof c._td==='number')c.translationDictionary=ppTd[c._td]||[];"
         "if(c.caveat===undefined&&typeof c._cv==='number')c.caveat=ppCv[c._cv]||'';"

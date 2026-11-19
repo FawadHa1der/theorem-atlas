@@ -107,10 +107,21 @@ def discover_role_compatible_insights(data):
     i_sk = imp.get("skels") or []
     i_pj = imp.get("projs") or []
     i_es = imp.get("syms") or []
+    iso_keys = (
+        "_pA", "_pB", "_es", "_mi", "_dA", "_dB", "_w1", "_w2",
+        "_et", "_sk", "_pa", "_pAN", "_pBN", "_dcA", "_dcB", "_oc",
+        "_tdA", "_tdB", "_kd", "_so", "_wm", "_tb", "_mA", "_mB",
+    )
     isos = sm.get("customIsomorphisms") or data.get("crossDomainIsomorphisms") or []
     seen_pairs = set()
     ranked = []
-    for iso in isos:
+    for raw_iso in isos:
+        iso = dict(raw_iso)
+        xv = raw_iso.get("_x")
+        if isinstance(xv, list):
+            for ki, kk in enumerate(iso_keys):
+                if ki < len(xv) and isinstance(xv[ki], int) and xv[ki] >= 0:
+                    iso[kk] = xv[ki]
         dA = iso.get("declA") or (dp[iso["_dA"]] if isinstance(iso.get("_dA"), int) and 0 <= iso["_dA"] < len(dp) else {})
         dB = iso.get("declB") or (dp[iso["_dB"]] if isinstance(iso.get("_dB"), int) and 0 <= iso["_dB"] < len(dp) else {})
         fA = dA.get("file") or (dm_files[dA["_fl"]] if isinstance(dA.get("_fl"), int) and 0 <= dA["_fl"] < len(dm_files) else "")
@@ -185,7 +196,7 @@ def run_cycle(cycle_num, start_ts, end_ts):
 
     status = {
         "status": "running" if remaining_hours > 0 else "completed",
-        "version": "V247",
+        "version": "V248",
         "daemonPid": os.getpid(),
         "cycle": cycle_num,
         "timestampUtc": now_iso,
@@ -209,7 +220,7 @@ def run_cycle(cycle_num, start_ts, end_ts):
     with RUNS_JSONL.open("a", encoding="utf-8") as f:
         f.write(json.dumps({
             "cycle": cycle_num,
-            "version": "V247",
+            "version": "V248",
             "timestampUtc": now_iso,
             "exitCode": proc.returncode,
             "passed": passed_checks,
