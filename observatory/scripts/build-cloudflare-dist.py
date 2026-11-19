@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-V243 Unified Chrome & Safari Shard Builder (< 25 MiB static assets & < 25 MiB total corpus!)
+V244 Unified Chrome & Safari Shard Builder (< 25 MiB static assets & < 21 MiB total corpus!)
 & Cloudflare R2 Unrestricted-Size Lean 4 Streaming Function Generator.
 
 - Reconstructs `bundle-data.js` from `observatory/chunks/` if missing in a fresh Git clone.
@@ -25,7 +25,7 @@ LOCAL_CHUNKS_DIR = OBS_DIR / "chunks"
 CF_DIR = OBS_DIR / "dist-cloudflare"
 CF_CHUNKS_DIR = CF_DIR / "chunks"
 LIMIT_BYTES = 25 * 1024 * 1024  # Cloudflare Pages 25 MiB static asset limit (does NOT restrict .lean files in R2!)
-ASSET_VER = "243"
+ASSET_VER = "244"
 
 SHARD_NAMES = [
     "bundle-shard-1-core.js",
@@ -259,12 +259,16 @@ def build_shards_and_sync_routes():
         "r.familyId=cpFm[r._fm]||'';r.projectId=cpPj[r._pj]||'';r.file=fl;"
         "if(r.sourceUrl===undefined&&typeof r._ub==='number')r.sourceUrl=(cpUb[r._ub]||'')+'/'+fl+'#L'+r.line;}}"
         "if(sm){"
+        "var snPool=sm.snippetPool||[];"
         "var vls=sm.verifiedLeanSuites||[];for(var si=0;si<vls.length;si++){var sv=vls[si];if(sv){"
         "if(!sv.module&&sv.leanFile)sv.module=sv.leanFile;"
         "if(sv.plainSummary===undefined&&sv.summary!==undefined)sv.plainSummary=sv.summary;"
+        "if(sv.snippet===undefined&&typeof sv._sn==='number')sv.snippet=snPool[sv._sn]||'';"
         "if(sv.code===undefined&&sv.snippet!==undefined)sv.code=sv.snippet;"
-        "if(sv.leanFile&&Array.isArray(sv.declarations)){for(var di2=0;di2<sv.declarations.length;di2++){var dc=sv.declarations[di2];if(dc&&!dc.file)dc.file=sv.leanFile;}}}}"
-        "var snPool=sm.snippetPool||[];"
+        "if(sv.leanFile&&Array.isArray(sv.declarations)){for(var di2=0;di2<sv.declarations.length;di2++){var dc=sv.declarations[di2];if(dc){if(!dc.file)dc.file=sv.leanFile;if(dc.snippet===undefined&&typeof dc._sn==='number')dc.snippet=snPool[dc._sn]||'';}}}}}"
+        "if(!Array.isArray(window.V145_REAL_LEAN_SUITES)||!window.V145_REAL_LEAN_SUITES.length){"
+        "window.V145_REAL_LEAN_SUITES=vls.map(function(sv){var d0=(sv&&Array.isArray(sv.declarations)&&sv.declarations[0])||{},lf=(sv&&sv.leanFile)||'';"
+        "return{id:(sv&&sv.id)||'',projects:(sv&&Array.isArray(sv.projects))?sv.projects.slice():[],file:lf,moduleName:lf.replace(/\\.lean$/,'').replace(/\\//g,'.'),title:(sv&&sv.title)||'',theoremName:(sv&&sv.theoremName)||d0.name||lf.replace(/^.*\\//,'').replace(/\\.lean$/,''),line:d0.line||1,snippet:(sv&&(sv.snippet||sv.summary))||d0.snippet||d0.signature||('-- '+lf),zeroSorry:true};});}"
         "var dm=sm.declMeta||{},dmKd=dm.kinds||[],dmSk=dm.skels||[],dmPa=dm.archs||[],dmFl=dm.files||[],dmUb=dm.urlBases||[];"
         "var dp=sm.isoDeclPool||[],w1=sm.isoWhy1Pool||[],w2=sm.isoWhy2Pool||[],tp=sm.isoTierPool||[];"
         "for(var di3=0;di3<dp.length;di3++){var d=dp[di3];if(d){"

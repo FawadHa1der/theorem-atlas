@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """
-Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V243).
+Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V244).
 Verifies:
-1. All 762+ physical Lean 4 files (644 in CommonGround/Verification/ + 118 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
+1. All 764+ physical Lean 4 files (645 in CommonGround/Verification/ + 119 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
    tokens outside comments (with NO 25 MiB cap on `.lean` files — large `.lean` files stream via Cloudflare R2 `/api/lean/*`)
    AND compile cleanly through the real Lean 4.33.0 kernel (`compile-all-lean4.py`).
 2. Reconstructs `bundle-data.js` from the 8 tracked `<16 MiB` shards and builds `dist-cloudflare/` if absent in CI.
 3. Verifies end-to-end connection integrity & zero clutter:
    - 0 legacy `upgrade-v*.py` scripts and 0 `.pyc` / `__pycache__` artifacts;
-   - entire unsharded `bundle-data.js` is < 25.00 MiB UTF-8 bytes;
+   - entire unsharded `bundle-data.js` is < 21.50 MiB UTF-8 bytes;
    - 0 unmounted ghost repository IDs, 0 `‖c‖h‖a‖r‖` corrupted strings, 0 `127.0.0.1`/`localhost` dead links,
      and 0 `Solved Open Instance` / `Hodge Sextic` strings across `bundle-data.js`;
-   - exact 1-to-1 bijection between `verifiedLeanSuites` and `CommonGround/Verification/*.lean` with ground-truth title alignment;
+   - exact 1-to-1 bijection between `verifiedLeanSuites` and `CommonGround/Verification/*.lean` with ground-truth title & triad alignment;
    - 100% of `highLevelMechanisms[*].verifiedBridgeFile` and `insightPaths.connections[*].verifiedLeanFile` resolve on disk;
    - 100% of `proofPipelines` map `projectA` & `projectB` to canonical 40-project IDs, and 100% of `customIsomorphisms`,
      `highLevelMechanisms`, `grandTrinities`, `customSearchIndex`, and `insightPaths.connections` resolve valid lossless pool indices;
@@ -48,9 +48,9 @@ def check_end_to_end_connections_and_clutter():
     assert not pyc_files, f"Bytecode .pyc files detected (violates Zero Bytecode rule): {pyc_files[:5]}"
 
     raw_bytes = (OBS_DIR / "bundle-data.js").stat().st_size
-    assert raw_bytes < 25 * 1024 * 1024, f"Expected sub-25 MiB bundle-data.js, got {raw_bytes / (1024*1024):.2f} MiB!"
+    assert raw_bytes < int(21.5 * 1024 * 1024), f"Expected sub-21.5 MiB bundle-data.js, got {raw_bytes / (1024*1024):.2f} MiB!"
     raw = (OBS_DIR / "bundle-data.js").read_text(encoding="utf-8")
-    for bad_str in ("127.0.0.1", "localhost:", "Solved Open Instance", "Hodge Sextic"):
+    for bad_str in ("127.0.0.1", "localhost:", "Solved Open Instance", "Hodge Sextic", "window.V145_REAL_LEAN_SUITES ="):
         assert bad_str not in raw, f"Legacy/clutter string {bad_str!r} reintroduced into bundle-data.js!"
     assert not re.search(r"‖[^‖\s]‖[^‖\s]‖", raw), "Character-corrupted ‖c‖h‖a‖r‖ string reintroduced into bundle-data.js!"
     ghost_rx = re.compile(
@@ -70,9 +70,12 @@ def check_end_to_end_connections_and_clutter():
         f"verifiedLeanSuites ({len(suite_files)}) is not in 1-to-1 bijection with CommonGround/Verification/*.lean ({len(disk_verif)})!"
     )
     assert suites and "Williams" in (suites[0].get("title") or ""), "verifiedLeanSuites[0] ground-truth title alignment broken!"
+    assert (suites[0].get("projects") or [None])[0] == "apsp3sum", "verifiedLeanSuites[0] ground-truth triad alignment broken!"
+    covered_suite_projs = {p for s in suites for p in (s.get("projects") or []) if p in canon_projs}
+    assert covered_suite_projs == canon_projs, f"verifiedLeanSuites missing canonical projects: {canon_projs - covered_suite_projs}"
 
     sn_pool = sm.get("snippetPool") or []
-    assert len(sn_pool) >= 2000, "Lossless semanticMechanisms.snippetPool missing or truncated!"
+    assert len(sn_pool) >= 2800, "Lossless semanticMechanisms.snippetPool missing or truncated!"
     csi_pools = preloaded.get("csiPools") or {}
     assert len(csi_pools.get("files") or []) > 900, "Lossless csiPools.files missing or truncated!"
     tr_pools = sm.get("trinityPools") or {}
@@ -80,9 +83,10 @@ def check_end_to_end_connections_and_clutter():
     for gt in sm.get("grandTrinities", []):
         assert "unifyingEquation" not in gt, f"Unreferenced dead key unifyingEquation reintroduced on {gt.get('id')}!"
     for fam in preloaded.get("constellationCatalog", {}).get("families", []):
-        assert "scopeNotes" not in fam and "comparatorConfigurations" not in fam and "tags" not in fam, (
-            f"Unreferenced dead constellationCatalog.families keys reintroduced on {fam.get('id')}!"
-        )
+        for dead_fk in ("scopeNotes", "comparatorConfigurations", "tags", "shards", "manuscripts", "sharedIngredientCount"):
+            assert dead_fk not in fam, (
+                f"Unreferenced dead constellationCatalog.families key {dead_fk!r} reintroduced on {fam.get('id')}!"
+            )
 
     mech_pools = sm.get("mechPools") or {}
     part_items = mech_pools.get("partItems") or []
@@ -172,7 +176,7 @@ def check_end_to_end_connections_and_clutter():
         assert target.exists(), f"Broken relative link {rel_link} in README.md -> {target}"
     print(
         f"  [OK] End-to-end connection bijection verified: {len(suites)} suites == {len(disk_verif)} CommonGround/Verification/*.lean, "
-        f"bundle={raw_bytes/(1024*1024):.2f} MiB (<25 MiB!), {len(sn_pool)} unique snippets, {len(sm.get('proofPipelines', []))} canonical pipelines, "
+        f"bundle={raw_bytes/(1024*1024):.2f} MiB (<21.5 MiB!), {len(sn_pool)} unique snippets, {len(sm.get('proofPipelines', []))} canonical pipelines, "
         f"{len(dp)} pooled decls, {len(i_sk)} iso skels, {len(part_items)} mech items, {len(ep_pool)} path endpoints, "
         f"0 ghost repo IDs, 0 127.0.0.1 links, 0 ‖c‖h‖a‖r‖ corruptions, 0 broken .lean refs, README clean."
     )
@@ -208,13 +212,13 @@ def check_unified_static_assets():
 
 
 def main():
-    print("=== Running V243 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
+    print("=== Running V244 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
     ensure_bundle_reconstructed()
     check_lean_corpus_and_kernel()
     check_end_to_end_connections_and_clutter()
     check_unified_static_assets()
     subprocess.run(["bash", str(OBS_DIR / "tests" / "run-tests.sh")], check=True)
-    print("=== ALL V243 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
+    print("=== ALL V244 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
 
 
 if __name__ == "__main__":
