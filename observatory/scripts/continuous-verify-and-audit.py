@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V274).
+Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V275).
 Verifies:
-1. All 824+ physical Lean 4 files (675 in CommonGround/Verification/ + 149 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
+1. All 826+ physical Lean 4 files (676 in CommonGround/Verification/ + 150 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
    tokens outside comments (with NO 25 MiB cap on `.lean` files — large `.lean` files stream via Cloudflare R2 `/api/lean/*`)
    AND compile cleanly through the real Lean 4.33.0 kernel (`compile-all-lean4.py`).
 2. Reconstructs `bundle-data.js` from the 8 tracked `<16 MiB` shards and builds `dist-cloudflare/` if absent in CI.
@@ -84,7 +84,7 @@ def check_end_to_end_connections_and_clutter():
     assert suite_files == disk_verif, (
         f"verifiedLeanSuites ({len(suite_files)}) is not in 1-to-1 bijection with CommonGround/Verification/*.lean ({len(disk_verif)})!"
     )
-    assert len(suites) >= 675, f"Expected >= 675 verifiedLeanSuites in V274+, got {len(suites)}!"
+    assert len(suites) >= 676, f"Expected >= 676 verifiedLeanSuites in V275+, got {len(suites)}!"
     assert suites and "Williams" in (suites[0].get("title") or ""), "verifiedLeanSuites[0] ground-truth title alignment broken!"
     assert (suites[0].get("projects") or [None])[0] == "apsp3sum", "verifiedLeanSuites[0] ground-truth triad alignment broken!"
     non_canon_suite_projs = [(s.get("id"), p) for s in suites for p in (s.get("projects") or []) if p not in canon_projs]
@@ -379,13 +379,13 @@ def check_unified_static_assets():
 
 
 def main():
-    print("=== Running V274 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
+    print("=== Running V275 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
     ensure_bundle_reconstructed()
     check_lean_corpus_and_kernel()
     check_end_to_end_connections_and_clutter()
     check_unified_static_assets()
     subprocess.run(["bash", str(OBS_DIR / "tests" / "run-tests.sh")], check=True)
-    print("=== ALL V274 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
+    print("=== ALL V275 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
 
 
 if __name__ == "__main__":
