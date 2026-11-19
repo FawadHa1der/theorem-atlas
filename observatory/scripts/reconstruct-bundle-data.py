@@ -36,8 +36,12 @@ def reconstruct(force: bool = False) -> Path:
     tail_js = tail.lstrip(";")
 
     mechs = []
+    mech_pools = None
     for name in ("bundle-shard-2a-mechanisms.js", "bundle-shard-2b-mechanisms.js"):
-        arr, _ = extract_json_arg((CHUNKS_DIR / name).read_text(encoding="utf-8"), ".concat(")
+        raw_m = (CHUNKS_DIR / name).read_text(encoding="utf-8")
+        if "semanticMechanisms.mechPools=" in raw_m:
+            mech_pools, raw_m = extract_json_arg(raw_m, "semanticMechanisms.mechPools=")
+        arr, _ = extract_json_arg(raw_m, ".concat(")
         mechs.extend(arr)
 
     isos = []
@@ -47,8 +51,11 @@ def reconstruct(force: bool = False) -> Path:
 
     conns = []
     extra_suites = []
+    path_pools = None
     for name in ("bundle-shard-4a-paths.js", "bundle-shard-4b-paths.js"):
         raw_shard = (CHUNKS_DIR / name).read_text(encoding="utf-8")
+        if "insightPaths.pathPools=" in raw_shard:
+            path_pools, raw_shard = extract_json_arg(raw_shard, "insightPaths.pathPools=")
         arr, rem = extract_json_arg(raw_shard, ".concat(")
         conns.extend(arr)
         if "verifiedLeanSuites.concat(" in rem:
@@ -56,10 +63,14 @@ def reconstruct(force: bool = False) -> Path:
             extra_suites.extend(s_arr)
 
     core["semanticMechanisms"]["highLevelMechanisms"] = mechs
+    if mech_pools is not None:
+        core["semanticMechanisms"]["mechPools"] = mech_pools
     core["semanticMechanisms"]["customIsomorphisms"] = isos
     if extra_suites:
         core["semanticMechanisms"]["verifiedLeanSuites"] = list(core["semanticMechanisms"].get("verifiedLeanSuites", [])) + extra_suites
     core["insightPaths"]["connections"] = conns
+    if path_pools is not None:
+        core["insightPaths"]["pathPools"] = path_pools
 
     out_text = "window.__CG_PRELOADED__ = " + json.dumps(core, ensure_ascii=False, separators=(",", ":")) + ";"
     if tail_js.strip():

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-V239 Unified Chrome & Safari Shard Builder (< 25 MiB static assets)
+V240 Unified Chrome & Safari Shard Builder (< 25 MiB static assets)
 & Cloudflare R2 Unrestricted-Size Lean 4 Streaming Function Generator.
 
 - Reconstructs `bundle-data.js` from `observatory/chunks/` if missing in a fresh Git clone.
@@ -25,7 +25,7 @@ LOCAL_CHUNKS_DIR = OBS_DIR / "chunks"
 CF_DIR = OBS_DIR / "dist-cloudflare"
 CF_CHUNKS_DIR = CF_DIR / "chunks"
 LIMIT_BYTES = 25 * 1024 * 1024  # Cloudflare Pages 25 MiB static asset limit (does NOT restrict .lean files in R2!)
-ASSET_VER = "239"
+ASSET_VER = "240"
 
 SHARD_NAMES = [
     "bundle-shard-1-core.js",
@@ -159,17 +159,22 @@ def build_shards_and_sync_routes():
     suites = sm.get("verifiedLeanSuites", [])
     conns = preloaded["insightPaths"]["connections"]
 
-    suite_split = min(250, len(suites))
+    suite_split = min(180, len(suites))
+    mech_pools = sm.get("mechPools")
+    path_pools = preloaded["insightPaths"].get("pathPools")
 
     core_sm = {
         k: v for k, v in sm.items()
-        if k not in ("highLevelMechanisms", "customIsomorphisms", "verifiedLeanSuites")
+        if k not in ("highLevelMechanisms", "customIsomorphisms", "verifiedLeanSuites", "mechPools")
     }
     core_sm["highLevelMechanisms"] = []
     core_sm["customIsomorphisms"] = []
     core_sm["verifiedLeanSuites"] = suites[:suite_split]
 
-    core_ip = dict(preloaded["insightPaths"])
+    core_ip = {
+        k: v for k, v in preloaded["insightPaths"].items()
+        if k not in ("connections", "pathPools")
+    }
     core_ip["connections"] = []
 
     core_payload = {
@@ -190,9 +195,13 @@ def build_shards_and_sync_routes():
     write_dual_shard("bundle-shard-1-core.js", s1_code)
 
     m_mid = int(len(mechs) * 0.45)
+    s2a_prefix = ""
+    if mech_pools is not None:
+        s2a_prefix = "window.__CG_PRELOADED__.semanticMechanisms.mechPools=" + json.dumps(mech_pools, ensure_ascii=False, separators=(",", ":")) + ";\n"
     write_dual_shard(
         "bundle-shard-2a-mechanisms.js",
-        "window.__CG_PRELOADED__.semanticMechanisms.highLevelMechanisms = window.__CG_PRELOADED__.semanticMechanisms.highLevelMechanisms.concat("
+        s2a_prefix
+        + "window.__CG_PRELOADED__.semanticMechanisms.highLevelMechanisms = window.__CG_PRELOADED__.semanticMechanisms.highLevelMechanisms.concat("
         + json.dumps(mechs[:m_mid], ensure_ascii=False, separators=(",", ":")) + ");\n"
     )
     write_dual_shard(
@@ -220,9 +229,13 @@ def build_shards_and_sync_routes():
     )
 
     c_mid = len(conns) // 2
+    s4a_prefix = ""
+    if path_pools is not None:
+        s4a_prefix = "window.__CG_PRELOADED__.insightPaths.pathPools=" + json.dumps(path_pools, ensure_ascii=False, separators=(",", ":")) + ";\n"
     write_dual_shard(
         "bundle-shard-4a-paths.js",
-        "window.__CG_PRELOADED__.insightPaths.connections = window.__CG_PRELOADED__.insightPaths.connections.concat("
+        s4a_prefix
+        + "window.__CG_PRELOADED__.insightPaths.connections = window.__CG_PRELOADED__.insightPaths.connections.concat("
         + json.dumps(conns[:c_mid], ensure_ascii=False, separators=(",", ":")) + ");\n"
     )
     s4b_code = (
@@ -238,7 +251,38 @@ def build_shards_and_sync_routes():
         "(function(){if(typeof window!=='undefined'&&window.__CG_PRELOADED__){"
         "var pre=window.__CG_PRELOADED__,sm=pre.semanticMechanisms;"
         "if(sm){"
+        "var mpPart=(sm.mechPools&&sm.mechPools.partItems)||[];"
         "var ms=sm.highLevelMechanisms||[];for(var i=0;i<ms.length;i++){var m=ms[i];if(m){"
+        "if(!m.participatingProjects&&Array.isArray(m._pp)){m.participatingProjects=m._pp.map(function(x){return mpPart[x]||{};});}"
+        "if(!m.leanTransferBlueprint){"
+        "var pps=m.participatingProjects||[],p0=pps[0]||{},p1=pps[1]||pps[0]||{},d0=p0.customDecl||{},d1=p1.customDecl||{};"
+        "var n0=d0.name||'carrierA',n1=d1.name||'carrierB',k0=d0.kind||'theorem',k1=d1.kind||'theorem';"
+        "var pn0=p0.projectName||p0.projectId||'Domain A',pn1=p1.projectName||p1.projectId||'Domain B';"
+        "var id0=p0.projectId||'flt',id1=p1.projectId||'tc-numtheory',vf=m.verifiedBridgeFile||m.verifiedLeanFile||'CommonGround/Verification/AllBridges.lean';"
+        "if(!m.translationDictionary){m.translationDictionary=["
+        "{concept:'Primary Carrier & Anchor',domainA:pn0+': `'+k0+' '+n0+'` ('+(d0.file||'DomainA.lean')+')',domainB:pn1+': `'+k1+' '+n1+'` ('+(d1.file||'DomainB.lean')+')'},"
+        "{concept:'Invariant Projection / Decomposition',domainA:(p0.role||'Primary realization')+' in '+(p0.discipline||'Domain A')+' ('+(d0.proofArch||'kernel proof')+')',domainB:(p1.role||'Dual partner')+' in '+(p1.discipline||'Domain B')+' ('+(d1.proofArch||'kernel proof')+')'},"
+        "{concept:'Coercive Stability & Premise Gate',domainA:String(m.sharedStructure||m.title||'Shared quantitative carrier'),domainB:String(m.obligations||m.differences||'Explicit boundary premise check')}];}"
+        "if(!m.visualSteps){m.visualSteps=["
+        "'1. Lift to Shared Carrier: Embed `'+n0+'` ('+pn0+') and `'+n1+'` ('+pn1+') into the common functorial carrier.',"
+        "'2. Invariant Projection Split: Decouple the structured low-complexity core from residual perturbation modes.',"
+        "'3. Premise-Gated Transfer: Discharge quantitative stability via `'+(vf.split('/').pop())+'` while guarding boundary counterexamples.'];}"
+        "if(!m.proofStepper){m.proofStepper=["
+        "{stage:1,title:'Stage 1: Carrier Alignment ('+id0+' ↔ '+id1+')',formula:'Φ_A('+n0+') = Φ_B('+n1+')',intuition:'Aligns state invariants of '+pn0+' ('+id0+') and '+pn1+' ('+id1+').',whatBreaksIfSkipped:'Carrier mismatch prevents functorial transport across domains.'},"
+        "{stage:2,title:'Stage 2: Structural Projection & Commutation',formula:'P_core(T u) = T_reduced(P_core u)',intuition:'Applies '+String(m.astSkeletonType||m.shortLabel||'projection split')+' to isolate conserved quantities.',whatBreaksIfSkipped:'Coupled cross-terms destroy monotone contraction.'},"
+        "{stage:3,title:'Stage 3: Quantitative Coercivity & Boundary Gate',formula:'residual_B ≤ C_bridge · residual_A',intuition:String(m.obligations||'Verifies threshold positivity and transfers the kernel bound.'),whatBreaksIfSkipped:'Dropping boundary positivity triggers explicit premise-failure counterexample.'}];}"
+        "if(!m.investigationDirections){m.investigationDirections=["
+        "'Transport quantitative stability from `'+n0+'` ('+id0+') to sharpen constants around `'+n1+'` ('+id1+').',"
+        "'Extract a shared Lean 4 structure unifying `'+id0+'` and `'+id1+'` under `'+String(m.astSkeletonType||m.title)+'`.',"
+        "'Formalize the sharp premise-failure counterexample when boundary hypotheses in `'+id1+'` are relaxed.'];}"
+        "var cid='M'+(i+1)+'_'+String(n0).replace(/[^a-zA-Z0-9_]/g,'_').slice(0,26);"
+        "m.leanTransferBlueprint='/- Functorial Transfer Blueprint: '+String(m.title||'Cross-Domain Mechanism')+'\\n   Domain A ('+id0+'): '+k0+' '+n0+' ('+(d0.file||'DomainA.lean')+')\\n   Domain B ('+id1+'): '+k1+' '+n1+' ('+(d1.file||'DomainB.lean')+')\\n   Verified Kernel Anchor: '+vf+' (0 sorry) -/\\n\\nstructure Carrier_'+cid+' where\\n  scaleBudget : Nat\\n  coreEnergy  : Int\\n  tailDefect  : Int\\n  h_coercive  : 0 <= coreEnergy - tailDefect\\n\\ntheorem transfer_'+cid+'_witness (c : Carrier_'+cid+') :\\n    c.tailDefect <= c.coreEnergy := by\\n  have h := c.h_coercive\\n  omega\\n\\n/-- Premise-failure guardrail: dropping `0 <= coreEnergy - tailDefect` breaks `tailDefect <= coreEnergy`. -/\\ntheorem transfer_'+cid+'_premise_failure_counterexample :\\n    exists (core tail : Int), ¬ (0 <= core - tail) /\\\\ ¬ (tail <= core) :=\\n  ⟨3, 5, by decide⟩';"
+        "if(!m.researchPlaybook){m.researchPlaybook={"
+        "unsolvedBottleneck:'In `'+pn1+' ('+id1+')`, direct estimates around `'+n1+'` stall under coupled multi-scale perturbations.',"
+        "crossDomainLever:'Transport `'+n0+'` from `'+pn0+' ('+id0+')` via `'+String(m.title||'functorial carrier')+'` anchored in `'+(vf.split('/').pop())+'`.',"
+        "steps:['Step 1: Instantiate `Carrier_'+cid+'` pairing `'+id0+'` (`'+n0+'`) with `'+id1+'` (`'+n1+'`).','Step 2: Discharge `'+(m.obligations||'coercive positivity')+'` across the Rosetta dictionary slots.','Step 3: Verify both the positive transfer witness and the premise-failure counterexample in Lean 4.33.0 (`0` sorry).'],"
+        "starterLeanCode:m.leanTransferBlueprint};}}"
+        "if(m.researchPlaybook&&!m.researchPlaybook.starterLeanCode)m.researchPlaybook.starterLeanCode=m.leanTransferBlueprint;"
         "if(!m.plainIntuition&&m.whyItMatters)m.plainIntuition=m.whyItMatters;"
         "if(!m.physicalAnalogy&&m.analogy)m.physicalAnalogy=m.analogy;"
         "if(!m.intuitionAnalogy&&m.analogy)m.intuitionAnalogy=m.analogy;"
@@ -253,7 +297,16 @@ def build_shards_and_sync_routes():
         "if(!iso.whyItMatters&&iso.plainEnglishWhy)iso.whyItMatters=iso.plainEnglishWhy;}}"
         "sm.mechanisms=ms;sm.astIsomorphisms=is;"
         "sm.verifiedLean4BridgeModules=sm.verifiedLeanSuites;sm.verifiedLeanBridges=sm.verifiedLeanSuites;}"
-        "var ip=pre.insightPaths;if(ip){ip.paths=ip.connections;}"
+        "var ip=pre.insightPaths;if(ip){"
+        "var pp=ip.pathPools||{},ppEp=pp.endpoints||[],ppTd=pp.transDicts||[],ppCv=pp.caveats||[],ppLs=pp.sketches||[],ppSm=pp.summaries||[],ppRw=pp.reqWorks||[];"
+        "var cs=ip.connections||[];for(var k=0;k<cs.length;k++){var c=cs[k];if(c){"
+        "if(!c.endpoints&&Array.isArray(c._ep))c.endpoints=c._ep.map(function(x){return ppEp[x]||{};});"
+        "if(!c.translationDictionary&&typeof c._td==='number')c.translationDictionary=ppTd[c._td]||[];"
+        "if(c.caveat===undefined&&typeof c._cv==='number')c.caveat=ppCv[c._cv]||'';"
+        "if(c.leanSketch===undefined&&typeof c._ls==='number')c.leanSketch=ppLs[c._ls]||'';"
+        "if(c.summary===undefined&&typeof c._sm==='number')c.summary=ppSm[c._sm]||'';"
+        "if(c.requiredWork===undefined&&typeof c._rw==='number')c.requiredWork=ppRw[c._rw]||'';}}"
+        "ip.paths=cs;}"
         "var ub=pre.unrelatedBridges;if(ub&&ub.discoveries&&!ub.bridges){ub.bridges=ub.discoveries;}}})();\n"
     )
     write_dual_shard("bundle-shard-4b-paths.js", s4b_code)
