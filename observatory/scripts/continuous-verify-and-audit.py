@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 """
-Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V245).
+Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V246).
 Verifies:
-1. All 766+ physical Lean 4 files (646 in CommonGround/Verification/ + 120 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
+1. All 768+ physical Lean 4 files (647 in CommonGround/Verification/ + 121 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
    tokens outside comments (with NO 25 MiB cap on `.lean` files — large `.lean` files stream via Cloudflare R2 `/api/lean/*`)
    AND compile cleanly through the real Lean 4.33.0 kernel (`compile-all-lean4.py`).
 2. Reconstructs `bundle-data.js` from the 8 tracked `<16 MiB` shards and builds `dist-cloudflare/` if absent in CI.
 3. Verifies end-to-end connection integrity & zero clutter:
    - 0 legacy `upgrade-v*.py` scripts and 0 `.pyc` / `__pycache__` artifacts;
-   - entire unsharded `bundle-data.js` is < 20.20 MiB UTF-8 bytes;
+   - entire unsharded `bundle-data.js` is < 18.80 MiB UTF-8 bytes;
    - 0 unmounted ghost repository IDs, 0 `‖c‖h‖a‖r‖` corrupted strings, 0 `127.0.0.1`/`localhost` dead links,
      and 0 `Solved Open Instance` / `Hodge Sextic` strings across `bundle-data.js`;
    - exact 1-to-1 bijection between `verifiedLeanSuites` and `CommonGround/Verification/*.lean` with ground-truth title & triad alignment;
    - 100% of `highLevelMechanisms[*].verifiedBridgeFile` and `insightPaths.connections[*].verifiedLeanFile` resolve on disk;
    - 100% of `proofPipelines` map `projectA` & `projectB` to canonical 40-project IDs, and 100% of `customIsomorphisms`,
-     `highLevelMechanisms` (`fieldPools`), `proofPipelines` (`pipelinePools`), `grandTrinities`, `customSearchIndex`, and `insightPaths.connections` resolve valid lossless pool indices;
+     `highLevelMechanisms` (`fieldPools`), `proofPipelines` (`pipelinePools`), `grandTrinities`, `customSearchIndex` (`csiPools`), and `insightPaths.connections` (`pathPools`) resolve valid lossless pool indices;
    - `README.md` contains 0 legacy forbidden strings and 100% resolving relative `./...` links.
 4. Confirms no legacy forked `safari-standalone.html` or `observatory/safari/` artifacts exist, and verifies all unified
    Chrome + Safari routes resolve CSS + all 8 untruncated `<25 MiB` shards + `unified-standalone.js`.
@@ -48,7 +48,7 @@ def check_end_to_end_connections_and_clutter():
     assert not pyc_files, f"Bytecode .pyc files detected (violates Zero Bytecode rule): {pyc_files[:5]}"
 
     raw_bytes = (OBS_DIR / "bundle-data.js").stat().st_size
-    assert raw_bytes < int(20.2 * 1024 * 1024), f"Expected sub-20.2 MiB bundle-data.js, got {raw_bytes / (1024*1024):.2f} MiB!"
+    assert raw_bytes < int(18.8 * 1024 * 1024), f"Expected sub-18.8 MiB bundle-data.js, got {raw_bytes / (1024*1024):.2f} MiB!"
     raw = (OBS_DIR / "bundle-data.js").read_text(encoding="utf-8")
     for bad_str in ("127.0.0.1", "localhost:", "Solved Open Instance", "Hodge Sextic", "window.V145_REAL_LEAN_SUITES ="):
         assert bad_str not in raw, f"Legacy/clutter string {bad_str!r} reintroduced into bundle-data.js!"
@@ -77,7 +77,9 @@ def check_end_to_end_connections_and_clutter():
     sn_pool = sm.get("snippetPool") or []
     assert len(sn_pool) >= 2800, "Lossless semanticMechanisms.snippetPool missing or truncated!"
     csi_pools = preloaded.get("csiPools") or {}
-    assert len(csi_pools.get("files") or []) > 900, "Lossless csiPools.files missing or truncated!"
+    assert len(csi_pools.get("files") or []) > 900 and len(csi_pools.get("evidences") or []) >= 700, (
+        "Lossless csiPools.files / evidences missing or truncated!"
+    )
     tr_pools = sm.get("trinityPools") or {}
     assert len(tr_pools.get("domains") or []) > 900, "Lossless trinityPools.domains missing or truncated!"
     for gt in sm.get("grandTrinities", []):
@@ -133,9 +135,12 @@ def check_end_to_end_connections_and_clutter():
     ep_pool = path_pools.get("endpoints") or []
     ep_meta = path_pools.get("epMeta") or {}
     db_pool = path_pools.get("discBridges") or []
-    assert len(ep_pool) > 3500 and len(db_pool) >= 100 and len(ep_meta.get("paths") or []) >= 400, "Lossless pathPools missing or truncated!"
+    pp_vleans = path_pools.get("vleans") or []
+    assert (
+        len(ep_pool) > 3500 and len(db_pool) >= 100 and len(ep_meta.get("paths") or []) >= 400 and len(pp_vleans) >= 250
+    ), "Lossless pathPools missing or truncated!"
     for c in preloaded.get("insightPaths", {}).get("connections", []):
-        vf = c.get("verifiedLeanFile")
+        vf = c.get("verifiedLeanFile") or (pp_vleans[c["_vl"]] if isinstance(c.get("_vl"), int) else None)
         if vf:
             assert (REPO_ROOT / vf).exists(), f"Broken insightPaths.connections.verifiedLeanFile: {vf}"
         if "_ep" in c:

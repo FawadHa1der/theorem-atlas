@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-V245 Unified Chrome & Safari Shard Builder (< 25 MiB static assets & < 20 MiB total corpus!)
+V246 Unified Chrome & Safari Shard Builder (< 25 MiB static assets & < 18.8 MiB total corpus!)
 & Cloudflare R2 Unrestricted-Size Lean 4 Streaming Function Generator.
 
 - Reconstructs `bundle-data.js` from `observatory/chunks/` if missing in a fresh Git clone.
@@ -25,7 +25,7 @@ LOCAL_CHUNKS_DIR = OBS_DIR / "chunks"
 CF_DIR = OBS_DIR / "dist-cloudflare"
 CF_CHUNKS_DIR = CF_DIR / "chunks"
 LIMIT_BYTES = 25 * 1024 * 1024  # Cloudflare Pages 25 MiB static asset limit (does NOT restrict .lean files in R2!)
-ASSET_VER = "245"
+ASSET_VER = "246"
 
 SHARD_NAMES = [
     "bundle-shard-1-core.js",
@@ -252,12 +252,15 @@ def build_shards_and_sync_routes():
     s4b_code += (
         "(function(){if(typeof window!=='undefined'&&window.__CG_PRELOADED__){"
         "var pre=window.__CG_PRELOADED__,sm=pre.semanticMechanisms;"
-        "var cp=pre.csiPools||{},cpKd=cp.kinds||[],cpFm=cp.fams||[],cpPj=cp.projs||[],cpFl=cp.files||[],cpUb=cp.urlBases||[];"
-        "var csi=pre.customSearchIndex||[];for(var q=0;q<csi.length;q++){var r=csi[q];if(r&&typeof r._fl==='number'){"
+        "var cp=pre.csiPools||{},cpKd=cp.kinds||[],cpFm=cp.fams||[],cpPj=cp.projs||[],cpFl=cp.files||[],cpUb=cp.urlBases||[],cpEv=cp.evidences||[],cpSu=cp.sourceUrls||[];"
+        "var csi=pre.customSearchIndex||[];for(var q=0;q<csi.length;q++){var r=csi[q];if(r){"
+        "if(r.evidence===undefined&&typeof r._ev==='number')r.evidence=cpEv[r._ev]||'';"
+        "if(r.sourceUrl===undefined&&typeof r._su==='number')r.sourceUrl=cpSu[r._su]||'';"
+        "if(typeof r._fl==='number'){"
         "var fl=cpFl[r._fl]||'',fn=r.fullName||'';r.kind=cpKd[r._k]||'';"
         "if(r.name===undefined){var di=fn.lastIndexOf('.');r.name=di>=0?fn.slice(di+1):fn;}"
         "r.familyId=cpFm[r._fm]||'';r.projectId=cpPj[r._pj]||'';r.file=fl;"
-        "if(r.sourceUrl===undefined&&typeof r._ub==='number')r.sourceUrl=(cpUb[r._ub]||'')+'/'+fl+'#L'+r.line;}}"
+        "if(r.sourceUrl===undefined&&typeof r._ub==='number')r.sourceUrl=(cpUb[r._ub]||'')+'/'+fl+'#L'+r.line;}}}"
         "if(sm){"
         "var snPool=sm.snippetPool||[];"
         "var vls=sm.verifiedLeanSuites||[];for(var si=0;si<vls.length;si++){var sv=vls[si];if(sv){"
@@ -392,6 +395,7 @@ def build_shards_and_sync_routes():
         "var ip=pre.insightPaths;if(ip){"
         "var pp=ip.pathPools||{},ppEp=pp.endpoints||[],ppTd=pp.transDicts||[],ppCv=pp.caveats||[],ppLs=pp.sketches||[],ppSm=pp.summaries||[],ppRw=pp.reqWorks||[];"
         "var ppDb=pp.discBridges||[],ppTl=pp.tools||[],ppAn=pp.analogies||[],ppSi=pp.sharedIngs||[],ppRl=pp.relLevels||[],ppDs=pp.discs||[],ppKd=pp.kinds||[],ppWm=pp.whys||[],ppOc=pp.obsCats||[];"
+        "var ppPjs=pp.projsList||[],ppVl2=pp.vleans||[],ppHr=pp.hrefs||[],ppFms=pp.famsList||[],ppCt=pp.cats||[],ppSt2=pp.statuses||[];"
         "var snPoolIp=(sm&&sm.snippetPool)||[];"
         "var em=pp.epMeta||{},emPj=em.projs||[],emCm=em.commits||[],emPa=em.paths||[],emUb=em.urlBases||[];"
         "for(var ei=0;ei<ppEp.length;ei++){var ep=ppEp[ei];if(ep){"
@@ -416,7 +420,13 @@ def build_shards_and_sync_routes():
         "if(!c.disciplines&&typeof c._ds==='number')c.disciplines=ppDs[c._ds]||[];"
         "if(c.kind===undefined&&typeof c._kd==='number')c.kind=ppKd[c._kd]||'';"
         "if(c.whyItMatters===undefined&&typeof c._wm==='number')c.whyItMatters=ppWm[c._wm]||'';"
-        "if(c.obstacleCategory===undefined&&typeof c._oc==='number')c.obstacleCategory=ppOc[c._oc]||'';}}"
+        "if(c.obstacleCategory===undefined&&typeof c._oc==='number')c.obstacleCategory=ppOc[c._oc]||'';"
+        "if(!c.projects&&typeof c._pjs==='number')c.projects=(ppPjs[c._pjs]||[]).slice();"
+        "if(c.verifiedLeanFile===undefined&&typeof c._vl==='number')c.verifiedLeanFile=ppVl2[c._vl]||'';"
+        "if(c.href===undefined&&typeof c._hr==='number')c.href=ppHr[c._hr]||'';"
+        "if(!c.families&&typeof c._fms==='number')c.families=(ppFms[c._fms]||[]).slice();"
+        "if(c.category===undefined&&typeof c._ct==='number')c.category=ppCt[c._ct]||'';"
+        "if(c.status===undefined&&typeof c._st==='number')c.status=ppSt2[c._st]||'';}}"
         "ip.paths=cs;}"
         "var ub=pre.unrelatedBridges;if(ub&&ub.discoveries&&!ub.bridges){ub.bridges=ub.discoveries;}}})();\n"
     )
