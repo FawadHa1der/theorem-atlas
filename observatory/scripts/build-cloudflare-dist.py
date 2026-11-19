@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-V244 Unified Chrome & Safari Shard Builder (< 25 MiB static assets & < 21 MiB total corpus!)
+V245 Unified Chrome & Safari Shard Builder (< 25 MiB static assets & < 20 MiB total corpus!)
 & Cloudflare R2 Unrestricted-Size Lean 4 Streaming Function Generator.
 
 - Reconstructs `bundle-data.js` from `observatory/chunks/` if missing in a fresh Git clone.
@@ -25,7 +25,7 @@ LOCAL_CHUNKS_DIR = OBS_DIR / "chunks"
 CF_DIR = OBS_DIR / "dist-cloudflare"
 CF_CHUNKS_DIR = CF_DIR / "chunks"
 LIMIT_BYTES = 25 * 1024 * 1024  # Cloudflare Pages 25 MiB static asset limit (does NOT restrict .lean files in R2!)
-ASSET_VER = "244"
+ASSET_VER = "245"
 
 SHARD_NAMES = [
     "bundle-shard-1-core.js",
@@ -301,6 +301,7 @@ def build_shards_and_sync_routes():
         "if(cd.proofArch===undefined&&typeof cd._pa==='number')cd.proofArch=pmPa[cd._pa]||'';"
         "if(cd.signature===undefined&&cd._sg===1)cd.signature=cd.file||'';"
         "if(cd.url===undefined&&typeof cd._ub==='number')cd.url=(pmUb[cd._ub]||'')+'/'+(cd.file||'')+'#L'+cd.line;}}}"
+        "var mfp=mp.fieldPools||{},mfDf=mfp.diffs||[],mfCt=mfp.cats||[],mfVl=mfp.vleans||[],mfVb=mfp.vbridges||[],mfTg=mfp.tags||[],mfNh=mfp.hyps||[],mfLt=mfp.ltbs||[],mfOc=mfp.obs||[],mfCs=mfp.skels||[],mfDa=mfp.archs||[];"
         "var ms=sm.highLevelMechanisms||[];for(var i=0;i<ms.length;i++){var m=ms[i];if(m){"
         "if(!m.participatingProjects&&Array.isArray(m._pp)){m.participatingProjects=m._pp.map(function(x){return mpPart[x]||{};});}"
         "if(!m.researchPlaybook&&typeof m._rp==='number'&&mpPb[m._rp])m.researchPlaybook=Object.assign({},mpPb[m._rp]);"
@@ -311,6 +312,16 @@ def build_shards_and_sync_routes():
         "if(!m.visualSteps&&typeof m._vs==='number')m.visualSteps=mpVs[m._vs]||[];"
         "if(m.astSkeletonType===undefined&&typeof m._ast==='number')m.astSkeletonType=mpAst[m._ast]||'';"
         "if(m.epistemicGrade===undefined&&typeof m._eg==='number')m.epistemicGrade=mpGr[m._eg]||'';"
+        "if(m.differences===undefined&&typeof m._df==='number')m.differences=mfDf[m._df];"
+        "if(m.category===undefined&&typeof m._ct==='number')m.category=mfCt[m._ct]||'';"
+        "if(m.verifiedLeanFile===undefined&&typeof m._vl==='number')m.verifiedLeanFile=mfVl[m._vl]||'';"
+        "if(m.verifiedBridgeFile===undefined&&typeof m._vb==='number')m.verifiedBridgeFile=mfVb[m._vb]||'';"
+        "if(m.tagline===undefined&&typeof m._tg==='number')m.tagline=mfTg[m._tg]||'';"
+        "if(m.newDiscoveryHypothesis===undefined&&typeof m._nh==='number')m.newDiscoveryHypothesis=mfNh[m._nh]||'';"
+        "if(m.leanTransferBlueprint===undefined&&typeof m._lt==='number')m.leanTransferBlueprint=mfLt[m._lt]||'';"
+        "if(m.obstacleCategory===undefined&&typeof m._oc==='number')m.obstacleCategory=mfOc[m._oc]||'';"
+        "if(m.canonicalSkeleton===undefined&&typeof m._cs==='number')m.canonicalSkeleton=mfCs[m._cs]||'';"
+        "if(m.dominantProofArch===undefined&&typeof m._da==='number')m.dominantProofArch=mfDa[m._da]||'';"
         "if(!m.leanTransferBlueprint){"
         "var pps=m.participatingProjects||[],p0=pps[0]||{},p1=pps[1]||pps[0]||{},d0=p0.customDecl||{},d1=p1.customDecl||{};"
         "var n0=d0.name||'carrierA',n1=d1.name||'carrierB',k0=d0.kind||'theorem',k1=d1.kind||'theorem';"
@@ -344,6 +355,17 @@ def build_shards_and_sync_routes():
         "if(!m.physicalAnalogy&&m.analogy)m.physicalAnalogy=m.analogy;"
         "if(!m.intuitionAnalogy&&m.analogy)m.intuitionAnalogy=m.analogy;"
         "if(!m.name&&m.title)m.name=m.title;}}"
+        "var ppp=sm.pipelinePools||{},ppSt=ppp.stages||[],ppPn=ppp.pnames||[],ppDc=ppp.discs||[],ppVl=ppp.vleans||[],ppOb=ppp.obs||[];"
+        "var ppsArr=sm.proofPipelines||[];for(var ppi=0;ppi<ppsArr.length;ppi++){var pr=ppsArr[ppi];if(pr){"
+        "if(!pr.stages&&typeof pr._st==='number')pr.stages=(ppSt[pr._st]||[]).map(function(s){return Object.assign({},s);});"
+        "if(pr.projectAName===undefined&&typeof pr._pAN==='number')pr.projectAName=ppPn[pr._pAN]||'';"
+        "if(pr.projectBName===undefined&&typeof pr._pBN==='number')pr.projectBName=ppPn[pr._pBN]||'';"
+        "if(pr.disciplineA===undefined&&typeof pr._dA==='number')pr.disciplineA=ppDc[pr._dA]||'';"
+        "if(pr.disciplineB===undefined&&typeof pr._dB==='number')pr.disciplineB=ppDc[pr._dB]||'';"
+        "if(pr.verifiedLeanFile===undefined&&typeof pr._vl==='number')pr.verifiedLeanFile=ppVl[pr._vl]||'';"
+        "if(pr.obstacleCategory===undefined&&typeof pr._oc==='number')pr.obstacleCategory=ppOb[pr._oc]||'';"
+        "if(!pr.sourceProject&&pr.projectA)pr.sourceProject=pr.projectA;"
+        "if(!pr.targetProject&&pr.projectB)pr.targetProject=pr.projectB;}}"
         "var imp=sm.isoMetaPools||{},iSk=imp.skels||[],iPa=imp.archs||[],iPn=imp.pnames||[],iDc=imp.discs||[],iOc=imp.obs||[],iDg=imp.dags||[],iKd=imp.kinds||[],iSo=imp.sops||[],iWm=imp.whys||[],iTb=imp.tbs||[];"
         "var is=sm.customIsomorphisms||[];for(var j=0;j<is.length;j++){var iso=is[j];if(iso){"
         "if(!iso.declA&&typeof iso._dA==='number')iso.declA=dp[iso._dA]||{};"

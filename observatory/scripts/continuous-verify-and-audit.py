@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 """
-Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V244).
+Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V245).
 Verifies:
-1. All 764+ physical Lean 4 files (645 in CommonGround/Verification/ + 119 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
+1. All 766+ physical Lean 4 files (646 in CommonGround/Verification/ + 120 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
    tokens outside comments (with NO 25 MiB cap on `.lean` files — large `.lean` files stream via Cloudflare R2 `/api/lean/*`)
    AND compile cleanly through the real Lean 4.33.0 kernel (`compile-all-lean4.py`).
 2. Reconstructs `bundle-data.js` from the 8 tracked `<16 MiB` shards and builds `dist-cloudflare/` if absent in CI.
 3. Verifies end-to-end connection integrity & zero clutter:
    - 0 legacy `upgrade-v*.py` scripts and 0 `.pyc` / `__pycache__` artifacts;
-   - entire unsharded `bundle-data.js` is < 21.50 MiB UTF-8 bytes;
+   - entire unsharded `bundle-data.js` is < 20.20 MiB UTF-8 bytes;
    - 0 unmounted ghost repository IDs, 0 `‖c‖h‖a‖r‖` corrupted strings, 0 `127.0.0.1`/`localhost` dead links,
      and 0 `Solved Open Instance` / `Hodge Sextic` strings across `bundle-data.js`;
    - exact 1-to-1 bijection between `verifiedLeanSuites` and `CommonGround/Verification/*.lean` with ground-truth title & triad alignment;
    - 100% of `highLevelMechanisms[*].verifiedBridgeFile` and `insightPaths.connections[*].verifiedLeanFile` resolve on disk;
    - 100% of `proofPipelines` map `projectA` & `projectB` to canonical 40-project IDs, and 100% of `customIsomorphisms`,
-     `highLevelMechanisms`, `grandTrinities`, `customSearchIndex`, and `insightPaths.connections` resolve valid lossless pool indices;
+     `highLevelMechanisms` (`fieldPools`), `proofPipelines` (`pipelinePools`), `grandTrinities`, `customSearchIndex`, and `insightPaths.connections` resolve valid lossless pool indices;
    - `README.md` contains 0 legacy forbidden strings and 100% resolving relative `./...` links.
 4. Confirms no legacy forked `safari-standalone.html` or `observatory/safari/` artifacts exist, and verifies all unified
    Chrome + Safari routes resolve CSS + all 8 untruncated `<25 MiB` shards + `unified-standalone.js`.
@@ -48,7 +48,7 @@ def check_end_to_end_connections_and_clutter():
     assert not pyc_files, f"Bytecode .pyc files detected (violates Zero Bytecode rule): {pyc_files[:5]}"
 
     raw_bytes = (OBS_DIR / "bundle-data.js").stat().st_size
-    assert raw_bytes < int(21.5 * 1024 * 1024), f"Expected sub-21.5 MiB bundle-data.js, got {raw_bytes / (1024*1024):.2f} MiB!"
+    assert raw_bytes < int(20.2 * 1024 * 1024), f"Expected sub-20.2 MiB bundle-data.js, got {raw_bytes / (1024*1024):.2f} MiB!"
     raw = (OBS_DIR / "bundle-data.js").read_text(encoding="utf-8")
     for bad_str in ("127.0.0.1", "localhost:", "Solved Open Instance", "Hodge Sextic", "window.V145_REAL_LEAN_SUITES ="):
         assert bad_str not in raw, f"Legacy/clutter string {bad_str!r} reintroduced into bundle-data.js!"
@@ -92,7 +92,11 @@ def check_end_to_end_connections_and_clutter():
     part_items = mech_pools.get("partItems") or []
     part_meta = mech_pools.get("partMeta") or {}
     mech_pbs = mech_pools.get("playbooks") or []
-    assert len(part_items) > 3500 and len(mech_pbs) >= 150 and len(part_meta.get("files") or []) >= 400, "Lossless mechPools missing or truncated!"
+    mech_fp = mech_pools.get("fieldPools") or {}
+    vbridges_pool = mech_fp.get("vbridges") or []
+    assert (
+        len(part_items) > 3500 and len(mech_pbs) >= 150 and len(part_meta.get("files") or []) >= 400 and len(vbridges_pool) >= 300
+    ), "Lossless mechPools / fieldPools missing or truncated!"
     dead_mech_keys = (
         "tacticStepper",
         "openConjectureAttackTree",
@@ -107,7 +111,7 @@ def check_end_to_end_connections_and_clutter():
         "headline",
     )
     for m in sm.get("highLevelMechanisms", []):
-        bf = m.get("verifiedBridgeFile")
+        bf = m.get("verifiedBridgeFile") or (vbridges_pool[m["_vb"]] if isinstance(m.get("_vb"), int) else None)
         if bf:
             assert (REPO_ROOT / bf).exists(), f"Broken highLevelMechanisms.verifiedBridgeFile: {bf}"
         if "_pp" in m:
@@ -116,10 +120,15 @@ def check_end_to_end_connections_and_clutter():
             assert 0 <= m["_rp"] < len(mech_pbs), f"Out-of-bounds _rp index on {m.get('id')}"
         for dead_k in dead_mech_keys:
             assert dead_k not in m, f"Stale ghost-project or synthetic field {dead_k!r} reintroduced on mechanism {m.get('id')}!"
+    pipe_pools = sm.get("pipelinePools") or {}
+    pipe_stages = pipe_pools.get("stages") or []
+    assert len(pipe_stages) >= 200, "Lossless pipelinePools.stages missing or truncated!"
     for pp in sm.get("proofPipelines", []):
         assert pp.get("projectA") in canon_projs and pp.get("projectB") in canon_projs, (
             f"Broken or non-canonical proofPipeline projects on {pp.get('id')}: {pp.get('projectA')} <-> {pp.get('projectB')}"
         )
+        if "_st" in pp:
+            assert 0 <= pp["_st"] < len(pipe_stages), f"Out-of-bounds _st index on {pp.get('id')}"
     path_pools = preloaded.get("insightPaths", {}).get("pathPools") or {}
     ep_pool = path_pools.get("endpoints") or []
     ep_meta = path_pools.get("epMeta") or {}
