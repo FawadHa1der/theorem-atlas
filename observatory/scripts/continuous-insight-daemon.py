@@ -44,6 +44,7 @@ SYNTHETIC_TEMPLATE_TOKENS = (
 def terminate_other_daemons():
     """Ensure no older continuous-insight-daemon or legacy 24h audit loop is left running in parallel."""
     my_pid = os.getpid()
+    ppid = os.getppid()
     for pat in ("continuous-insight-daemon", "continuous-24h", "continuous-72h", "audit-daemon"):
         try:
             proc = subprocess.run(
@@ -57,7 +58,7 @@ def terminate_other_daemons():
                 if not line.isdigit():
                     continue
                 pid = int(line)
-                if pid != my_pid:
+                if pid not in (my_pid, ppid, 1):
                     try:
                         os.kill(pid, signal.SIGTERM)
                     except OSError:
@@ -224,7 +225,7 @@ def run_cycle(cycle_num, start_ts, end_ts):
 
     status = {
         "status": "running" if remaining_hours > 0 else "completed",
-        "version": "V255",
+        "version": "V256",
         "daemonPid": os.getpid(),
         "cycle": cycle_num,
         "timestampUtc": now_iso,
@@ -248,7 +249,7 @@ def run_cycle(cycle_num, start_ts, end_ts):
     with RUNS_JSONL.open("a", encoding="utf-8") as f:
         f.write(json.dumps({
             "cycle": cycle_num,
-            "version": "V255",
+            "version": "V256",
             "timestampUtc": now_iso,
             "exitCode": proc.returncode,
             "passed": passed_checks,
