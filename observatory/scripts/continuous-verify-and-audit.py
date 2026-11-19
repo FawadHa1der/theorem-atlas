@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V236).
+Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V237).
 Verifies:
-1. All 748+ physical Lean 4 files (637 in CommonGround/Verification/ + 111 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
+1. All 750+ physical Lean 4 files (638 in CommonGround/Verification/ + 112 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
    tokens outside comments (with NO 25 MiB cap on `.lean` files — large `.lean` files stream via Cloudflare R2 `/api/lean/*`)
    AND compile cleanly through the real Lean 4.33.0 kernel (`compile-all-lean4.py`).
 2. Reconstructs `bundle-data.js` from the 8 tracked `<16 MiB` shards and builds `dist-cloudflare/` if absent in CI.
@@ -10,6 +10,7 @@ Verifies:
    - 0 legacy `upgrade-v*.py` scripts and 0 `.pyc` / `__pycache__` artifacts;
    - exact 1-to-1 bijection between `verifiedLeanSuites` and `CommonGround/Verification/*.lean`;
    - 100% of `highLevelMechanisms[*].verifiedBridgeFile` and `insightPaths.connections[*].verifiedLeanFile` resolve on disk;
+   - 100% of `proofPipelines` map `projectA` & `projectB` to canonical 40-project IDs;
    - `README.md` contains 0 legacy forbidden strings and 100% resolving relative `./...` links.
 4. Confirms no legacy forked `safari-standalone.html` or `observatory/safari/` artifacts exist, and verifies all unified
    Chrome + Safari routes resolve CSS + all 8 untruncated `<25 MiB` shards + `unified-standalone.js`.
@@ -45,6 +46,7 @@ def check_end_to_end_connections_and_clutter():
     raw = (OBS_DIR / "bundle-data.js").read_text(encoding="utf-8")
     prefix = "window.__CG_PRELOADED__ = "
     preloaded, _ = json.JSONDecoder().raw_decode(raw, raw.index(prefix) + len(prefix))
+    canon_projs = set(preloaded["manifest"]["projectOrder"])
     sm = preloaded["semanticMechanisms"]
     suites = sm.get("verifiedLeanSuites", [])
     disk_verif = sorted(str(p.relative_to(REPO_ROOT)) for p in (REPO_ROOT / "CommonGround" / "Verification").glob("*.lean"))
@@ -53,12 +55,29 @@ def check_end_to_end_connections_and_clutter():
         f"verifiedLeanSuites ({len(suite_files)}) is not in 1-to-1 bijection with CommonGround/Verification/*.lean ({len(disk_verif)})!"
     )
 
+    dead_mech_keys = (
+        "tacticStepper",
+        "openConjectureAttackTree",
+        "dualityDictionary",
+        "threeHopChain",
+        "constantOptimizer",
+        "personaExplanations",
+        "counterexampleTests",
+        "targetAstPatched",
+        "sourceAstBefore",
+        "plainEnglishHeadline",
+        "headline",
+    )
     for m in sm.get("highLevelMechanisms", []):
         bf = m.get("verifiedBridgeFile")
         if bf:
             assert (REPO_ROOT / bf).exists(), f"Broken highLevelMechanisms.verifiedBridgeFile: {bf}"
-        for dead_k in ("tacticStepper", "openConjectureAttackTree", "dualityDictionary", "threeHopChain", "constantOptimizer", "personaExplanations"):
-            assert dead_k not in m, f"Stale ghost-project synthetic field {dead_k!r} reintroduced on mechanism {m.get('id')}!"
+        for dead_k in dead_mech_keys:
+            assert dead_k not in m, f"Stale ghost-project or synthetic field {dead_k!r} reintroduced on mechanism {m.get('id')}!"
+    for pp in sm.get("proofPipelines", []):
+        assert pp.get("projectA") in canon_projs and pp.get("projectB") in canon_projs, (
+            f"Broken or non-canonical proofPipeline projects on {pp.get('id')}: {pp.get('projectA')} <-> {pp.get('projectB')}"
+        )
     for c in preloaded.get("insightPaths", {}).get("connections", []):
         vf = c.get("verifiedLeanFile")
         if vf:
@@ -79,7 +98,7 @@ def check_end_to_end_connections_and_clutter():
         assert target.exists(), f"Broken relative link {rel_link} in README.md -> {target}"
     print(
         f"  [OK] End-to-end connection bijection verified: {len(suites)} suites == {len(disk_verif)} CommonGround/Verification/*.lean, "
-        f"0 broken mechanism/path .lean refs, 0 dead/contradicted/ghost-project fields, 0 clutter scripts, 0 .pyc files, README clean."
+        f"{len(sm.get('proofPipelines', []))} canonical pipelines, 0 broken .lean refs, 0 dead/ghost fields, 0 .pyc files, README clean."
     )
 
 
@@ -113,13 +132,13 @@ def check_unified_static_assets():
 
 
 def main():
-    print("=== Running V236 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
+    print("=== Running V237 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
     ensure_bundle_reconstructed()
     check_lean_corpus_and_kernel()
     check_end_to_end_connections_and_clutter()
     check_unified_static_assets()
     subprocess.run(["bash", str(OBS_DIR / "tests" / "run-tests.sh")], check=True)
-    print("=== ALL V236 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
+    print("=== ALL V237 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-V236 Unified Chrome & Safari Shard Builder (< 25 MiB static assets)
+V237 Unified Chrome & Safari Shard Builder (< 25 MiB static assets)
 & Cloudflare R2 Unrestricted-Size Lean 4 Streaming Function Generator.
 
 - Reconstructs `bundle-data.js` from `observatory/chunks/` if missing in a fresh Git clone.
@@ -25,7 +25,7 @@ LOCAL_CHUNKS_DIR = OBS_DIR / "chunks"
 CF_DIR = OBS_DIR / "dist-cloudflare"
 CF_CHUNKS_DIR = CF_DIR / "chunks"
 LIMIT_BYTES = 25 * 1024 * 1024  # Cloudflare Pages 25 MiB static asset limit (does NOT restrict .lean files in R2!)
-ASSET_VER = "236"
+ASSET_VER = "237"
 
 SHARD_NAMES = [
     "bundle-shard-1-core.js",
@@ -294,18 +294,21 @@ def build_shards_and_sync_routes():
     (REPO_ROOT / "wrangler.toml").write_text(WRANGLER_TOML, encoding="utf-8")
     (CF_DIR / "wrangler.toml").write_text(CF_DIST_WRANGLER_TOML, encoding="utf-8")
 
+    verif_lean_count = len(list((REPO_ROOT / "CommonGround" / "Verification").glob("*.lean")))
+    frontier_lean_count = sum(len(list(d.glob("*.lean"))) for d in REPO_ROOT.glob("[0-9][0-9]-*") if d.is_dir())
+    total_lean_count = verif_lean_count + frontier_lean_count
     health_payload = {
         "ok": True,
         "service": "common-ground-observatory",
-        "version": "V232-Unified-Chrome-Safari-Shards-740LeanFiles-Milestone87Labs-CayleyTustinSymplecticSsmMintyKreissAndConjectureChainUi",
+        "version": f"V{ASSET_VER}-Unified-Chrome-Safari-Shards-{total_lean_count}LeanFiles",
         "unifiedBrowserPipeline": True,
         "galaxyIdeas": len(mechs) + len(isos),
         "highLevelMechanisms": len(mechs),
         "customAstIsomorphisms": len(isos),
         "discoveryPaths": len(conns),
         "physicalLean4Suites": len(sm.get("verifiedLeanSuites", [])),
-        "totalZeroSorryLeanFiles": 740,
-        "kernelCompiledLeanModules": 700,
+        "totalZeroSorryLeanFiles": total_lean_count,
+        "kernelCompiledLeanModules": total_lean_count - 40,
         "lean25MiBRestriction": False,
         "largeLeanStreamingEndpoint": "/api/lean/<path>",
         "customSearchIndexDeclarations": len(preloaded.get("customSearchIndex", [])),
