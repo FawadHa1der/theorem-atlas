@@ -452,6 +452,50 @@ if (mm.innerHTML.indexOf("MATCHING SINGLE-PROJECT MECHANISM NOTES") === -1) {
 }
 window.v137CloseMatcherModal();
 
+// 8. V280 End-to-End UI Button, Link & 3-Tier Galaxy Epistemic Popup Regression Gate
+(function runV280UiButtonLinkAndPopupGate() {
+  // (a) Surprise Me must NEVER land on a guardrailed ⚠ AST lookalike
+  for (var sTry = 0; sTry < 20; sTry++) {
+    triggerSurpriseBridge();
+    if (state.lens === "galaxy" && state.source) {
+      var pickedIso = (semanticMechanisms.customIsomorphisms || []).find(function(x) { return x && x.id === state.source; });
+      if (pickedIso && pickedIso.epistemicSymbol === "⚠") {
+        throw new Error("Surprise Me landed on guardrailed ⚠ AST lookalike: " + pickedIso.id);
+      }
+    }
+  }
+  // (b) External chain lemma IDs in selectIngredient must resolve cleanly without "Record not found in bucket"
+  state.lens = "galaxy";
+  selectIngredient("unindexed-external-chain-lemma-id-test", "cslib", "econlib");
+  var inspHtml = document.getElementById("inspector-panel").innerHTML || "";
+  if (inspHtml.indexOf("Record not found in bucket") !== -1 || inspHtml.indexOf('href=""') !== -1) {
+    throw new Error("Inspector rendered broken bucket error or empty href=\"\" on external chain lemma selection!");
+  }
+  // (c) Direct indexData.records bucket record load must populate mathlibUrl & code snippet (zero href="" or blank <code>:</code>)
+  if (indexData && indexData.records && indexData.records.length) {
+    selectIngredient(indexData.records[0].id, "ns", "poincare");
+    var inspRecHtml = document.getElementById("inspector-panel").innerHTML || "";
+    if (inspRecHtml.indexOf('href=""') !== -1 || inspRecHtml.indexOf("<code>:</code>") !== -1) {
+      throw new Error("loadBucketRecord produced empty href=\"\" or blank <code>:</code> in Inspector!");
+    }
+  }
+  // (d) #open-mech-studio on a non-path mechanism (e.g. index 500) must open a valid path or composer
+  state.lens = "serendipity";
+  state.serenSubmode = "mechanisms";
+  state.activeMechId = semanticMechanisms.highLevelMechanisms[500].id;
+  renderApp();
+  var openMechBtn = document.getElementById("open-mech-studio");
+  if (!openMechBtn || typeof openMechBtn.onclick !== "function") {
+    throw new Error("#open-mech-studio missing onclick handler in serendipity:mechanisms!");
+  }
+  openMechBtn.click();
+  if (state.lens === "paths" && state.selectedPath) {
+    var matchedPath = insightPaths.connections.find(function(c) { return c.id === state.selectedPath; });
+    if (!matchedPath) throw new Error("#open-mech-studio navigated to non-existent selectedPath: " + state.selectedPath);
+    assertNoUndefinedOrNaN("Opened Mechanism Studio Path Detail", mount.innerHTML);
+  }
+})();
+
 // Run V147 Comprehensive Automated UX, Functional & Mathematical Test Suite
 var v147Report = window.v147RunAllAutomatedTests();
 print("V147_AUTOMATED_TEST_SUITE_SUMMARY: Passed=" + v147Report.passed + "/" + v147Report.total + ", Failed=" + v147Report.failed + ", Elapsed=" + v147Report.elapsedMs + "ms");
