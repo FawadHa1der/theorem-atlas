@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V237).
+Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V238).
 Verifies:
-1. All 750+ physical Lean 4 files (638 in CommonGround/Verification/ + 112 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
+1. All 752+ physical Lean 4 files (639 in CommonGround/Verification/ + 113 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
    tokens outside comments (with NO 25 MiB cap on `.lean` files — large `.lean` files stream via Cloudflare R2 `/api/lean/*`)
    AND compile cleanly through the real Lean 4.33.0 kernel (`compile-all-lean4.py`).
 2. Reconstructs `bundle-data.js` from the 8 tracked `<16 MiB` shards and builds `dist-cloudflare/` if absent in CI.
@@ -10,7 +10,7 @@ Verifies:
    - 0 legacy `upgrade-v*.py` scripts and 0 `.pyc` / `__pycache__` artifacts;
    - exact 1-to-1 bijection between `verifiedLeanSuites` and `CommonGround/Verification/*.lean`;
    - 100% of `highLevelMechanisms[*].verifiedBridgeFile` and `insightPaths.connections[*].verifiedLeanFile` resolve on disk;
-   - 100% of `proofPipelines` map `projectA` & `projectB` to canonical 40-project IDs;
+   - 100% of `proofPipelines` map `projectA` & `projectB` to canonical 40-project IDs, and 0 `‖c‖h‖a‖r‖` corrupted strings exist;
    - `README.md` contains 0 legacy forbidden strings and 100% resolving relative `./...` links.
 4. Confirms no legacy forked `safari-standalone.html` or `observatory/safari/` artifacts exist, and verifies all unified
    Chrome + Safari routes resolve CSS + all 8 untruncated `<25 MiB` shards + `unified-standalone.js`.
@@ -44,6 +44,7 @@ def check_end_to_end_connections_and_clutter():
     assert not pyc_files, f"Bytecode .pyc files detected (violates Zero Bytecode rule): {pyc_files[:5]}"
 
     raw = (OBS_DIR / "bundle-data.js").read_text(encoding="utf-8")
+    assert not re.search(r"‖[^‖\s]‖[^‖\s]‖", raw), "Character-corrupted ‖c‖h‖a‖r‖ string reintroduced into bundle-data.js!"
     prefix = "window.__CG_PRELOADED__ = "
     preloaded, _ = json.JSONDecoder().raw_decode(raw, raw.index(prefix) + len(prefix))
     canon_projs = set(preloaded["manifest"]["projectOrder"])
@@ -82,7 +83,8 @@ def check_end_to_end_connections_and_clutter():
         vf = c.get("verifiedLeanFile")
         if vf:
             assert (REPO_ROOT / vf).exists(), f"Broken insightPaths.connections.verifiedLeanFile: {vf}"
-        assert "sourceAstBefore" not in c, "Unreferenced duplicate v40 field reintroduced into insightPaths.connections!"
+        for dead_ck in ("sourceAstBefore", "conjecture", "intuitionAnalogy", "headline"):
+            assert dead_ck not in c, f"Unreferenced duplicate field {dead_ck!r} reintroduced into insightPaths.connections!"
     assert "verificationSuiteBridges" not in sm, "Unreferenced verificationSuiteBridges clutter reintroduced!"
     for iso in sm.get("customIsomorphisms", []):
         if iso.get("epistemicSymbol") == "⚠":
@@ -98,7 +100,7 @@ def check_end_to_end_connections_and_clutter():
         assert target.exists(), f"Broken relative link {rel_link} in README.md -> {target}"
     print(
         f"  [OK] End-to-end connection bijection verified: {len(suites)} suites == {len(disk_verif)} CommonGround/Verification/*.lean, "
-        f"{len(sm.get('proofPipelines', []))} canonical pipelines, 0 broken .lean refs, 0 dead/ghost fields, 0 .pyc files, README clean."
+        f"{len(sm.get('proofPipelines', []))} canonical pipelines, 0 ‖c‖h‖a‖r‖ corruptions, 0 broken .lean refs, 0 dead fields, README clean."
     )
 
 
@@ -132,13 +134,13 @@ def check_unified_static_assets():
 
 
 def main():
-    print("=== Running V237 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
+    print("=== Running V238 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
     ensure_bundle_reconstructed()
     check_lean_corpus_and_kernel()
     check_end_to_end_connections_and_clutter()
     check_unified_static_assets()
     subprocess.run(["bash", str(OBS_DIR / "tests" / "run-tests.sh")], check=True)
-    print("=== ALL V237 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
+    print("=== ALL V238 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
 
 
 if __name__ == "__main__":

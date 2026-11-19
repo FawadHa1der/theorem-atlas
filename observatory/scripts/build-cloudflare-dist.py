@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-V237 Unified Chrome & Safari Shard Builder (< 25 MiB static assets)
+V238 Unified Chrome & Safari Shard Builder (< 25 MiB static assets)
 & Cloudflare R2 Unrestricted-Size Lean 4 Streaming Function Generator.
 
 - Reconstructs `bundle-data.js` from `observatory/chunks/` if missing in a fresh Git clone.
@@ -25,7 +25,7 @@ LOCAL_CHUNKS_DIR = OBS_DIR / "chunks"
 CF_DIR = OBS_DIR / "dist-cloudflare"
 CF_CHUNKS_DIR = CF_DIR / "chunks"
 LIMIT_BYTES = 25 * 1024 * 1024  # Cloudflare Pages 25 MiB static asset limit (does NOT restrict .lean files in R2!)
-ASSET_VER = "237"
+ASSET_VER = "238"
 
 SHARD_NAMES = [
     "bundle-shard-1-core.js",
@@ -241,6 +241,7 @@ def build_shards_and_sync_routes():
         "var ms=sm.highLevelMechanisms||[];for(var i=0;i<ms.length;i++){var m=ms[i];if(m){"
         "if(!m.plainIntuition&&m.whyItMatters)m.plainIntuition=m.whyItMatters;"
         "if(!m.physicalAnalogy&&m.analogy)m.physicalAnalogy=m.analogy;"
+        "if(!m.intuitionAnalogy&&m.analogy)m.intuitionAnalogy=m.analogy;"
         "if(!m.name&&m.title)m.name=m.title;}}"
         "var is=sm.customIsomorphisms||[];for(var j=0;j<is.length;j++){var iso=is[j];if(iso&&!iso.whyItMatters&&iso.plainEnglishWhy)iso.whyItMatters=iso.plainEnglishWhy;}"
         "sm.mechanisms=ms;sm.astIsomorphisms=is;"
