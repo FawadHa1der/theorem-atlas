@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V252).
+Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V253).
 Verifies:
-1. All 780+ physical Lean 4 files (653 in CommonGround/Verification/ + 127 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
+1. All 782+ physical Lean 4 files (654 in CommonGround/Verification/ + 128 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
    tokens outside comments (with NO 25 MiB cap on `.lean` files — large `.lean` files stream via Cloudflare R2 `/api/lean/*`)
    AND compile cleanly through the real Lean 4.33.0 kernel (`compile-all-lean4.py`).
 2. Reconstructs `bundle-data.js` from the 8 tracked `<16 MiB` shards and builds `dist-cloudflare/` if absent in CI.
 3. Verifies end-to-end connection integrity & zero clutter:
    - 0 legacy `upgrade-v*.py` scripts and 0 `.pyc` / `__pycache__` artifacts;
-   - entire unsharded `bundle-data.js` is < 11.00 MiB UTF-8 bytes;
+   - entire unsharded `bundle-data.js` is < 10.00 MiB UTF-8 bytes (Historic Sub-10.0 MiB Milestone!);
    - 0 unmounted ghost repository IDs, 0 `‖c‖h‖a‖r‖` corrupted strings, 0 `127.0.0.1`/`localhost` dead links,
      and 0 `Solved Open Instance` / `Hodge Sextic` strings across `bundle-data.js`;
    - exact 1-to-1 bijection between `verifiedLeanSuites` and `CommonGround/Verification/*.lean` with ground-truth title & triad alignment;
@@ -49,7 +49,7 @@ def check_end_to_end_connections_and_clutter():
     assert not pyc_files, f"Bytecode .pyc files detected (violates Zero Bytecode rule): {pyc_files[:5]}"
 
     raw_bytes = (OBS_DIR / "bundle-data.js").stat().st_size
-    assert raw_bytes < int(11.0 * 1024 * 1024), f"Expected sub-11.0 MiB bundle-data.js, got {raw_bytes / (1024*1024):.3f} MiB!"
+    assert raw_bytes < int(10.0 * 1024 * 1024), f"Expected sub-10.0 MiB bundle-data.js, got {raw_bytes / (1024*1024):.3f} MiB!"
     raw = (OBS_DIR / "bundle-data.js").read_text(encoding="utf-8")
     for bad_str in ("127.0.0.1", "localhost:", "Solved Open Instance", "Hodge Sextic", "window.V145_REAL_LEAN_SUITES ="):
         assert bad_str not in raw, f"Legacy/clutter string {bad_str!r} reintroduced into bundle-data.js!"
@@ -62,7 +62,7 @@ def check_end_to_end_connections_and_clutter():
     assert not ghost_m, f"Unmounted ghost repository ID reintroduced into bundle-data.js: {ghost_m.group(0)!r}"
     prefix = "window.__CG_PRELOADED__ = "
     preloaded, _ = json.JSONDecoder().raw_decode(raw, raw.index(prefix) + len(prefix))
-    assert len(preloaded.get("_phr") or []) >= 40, "Lossless preloaded._phr phrase dictionary missing or truncated!"
+    assert len(preloaded.get("_phr") or []) >= 500, "Lossless V253+ preloaded._phr phrase dictionary missing or truncated!"
     canon_projs = set(preloaded["manifest"]["projectOrder"])
     sm = preloaded["semanticMechanisms"]
     suites = sm.get("verifiedLeanSuites", [])
@@ -84,9 +84,11 @@ def check_end_to_end_connections_and_clutter():
     assert suite_files == disk_verif, (
         f"verifiedLeanSuites ({len(suite_files)}) is not in 1-to-1 bijection with CommonGround/Verification/*.lean ({len(disk_verif)})!"
     )
-    assert len(suites) >= 653, f"Expected >= 653 verifiedLeanSuites in V252+, got {len(suites)}!"
+    assert len(suites) >= 654, f"Expected >= 654 verifiedLeanSuites in V253+, got {len(suites)}!"
     assert suites and "Williams" in (suites[0].get("title") or ""), "verifiedLeanSuites[0] ground-truth title alignment broken!"
     assert (suites[0].get("projects") or [None])[0] == "apsp3sum", "verifiedLeanSuites[0] ground-truth triad alignment broken!"
+    non_canon_suite_projs = [(s.get("id"), p) for s in suites for p in (s.get("projects") or []) if p not in canon_projs]
+    assert not non_canon_suite_projs, f"Non-canonical project IDs in verifiedLeanSuites: {non_canon_suite_projs[:5]}"
     covered_suite_projs = {p for s in suites for p in (s.get("projects") or []) if p in canon_projs}
     assert covered_suite_projs == canon_projs, f"verifiedLeanSuites missing canonical projects: {canon_projs - covered_suite_projs}"
 
@@ -377,13 +379,13 @@ def check_unified_static_assets():
 
 
 def main():
-    print("=== Running V252 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
+    print("=== Running V253 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
     ensure_bundle_reconstructed()
     check_lean_corpus_and_kernel()
     check_end_to_end_connections_and_clutter()
     check_unified_static_assets()
     subprocess.run(["bash", str(OBS_DIR / "tests" / "run-tests.sh")], check=True)
-    print("=== ALL V252 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
+    print("=== ALL V253 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
 
 
 if __name__ == "__main__":
