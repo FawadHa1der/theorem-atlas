@@ -126,12 +126,16 @@ def main():
     subprocess.run([lake_bin, "build"], cwd=str(REPO_ROOT), env=env, check=True)
 
     print(f"[Lean 4 Kernel] Compiling {len(pure_frontier)} standalone pure-Lean frontier modules...")
-    for pf in pure_frontier:
+    import concurrent.futures
+    def _compile_one(pf: Path):
         res = subprocess.run([lean_bin, str(pf)], cwd=str(REPO_ROOT), env=env, capture_output=True, text=True)
-        if res.returncode != 0:
-            print(res.stdout)
-            print(res.stderr)
-            raise SystemExit(f"Lean kernel failed on {pf}: exit {res.returncode}")
+        return pf, res
+    with concurrent.futures.ThreadPoolExecutor(max_workers=os.cpu_count() or 2) as pool:
+        for pf, res in pool.map(_compile_one, pure_frontier):
+            if res.returncode != 0:
+                print(res.stdout)
+                print(res.stderr)
+                raise SystemExit(f"Lean kernel failed on {pf}: exit {res.returncode}")
 
     print(
         f"[Lean 4 Kernel OK] {len(verif_files)} Verification modules + {len(pure_frontier)} pure-core Frontier modules "
