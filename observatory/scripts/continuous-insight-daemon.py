@@ -116,8 +116,22 @@ def discover_role_compatible_insights(data):
     seen_pairs = set()
     ranked = []
     for raw_iso in isos:
-        iso = dict(raw_iso)
-        xv = raw_iso.get("_x")
+        if isinstance(raw_iso, list):
+            rid = raw_iso[0] or ""
+            iso = {
+                "id": rid[1:] if rid.startswith("=") else f"iso-{rid}",
+                "_sc": raw_iso[1],
+                "_x": raw_iso[2],
+            }
+            flg = raw_iso[3] if len(raw_iso) > 3 and isinstance(raw_iso[3], int) else 0
+            if flg & 1:
+                iso["_cs"] = 1
+            if flg & 2:
+                iso["_sd"] = 1
+            xv = iso.get("_x")
+        else:
+            iso = dict(raw_iso)
+            xv = raw_iso.get("_x")
         if isinstance(xv, list):
             for ki, kk in enumerate(iso_keys):
                 if ki < len(xv) and isinstance(xv[ki], int) and xv[ki] >= 0:
@@ -130,8 +144,8 @@ def discover_role_compatible_insights(data):
             dv = dx.get("_d")
             if isinstance(dv, list) and len(dv) > 5 and isinstance(dv[5], int) and dv[5] >= 0 and "_fl" not in dx:
                 dx["_fl"] = dv[5]
-        fA = dA.get("file") or (dm_files[dA["_fl"]] if isinstance(dA.get("_fl"), int) and 0 <= dA["_fl"] < len(dm_files) else "")
-        fB = dB.get("file") or (dm_files[dB["_fl"]] if isinstance(dB.get("_fl"), int) and 0 <= dB["_fl"] < len(dm_files) else "")
+        fA = dA.get("file") or (dm_files[dA["_fl"]] if isinstance(dA["_fl"], int) and 0 <= dA["_fl"] < len(dm_files) else "") if isinstance(dA.get("_fl"), int) else (dA.get("file") or "")
+        fB = dB.get("file") or (dm_files[dB["_fl"]] if isinstance(dB["_fl"], int) and 0 <= dB["_fl"] < len(dm_files) else "") if isinstance(dB.get("_fl"), int) else (dB.get("file") or "")
         es_sym = iso.get("epistemicSymbol") or (i_es[iso["_es"]] if isinstance(iso.get("_es"), int) and 0 <= iso["_es"] < len(i_es) else "")
         p_id_a = iso.get("projectA") or (i_pj[iso["_pA"]] if isinstance(iso.get("_pA"), int) and 0 <= iso["_pA"] < len(i_pj) else "")
         p_id_b = iso.get("projectB") or (i_pj[iso["_pB"]] if isinstance(iso.get("_pB"), int) and 0 <= iso["_pB"] < len(i_pj) else "")
@@ -202,7 +216,7 @@ def run_cycle(cycle_num, start_ts, end_ts):
 
     status = {
         "status": "running" if remaining_hours > 0 else "completed",
-        "version": "V250",
+        "version": "V251",
         "daemonPid": os.getpid(),
         "cycle": cycle_num,
         "timestampUtc": now_iso,
@@ -226,7 +240,7 @@ def run_cycle(cycle_num, start_ts, end_ts):
     with RUNS_JSONL.open("a", encoding="utf-8") as f:
         f.write(json.dumps({
             "cycle": cycle_num,
-            "version": "V250",
+            "version": "V251",
             "timestampUtc": now_iso,
             "exitCode": proc.returncode,
             "passed": passed_checks,

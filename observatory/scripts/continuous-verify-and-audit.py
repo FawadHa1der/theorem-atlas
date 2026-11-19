@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V250).
+Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V251).
 Verifies:
-1. All 776+ physical Lean 4 files (651 in CommonGround/Verification/ + 125 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
+1. All 778+ physical Lean 4 files (652 in CommonGround/Verification/ + 126 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
    tokens outside comments (with NO 25 MiB cap on `.lean` files — large `.lean` files stream via Cloudflare R2 `/api/lean/*`)
    AND compile cleanly through the real Lean 4.33.0 kernel (`compile-all-lean4.py`).
 2. Reconstructs `bundle-data.js` from the 8 tracked `<16 MiB` shards and builds `dist-cloudflare/` if absent in CI.
 3. Verifies end-to-end connection integrity & zero clutter:
    - 0 legacy `upgrade-v*.py` scripts and 0 `.pyc` / `__pycache__` artifacts;
-   - entire unsharded `bundle-data.js` is < 14.00 MiB UTF-8 bytes;
+   - entire unsharded `bundle-data.js` is < 13.00 MiB UTF-8 bytes;
    - 0 unmounted ghost repository IDs, 0 `‖c‖h‖a‖r‖` corrupted strings, 0 `127.0.0.1`/`localhost` dead links,
      and 0 `Solved Open Instance` / `Hodge Sextic` strings across `bundle-data.js`;
    - exact 1-to-1 bijection between `verifiedLeanSuites` and `CommonGround/Verification/*.lean` with ground-truth title & triad alignment;
@@ -49,7 +49,7 @@ def check_end_to_end_connections_and_clutter():
     assert not pyc_files, f"Bytecode .pyc files detected (violates Zero Bytecode rule): {pyc_files[:5]}"
 
     raw_bytes = (OBS_DIR / "bundle-data.js").stat().st_size
-    assert raw_bytes < int(14.0 * 1024 * 1024), f"Expected sub-14.0 MiB bundle-data.js, got {raw_bytes / (1024*1024):.3f} MiB!"
+    assert raw_bytes < int(13.0 * 1024 * 1024), f"Expected sub-13.0 MiB bundle-data.js, got {raw_bytes / (1024*1024):.3f} MiB!"
     raw = (OBS_DIR / "bundle-data.js").read_text(encoding="utf-8")
     for bad_str in ("127.0.0.1", "localhost:", "Solved Open Instance", "Hodge Sextic", "window.V145_REAL_LEAN_SUITES ="):
         assert bad_str not in raw, f"Legacy/clutter string {bad_str!r} reintroduced into bundle-data.js!"
@@ -83,7 +83,7 @@ def check_end_to_end_connections_and_clutter():
     assert suite_files == disk_verif, (
         f"verifiedLeanSuites ({len(suite_files)}) is not in 1-to-1 bijection with CommonGround/Verification/*.lean ({len(disk_verif)})!"
     )
-    assert len(suites) >= 651, f"Expected >= 651 verifiedLeanSuites in V250+, got {len(suites)}!"
+    assert len(suites) >= 652, f"Expected >= 652 verifiedLeanSuites in V251+, got {len(suites)}!"
     assert suites and "Williams" in (suites[0].get("title") or ""), "verifiedLeanSuites[0] ground-truth title alignment broken!"
     assert (suites[0].get("projects") or [None])[0] == "apsp3sum", "verifiedLeanSuites[0] ground-truth triad alignment broken!"
     covered_suite_projs = {p for s in suites for p in (s.get("projects") or []) if p in canon_projs}
@@ -99,15 +99,17 @@ def check_end_to_end_connections_and_clutter():
         and len(csi_fns) >= 4500
     ), "Lossless csiPools.files / evidences / fns missing or truncated!"
     for r in preloaded.get("customSearchIndex", []):
-        if "_cx" in r and len(r["_cx"]) > 0 and r["_cx"][0] >= 0:
-            assert 0 <= r["_cx"][0] < len(csi_fns), f"Out-of-bounds _cx[0] (fns) on {r.get('name')}"
+        cx = r[:9] if isinstance(r, list) else r.get("_cx", [])
+        if len(cx) > 0 and isinstance(cx[0], int) and cx[0] >= 0:
+            assert 0 <= cx[0] < len(csi_fns), f"Out-of-bounds _cx[0] (fns) on {r}"
     tr_pools = sm.get("trinityPools") or {}
     tr_dm_meta = tr_pools.get("dmMeta") or {}
     assert len(tr_pools.get("domains") or []) > 900 and len(tr_dm_meta.get("projs") or []) >= 35, (
         "Lossless trinityPools.domains / dmMeta missing or truncated!"
     )
     for gt in sm.get("grandTrinities", []):
-        assert "unifyingEquation" not in gt, f"Unreferenced dead key unifyingEquation reintroduced on {gt.get('id')}!"
+        if isinstance(gt, dict):
+            assert "unifyingEquation" not in gt, f"Unreferenced dead key unifyingEquation reintroduced on {gt.get('id')}!"
     for fam in preloaded.get("constellationCatalog", {}).get("families", []):
         for dead_fk in ("scopeNotes", "comparatorConfigurations", "tags", "shards", "manuscripts", "sharedIngredientCount"):
             assert dead_fk not in fam, (
@@ -151,48 +153,73 @@ def check_end_to_end_connections_and_clutter():
         "_df", "_ct", "_vl", "_vb", "_tg", "_nh", "_lt", "_oc",
         "_cs", "_da",
     )
-    for m in sm.get("highLevelMechanisms", []):
-        mv = dict(m)
-        if "_mx" in m:
-            mx = m["_mx"]
+    for raw_m in sm.get("highLevelMechanisms", []):
+        if isinstance(raw_m, list):
+            mv = {
+                "id": raw_m[0],
+                "title": raw_m[1],
+                "plainHeadline": raw_m[2],
+                "mechanismScore": raw_m[3],
+                "projectCount": raw_m[4],
+                "_mx": raw_m[5],
+                "_pp": raw_m[6],
+            }
+        else:
+            mv = dict(raw_m)
+        if "_mx" in mv and isinstance(mv["_mx"], list):
+            mx = mv["_mx"]
             for ki, kk in enumerate(mech_keys):
                 if ki < len(mx) and isinstance(mx[ki], int) and mx[ki] >= 0:
                     mv[kk] = mx[ki]
             if len(mx) > 18 and mx[18] >= 0:
-                assert 0 <= mx[18] < len(mf_projs), f"Out-of-bounds _mx[18] (projs) on {m.get('id')}"
+                assert 0 <= mx[18] < len(mf_projs), f"Out-of-bounds _mx[18] (projs) on {mv.get('id')}"
             if len(mx) > 19 and mx[19] >= 0:
-                assert 0 <= mx[19] < len(mf_names), f"Out-of-bounds _mx[19] (names) on {m.get('id')}"
+                assert 0 <= mx[19] < len(mf_names), f"Out-of-bounds _mx[19] (names) on {mv.get('id')}"
             if len(mx) > 20 and mx[20] >= 0:
-                assert 0 <= mx[20] < len(mf_pints), f"Out-of-bounds _mx[20] (pints) on {m.get('id')}"
+                assert 0 <= mx[20] < len(mf_pints), f"Out-of-bounds _mx[20] (pints) on {mv.get('id')}"
             if len(mx) > 21 and mx[21] >= 0:
-                assert 0 <= mx[21] < len(mf_otags), f"Out-of-bounds _mx[21] (otags) on {m.get('id')}"
+                assert 0 <= mx[21] < len(mf_otags), f"Out-of-bounds _mx[21] (otags) on {mv.get('id')}"
             if len(mx) > 22 and mx[22] >= 0:
-                assert 0 <= mx[22] < len(mf_slabels), f"Out-of-bounds _mx[22] (slabels) on {m.get('id')}"
+                assert 0 <= mx[22] < len(mf_slabels), f"Out-of-bounds _mx[22] (slabels) on {mv.get('id')}"
             if len(mx) > 23 and mx[23] >= 0:
-                assert 0 <= mx[23] < len(mf_whys), f"Out-of-bounds _mx[23] (whys) on {m.get('id')}"
+                assert 0 <= mx[23] < len(mf_whys), f"Out-of-bounds _mx[23] (whys) on {mv.get('id')}"
             if len(mx) > 24 and mx[24] >= 0:
-                assert 0 <= mx[24] < len(mf_sstructs), f"Out-of-bounds _mx[24] (sstructs) on {m.get('id')}"
+                assert 0 <= mx[24] < len(mf_sstructs), f"Out-of-bounds _mx[24] (sstructs) on {mv.get('id')}"
             if len(mx) > 25 and mx[25] >= 0:
-                assert 0 <= mx[25] < len(mf_obls), f"Out-of-bounds _mx[25] (obls) on {m.get('id')}"
+                assert 0 <= mx[25] < len(mf_obls), f"Out-of-bounds _mx[25] (obls) on {mv.get('id')}"
         bf = mv.get("verifiedBridgeFile") or (vbridges_pool[mv["_vb"]] if isinstance(mv.get("_vb"), int) else None)
         if bf:
             assert (REPO_ROOT / bf).exists(), f"Broken highLevelMechanisms.verifiedBridgeFile: {bf}"
-        if "_pp" in mv:
-            assert all(0 <= idx < len(part_items) for idx in mv["_pp"]), f"Out-of-bounds _pp index on {m.get('id')}"
+        if "_pp" in mv and isinstance(mv["_pp"], list):
+            assert all(0 <= idx < len(part_items) for idx in mv["_pp"]), f"Out-of-bounds _pp index on {mv.get('id')}"
         if "_rp" in mv:
-            assert 0 <= mv["_rp"] < len(mech_pbs), f"Out-of-bounds _rp index on {m.get('id')}"
-        for dead_k in dead_mech_keys:
-            assert dead_k not in m, f"Stale ghost-project or synthetic field {dead_k!r} reintroduced on mechanism {m.get('id')}!"
+            assert 0 <= mv["_rp"] < len(mech_pbs), f"Out-of-bounds _rp index on {mv.get('id')}"
+        if isinstance(raw_m, dict):
+            for dead_k in dead_mech_keys:
+                assert dead_k not in raw_m, f"Stale ghost-project or synthetic field {dead_k!r} reintroduced on mechanism {mv.get('id')}!"
     pipe_pools = sm.get("pipelinePools") or {}
     pipe_stages = pipe_pools.get("stages") or []
     assert len(pipe_stages) >= 200 and len(pipe_pools.get("stageStrs") or []) >= 200, (
         "Lossless pipelinePools.stages / stageStrs missing or truncated!"
     )
-    for pp in sm.get("proofPipelines", []):
+    for raw_pp in sm.get("proofPipelines", []):
+        pp = (
+            {
+                "id": raw_pp[0],
+                "title": raw_pp[1],
+                "score": raw_pp[2],
+                "projectA": raw_pp[3],
+                "projectB": raw_pp[4],
+                "_st": raw_pp[5],
+                "_px": raw_pp[6],
+            }
+            if isinstance(raw_pp, list)
+            else raw_pp
+        )
         assert pp.get("projectA") in canon_projs and pp.get("projectB") in canon_projs, (
             f"Broken or non-canonical proofPipeline projects on {pp.get('id')}: {pp.get('projectA')} <-> {pp.get('projectB')}"
         )
-        if "_st" in pp:
+        if "_st" in pp and isinstance(pp["_st"], int):
             assert 0 <= pp["_st"] < len(pipe_stages), f"Out-of-bounds _st index on {pp.get('id')}"
     path_pools = preloaded.get("insightPaths", {}).get("pathPools") or {}
     ep_pool = path_pools.get("endpoints") or []
@@ -209,24 +236,29 @@ def check_end_to_end_connections_and_clutter():
         "_si", "_rl", "_ds", "_kd", "_wm", "_oc", "_pjs", "_vl",
         "_hr", "_fms", "_ct", "_st",
     )
-    for c in preloaded.get("insightPaths", {}).get("connections", []):
-        cv = dict(c)
-        if "_ix" in c:
-            ix = c["_ix"]
+    for raw_c in preloaded.get("insightPaths", {}).get("connections", []):
+        cv = (
+            {"id": raw_c[0], "title": raw_c[1], "_ep": raw_c[2], "_ix": raw_c[3]}
+            if isinstance(raw_c, list)
+            else dict(raw_c)
+        )
+        if "_ix" in cv and isinstance(cv["_ix"], list):
+            ix = cv["_ix"]
             for ki, kk in enumerate(conn_keys):
                 if ki < len(ix) and isinstance(ix[ki], int) and ix[ki] >= 0:
                     cv[kk] = ix[ki]
             if len(ix) > 20 and ix[20] >= 0:
-                assert 0 <= ix[20] < len(pp_mids), f"Out-of-bounds _ix[20] (mids) on {c.get('id')}"
+                assert 0 <= ix[20] < len(pp_mids), f"Out-of-bounds _ix[20] (mids) on {cv.get('id')}"
         vf = cv.get("verifiedLeanFile") or (pp_vleans[cv["_vl"]] if isinstance(cv.get("_vl"), int) else None)
         if vf:
             assert (REPO_ROOT / vf).exists(), f"Broken insightPaths.connections.verifiedLeanFile: {vf}"
-        if "_ep" in cv:
-            assert all(0 <= idx < len(ep_pool) for idx in cv["_ep"]), f"Out-of-bounds _ep index on {c.get('id')}"
+        if "_ep" in cv and isinstance(cv["_ep"], list):
+            assert all(0 <= idx < len(ep_pool) for idx in cv["_ep"]), f"Out-of-bounds _ep index on {cv.get('id')}"
         if "_db" in cv:
-            assert 0 <= cv["_db"] < len(db_pool), f"Out-of-bounds _db index on {c.get('id')}"
-        for dead_ck in ("sourceAstBefore", "conjecture", "intuitionAnalogy", "headline", "targetProject"):
-            assert dead_ck not in c, f"Unreferenced duplicate field {dead_ck!r} reintroduced into insightPaths.connections!"
+            assert 0 <= cv["_db"] < len(db_pool), f"Out-of-bounds _db index on {cv.get('id')}"
+        if isinstance(raw_c, dict):
+            for dead_ck in ("sourceAstBefore", "conjecture", "intuitionAnalogy", "headline", "targetProject"):
+                assert dead_ck not in raw_c, f"Unreferenced duplicate field {dead_ck!r} reintroduced into insightPaths.connections!"
     assert "verificationSuiteBridges" not in sm, "Unreferenced verificationSuiteBridges clutter reintroduced!"
     dp = sm.get("isoDeclPool") or []
     dm = sm.get("declMeta") or {}
@@ -249,36 +281,46 @@ def check_end_to_end_connections_and_clutter():
         "_et", "_sk", "_pa", "_pAN", "_pBN", "_dcA", "_dcB", "_oc",
         "_tdA", "_tdB", "_kd", "_so", "_wm", "_tb", "_mA", "_mB",
     )
-    for iso in sm.get("customIsomorphisms", []):
-        iv = dict(iso)
-        if "_x" in iso:
-            xv = iso["_x"]
+    for raw_iso in sm.get("customIsomorphisms", []):
+        if isinstance(raw_iso, list):
+            rid = raw_iso[0] or ""
+            iv = {
+                "id": rid[1:] if rid.startswith("=") else f"iso-{rid}",
+                "_sc": raw_iso[1],
+                "_x": raw_iso[2],
+            }
+            if len(raw_iso) > 6 and raw_iso[6]:
+                iv["transferHypothesis"] = raw_iso[6]
+        else:
+            iv = dict(raw_iso)
+            assert "targetProject" not in raw_iso, f"Dead unreferenced targetProject reintroduced on {iv.get('id')}!"
+        if "_x" in iv and isinstance(iv["_x"], list):
+            xv = iv["_x"]
             for ki, kk in enumerate(iso_keys):
                 if ki < len(xv) and isinstance(xv[ki], int) and xv[ki] >= 0:
                     iv[kk] = xv[ki]
-        assert "targetProject" not in iso, f"Dead unreferenced targetProject reintroduced on {iso.get('id')}!"
-        assert "declA" in iv or (isinstance(iv.get("_dA"), int) and 0 <= iv["_dA"] < len(dp)), f"Invalid _dA on {iso.get('id')}"
-        assert "declB" in iv or (isinstance(iv.get("_dB"), int) and 0 <= iv["_dB"] < len(dp)), f"Invalid _dB on {iso.get('id')}"
+        assert "declA" in iv or (isinstance(iv.get("_dA"), int) and 0 <= iv["_dA"] < len(dp)), f"Invalid _dA on {iv.get('id')}"
+        assert "declB" in iv or (isinstance(iv.get("_dB"), int) and 0 <= iv["_dB"] < len(dp)), f"Invalid _dB on {iv.get('id')}"
         if "_pA" in iv:
-            assert 0 <= iv["_pA"] < len(i_pj), f"Invalid _pA on {iso.get('id')}"
+            assert 0 <= iv["_pA"] < len(i_pj), f"Invalid _pA on {iv.get('id')}"
         if "_pB" in iv:
-            assert 0 <= iv["_pB"] < len(i_pj), f"Invalid _pB on {iso.get('id')}"
+            assert 0 <= iv["_pB"] < len(i_pj), f"Invalid _pB on {iv.get('id')}"
         if "_es" in iv:
-            assert 0 <= iv["_es"] < len(i_es), f"Invalid _es on {iso.get('id')}"
+            assert 0 <= iv["_es"] < len(i_es), f"Invalid _es on {iv.get('id')}"
         if "_mi" in iv:
-            assert 0 <= iv["_mi"] < len(i_mi), f"Invalid _mi on {iso.get('id')}"
+            assert 0 <= iv["_mi"] < len(i_mi), f"Invalid _mi on {iv.get('id')}"
         if "_w1" in iv:
-            assert 0 <= iv["_w1"] < len(w1), f"Invalid _w1 on {iso.get('id')}"
+            assert 0 <= iv["_w1"] < len(w1), f"Invalid _w1 on {iv.get('id')}"
         if "_w2" in iv:
-            assert 0 <= iv["_w2"] < len(w2), f"Invalid _w2 on {iso.get('id')}"
+            assert 0 <= iv["_w2"] < len(w2), f"Invalid _w2 on {iv.get('id')}"
         if "_et" in iv:
-            assert 0 <= iv["_et"] < len(tp), f"Invalid _et on {iso.get('id')}"
+            assert 0 <= iv["_et"] < len(tp), f"Invalid _et on {iv.get('id')}"
         if "_sk" in iv:
-            assert 0 <= iv["_sk"] < len(i_sk), f"Invalid _sk on {iso.get('id')}"
+            assert 0 <= iv["_sk"] < len(i_sk), f"Invalid _sk on {iv.get('id')}"
         es_val = iv.get("epistemicSymbol") or (i_es[iv["_es"]] if isinstance(iv.get("_es"), int) else None)
         if es_val == "⚠":
             assert "transferHypothesis" not in iv and "transferBlueprint" not in iv and "_tb" not in iv, (
-                f"Contradicted optimistic transferHypothesis/transferBlueprint clutter found on ⚠ lookalike {iso.get('id')}!"
+                f"Contradicted optimistic transferHypothesis/transferBlueprint clutter found on ⚠ lookalike {iv.get('id')}!"
             )
     idxd = preloaded.get("indexData") or {}
     assert len(idxd.get("_pkeys") or []) == 40, "Lossless indexData._pkeys missing or not 40 canonical projects!"
@@ -297,7 +339,7 @@ def check_end_to_end_connections_and_clutter():
         assert target.exists(), f"Broken relative link {rel_link} in README.md -> {target}"
     print(
         f"  [OK] End-to-end connection bijection verified: {len(suites)} suites == {len(disk_verif)} CommonGround/Verification/*.lean, "
-        f"bundle={raw_bytes/(1024*1024):.3f} MiB (<14.0 MiB!), {len(sn_pool)} unique snippets, {len(sm.get('proofPipelines', []))} canonical pipelines, "
+        f"bundle={raw_bytes/(1024*1024):.3f} MiB (<13.0 MiB!), {len(sn_pool)} unique snippets, {len(sm.get('proofPipelines', []))} canonical pipelines, "
         f"{len(dp)} pooled decls, {len(i_sk)} iso skels, {len(part_items)} mech items, {len(ep_pool)} path endpoints, "
         f"0 ghost repo IDs, 0 127.0.0.1 links, 0 ‖c‖h‖a‖r‖ corruptions, 0 broken .lean refs, README clean."
     )
@@ -333,13 +375,13 @@ def check_unified_static_assets():
 
 
 def main():
-    print("=== Running V250 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
+    print("=== Running V251 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
     ensure_bundle_reconstructed()
     check_lean_corpus_and_kernel()
     check_end_to_end_connections_and_clutter()
     check_unified_static_assets()
     subprocess.run(["bash", str(OBS_DIR / "tests" / "run-tests.sh")], check=True)
-    print("=== ALL V250 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
+    print("=== ALL V251 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
 
 
 if __name__ == "__main__":
