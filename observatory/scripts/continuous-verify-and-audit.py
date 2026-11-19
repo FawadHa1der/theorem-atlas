@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V235).
+Deterministic Zero-Clutter Mathematical, Lean 4.33.0 Kernel & Unified Browser Shard Verification Harness (V236).
 Verifies:
-1. All 746+ physical Lean 4 files (636 in CommonGround/Verification/ + 110 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
+1. All 748+ physical Lean 4 files (637 in CommonGround/Verification/ + 111 in 01..10-*) have 0 `sorry`/`admit`/`sorryAx`
    tokens outside comments (with NO 25 MiB cap on `.lean` files — large `.lean` files stream via Cloudflare R2 `/api/lean/*`)
    AND compile cleanly through the real Lean 4.33.0 kernel (`compile-all-lean4.py`).
 2. Reconstructs `bundle-data.js` from the 8 tracked `<16 MiB` shards and builds `dist-cloudflare/` if absent in CI.
@@ -57,6 +57,8 @@ def check_end_to_end_connections_and_clutter():
         bf = m.get("verifiedBridgeFile")
         if bf:
             assert (REPO_ROOT / bf).exists(), f"Broken highLevelMechanisms.verifiedBridgeFile: {bf}"
+        for dead_k in ("tacticStepper", "openConjectureAttackTree", "dualityDictionary", "threeHopChain", "constantOptimizer", "personaExplanations"):
+            assert dead_k not in m, f"Stale ghost-project synthetic field {dead_k!r} reintroduced on mechanism {m.get('id')}!"
     for c in preloaded.get("insightPaths", {}).get("connections", []):
         vf = c.get("verifiedLeanFile")
         if vf:
@@ -77,7 +79,7 @@ def check_end_to_end_connections_and_clutter():
         assert target.exists(), f"Broken relative link {rel_link} in README.md -> {target}"
     print(
         f"  [OK] End-to-end connection bijection verified: {len(suites)} suites == {len(disk_verif)} CommonGround/Verification/*.lean, "
-        f"0 broken mechanism/path .lean refs, 0 dead/contradicted lookalike fields, 0 clutter scripts, 0 .pyc files, README clean."
+        f"0 broken mechanism/path .lean refs, 0 dead/contradicted/ghost-project fields, 0 clutter scripts, 0 .pyc files, README clean."
     )
 
 
@@ -111,13 +113,13 @@ def check_unified_static_assets():
 
 
 def main():
-    print("=== Running V235 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
+    print("=== Running V236 End-to-End Lean 4.33.0 Kernel & Unified Chrome/Safari Observatory Audit ===")
     ensure_bundle_reconstructed()
     check_lean_corpus_and_kernel()
     check_end_to_end_connections_and_clutter()
     check_unified_static_assets()
     subprocess.run(["bash", str(OBS_DIR / "tests" / "run-tests.sh")], check=True)
-    print("=== ALL V235 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
+    print("=== ALL V236 CONTINUOUS VERIFICATION CHECKS PASSED (EXIT 0) ===")
 
 
 if __name__ == "__main__":

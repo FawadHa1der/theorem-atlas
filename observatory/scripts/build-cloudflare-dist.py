@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-V235 Unified Chrome & Safari Shard Builder (< 25 MiB static assets)
+V236 Unified Chrome & Safari Shard Builder (< 25 MiB static assets)
 & Cloudflare R2 Unrestricted-Size Lean 4 Streaming Function Generator.
 
 - Reconstructs `bundle-data.js` from `observatory/chunks/` if missing in a fresh Git clone.
@@ -25,7 +25,7 @@ LOCAL_CHUNKS_DIR = OBS_DIR / "chunks"
 CF_DIR = OBS_DIR / "dist-cloudflare"
 CF_CHUNKS_DIR = CF_DIR / "chunks"
 LIMIT_BYTES = 25 * 1024 * 1024  # Cloudflare Pages 25 MiB static asset limit (does NOT restrict .lean files in R2!)
-ASSET_VER = "235"
+ASSET_VER = "236"
 
 SHARD_NAMES = [
     "bundle-shard-1-core.js",
