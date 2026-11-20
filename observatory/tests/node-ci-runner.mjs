@@ -104,6 +104,13 @@ function runUnifiedIndexFileOriginSuite() {
   vm.runInContext(
     `
     window.addEventListener = function(){};
+    document.readyState = "loading";
+    window._cgCiDomContentLoadedCbs = [];
+    var _origDocAddEL = document.addEventListener;
+    document.addEventListener = function(ev, cb) {
+      if (ev === "DOMContentLoaded") window._cgCiDomContentLoadedCbs.push(cb);
+      else if (typeof _origDocAddEL === "function") _origDocAddEL.call(document, ev, cb);
+    };
     window.location = { protocol: "file:", search: "", href: "file:///observatory/index.html" };
     window.history = {
       replaceState: function() { throw new Error("SecurityError: Blocked attempt to use history.replaceState() on file://"); },
@@ -128,6 +135,13 @@ function runUnifiedIndexFileOriginSuite() {
 
   vm.runInContext(
     `
+    if (typeof window.cgPinResearchHop !== "function" || typeof window.cgComposeGalaxyIsoBridge !== "function") {
+      throw new Error("Real-browser readyState=loading script load aborted before registering cgPinResearchHop / cgComposeGalaxyIsoBridge!");
+    }
+    document.readyState = "interactive";
+    for (var dci = 0; dci < window._cgCiDomContentLoadedCbs.length; dci++) {
+      window._cgCiDomContentLoadedCbs[dci]();
+    }
     var mount = document.getElementById("app-mount");
     if (!mount.innerHTML || mount.innerHTML.indexOf("Loading 40-Project") !== -1 || mount.innerHTML.indexOf("CONSTELLATION SHARD DIAGNOSTIC") !== -1) {
       throw new Error("observatory/index.html failed automatic init() boot on file://!");
@@ -147,6 +161,21 @@ function runUnifiedIndexFileOriginSuite() {
     if (cards[0].innerHTML.indexOf("v146-inline-card-drawer") === -1) {
       throw new Error("Clicking .ingredient-card[0] under file:// failed to expand inline drawer!");
     }
+    if (cards[0].innerHTML.indexOf("v7-pin-research-hop") === -1 || cards[0].innerHTML.indexOf("v7-launch-research-direction") === -1) {
+      throw new Error("Expanded Galaxy card drawer missing #v7-pin-research-hop or #v7-launch-research-direction!");
+    }
+    if (!window.cgPinResearchHop(state.source)) {
+      throw new Error("window.cgPinResearchHop(state.source) failed after readyState=loading boot!");
+    }
+    if (cards[0].innerHTML.indexOf("cg-active-research-chain-bar") === -1) {
+      throw new Error("Pinning hop did not update expanded inline Galaxy card drawer with #cg-active-research-chain-bar!");
+    }
+    var picked0 = recordById.get(state.source);
+    if (!window.cgComposeGalaxyIsoBridge((picked0 && picked0.projects && picked0.projects[0]) || "cslib", (picked0 && picked0.projects && picked0.projects[1]) || "econlib") || !document.getElementById("v95-composer-backdrop")) {
+      throw new Error("window.cgComposeGalaxyIsoBridge failed to mount #v95-composer-backdrop!");
+    }
+    if (typeof window.v95CloseBridgeComposer === "function") window.v95CloseBridgeComposer();
+    window.cgClearResearchChain();
     for (var lensName of ["serendipity", "paths", "bridges", "constellation", "intuition", "galaxy"]) {
       state.lens = lensName;
       renderApp();
@@ -154,7 +183,7 @@ function runUnifiedIndexFileOriginSuite() {
         throw new Error("Lens " + lensName + " failed in observatory/index.html!");
       }
     }
-    print("UNIFIED_INDEX_FILE_ORIGIN_NODE_VM_OK: scripts=9, totalUntruncatedPayload=${totalMiB}MiB, cards=" + cards.length + ", lenses=6/6");
+    print("UNIFIED_INDEX_FILE_ORIGIN_NODE_VM_OK: scripts=9, readyState=loading->DCL OK, galaxyPinAndDraftOK=true, totalUntruncatedPayload=${totalMiB}MiB, cards=" + cards.length + ", lenses=6/6");
     `,
     ctx,
     { filename: "unified-file-assertions.js" }
