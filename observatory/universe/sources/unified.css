@@ -4156,4 +4156,112 @@ details.cg-secondary-compass-drawer > summary:hover {
   color: #fef3c7;
 }
 
-
+/* V286: Calm UI Simplification, GitHub Source Links & Progressive-Disclosure Secondary Tools */
+.cg-github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border-radius: 9px;
+  border: 1px solid rgba(148, 163, 184, 0.32);
+  background: rgba(12, 21, 34, 0.85);
+  color: #e2e8f0;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.cg-github-link:hover {
+  border-color: var(--gold);
+  background: rgba(229, 198, 135, 0.12);
+  color: #fef3c7;
+}
+.cg-inline-github-chip,
+.cg-lean-github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.34);
+  background: rgba(15, 23, 42, 0.84);
+  color: #cbd5e1;
+  font-size: 10.8px;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+.cg-inline-github-chip:hover,
+.cg-lean-github-link:hover {
+  border-color: var(--gold);
+  color: #fde68a;
+  background: rgba(229, 198, 135, 0.12);
+}
+.cg-menu-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.cg-editorial-intro-compact {
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+}
+.cg-editorial-intro-compact .cg-intro-headline {
+  font-size: clamp(20px, 2.2vw, 27px) !important;
+  margin: 4px 0 5px 0 !important;
+  line-height: 1.18 !important;
+}
+.cg-editorial-intro-compact .cg-intro-lead {
+  font-size: 13px !important;
+  margin: 0 !important;
+  line-height: 1.48 !important;
+}
+.cg-editorial-intro-compact .cg-entry-cards {
+  gap: 8px !important;
+}
+.cg-editorial-intro-compact .cg-entry-card {
+  padding: 9px 11px !important;
+  gap: 2px !important;
+}
+.cg-editorial-intro-compact .cg-entry-card strong {
+  font-size: 12.8px !important;
+}
+.cg-editorial-intro-compact .cg-entry-card span:last-child {
+  font-size: 11px !important;
+}
+.cg-optional-tools-disclosure,
+.cg-footer-more-disclosure {
+  margin-top: 6px;
+}
+.cg-optional-tools-disclosure > summary,
+.cg-footer-more-disclosure > summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.6px;
+  font-weight: 650;
+  color: #94a3b8;
+  padding: 2px 6px;
+  border-radius: 6px;
+  user-select: none;
+}
+.cg-optional-tools-disclosure > summary::-webkit-details-marker,
+.cg-footer-more-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+.cg-optional-tools-disclosure > summary:hover,
+.cg-footer-more-disclosure > summary:hover {
+  color: #e2e8f0;
+  background: rgba(148, 163, 184, 0.12);
+}
+.cg-optional-tools-body {
+  margin-top: 6px;
+  padding: 7px 9px;
+  border-radius: 8px;
+  background: rgba(4, 10, 20, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}

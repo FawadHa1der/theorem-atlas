@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Common Ground · Cross-Domain Mathematical Observatory</title>
-  <link rel="stylesheet" href="./unified.css?v=285">
+  <link rel="stylesheet" href="./unified.css?v=286">
 </head>
 <body class="v125-mode-novice cg-calm-editorial">
   <a class="skip" href="#main-workspace">Skip to interactive workspace</a>
@@ -14,7 +14,7 @@
     <div class="masthead-inner">
       <a class="brand" href="./" id="brand-home">
         <span class="brand-mark" aria-hidden="true">✳</span>
-        <span>Common Ground <small class="brand-sub">Cross-Domain Mathematical Observatory</small></span>
+        <span>Common Ground <small class="brand-sub">Mathematical Observatory</small></span>
       </a>
 
       <nav class="lens-nav" aria-label="Discovery views">
@@ -46,69 +46,73 @@
         </div>
 
         <details class="cg-tools-dropdown" id="cg-tools-menu">
-          <summary class="cg-tools-summary">Studios &amp; Tools ▾</summary>
-          <div class="cg-tools-popover" role="menu" aria-label="Specialized mathematical studios and verification tools">
+          <summary class="cg-tools-summary">Tools ▾</summary>
+          <div class="cg-tools-popover" role="menu" aria-label="Interactive labs, research matchers, and verification tools">
             <div class="cg-tools-col">
-              <div class="cg-tools-heading">Visual &amp; Finite Labs</div>
-              <button type="button" class="cg-menu-item" onclick="document.getElementById('cg-tools-menu').removeAttribute('open');if(window.v136OpenV34FiniteDiagramsModal)window.v136OpenV34FiniteDiagramsModal(0);">
-                <strong>140 Exact Finite Micro-Labs</strong>
-                <span>Interactive finite witnesses where every step can be checked by hand</span>
+              <div class="cg-tools-heading">Interactive Labs</div>
+              <button type="button" class="cg-menu-item" onclick="if(window.cgCloseToolsMenu)window.cgCloseToolsMenu();if(window.v136OpenV34FiniteDiagramsModal)window.v136OpenV34FiniteDiagramsModal(0);">
+                <strong>141 Exact Finite Micro-Labs</strong>
+                <span>Hands-on finite models and counterexamples checkable by hand</span>
               </button>
-              <button type="button" class="cg-menu-item" onclick="document.getElementById('cg-tools-menu').removeAttribute('open');if(window.v90OpenSplitScreenDualStudio)window.v90OpenSplitScreenDualStudio(0, 1);">
-                <strong>Split-Screen Dual Simulators</strong>
-                <span>Compare two physical or algebraic mechanisms side by side</span>
-              </button>
-              <button type="button" class="cg-menu-item" onclick="document.getElementById('cg-tools-menu').removeAttribute('open');if(window.v65OpenCommutativeAnimatorModal)window.v65OpenCommutativeAnimatorModal(0);">
-                <strong>Commutative Bridge Animator</strong>
-                <span>Watch how Domain A translates through an abstract carrier into Domain B</span>
-              </button>
-              <button type="button" class="cg-menu-item" onclick="document.getElementById('cg-tools-menu').removeAttribute('open');if(window.v70OpenBreakHypothesisSandbox)window.v70OpenBreakHypothesisSandbox(0);">
+              <button type="button" class="cg-menu-item" onclick="if(window.cgCloseToolsMenu)window.cgCloseToolsMenu();if(window.v70OpenBreakHypothesisSandbox)window.v70OpenBreakHypothesisSandbox(0);">
                 <strong>Break-the-Hypothesis Sandbox</strong>
                 <span>Drop a theorem premise to see the exact counterexample that emerges</span>
               </button>
-              <button type="button" class="cg-menu-item" onclick="document.getElementById('cg-tools-menu').removeAttribute('open');if(window.v115OpenProofGameStepper)window.v115OpenProofGameStepper(0);">
+              <button type="button" class="cg-menu-item" onclick="if(window.cgCloseToolsMenu)window.cgCloseToolsMenu();if(window.v115OpenProofGameStepper)window.v115OpenProofGameStepper(0);">
                 <strong>4-Step Proof-Game Stepper</strong>
                 <span>Walk through a cross-domain proof four stages at a time</span>
               </button>
+              <button type="button" class="cg-menu-item" onclick="if(window.cgCloseToolsMenu)window.cgCloseToolsMenu();if(window.v90OpenSplitScreenDualStudio)window.v90OpenSplitScreenDualStudio(0, 1);">
+                <strong>Split-Screen Dual Simulators</strong>
+                <span>Compare two physical or algebraic mechanisms side by side</span>
+              </button>
+              <button type="button" class="cg-menu-item" onclick="if(window.cgCloseToolsMenu)window.cgCloseToolsMenu();if(window.v65OpenCommutativeAnimatorModal)window.v65OpenCommutativeAnimatorModal(0);">
+                <strong>Commutative Bridge Animator</strong>
+                <span>Visualize how Domain A translates through an abstract carrier into Domain B</span>
+              </button>
             </div>
             <div class="cg-tools-col">
-              <div class="cg-tools-heading">Research &amp; Comparison</div>
-              <button type="button" class="cg-menu-item" onclick="document.getElementById('cg-tools-menu').removeAttribute('open');if(window.v148OpenArgumentAndWorksheetModal)window.v148OpenArgumentAndWorksheetModal('compare');">
-                <strong>Compare 48 Arguments &amp; Premise Worksheet</strong>
-                <span>Side-by-side structural comparison and checklist for your own proof</span>
-              </button>
-              <button type="button" class="cg-menu-item" onclick="document.getElementById('cg-tools-menu').removeAttribute('open');if(window.v137OpenSemanticMatcherModal)window.v137OpenSemanticMatcherModal('');">
+              <div class="cg-tools-heading">Discovery &amp; Research</div>
+              <button type="button" class="cg-menu-item" onclick="if(window.cgCloseToolsMenu)window.cgCloseToolsMenu();if(window.v137OpenSemanticMatcherModal)window.v137OpenSemanticMatcherModal('');">
                 <strong>8-Role Signature Matcher</strong>
                 <span>Describe your mathematical obstacle in plain words to find matching mechanisms</span>
               </button>
-              <button type="button" class="cg-menu-item" onclick="document.getElementById('cg-tools-menu').removeAttribute('open');if(window.v131OpenV34CatalogueModal)window.v131OpenV34CatalogueModal('concepts');">
-                <strong>593-Project Epistemic Catalogue</strong>
-                <span>24 guiding questions, 48 reviewed arguments, and 252 frontier leads</span>
+              <button type="button" class="cg-menu-item" onclick="if(window.cgCloseToolsMenu)window.cgCloseToolsMenu();if(window.v148OpenArgumentAndWorksheetModal)window.v148OpenArgumentAndWorksheetModal('compare');">
+                <strong>Compare 48 Arguments &amp; Premise Worksheet</strong>
+                <span>Side-by-side structural comparison and checklist for your own proof</span>
               </button>
-              <button type="button" class="cg-menu-item" onclick="document.getElementById('cg-tools-menu').removeAttribute('open');if(window.v95OpenBridgeComposerStudio)window.v95OpenBridgeComposerStudio();">
-                <strong>Custom Bridge Composer</strong>
-                <span>Synthesize a Lean 4 adapter blueprint between any two projects</span>
+              <button type="button" class="cg-menu-item" onclick="if(window.cgCloseToolsMenu)window.cgCloseToolsMenu();if(window.v131OpenV34CatalogueModal)window.v131OpenV34CatalogueModal('concepts');">
+                <strong>Epistemic Research Catalogue</strong>
+                <span>24 guiding questions, 48 reviewed arguments, and 254 frontier leads</span>
               </button>
-              <button type="button" class="cg-menu-item" onclick="document.getElementById('cg-tools-menu').removeAttribute('open');if(window.v75OpenGuidedPlaylistsModal)window.v75OpenGuidedPlaylistsModal();">
+              <button type="button" class="cg-menu-item" onclick="if(window.cgCloseToolsMenu)window.cgCloseToolsMenu();if(window.v75OpenGuidedPlaylistsModal)window.v75OpenGuidedPlaylistsModal();">
                 <strong>18 Guided Discovery Tours</strong>
-                <span>Curated narrative walkthroughs across unexpected mathematical worlds</span>
+                <span>Curated walkthroughs across unexpected mathematical connections</span>
+              </button>
+              <button type="button" class="cg-menu-item" onclick="if(window.cgCloseToolsMenu)window.cgCloseToolsMenu();if(window.v95OpenBridgeComposerStudio)window.v95OpenBridgeComposerStudio();">
+                <strong>Lean 4 / LaTeX Adapter Exporter</strong>
+                <span>Export a premise-gated Lean 4 &amp; LaTeX template between two chosen projects</span>
               </button>
             </div>
             <div class="cg-tools-col">
-              <div class="cg-tools-heading">Glossary &amp; Verification</div>
-              <button type="button" class="cg-menu-item" onclick="document.getElementById('cg-tools-menu').removeAttribute('open');if(window.v85OpenAcronymGlossaryModal)window.v85OpenAcronymGlossaryModal('ALL');">
-                <strong>Plain-English Visual Glossary (36 Terms)</strong>
-                <span>Clear everyday explanations for AST, 0-Sorry, Spectral Gap, Coercivity, and more</span>
+              <div class="cg-tools-heading">Source &amp; Verification</div>
+              <a class="cg-menu-item cg-menu-link" href="https://github.com/FawadHa1der/theorem-atlas" target="_blank" rel="noopener noreferrer" onclick="if(window.cgCloseToolsMenu)window.cgCloseToolsMenu();">
+                <strong>GitHub Source &amp; Lean 4 Corpus ↗</strong>
+                <span>Inspect all 848 zero-sorry Lean 4.33.0 proofs and Observatory code</span>
+              </a>
+              <button type="button" class="cg-menu-item" onclick="if(window.cgCloseToolsMenu)window.cgCloseToolsMenu();if(window.v85OpenAcronymGlossaryModal)window.v85OpenAcronymGlossaryModal('ALL');">
+                <strong>Plain-English Glossary (36 Terms)</strong>
+                <span>Everyday explanations for AST, 0-Sorry, Spectral Gap, Coercivity, and more</span>
               </button>
-              <button type="button" class="cg-menu-item" onclick="document.getElementById('cg-tools-menu').removeAttribute('open');if(window.v55OpenProofCertificateModal)window.v55OpenProofCertificateModal(0);">
+              <button type="button" class="cg-menu-item" onclick="if(window.cgCloseToolsMenu)window.cgCloseToolsMenu();if(window.v55OpenProofCertificateModal)window.v55OpenProofCertificateModal(0);">
                 <strong>Lean 4.33.0 Proof Certificates</strong>
                 <span>Inspect compiled zero-sorry verification modules and kernel hashes</span>
               </button>
-              <button type="button" class="cg-menu-item" onclick="document.getElementById('cg-tools-menu').removeAttribute('open');if(window.v145OpenFactAuditModal)window.v145OpenFactAuditModal();">
+              <button type="button" class="cg-menu-item" onclick="if(window.cgCloseToolsMenu)window.cgCloseToolsMenu();if(window.v145OpenFactAuditModal)window.v145OpenFactAuditModal();">
                 <strong>Fact &amp; Proof Accuracy Audit</strong>
-                <span>End-to-end provenance check across 846 zero-sorry Lean 4 files (806 kernel-compiled)</span>
+                <span>End-to-end provenance check across 848 zero-sorry Lean 4 files (808 compiled)</span>
               </button>
-              <button type="button" class="cg-menu-item" onclick="document.getElementById('cg-tools-menu').removeAttribute('open');if(window.v147OpenAutomatedTestSuiteModal)window.v147OpenAutomatedTestSuiteModal('tests');">
+              <button type="button" class="cg-menu-item" onclick="if(window.cgCloseToolsMenu)window.cgCloseToolsMenu();if(window.v147OpenAutomatedTestSuiteModal)window.v147OpenAutomatedTestSuiteModal('tests');">
                 <strong>Automated UX &amp; Math Test Suite</strong>
                 <span>Run live functional, mathematical, and Cloudflare shard diagnostics</span>
               </button>
@@ -116,43 +120,53 @@
           </div>
         </details>
 
-        <button type="button" class="cg-omnibox-trigger" id="cg-omnibox-open-btn" title="Instant search across all 3,287 ideas, 252 leads, 40 projects &amp; 140 labs (⌘K)" onclick="if(window.cgOpenOmnibox)window.cgOpenOmnibox('');"><span>Quick Jump</span><span class="cg-kbd-pill">⌘K</span></button>
+        <button type="button" class="cg-omnibox-trigger" id="cg-omnibox-open-btn" title="Instant search across all 3,287 ideas, 254 leads, 40 projects &amp; 141 labs (⌘K)" onclick="if(window.cgOpenOmnibox)window.cgOpenOmnibox('');"><span>Search</span><span class="cg-kbd-pill">⌘K</span></button>
         <button type="button" class="cg-zen-masthead-btn" id="cg-masthead-zen-btn" aria-pressed="false" title="Toggle full-bleed 3D Zen Theater mode (press Z)" onclick="if(window.cgToggleZenTheater)window.cgToggleZenTheater();">⛶ Theater</button>
         <button type="button" class="surprise-btn" id="surprise-me-btn" title="Jump to a surprising cross-domain connection">Surprise Me</button>
+        <a id="cg-github-source-link" class="cg-github-link" href="https://github.com/FawadHa1der/theorem-atlas" target="_blank" rel="noopener noreferrer" title="View source code and all 848 zero-sorry Lean 4.33.0 proofs on GitHub">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span>GitHub</span>
+        </a>
       </div>
     </div>
   </header>
 
-  <section id="v60-quickstart-hero" class="cg-editorial-intro" aria-label="Introduction and quick entry points">
+  <section id="v60-quickstart-hero" class="cg-editorial-intro cg-editorial-intro-compact" aria-label="Introduction and quick entry points">
     <div class="cg-intro-copy-wrap cg-intro-inner">
       <div class="cg-intro-copy">
-        <div class="cg-intro-kicker-row"><p class="cg-intro-kicker" style="margin:0">Plain-English Mathematical Discovery · Lean 4.33.0 Kernel Verified</p><button type="button" id="cg-compact-hero-toggle" class="cg-calm-chip cg-compact-toggle-btn" onclick="if(window.cgToggleCompactHero)window.cgToggleCompactHero();" title="Collapse or expand overview banner to maximize workspace height">Compact workspace ▴</button></div>
+        <div class="cg-intro-kicker-row">
+          <p class="cg-intro-kicker" style="margin:0">Cross-Domain Mathematical Discovery · 848 Zero-Sorry Lean 4.33.0 Files</p>
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+            <a class="cg-calm-chip cg-inline-github-chip" href="https://github.com/FawadHa1der/theorem-atlas" target="_blank" rel="noopener noreferrer">Source on GitHub ↗</a>
+            <button type="button" id="cg-compact-hero-toggle" class="cg-calm-chip cg-compact-toggle-btn" onclick="if(window.cgToggleCompactHero)window.cgToggleCompactHero();" title="Collapse or expand overview banner to maximize workspace height">Hide intro ▴</button>
+          </div>
+        </div>
         <h1 class="cg-intro-headline">How a proof idea in one field unexpectedly solves a problem in another.</h1>
         <p class="cg-intro-lead">
-          Explore <strong>1,400 cross-domain mechanisms</strong>, <strong>1,887 unique endpoint bridges</strong> (deduplicated from 7,000 AST pairs), and <strong>846 zero-sorry Lean 4 files</strong> across 40 projects. Connections are gated by <strong>multi-role mathematical signatures</strong> and <strong>premise-boundary checks</strong> so false lookalikes are caught early.
-          <button type="button" class="cg-inline-link" onclick="if(window.v85OpenAcronymGlossaryModal)window.v85OpenAcronymGlossaryModal('ALL');">Read the 36-term plain-English glossary →</button>
+          Browse <strong>1,400 mechanisms</strong>, <strong>1,887 deduplicated bridges</strong>, and <strong>254 frontier research leads</strong> across 40 Lean 4 projects—every bridge pairs a machine-checked witness with its exact premise-failure boundary.
+          <button type="button" class="cg-inline-link" onclick="if(window.v85OpenAcronymGlossaryModal)window.v85OpenAcronymGlossaryModal('ALL');">Glossary →</button>
         </p>
       </div>
       <div id="v60-qs-grid" class="cg-entry-cards">
-        <button type="button" class="cg-entry-card" onclick="if(window.v136OpenV34FiniteDiagramsModal)window.v136OpenV34FiniteDiagramsModal(0);">
-          <span class="cg-entry-tag">Hands-On Intuition</span>
-          <strong>140 Finite Micro-Labs</strong>
-          <span>Checkable toy models for energy splits, couplings &amp; symmetry</span>
+        <button type="button" class="cg-entry-card" onclick="if(window.v136OpenV34FiniteDiagramsModal)window.v136OpenV34FiniteDiagramsModal(140);">
+          <span class="cg-entry-tag">Hands-On Witness</span>
+          <strong>141 Finite Micro-Labs</strong>
+          <span>Checkable toy models &amp; counterexamples</span>
+        </button>
+        <button type="button" class="cg-entry-card" onclick="if(window.v137OpenSemanticMatcherModal)window.v137OpenSemanticMatcherModal('');">
+          <span class="cg-entry-tag">Find Connections</span>
+          <strong>Match Ideas &amp; Premises</strong>
+          <span>Search by proof role &amp; catch false lookalikes</span>
         </button>
         <button type="button" class="cg-entry-card" onclick="if(window.v148OpenArgumentAndWorksheetModal)window.v148OpenArgumentAndWorksheetModal('compare');">
           <span class="cg-entry-tag">Side-by-Side Rigor</span>
           <strong>Compare 48 Arguments</strong>
-          <span>Shared structure, domain differences &amp; premise worksheets</span>
-        </button>
-        <button type="button" class="cg-entry-card" onclick="if(window.v137OpenSemanticMatcherModal)window.v137OpenSemanticMatcherModal('');">
-          <span class="cg-entry-tag">◆ Role &amp; Boundary Matcher</span>
-          <strong>Find Ideas &amp; Check Premises</strong>
-          <span>Match ≥2 proof roles &amp; catch dropped-hypothesis traps</span>
+          <span>Shared structure &amp; proof obligations</span>
         </button>
         <button type="button" class="cg-entry-card" onclick="var b=document.querySelector('[data-lens=\'intuition\']');if(b)b.click();">
-          <span class="cg-entry-tag">Interactive Canvas</span>
-          <strong>160 Visual Sliders</strong>
-          <span>Sweep parameters in real time before reading any symbols</span>
+          <span class="cg-entry-tag">Visual Intuition</span>
+          <strong>160 Interactive Sliders</strong>
+          <span>Sweep parameters before reading symbols</span>
         </button>
       </div>
     </div>
@@ -164,14 +178,14 @@
     </div>
   </main>
 
-  <script src="../../chunks/bundle-shard-1-core.js?v=285"></script>
-  <script src="../../chunks/bundle-shard-2a-mechanisms.js?v=285"></script>
-  <script src="../../chunks/bundle-shard-2b-mechanisms.js?v=285"></script>
-  <script src="../../chunks/bundle-shard-3a-isomorphisms.js?v=285"></script>
-  <script src="../../chunks/bundle-shard-3b-isomorphisms.js?v=285"></script>
-  <script src="../../chunks/bundle-shard-3c-isomorphisms.js?v=285"></script>
-  <script src="../../chunks/bundle-shard-4a-paths.js?v=285"></script>
-  <script src="../../chunks/bundle-shard-4b-paths.js?v=285"></script>
-  <script src="./unified-standalone.js?v=285"></script>
+  <script src="../../chunks/bundle-shard-1-core.js?v=286"></script>
+  <script src="../../chunks/bundle-shard-2a-mechanisms.js?v=286"></script>
+  <script src="../../chunks/bundle-shard-2b-mechanisms.js?v=286"></script>
+  <script src="../../chunks/bundle-shard-3a-isomorphisms.js?v=286"></script>
+  <script src="../../chunks/bundle-shard-3b-isomorphisms.js?v=286"></script>
+  <script src="../../chunks/bundle-shard-3c-isomorphisms.js?v=286"></script>
+  <script src="../../chunks/bundle-shard-4a-paths.js?v=286"></script>
+  <script src="../../chunks/bundle-shard-4b-paths.js?v=286"></script>
+  <script src="./unified-standalone.js?v=286"></script>
 </body>
 </html>

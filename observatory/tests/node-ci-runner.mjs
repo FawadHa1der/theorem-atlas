@@ -89,6 +89,9 @@ function runUnifiedIndexFileOriginSuite() {
   }
   const indexPath = path.join(OBS_DIR, "index.html");
   const html = fs.readFileSync(indexPath, "utf8");
+  if (!html.includes('id="cg-github-source-link"') || !html.includes("https://github.com/FawadHa1der/theorem-atlas")) {
+    throw new Error("observatory/index.html is missing the #cg-github-source-link GitHub repository source link!");
+  }
   const scriptMatches = [...html.matchAll(/<script\s+src="([^"?]+)(?:\?[^"]*)?"><\/script>/g)];
   if (scriptMatches.length !== 9) {
     throw new Error(`Expected 9 classic <script src> tags in observatory/index.html, found ${scriptMatches.length}`);
@@ -164,6 +167,13 @@ function runUnifiedIndexFileOriginSuite() {
     if (cards[0].innerHTML.indexOf("v7-pin-research-hop") === -1 || cards[0].innerHTML.indexOf("v7-launch-research-direction") === -1) {
       throw new Error("Expanded Galaxy card drawer missing #v7-pin-research-hop or #v7-launch-research-direction!");
     }
+    if (cards[0].innerHTML.indexOf("cg-optional-tools-disclosure") === -1 || cards[0].innerHTML.indexOf("cg-lean-github-link") === -1) {
+      throw new Error("Expanded Galaxy card drawer missing calm progressive-disclosure wrapper or GitHub source link!");
+    }
+    if (typeof window.cgCloseToolsMenu !== "function" || typeof window.cgGithubBlobUrl !== "function") {
+      throw new Error("window.cgCloseToolsMenu or window.cgGithubBlobUrl not registered!");
+    }
+    window.cgCloseToolsMenu();
     if (!window.cgPinResearchHop(state.source)) {
       throw new Error("window.cgPinResearchHop(state.source) failed after readyState=loading boot!");
     }
@@ -183,7 +193,7 @@ function runUnifiedIndexFileOriginSuite() {
         throw new Error("Lens " + lensName + " failed in observatory/index.html!");
       }
     }
-    print("UNIFIED_INDEX_FILE_ORIGIN_NODE_VM_OK: scripts=9, readyState=loading->DCL OK, galaxyPinAndDraftOK=true, totalUntruncatedPayload=${totalMiB}MiB, cards=" + cards.length + ", lenses=6/6");
+    print("UNIFIED_INDEX_FILE_ORIGIN_NODE_VM_OK: scripts=9, readyState=loading->DCL OK, galaxyPinAndDraftOK=true, githubSourceLinkOK=true, totalUntruncatedPayload=${totalMiB}MiB, cards=" + cards.length + ", lenses=6/6");
     `,
     ctx,
     { filename: "unified-file-assertions.js" }
